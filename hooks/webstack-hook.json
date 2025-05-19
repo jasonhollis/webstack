@@ -1,0 +1,8 @@
+[
+  {
+    "id": "webstack",
+    "execute-command": "/opt/webstack/bin/deploy_from_webhook.sh",
+    "command-working-directory": "/opt/webstack/html",
+    "response-message": "✅ Deploy triggered!"
+  }
+]
