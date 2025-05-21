@@ -1,0 +1,22 @@
+server {
+    listen 80;
+    server_name www.ktp.digital ww2.ktp.digital;
+    return 301 https://$host$request_uri;
+}
+server {
+    listen 443 ssl http2;
+    server_name www.ktp.digital ww2.ktp.digital;
+    ssl_certificate     /etc/letsencrypt/live/ww2.ktp.digital/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ww2.ktp.digital/privkey.pem;
+    root /opt/webstack/html;
+    index index.php index.html;
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+    }
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    access_log /var/log/nginx/webstack_access.log;
+    error_log  /var/log/nginx/webstack_error.log;
+}
