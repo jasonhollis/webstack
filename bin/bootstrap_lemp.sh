@@ -32,7 +32,7 @@ EOPHP
 cat << 'EONGINX' > /etc/nginx/sites-available/webstack
 server {
     listen 80;
-    server_name ww2.ktp.digital;
+    server_name www.ktp.digital;
 
     root /opt/webstack/html;
     index index.php index.html;
@@ -61,4 +61,4 @@ rm -f /etc/nginx/sites-enabled/default
 nginx -t && systemctl reload nginx
 
 echo "✅ LEMP stack installed."
-echo "🌐 Visit: http://ww2.ktp.digital"
+echo "🌐 Visit: http://www.ktp.digital"

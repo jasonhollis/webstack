@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOMAIN="ww2.ktp.digital"
+DOMAIN="www.ktp.digital"
 EMAIL="jason@ktp.digital"
 
 echo "📦 Installing Certbot and Nginx plugin..."
