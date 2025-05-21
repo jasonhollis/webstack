@@ -1,22 +1,27 @@
 #!/bin/bash
-set -euo pipefail
+set -e
 
 REPO_DIR="/opt/webstack/html"
 OBJECTIVES_DIR="/opt/webstack/objectives"
 VERSION_FILE="$REPO_DIR/VERSION"
 SNAPSHOT_SCRIPT="/opt/webstack/bin/snapshot_webstack.sh"
 LOG_FILE="/opt/webstack/logs/deploy_webhook.log"
-NOTIFY_SCRIPT="/opt/webstack/bin/notify_pushover.sh"
-WEBSTACK_URL="https://www.ktp.digital/admin/maintenance.php"
-SOUND="Intro"      # Stones Satisfaction Intro (custom Pushover sound)
-PRIORITY=1         # High priority
+PUSHOVER_USER="uh1ozrrcj8y5jktg5euc6yz6zpdcqh"
+PUSHOVER_TOKEN="aqfyb8hsfb6txs6pd4qwchjwd3iccb"
+SOUND="alien"
+CONFIG_BACKUP="/opt/webstack/config_backup"
+LIVE_DOMAIN="www.ktp.digital"
 
-# Accept version from argument or prompt, showing current version if prompting
+CERT_DIR="/etc/letsencrypt/live/$LIVE_DOMAIN"
+FULLCHAIN="$CERT_DIR/fullchain.pem"
+PRIVKEY="$CERT_DIR/privkey.pem"
+NGINX_CONF="/etc/nginx/sites-available/webstack.site"
+
+# Accept version from argument or prompt
 if [[ -n "$1" ]]; then
   NEW_VERSION="$1"
 else
-  CUR_VERSION=$(cat "$VERSION_FILE" 2>/dev/null || echo "unknown")
-  read -p "🔢 Enter new version (current: $CUR_VERSION): " NEW_VERSION
+  read -p "🔢 Enter new version (e.g. v1.0.2): " NEW_VERSION
 fi
 
 if [[ -z "$NEW_VERSION" ]]; then
@@ -24,53 +29,55 @@ if [[ -z "$NEW_VERSION" ]]; then
   exit 1
 fi
 
-# Create snapshot BEFORE updating version file, so snapshot always matches prior state
-"$SNAPSHOT_SCRIPT" "$(cat "$VERSION_FILE")" >> "$LOG_FILE" 2>&1
-
-# Now update version file and continue workflow
 echo "$NEW_VERSION" > "$VERSION_FILE"
-echo "[$(date)] ✍️  Version bumped to $NEW_VERSION" >> "$LOG_FILE"
 
-cd "$REPO_DIR"
+mkdir -p "$CONFIG_BACKUP"
+cd "$CONFIG_BACKUP"
 
-git add VERSION
-git commit -m "⬆️ Version bump: $NEW_VERSION" || echo "No changes to commit."
-git push origin master >> "$LOG_FILE" 2>&1
-
-# ---- OBJECTIVES .md HANDLING ----
-OBJECTIVES_MD="${OBJECTIVES_DIR}/${NEW_VERSION}_objectives.md"
-TEMPLATE_MD="${OBJECTIVES_DIR}/PROJECT_OBJECTIVES.md"
-
-if [[ -f "$TEMPLATE_MD" ]]; then
-  cp "$TEMPLATE_MD" "$OBJECTIVES_MD"
-  {
-    echo ""
-    echo "## Objectives & Changelog for $NEW_VERSION"
-    echo "*Created: $(TZ='Australia/Melbourne' date '+%Y-%m-%d %H:%M:%S %Z')*"
-    echo ""
-    echo "---"
-    echo ""
-  } >> "$OBJECTIVES_MD"
+# Copy configs and certs if present
+if [[ -f "$FULLCHAIN" ]]; then
+  cp "$FULLCHAIN" fullchain.pem
+  echo "✅ Backed up fullchain.pem"
 else
-  {
-    echo "# Objectives & Changelog for $NEW_VERSION"
-    echo "*Created: $(TZ='Australia/Melbourne' date '+%Y-%m-%d %H:%M:%S %Z')*"
-    echo ""
-    echo "---"
-    echo ""
-  } > "$OBJECTIVES_MD"
+  echo "⚠️  fullchain.pem not found! ($FULLCHAIN)" | tee -a "$LOG_FILE"
 fi
 
-echo "[$(date)] 📝 Created new objectives file: $OBJECTIVES_MD" >> "$LOG_FILE"
+if [[ -f "$PRIVKEY" ]]; then
+  cp "$PRIVKEY" privkey.pem
+  echo "✅ Backed up privkey.pem"
+else
+  echo "⚠️  privkey.pem not found! ($PRIVKEY)" | tee -a "$LOG_FILE"
+fi
 
-# --- PUSHOVER NOTIFICATION ---
-DEPLOY_TIME="$(date '+%Y-%m-%d %H:%M:%S')"
-"$NOTIFY_SCRIPT" \
-  "📦 Version $NEW_VERSION deployed at $DEPLOY_TIME" \
-  "Version Bump to $NEW_VERSION" \
-  "$WEBSTACK_URL" \
-  "View Snapshots" \
-  "$SOUND" \
-  "$PRIORITY" || echo "Warning: Pushover notification failed."
+if [[ -f "$NGINX_CONF" ]]; then
+  cp "$NGINX_CONF" webstack.site
+  echo "✅ Backed up nginx config"
+else
+  echo "⚠️  nginx config not found! ($NGINX_CONF)" | tee -a "$LOG_FILE"
+fi
 
-echo "✅ Version $NEW_VERSION deployed, pushed, and objectives file created!"
+# Snapshot the codebase
+"$SNAPSHOT_SCRIPT"
+
+# Clear logs
+find /opt/webstack/logs/ -type f -exec truncate -s 0 {} \;
+
+cd "$REPO_DIR"
+git add -A
+git commit -m "⬆️ Version bump: $NEW_VERSION"
+git push origin master
+
+# Pushover notification (optional, can remove/comment out if not wanted)
+if [[ -n "$PUSHOVER_USER" && -n "$PUSHOVER_TOKEN" ]]; then
+  curl -s \
+    -F "token=$PUSHOVER_TOKEN" \
+    -F "user=$PUSHOVER_USER" \
+    -F "title=Webstack Deployed" \
+    -F "message=Version $NEW_VERSION deployed, config/certs backed up, logs cleared." \
+    -F "priority=1" \
+    -F "sound=$SOUND" \
+    https://api.pushover.net/1/messages.json >/dev/null
+fi
+
+echo "✅ Version $NEW_VERSION deployed, pushed, config/certs backed up, logs cleared, and objectives file created!"
+

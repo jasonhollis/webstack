@@ -1,0 +1,28 @@
+module.exports = {
+  content: [
+    "./html/**/*.php",
+    "./html/**/*.html",
+    "./html/**/*.js",
+    "./html/**/*.md",
+    "./admin/**/*.php",
+    "./admin/**/*.html",
+    "./admin/**/*.js",
+    "./*.php",
+    "./*.html",
+    "./assets/**/*.js",
+    "./assets/**/*.html"
+  ],
+  safelist: [
+    "prose",
+    "prose-invert",
+    "prose-lg",
+    "prose-xl",
+    "max-w-none",
+    { pattern: /^prose/ }
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [require('@tailwindcss/typography')],
+  darkMode: 'class',
+}
