@@ -1,21 +1,14 @@
 #!/bin/bash
-set -e
 
 REPO_DIR="/opt/webstack/html"
 OBJECTIVES_DIR="/opt/webstack/objectives"
 VERSION_FILE="$REPO_DIR/VERSION"
 SNAPSHOT_SCRIPT="/opt/webstack/bin/snapshot_webstack.sh"
-LOG_FILE="/opt/webstack/logs/deploy_webhook.log"
+LOG_DIR="/opt/webstack/logs"
+LOG_FILES_TO_CLEAR="deploy.log deploy_webhook.log error.log nginx_access.log nginx_error.log webhook.log access.log"
 PUSHOVER_USER="uh1ozrrcj8y5jktg5euc6yz6zpdcqh"
 PUSHOVER_TOKEN="aqfyb8hsfb6txs6pd4qwchjwd3iccb"
 SOUND="alien"
-CONFIG_BACKUP="/opt/webstack/config_backup"
-LIVE_DOMAIN="www.ktp.digital"
-
-CERT_DIR="/etc/letsencrypt/live/$LIVE_DOMAIN"
-FULLCHAIN="$CERT_DIR/fullchain.pem"
-PRIVKEY="$CERT_DIR/privkey.pem"
-NGINX_CONF="/etc/nginx/sites-available/webstack.site"
 
 # Accept version from argument or prompt
 if [[ -n "$1" ]]; then
@@ -29,55 +22,51 @@ if [[ -z "$NEW_VERSION" ]]; then
   exit 1
 fi
 
+# Write version file
 echo "$NEW_VERSION" > "$VERSION_FILE"
 
-mkdir -p "$CONFIG_BACKUP"
-cd "$CONFIG_BACKUP"
+# Rotate logs: Only clear those NOT needed for analytics
+for LOG in $LOG_FILES_TO_CLEAR; do
+  if [[ -f "$LOG_DIR/$LOG" ]]; then
+    mv "$LOG_DIR/$LOG" "$LOG_DIR/${LOG}.bak.$(date +%s)"
+    touch "$LOG_DIR/$LOG"
+    chown www-data:www-data "$LOG_DIR/$LOG"
+    chmod 664 "$LOG_DIR/$LOG"
+  fi
+done
 
-# Copy configs and certs if present
-if [[ -f "$FULLCHAIN" ]]; then
-  cp "$FULLCHAIN" fullchain.pem
-  echo "✅ Backed up fullchain.pem"
-else
-  echo "⚠️  fullchain.pem not found! ($FULLCHAIN)" | tee -a "$LOG_FILE"
+echo "✅ Log cleanup done, analytics logs preserved."
+
+# Snapshot before bump
+bash "$SNAPSHOT_SCRIPT"
+SNAP_STATUS=$?
+if [[ $SNAP_STATUS -ne 0 ]]; then
+  echo "❌ Snapshot failed. Aborting."
+  exit 1
 fi
 
-if [[ -f "$PRIVKEY" ]]; then
-  cp "$PRIVKEY" privkey.pem
-  echo "✅ Backed up privkey.pem"
-else
-  echo "⚠️  privkey.pem not found! ($PRIVKEY)" | tee -a "$LOG_FILE"
-fi
+LATEST_SNAP=$(ls -1t /opt/webstack/snapshots/webstack-*.zip 2>/dev/null | head -1)
 
-if [[ -f "$NGINX_CONF" ]]; then
-  cp "$NGINX_CONF" webstack.site
-  echo "✅ Backed up nginx config"
-else
-  echo "⚠️  nginx config not found! ($NGINX_CONF)" | tee -a "$LOG_FILE"
-fi
+# Git commit & push
+cd /opt/webstack || exit 1
+git add html/VERSION
+git add html/*
+git add objectives/*
+git add bin/*
+git commit -am "⬆️ Version bump: $NEW_VERSION"
+git push
 
-# Snapshot the codebase
-"$SNAPSHOT_SCRIPT"
-
-# Clear logs
-find /opt/webstack/logs/ -type f -exec truncate -s 0 {} \;
-
-cd "$REPO_DIR"
-git add -A
-git commit -m "⬆️ Version bump: $NEW_VERSION"
-git push origin master
-
-# Pushover notification (optional, can remove/comment out if not wanted)
+# Pushover notification
 if [[ -n "$PUSHOVER_USER" && -n "$PUSHOVER_TOKEN" ]]; then
+  MSG="✅ $NEW_VERSION deployed, snapshot created: $(basename "$LATEST_SNAP")"
   curl -s \
     -F "token=$PUSHOVER_TOKEN" \
     -F "user=$PUSHOVER_USER" \
-    -F "title=Webstack Deployed" \
-    -F "message=Version $NEW_VERSION deployed, config/certs backed up, logs cleared." \
-    -F "priority=1" \
+    -F "title=Webstack Deploy" \
+    -F "message=$MSG" \
     -F "sound=$SOUND" \
-    https://api.pushover.net/1/messages.json >/dev/null
+    https://api.pushover.net/1/messages.json > /dev/null
 fi
 
-echo "✅ Version $NEW_VERSION deployed, pushed, config/certs backed up, logs cleared, and objectives file created!"
+echo "✅ Version $NEW_VERSION deployed, pushed, and Pushover notified!"
 
