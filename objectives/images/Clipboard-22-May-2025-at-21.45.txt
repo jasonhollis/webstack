@@ -1,0 +1,1 @@
+/opt/webstack/bin/add_image_to_iteration_log.sh
