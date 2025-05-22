@@ -1,3 +1,4 @@
+cat << 'EOF' > /opt/webstack/bin/update_version.sh
 #!/bin/bash
 
 REPO_DIR="/opt/webstack/html"
@@ -75,3 +76,6 @@ if [[ -n "$PUSHOVER_USER" && -n "$PUSHOVER_TOKEN" ]]; then
 fi
 
 echo "✅ Version $NEW_VERSION deployed, pushed, and Pushover notified!"
+EOF
+
+chmod 755 /opt/webstack/bin/update_version.sh

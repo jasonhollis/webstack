@@ -1,0 +1,5 @@
+RESUME: KTP Webstack Logging Automation v1.4.7-dev+
+CONTEXT: All objective/activity/image logging scripts are fully stdin/argument aware, error handling is routed via failure.sh, Pushover notifications enabled, and Mac Shortcuts integration for images and text is live. 
+Scripts: append_objective.sh, append_activity.sh, add_image_to_objectives.sh, add_image_to_iteration_log.sh—each uses deploy-ready EOF file blocks, sets permissions, and writes to quickactions.log with timestamp, user, and content.
+No onboarding, no partial edits—only full-file replacements or sed routines.
+Next step: continue automation, admin UI, or error analytics as required.
