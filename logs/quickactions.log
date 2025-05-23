@@ -8310,3 +8310,82 @@ A supercharged /macos-tools.php with:
   * Human-friendly prose but geared to impress technical peers and recruiters
   * Links to official tool sites
   * Room to expand into /macos-tools.zip or GitHub releases later
+2025-05-23 22:20:35 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  root@ssdnodes-605e9a6080011:/opt/webstack/html/admin/objectives/images# /opt/webstack/bin/update_version.sh v1.5.2-dev
+
+[master 3a71fc2] ⬆️ Version bump: v1.5.2-dev
+
+ 11 files changed, 11179 insertions(+), 1 deletion(-)
+
+ create mode 100644 objectives/images/Screenshot-2025-05-23-at-16.36.44.png
+
+ create mode 100644 objectives/images/yoinkmac.webp
+
+ create mode 100644 objectives/v.1.5.1-dev_iteration_log.md
+
+ create mode 100644 objectives/v.1.5.1-dev_objectives.md
+
+ create mode 100644 objectives/version.md
+
+Enumerating objects: 28, done.
+
+Counting objects: 100% (28/28), done.
+
+Delta compression using up to 12 threads
+
+Compressing objects: 100% (16/16), done.
+
+Writing objects: 100% (17/17), 327.75 KiB | 1.86 MiB/s, done.
+
+Total 17 (delta 8), reused 0 (delta 0), pack-reused 0
+
+remote: Resolving deltas: 100% (8/8), completed with 8 local objects.
+
+To github.com:jasonhollis/webstack.git
+
+   9a1177e..3a71fc2  master -> master
+
+[Fri May 23 10:20:09 PM AEST 2025] 📦 Snapshot created: webstack-v1.5.2-dev-2025-05-23-222002.zip
+
+✅ Version v1.5.2-dev deployed, committed, pushed, snapshotted, and logs preserved.
+
+root@ssdnodes-605e9a6080011:/opt/webstack/html/admin/objectives/images# 
+2025-05-23 22:20:35 AEST [append_activity] root@ssdnodes-605e9a6080011: root@ssdnodes-605e9a6080011:/opt/webstack/html/admin/objectives/images# /opt/webstack/bin/update_version.sh v1.5.2-dev
+
+[master 3a71fc2] ⬆️ Version bump: v1.5.2-dev
+
+ 11 files changed, 11179 insertions(+), 1 deletion(-)
+
+ create mode 100644 objectives/images/Screenshot-2025-05-23-at-16.36.44.png
+
+ create mode 100644 objectives/images/yoinkmac.webp
+
+ create mode 100644 objectives/v.1.5.1-dev_iteration_log.md
+
+ create mode 100644 objectives/v.1.5.1-dev_objectives.md
+
+ create mode 100644 objectives/version.md
+
+Enumerating objects: 28, done.
+
+Counting objects: 100% (28/28), done.
+
+Delta compression using up to 12 threads
+
+Compressing objects: 100% (16/16), done.
+
+Writing objects: 100% (17/17), 327.75 KiB | 1.86 MiB/s, done.
+
+Total 17 (delta 8), reused 0 (delta 0), pack-reused 0
+
+remote: Resolving deltas: 100% (8/8), completed with 8 local objects.
+
+To github.com:jasonhollis/webstack.git
+
+   9a1177e..3a71fc2  master -> master
+
+[Fri May 23 10:20:09 PM AEST 2025] 📦 Snapshot created: webstack-v1.5.2-dev-2025-05-23-222002.zip
+
+✅ Version v1.5.2-dev deployed, committed, pushed, snapshotted, and logs preserved.
+
+root@ssdnodes-605e9a6080011:/opt/webstack/html/admin/objectives/images# 
