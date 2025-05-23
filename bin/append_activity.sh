@@ -23,6 +23,13 @@ if [[ -z "$ENTRY" ]]; then
   exit 1
 fi
 
+# Detect code-like input and wrap in triple backticks for Markdown
+if grep -qE '(^<\?php|^#!/|function |def |class |import |^SELECT |{|};)' <<< "$ENTRY"; then
+  ENTRY="```
+$ENTRY
+```"
+fi
+
 # Write to quickactions.log
 echo "$DATE [append_activity] $WHO: $ENTRY" >> "$LOGFILE" || $FAILURE "Failed to write to $LOGFILE"
 

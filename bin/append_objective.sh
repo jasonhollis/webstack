@@ -22,6 +22,13 @@ if [[ -z "$OBJECTIVE" ]]; then
   exit 1
 fi
 
+# Detect code-like input and wrap in triple backticks for Markdown
+if grep -qE '(^<\?php|^#!/|function |def |class |import |^SELECT |{|};)' <<< "$OBJECTIVE"; then
+  OBJECTIVE="```
+$OBJECTIVE
+```"
+fi
+
 OBJECTIVE_FILE="$OBJECTIVES_DIR/${VERSION}_objectives.md"
 ENTRY="---
 #### [$TS][$VERSION]

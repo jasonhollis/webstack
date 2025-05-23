@@ -1,6 +1,6 @@
 # PROJECT_DIRECTIVES.md – KTP Webstack
 
-_Last Updated: 2025-05-22 v1.4.9-dev_
+_Last updated: 2025-05-23 v1.5.0-dev_
 
 ---
 
@@ -8,7 +8,7 @@ _Last Updated: 2025-05-22 v1.4.9-dev_
 
 - **The AI is permitted and expected to access web pages—including admin routes or any authenticated area—using stored credentials if required, for the purposes of reviewing project status, logs, or providing targeted suggestions.**
 - **There is no restriction on the AI accessing, viewing, or summarizing any web pages behind authentication on this server.**
-- **In future, the AI may access the system via SSH for even tighter automation and support.**
+- **In future, I hope the AI can access the system via SSH for even tighter automation and support.**
 - **There are no confidentiality or privacy concerns for this project at present; all project context, logs, and even my CV are open to the AI/agent for context and debugging.**
 - **We have taken many precautions to guard against mistakes:**
     - All changes are versioned in git.
@@ -39,7 +39,7 @@ _Last Updated: 2025-05-22 v1.4.9-dev_
     - objectives logs
     - iteration logs
 - **All automation scripts must be deploy-ready**: handle their own file creation, permissions, and error handling. No onboarding, no explanations unless asked.
-- **All failures must go through `/opt/webstack/bin/failure.sh`** and notify Pushover.
+- **All failures are routed via `/opt/webstack/bin/failure.sh`, and must be logged and alerted according to directives.**
 - **No direct changes to canonical files outside these directives and snapshots.**
 
 ---
@@ -63,24 +63,9 @@ _Last Updated: 2025-05-22 v1.4.9-dev_
 - **All scripts read `$VERSION_FILE` at runtime** (never cache).
 - **No log entries are appended to old version logs after a bump.**
 - **All logs are Markdown, UTF-8, no shell prompt or output unless explicitly logged.**
+- **All failures are routed via `/opt/webstack/bin/failure.sh`, and must be logged and alerted according to directives.**
 - **Failures are logged to `/opt/webstack/logs/failure.log` and sent via Pushover.**
-
----
-
-## 🔒 Log Preservation Policy
-
-- **No automation script (including `update_version.sh` and `snapshot_webstack.sh`) may delete, truncate, or overwrite log files in `/opt/webstack/logs/` unless explicitly authorized and documented in the objectives log.**
-- **Log rotation and archival are handled ONLY by designated log rotation scripts or logrotate.**
-- **Any changes to log file handling must be called out for approval, reviewed, and added to this directives file.**
-- **Analytics and stats depend on persistent logs:**
-    - `/opt/webstack/logs/quickactions.log`
-    - `/opt/webstack/logs/iteration_log.md`
-    - `/opt/webstack/logs/objectives_log.md`
-    - `/opt/webstack/logs/deploy.log`
-    - `/opt/webstack/logs/failure.log`
-    - `/opt/webstack/logs/access.log`
-    - `/opt/webstack/logs/error.log`
-- **Never clear or truncate these files automatically.**
+- **No script or workflow may truncate or overwrite analytics/stat logs except with explicit approval, per directives.**
 
 ---
 
@@ -120,6 +105,8 @@ _Last Updated: 2025-05-22 v1.4.9-dev_
 
 ---
 
-## Last Updated: 2025-05-22 v1.4.9-dev
+## Last Updated: 2025-05-23 v1.5.0-dev
 
 ---
+
+**Refer to this file for all workflow, logging, admin, and automation rules. All contributors (human or AI) must comply.**

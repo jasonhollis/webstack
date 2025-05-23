@@ -6049,3 +6049,1445 @@ All errors MUST go through /opt/webstack/bin/failure.sh.
 
 
 Deploy-Ready: Full EOF Replacement for /opt/webstack/bin/update_version.sh
+2025-05-23 14:19:15
+OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: I think we should add the All failures routed via failure.sh and logged/alerted per directives bit into the project directives
+2025-05-23 14:19:39 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  🚦 Logging, Versioning & Automation
+
+  * Every version bump (update_version.sh):
+    * Pre-creates:
+      * ${OBJECTIVES_DIR}/${VERSION}_iteration_log.md
+      * ${OBJECTIVES_DIR}/${VERSION}_objectives.md
+    * Sets correct ownership (root:www-data) and permissions (664).
+  * All scripts read $VERSION_FILE at runtime (never cache).
+  * No log entries are appended to old version logs after a bump.
+  * All logs are Markdown, UTF-8, no shell prompt or output unless explicitly logged.
+  * All failures are routed via /opt/webstack/bin/failure.sh, and must be logged and alerted according to directives.
+  * Failures are logged to /opt/webstack/logs/failure.log and sent via Pushover.
+  * No script or workflow may truncate or overwrite analytics/stat logs except with explicit approval, per directives.
+2025-05-23 14:19:39 AEST [append_activity] root@ssdnodes-605e9a6080011: 🚦 Logging, Versioning & Automation
+
+  * Every version bump (update_version.sh):
+    * Pre-creates:
+      * ${OBJECTIVES_DIR}/${VERSION}_iteration_log.md
+      * ${OBJECTIVES_DIR}/${VERSION}_objectives.md
+    * Sets correct ownership (root:www-data) and permissions (664).
+  * All scripts read $VERSION_FILE at runtime (never cache).
+  * No log entries are appended to old version logs after a bump.
+  * All logs are Markdown, UTF-8, no shell prompt or output unless explicitly logged.
+  * All failures are routed via /opt/webstack/bin/failure.sh, and must be logged and alerted according to directives.
+  * Failures are logged to /opt/webstack/logs/failure.log and sent via Pushover.
+  * No script or workflow may truncate or overwrite analytics/stat logs except with explicit approval, per directives.
+2025-05-23 14:23:30
+IMAGE-LOG [v1.5.0-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-23-at-14.22.56.png
+2025-05-23 14:24:57 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  That's done ... let's do some real work now the focus is on the actual site.  Let's start with the nav bar.  It does not run across the whole page on any of the pages at this point notice the space in the upper left
+2025-05-23 14:24:57 AEST [append_activity] root@ssdnodes-605e9a6080011: That's done ... let's do some real work now the focus is on the actual site.  Let's start with the nav bar.  It does not run across the whole page on any of the pages at this point notice the space in the upper left
+2025-05-23 14:25:11
+OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: Let's start with the nav bar.  It does not run across the whole page on any of the pages at this point notice the space in the upper left
+2025-05-23 14:25:32
+IMAGE-OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-23-at-14.22.56.png
+2025-05-23 14:26:10 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Perfect, I see the issue. The nav bar is currently not stretching the full width of the page—there's a gap on the left (and possibly right) because the navigation bar <div> or <nav> likely has a constrained width (e.g., a max-w-7xl mx-auto or similar Tailwind class), or there’s padding/margin from a parent container.
+
+Here’s how to fix it for **all pages**:
+
+  1. Make the navbar span the full width:  
+Remove any max-w-*, mx-auto, or centralizing container class from the <nav> and place those only on the main content below the navbar.
+  2. Use Tailwind’s w-full and no container on the navbar itself.
+  3. Ensure the navbar background goes edge to edge:  
+Add w-full bg-white (or bg-gray-900 for dark mode) and move any centering/container logic to the page body.
+2025-05-23 14:26:10 AEST [append_activity] root@ssdnodes-605e9a6080011: Perfect, I see the issue. The nav bar is currently not stretching the full width of the page—there's a gap on the left (and possibly right) because the navigation bar <div> or <nav> likely has a constrained width (e.g., a max-w-7xl mx-auto or similar Tailwind class), or there’s padding/margin from a parent container.
+
+Here’s how to fix it for **all pages**:
+
+  1. Make the navbar span the full width:  
+Remove any max-w-*, mx-auto, or centralizing container class from the <nav> and place those only on the main content below the navbar.
+  2. Use Tailwind’s w-full and no container on the navbar itself.
+  3. Ensure the navbar background goes edge to edge:  
+Add w-full bg-white (or bg-gray-900 for dark mode) and move any centering/container logic to the page body.
+2025-05-23 14:27:41 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  This is the current nav.php that we optimised (I think) for mobiles many iterations ago:
+
+  
+
+
+<?php include __DIR__."/analytics_logger.php"; ?>
+
+<nav class="bg-white dark:bg-black/90 fixed top-0 w-full shadow z-50">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+
+    <a href="index.php" class="flex items-center space-x-2">
+
+      <picture>
+
+        <source srcset="images/logos/KTP Logo2.png" media="(prefers-color-scheme: dark)">
+
+        <img src="/images/logos/KTP Logo.png" alt="KTP Logo" class="h-8 w-auto">
+
+      </picture>
+
+      <span class="font-bold text-gray-900 dark:text-white text-lg">KTP Digital</span>
+
+    </a>
+
+  
+
+
+    <!-- Hamburger toggle -->
+
+    <button id="nav-toggle" class="md:hidden text-gray-900 dark:text-white focus:outline-none transition-transform duration-300 ease-in-out">
+
+      <svg id="icon-hamburger" class="w-6 h-6 block" fill="none" stroke="currentColor" stroke-width="2"
+
+           viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+
+        <path d="M4 6h16M4 12h16M4 18h16" />
+
+      </svg>
+
+      <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2"
+
+           viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+
+        <path d="M6 18L18 6M6 6l12 12" />
+
+      </svg>
+
+    </button>
+
+  
+
+
+    <!-- Desktop nav -->
+
+    <div class="hidden md:flex space-x-4 text-sm font-medium text-gray-800 dark:text-white">
+
+      <a href="index.php" class="hover:underline">Home</a>
+
+      <a href="smallbiz.php" class="hover:underline">Small Business</a>
+
+      <a href="enterprise.php" class="hover:underline">Enterprise</a>
+
+      <a href="automation.php" class="hover:underline">Automation</a>
+
+      <a href="about.php" class="hover:underline">About</a>
+
+      <a href="contact.php" class="hover:underline">Contact</a>
+
+    </div>
+
+  </div>
+
+  
+
+
+  <!-- Mobile dropdown -->
+
+  <div id="nav-dropdown" class="md:hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 text-sm font-medium text-gray-800 dark:text-white">
+
+    <div class="pt-2 pb-4 space-y-2">
+
+      <a href="index.php" class="block hover:underline nav-link">Home</a>
+
+      <a href="smallbiz.php" class="block hover:underline nav-link">Small Business</a>
+
+      <a href="enterprise.php" class="block hover:underline nav-link">Enterprise</a>
+
+      <a href="automation.php" class="block hover:underline nav-link">Automation</a>
+
+      <a href="about.php" class="block hover:underline nav-link">About</a>
+
+      <a href="contact.php" class="block hover:underline nav-link">Contact</a>
+
+    </div>
+
+  </div>
+
+  
+
+
+  <script>
+
+    const toggle = document.getElementById('nav-toggle');
+
+    const dropdown = document.getElementById('nav-dropdown');
+
+    const iconHamburger = document.getElementById('icon-hamburger');
+
+    const iconClose = document.getElementById('icon-close');
+
+  
+
+
+    toggle.addEventListener('click', () => {
+
+      const isClosed = dropdown.classList.contains('max-h-0');
+
+      dropdown.classList.toggle('max-h-0', !isClosed);
+
+      dropdown.classList.toggle('max-h-96', isClosed);
+
+      iconHamburger.classList.toggle('hidden', isClosed);
+
+      iconClose.classList.toggle('hidden', !isClosed);
+
+    });
+
+  
+
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+
+      link.addEventListener('click', () => {
+
+        dropdown.classList.add('max-h-0');
+
+        dropdown.classList.remove('max-h-96');
+
+        iconHamburger.classList.remove('hidden');
+
+        iconClose.classList.add('hidden');
+
+      });
+
+    });
+
+  </script>
+
+</nav>
+2025-05-23 14:27:41 AEST [append_activity] root@ssdnodes-605e9a6080011: This is the current nav.php that we optimised (I think) for mobiles many iterations ago:
+
+  
+
+
+<?php include __DIR__."/analytics_logger.php"; ?>
+
+<nav class="bg-white dark:bg-black/90 fixed top-0 w-full shadow z-50">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+
+    <a href="index.php" class="flex items-center space-x-2">
+
+      <picture>
+
+        <source srcset="images/logos/KTP Logo2.png" media="(prefers-color-scheme: dark)">
+
+        <img src="/images/logos/KTP Logo.png" alt="KTP Logo" class="h-8 w-auto">
+
+      </picture>
+
+      <span class="font-bold text-gray-900 dark:text-white text-lg">KTP Digital</span>
+
+    </a>
+
+  
+
+
+    <!-- Hamburger toggle -->
+
+    <button id="nav-toggle" class="md:hidden text-gray-900 dark:text-white focus:outline-none transition-transform duration-300 ease-in-out">
+
+      <svg id="icon-hamburger" class="w-6 h-6 block" fill="none" stroke="currentColor" stroke-width="2"
+
+           viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+
+        <path d="M4 6h16M4 12h16M4 18h16" />
+
+      </svg>
+
+      <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2"
+
+           viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+
+        <path d="M6 18L18 6M6 6l12 12" />
+
+      </svg>
+
+    </button>
+
+  
+
+
+    <!-- Desktop nav -->
+
+    <div class="hidden md:flex space-x-4 text-sm font-medium text-gray-800 dark:text-white">
+
+      <a href="index.php" class="hover:underline">Home</a>
+
+      <a href="smallbiz.php" class="hover:underline">Small Business</a>
+
+      <a href="enterprise.php" class="hover:underline">Enterprise</a>
+
+      <a href="automation.php" class="hover:underline">Automation</a>
+
+      <a href="about.php" class="hover:underline">About</a>
+
+      <a href="contact.php" class="hover:underline">Contact</a>
+
+    </div>
+
+  </div>
+
+  
+
+
+  <!-- Mobile dropdown -->
+
+  <div id="nav-dropdown" class="md:hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 text-sm font-medium text-gray-800 dark:text-white">
+
+    <div class="pt-2 pb-4 space-y-2">
+
+      <a href="index.php" class="block hover:underline nav-link">Home</a>
+
+      <a href="smallbiz.php" class="block hover:underline nav-link">Small Business</a>
+
+      <a href="enterprise.php" class="block hover:underline nav-link">Enterprise</a>
+
+      <a href="automation.php" class="block hover:underline nav-link">Automation</a>
+
+      <a href="about.php" class="block hover:underline nav-link">About</a>
+
+      <a href="contact.php" class="block hover:underline nav-link">Contact</a>
+
+    </div>
+
+  </div>
+
+  
+
+
+  <script>
+
+    const toggle = document.getElementById('nav-toggle');
+
+    const dropdown = document.getElementById('nav-dropdown');
+
+    const iconHamburger = document.getElementById('icon-hamburger');
+
+    const iconClose = document.getElementById('icon-close');
+
+  
+
+
+    toggle.addEventListener('click', () => {
+
+      const isClosed = dropdown.classList.contains('max-h-0');
+
+      dropdown.classList.toggle('max-h-0', !isClosed);
+
+      dropdown.classList.toggle('max-h-96', isClosed);
+
+      iconHamburger.classList.toggle('hidden', isClosed);
+
+      iconClose.classList.toggle('hidden', !isClosed);
+
+    });
+
+  
+
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+
+      link.addEventListener('click', () => {
+
+        dropdown.classList.add('max-h-0');
+
+        dropdown.classList.remove('max-h-96');
+
+        iconHamburger.classList.remove('hidden');
+
+        iconClose.classList.add('hidden');
+
+      });
+
+    });
+
+  </script>
+
+</nav>
+2025-05-23 14:31:05 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Nope no changes.  I think there may also be an issue with tailwind.  If you dig way thorough the project history and please stop and do that we are on tailwind 3.x I believe because of huge problems with 4x.  These pages all maybe wrong on that basis?
+2025-05-23 14:31:05 AEST [append_activity] root@ssdnodes-605e9a6080011: Nope no changes.  I think there may also be an issue with tailwind.  If you dig way thorough the project history and please stop and do that we are on tailwind 3.x I believe because of huge problems with 4x.  These pages all maybe wrong on that basis?
+2025-05-23 14:31:16 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Excellent catch and yes, you are correct—your project runs TailwindCSS 3.x, not 4.x, for full compatibility and stability.  
+Earlier attempts to use v4.x caused major breakages (class changes, color palette changes, dark mode bugs, etc). We locked to Tailwind 3.x in both the CDN and build pipeline. There are a few important things to keep in mind:
+
+  
+
+
+1\. Tailwind CDN Version Lock
+
+Your current <script src="...tailwindcss.com"></script> on each page must specify v3.x (not “latest” or 4.x).
+2025-05-23 14:31:16 AEST [append_activity] root@ssdnodes-605e9a6080011: Excellent catch and yes, you are correct—your project runs TailwindCSS 3.x, not 4.x, for full compatibility and stability.  
+Earlier attempts to use v4.x caused major breakages (class changes, color palette changes, dark mode bugs, etc). We locked to Tailwind 3.x in both the CDN and build pipeline. There are a few important things to keep in mind:
+
+  
+
+
+1\. Tailwind CDN Version Lock
+
+Your current <script src="...tailwindcss.com"></script> on each page must specify v3.x (not “latest” or 4.x).
+2025-05-23 14:31:28 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  2\. Class Compatibility Issues
+
+  * Some classes, especially “/opacity-xx” and newer utility classes, are 4.x only.  
+These will silently fail in 3.x.
+  * Some color names and dark mode behaviors are subtly different between 3.x and 4.x.
+  * Container behaviors, spacing, and shadow utilities can change between versions.
+  * If a page was last edited during the 4.x CDN window, its Tailwind classes may be incompatible or ignored by 3.x.
+
+  
+
+
+3\. Audit and Correction Approach
+
+  * Step 1: Check the <script src="...tailwindcss.com"> on all main pages (index.php, about.php, etc.) and set to 3.4.1 everywhere.
+  * Step 2: Re-audit your most recent layouts for any non-3.x classes (e.g., bg-black/90 is supported, but others may not be).
+  * Step 3: If you encounter visual glitches, colors not applying, spacing issues, or dark mode not working—it's likely a class or CDN version mismatch.
+2025-05-23 14:31:28 AEST [append_activity] root@ssdnodes-605e9a6080011: 2\. Class Compatibility Issues
+
+  * Some classes, especially “/opacity-xx” and newer utility classes, are 4.x only.  
+These will silently fail in 3.x.
+  * Some color names and dark mode behaviors are subtly different between 3.x and 4.x.
+  * Container behaviors, spacing, and shadow utilities can change between versions.
+  * If a page was last edited during the 4.x CDN window, its Tailwind classes may be incompatible or ignored by 3.x.
+
+  
+
+
+3\. Audit and Correction Approach
+
+  * Step 1: Check the <script src="...tailwindcss.com"> on all main pages (index.php, about.php, etc.) and set to 3.4.1 everywhere.
+  * Step 2: Re-audit your most recent layouts for any non-3.x classes (e.g., bg-black/90 is supported, but others may not be).
+  * Step 3: If you encounter visual glitches, colors not applying, spacing issues, or dark mode not working—it's likely a class or CDN version mismatch.
+2025-05-23 14:31:50
+OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: 3\. Audit and Correction Approach
+
+  * Step 1: Check the <script src="...tailwindcss.com"> on all main pages (index.php, about.php, etc.) and set to 3.4.1 everywhere.
+  * Step 2: Re-audit your most recent layouts for any non-3.x classes (e.g., bg-black/90 is supported, but others may not be).
+  * Step 3: If you encounter visual glitches, colors not applying, spacing issues, or dark mode not working—it's likely a class or CDN version mismatch.
+2025-05-23 14:32:26
+OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: FileCorrect Tailwind CDN?
+
+index.php
+Should be 3.4.1
+
+about.php
+Should be 3.4.1
+
+smallbiz.php
+Should be 3.4.1
+
+enterprise.php
+Should be 3.4.1
+
+automation.php
+Should be 3.4.1
+
+contact.php
+Should be 3.4.1
+
+admin/*.php
+Should be 3.4.1
+2025-05-23 14:33:01
+OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: First give me an audit and then we will use sed and test
+2025-05-23 14:37:02
+IMAGE-LOG [v1.5.0-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-23-at-14.36.37.png
+2025-05-23 14:38:04
+OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: Now how do we fix the nav bar an what does layout.php do?
+2025-05-23 14:38:23
+IMAGE-OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-23-at-14.36.37.png
+2025-05-23 14:39:59 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  FileWhat it DoesNav Impact
+
+layout.php
+Site-wide layout
+Includes nav.php at top, sets page padding, renders page content, handles background & footer
+
+nav.php
+Navigation bar
+Stretches full width, fixed at top, mobile/desktop
+
+*.php
+Content pages
+Call renderLayout(), supply unique content
+2025-05-23 14:39:59 AEST [append_activity] root@ssdnodes-605e9a6080011: FileWhat it DoesNav Impact
+
+layout.php
+Site-wide layout
+Includes nav.php at top, sets page padding, renders page content, handles background & footer
+
+nav.php
+Navigation bar
+Stretches full width, fixed at top, mobile/desktop
+
+*.php
+Content pages
+Call renderLayout(), supply unique content
+2025-05-23 14:40:09
+OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: FileWhat it DoesNav Impact
+
+layout.php
+Site-wide layout
+Includes nav.php at top, sets page padding, renders page content, handles background & footer
+
+nav.php
+Navigation bar
+Stretches full width, fixed at top, mobile/desktop
+
+*.php
+Content pages
+Call renderLayout(), supply unique content
+2025-05-23 14:42:52 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Root Cause & Fix
+
+1\. The Problem
+
+  * The <nav> bar itself is fine, but the inner <div> in nav.php is still using a constrained max width (max-w-7xl mx-auto).
+  * The parent page's CSS or a wrapping container might be restricting width for everything, not just content.
+  * You must remove max-w-7xl mx-auto from nav.php's inner <div>—not just visually, but actually in code.
+
+2\. **Fix: nav.php******
+
+Here’s what to do for a real fix:
+
+  * Remove any max-w-7xl mx-auto from your nav.php.
+  * Change the inner container to just use w-full px-4 sm:px-6.
+2025-05-23 14:42:52 AEST [append_activity] root@ssdnodes-605e9a6080011: Root Cause & Fix
+
+1\. The Problem
+
+  * The <nav> bar itself is fine, but the inner <div> in nav.php is still using a constrained max width (max-w-7xl mx-auto).
+  * The parent page's CSS or a wrapping container might be restricting width for everything, not just content.
+  * You must remove max-w-7xl mx-auto from nav.php's inner <div>—not just visually, but actually in code.
+
+2\. **Fix: nav.php******
+
+Here’s what to do for a real fix:
+
+  * Remove any max-w-7xl mx-auto from your nav.php.
+  * Change the inner container to just use w-full px-4 sm:px-6.
+2025-05-23 14:51:13
+OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: We have one major fix left for this release.  I want images to render and link like you have working in /admin/logs.php but I'm also pasting php revision code into the log and that is being rendered instead of being protected e.g. the browser is trying to interpret it all.  What can be done to fix this?
+2025-05-23 14:53:17
+OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: MethodRenders imagesRenders code blocks safelyExecutes PHP/HTML/JS?
+
+`echo $content`
+Yes
+No
+Yes (unsafe!)
+
+`htmlspecialchars()`
+No
+Yes
+No
+
+`Parsedown (safe)`
+Yes
+Yes
+No
+2025-05-23 14:53:58
+OBJECTIVE [v1.5.0-dev] root@ssdnodes-605e9a6080011: I think clickable copy would be kinda cool too
+2025-05-23 14:57:23
+IMAGE-LOG [v1.5.0-dev] root@ssdnodes-605e9a6080011: Clipboard-23-May-2025-at-14.57.txt
+2025-05-23 14:57:31 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:    * Safe: No HTML/PHP can be executed by browser, only rendered as text or code.
+  * Usable: Images are still rendered and clickable.
+  * Cool: Any code block gets a Copy button (hover to show, click to copy to clipboard).
+  * Stylish: Copy button is subtle, only visible on hover/focus, and looks great with Tailwind.
+
+  
+
+
+Copy/paste this as your new logs.php, reload /admin/logs.php, and try pasting some PHP/Bash code!  
+Let me know if you want custom code coloring or further features.
+2025-05-23 14:57:31 AEST [append_activity] root@ssdnodes-605e9a6080011:   * Safe: No HTML/PHP can be executed by browser, only rendered as text or code.
+  * Usable: Images are still rendered and clickable.
+  * Cool: Any code block gets a Copy button (hover to show, click to copy to clipboard).
+  * Stylish: Copy button is subtle, only visible on hover/focus, and looks great with Tailwind.
+
+  
+
+
+Copy/paste this as your new logs.php, reload /admin/logs.php, and try pasting some PHP/Bash code!  
+Let me know if you want custom code coloring or further features.
+2025-05-23 14:58:34
+IMAGE-LOG [v1.5.0-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-23-at-14.58.19.png
+2025-05-23 15:00:29 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  How to Guarantee Code is Rendered as Code (and gets Copy Button)
+
+**1\. Always fence pasted code in your logs with triple backticks******
+
+  * For single-line:  
+  
+  
+`your inline code here`
+  *   
+  
+
+  * For multi-line/code block:  
+  
+  
+```php
+  * <?php
+  * ___// your code___
+  * ?>
+  *   
+  
+  
+  
+  
+  
+  
+
+
+(That’s three backticks above and below!)
+
+  
+
+
+**2\. If you paste code directly, always surround it with triple backticks.******
+
+Example (for your iteration log):
+
+<pre> ``` <?php echo "This is PHP code"; ?> ``` </pre>
+
+or (for bash, python, etc.)
+
+<pre> ```bash echo "This is bash" ``` </pre>
+
+  
+
+
+3\. If you need a one-liner fix for old logs
+
+If you already have logs where code is not fenced, you can:
+
+  * Edit the log file, wrap the code blocks in triple backticks (```)
+  * Or, if you want, I can provide a script to scan/convert "bare" PHP tags or code lines into fenced code blocks.
+
+  
+
+
+**4\. You can also add a Markdown tip/reminder to your log entry page******
+
+"Tip: To paste code in the log, surround it with triple backticks (```) above and below for best results!"
+
+  
+
+
+**Summary Table******
+
+How you paste code
+
+How it renders
+
+Copy button?
+
+No backticks
+
+Interpreted, may break
+
+❌
+
+`inline code`
+
+Inline code
+
+❌
+
+php ...
+
+Block code, formatted
+
+✅ Yes (with fix)
+2025-05-23 15:00:29 AEST [append_activity] root@ssdnodes-605e9a6080011: How to Guarantee Code is Rendered as Code (and gets Copy Button)
+
+**1\. Always fence pasted code in your logs with triple backticks******
+
+  * For single-line:  
+  
+  
+`your inline code here`
+  *   
+  
+
+  * For multi-line/code block:  
+  
+  
+```php
+  * <?php
+  * ___// your code___
+  * ?>
+  *   
+  
+  
+  
+  
+  
+  
+
+
+(That’s three backticks above and below!)
+
+  
+
+
+**2\. If you paste code directly, always surround it with triple backticks.******
+
+Example (for your iteration log):
+
+<pre> ``` <?php echo "This is PHP code"; ?> ``` </pre>
+
+or (for bash, python, etc.)
+
+<pre> ```bash echo "This is bash" ``` </pre>
+
+  
+
+
+3\. If you need a one-liner fix for old logs
+
+If you already have logs where code is not fenced, you can:
+
+  * Edit the log file, wrap the code blocks in triple backticks (```)
+  * Or, if you want, I can provide a script to scan/convert "bare" PHP tags or code lines into fenced code blocks.
+
+  
+
+
+**4\. You can also add a Markdown tip/reminder to your log entry page******
+
+"Tip: To paste code in the log, surround it with triple backticks (```) above and below for best results!"
+
+  
+
+
+**Summary Table******
+
+How you paste code
+
+How it renders
+
+Copy button?
+
+No backticks
+
+Interpreted, may break
+
+❌
+
+`inline code`
+
+Inline code
+
+❌
+
+php ...
+
+Block code, formatted
+
+✅ Yes (with fix)
+2025-05-23 15:15:57 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  OK these are the append routines I use to paste text via the Mac.  Can we fix this up to protect code blocks?
+
+  
+
+
+root@ssdnodes-605e9a6080011:/opt/webstack/bin# cat appe
+
+append_activity.sh   append_objective.sh  
+
+root@ssdnodes-605e9a6080011:/opt/webstack/bin# cat append_*
+
+#!/bin/bash
+
+# append_activity.sh: Append activity log entry, handle all errors via failure.sh, and push notification.
+
+LOGFILE="/opt/webstack/logs/quickactions.log"
+
+VERSION_FILE="/opt/webstack/html/VERSION"
+
+OBJECTIVES_DIR="/opt/webstack/objectives"
+
+FAILURE="/opt/webstack/bin/failure.sh"
+
+PUSHOVER_USER="uh1ozrrcj8y5jktg5euc6yz6zpdcqh"
+
+PUSHOVER_TOKEN="aqfyb8hsfb6txs6pd4qwchjwd3iccb"
+
+TITLE="Webstack Activity Log"
+
+DATE="$(date '+%Y-%m-%d %H:%M:%S %Z')"
+
+WHO="$(whoami)@$(hostname)"
+
+  
+
+
+ENTRY="$(cat -)"
+
+  
+
+
+# Always log invocation
+
+{
+
+  echo "$DATE [activity] invoked by $WHO"
+
+  echo "  RAW:  $ENTRY"
+
+} >> "$LOGFILE" || $FAILURE "Failed to write activity invocation" "$LOGFILE"
+
+  
+
+
+if [[ -z "$ENTRY" ]]; then
+
+  $FAILURE "append_activity.sh called with empty input" "$LOGFILE"
+
+  exit 1
+
+fi
+
+  
+
+
+# Write to quickactions.log
+
+echo "$DATE [append_activity] $WHO: $ENTRY" >> "$LOGFILE" || $FAILURE "Failed to write to $LOGFILE"
+
+  
+
+
+# Write to current iteration log
+
+VERSION=$(cat "$VERSION_FILE" 2>/dev/null)
+
+ITERATION_LOG="${OBJECTIVES_DIR}/${VERSION}_iteration_log.md"
+
+if ! echo -e "\n---\n#### [$DATE][$VERSION]\n$ENTRY\n" >> "$ITERATION_LOG"; then
+
+  $FAILURE "Failed to write to iteration log" "$ITERATION_LOG"
+
+  exit 2
+
+fi
+
+  
+
+
+if ! chown root:www-data "$ITERATION_LOG" 2>/dev/null; then
+
+  $FAILURE "Failed chown on $ITERATION_LOG"
+
+fi
+
+if ! chmod 664 "$ITERATION_LOG" 2>/dev/null; then
+
+  $FAILURE "Failed chmod on $ITERATION_LOG"
+
+fi
+
+  
+
+
+if [[ -n "$PUSHOVER_USER" && -n "$PUSHOVER_TOKEN" ]]; then
+
+  MSG="[$DATE][$WHO] $ENTRY"
+
+  if ! curl -s \
+
+    -F "token=$PUSHOVER_TOKEN" \
+
+    -F "user=$PUSHOVER_USER" \
+
+    -F "title=$TITLE" \
+
+    -F "message=$MSG" \
+
+    -F "priority=0" \
+
+    https://api.pushover.net/1/messages.json >/dev/null; then
+
+    $FAILURE "Pushover notification failed for activity entry"
+
+  fi
+
+fi
+
+#!/bin/bash
+
+# append_objective.sh: Accepts objective entry from stdin OR as first argument, logs with universal error handling.
+
+  
+
+
+OBJECTIVES_DIR="/opt/webstack/objectives"
+
+VERSION_FILE="/opt/webstack/html/VERSION"
+
+FAILURE="/opt/webstack/bin/failure.sh"
+
+PUSHOVER_USER="uh1ozrrcj8y5jktg5euc6yz6zpdcqh"
+
+PUSHOVER_TOKEN="aqfyb8hsfb6txs6pd4qwchjwd3iccb"
+
+SOUND="alien"
+
+TS=$(TZ="Australia/Sydney" date +"%Y-%m-%d %H:%M:%S %Z")
+
+VERSION=$(cat "$VERSION_FILE" 2>/dev/null)
+
+  
+
+
+# Read from stdin if data exists, else from $1
+
+if [ -t 0 ]; then
+
+  OBJECTIVE="$1"
+
+else
+
+  OBJECTIVE="$(cat -)"
+
+fi
+
+  
+
+
+if [[ -z "$OBJECTIVE" ]]; then
+
+  $FAILURE "append_objective.sh called with no input"
+
+  exit 1
+
+fi
+
+  
+
+
+OBJECTIVE_FILE="$OBJECTIVES_DIR/${VERSION}_objectives.md"
+
+ENTRY="---
+
+#### [$TS][$VERSION]
+
+$OBJECTIVE
+
+"
+
+  
+
+
+if ! echo "$ENTRY" >> "$OBJECTIVE_FILE"; then
+
+  $FAILURE "Failed to append objective" "$OBJECTIVE_FILE"
+
+  exit 2
+
+fi
+
+  
+
+
+if ! chown root:www-data "$OBJECTIVE_FILE" 2>/dev/null; then
+
+  $FAILURE "Failed chown on $OBJECTIVE_FILE"
+
+fi
+
+if ! chmod 664 "$OBJECTIVE_FILE" 2>/dev/null; then
+
+  $FAILURE "Failed chmod on $OBJECTIVE_FILE"
+
+fi
+
+  
+
+
+if [[ -n "$PUSHOVER_USER" && -n "$PUSHOVER_TOKEN" ]]; then
+
+  MSG="🎯 Objective Added [$VERSION]: $OBJECTIVE"
+
+  if ! curl -s \
+
+    -F "token=$PUSHOVER_TOKEN" \
+
+    -F "user=$PUSHOVER_USER" \
+
+    -F "title=Webstack Objective" \
+
+    -F "message=$MSG" \
+
+    -F "sound=$SOUND" \
+
+    https://api.pushover.net/1/messages.json > /dev/null; then
+
+    $FAILURE "Pushover notification failed for objective"
+
+  fi
+
+fi
+
+  
+
+
+echo "$(date '+%Y-%m-%d %H:%M:%S')" >> /opt/webstack/logs/quickactions.log
+
+echo "OBJECTIVE [$VERSION] $(whoami)@$(hostname): $OBJECTIVE" >> /opt/webstack/logs/quickactions.log
+
+root@ssdnodes-605e9a6080011:/opt/webstack/bin# 
+2025-05-23 15:15:57 AEST [append_activity] root@ssdnodes-605e9a6080011: OK these are the append routines I use to paste text via the Mac.  Can we fix this up to protect code blocks?
+
+  
+
+
+root@ssdnodes-605e9a6080011:/opt/webstack/bin# cat appe
+
+append_activity.sh   append_objective.sh  
+
+root@ssdnodes-605e9a6080011:/opt/webstack/bin# cat append_*
+
+#!/bin/bash
+
+# append_activity.sh: Append activity log entry, handle all errors via failure.sh, and push notification.
+
+LOGFILE="/opt/webstack/logs/quickactions.log"
+
+VERSION_FILE="/opt/webstack/html/VERSION"
+
+OBJECTIVES_DIR="/opt/webstack/objectives"
+
+FAILURE="/opt/webstack/bin/failure.sh"
+
+PUSHOVER_USER="uh1ozrrcj8y5jktg5euc6yz6zpdcqh"
+
+PUSHOVER_TOKEN="aqfyb8hsfb6txs6pd4qwchjwd3iccb"
+
+TITLE="Webstack Activity Log"
+
+DATE="$(date '+%Y-%m-%d %H:%M:%S %Z')"
+
+WHO="$(whoami)@$(hostname)"
+
+  
+
+
+ENTRY="$(cat -)"
+
+  
+
+
+# Always log invocation
+
+{
+
+  echo "$DATE [activity] invoked by $WHO"
+
+  echo "  RAW:  $ENTRY"
+
+} >> "$LOGFILE" || $FAILURE "Failed to write activity invocation" "$LOGFILE"
+
+  
+
+
+if [[ -z "$ENTRY" ]]; then
+
+  $FAILURE "append_activity.sh called with empty input" "$LOGFILE"
+
+  exit 1
+
+fi
+
+  
+
+
+# Write to quickactions.log
+
+echo "$DATE [append_activity] $WHO: $ENTRY" >> "$LOGFILE" || $FAILURE "Failed to write to $LOGFILE"
+
+  
+
+
+# Write to current iteration log
+
+VERSION=$(cat "$VERSION_FILE" 2>/dev/null)
+
+ITERATION_LOG="${OBJECTIVES_DIR}/${VERSION}_iteration_log.md"
+
+if ! echo -e "\n---\n#### [$DATE][$VERSION]\n$ENTRY\n" >> "$ITERATION_LOG"; then
+
+  $FAILURE "Failed to write to iteration log" "$ITERATION_LOG"
+
+  exit 2
+
+fi
+
+  
+
+
+if ! chown root:www-data "$ITERATION_LOG" 2>/dev/null; then
+
+  $FAILURE "Failed chown on $ITERATION_LOG"
+
+fi
+
+if ! chmod 664 "$ITERATION_LOG" 2>/dev/null; then
+
+  $FAILURE "Failed chmod on $ITERATION_LOG"
+
+fi
+
+  
+
+
+if [[ -n "$PUSHOVER_USER" && -n "$PUSHOVER_TOKEN" ]]; then
+
+  MSG="[$DATE][$WHO] $ENTRY"
+
+  if ! curl -s \
+
+    -F "token=$PUSHOVER_TOKEN" \
+
+    -F "user=$PUSHOVER_USER" \
+
+    -F "title=$TITLE" \
+
+    -F "message=$MSG" \
+
+    -F "priority=0" \
+
+    https://api.pushover.net/1/messages.json >/dev/null; then
+
+    $FAILURE "Pushover notification failed for activity entry"
+
+  fi
+
+fi
+
+#!/bin/bash
+
+# append_objective.sh: Accepts objective entry from stdin OR as first argument, logs with universal error handling.
+
+  
+
+
+OBJECTIVES_DIR="/opt/webstack/objectives"
+
+VERSION_FILE="/opt/webstack/html/VERSION"
+
+FAILURE="/opt/webstack/bin/failure.sh"
+
+PUSHOVER_USER="uh1ozrrcj8y5jktg5euc6yz6zpdcqh"
+
+PUSHOVER_TOKEN="aqfyb8hsfb6txs6pd4qwchjwd3iccb"
+
+SOUND="alien"
+
+TS=$(TZ="Australia/Sydney" date +"%Y-%m-%d %H:%M:%S %Z")
+
+VERSION=$(cat "$VERSION_FILE" 2>/dev/null)
+
+  
+
+
+# Read from stdin if data exists, else from $1
+
+if [ -t 0 ]; then
+
+  OBJECTIVE="$1"
+
+else
+
+  OBJECTIVE="$(cat -)"
+
+fi
+
+  
+
+
+if [[ -z "$OBJECTIVE" ]]; then
+
+  $FAILURE "append_objective.sh called with no input"
+
+  exit 1
+
+fi
+
+  
+
+
+OBJECTIVE_FILE="$OBJECTIVES_DIR/${VERSION}_objectives.md"
+
+ENTRY="---
+
+#### [$TS][$VERSION]
+
+$OBJECTIVE
+
+"
+
+  
+
+
+if ! echo "$ENTRY" >> "$OBJECTIVE_FILE"; then
+
+  $FAILURE "Failed to append objective" "$OBJECTIVE_FILE"
+
+  exit 2
+
+fi
+
+  
+
+
+if ! chown root:www-data "$OBJECTIVE_FILE" 2>/dev/null; then
+
+  $FAILURE "Failed chown on $OBJECTIVE_FILE"
+
+fi
+
+if ! chmod 664 "$OBJECTIVE_FILE" 2>/dev/null; then
+
+  $FAILURE "Failed chmod on $OBJECTIVE_FILE"
+
+fi
+
+  
+
+
+if [[ -n "$PUSHOVER_USER" && -n "$PUSHOVER_TOKEN" ]]; then
+
+  MSG="🎯 Objective Added [$VERSION]: $OBJECTIVE"
+
+  if ! curl -s \
+
+    -F "token=$PUSHOVER_TOKEN" \
+
+    -F "user=$PUSHOVER_USER" \
+
+    -F "title=Webstack Objective" \
+
+    -F "message=$MSG" \
+
+    -F "sound=$SOUND" \
+
+    https://api.pushover.net/1/messages.json > /dev/null; then
+
+    $FAILURE "Pushover notification failed for objective"
+
+  fi
+
+fi
+
+  
+
+
+echo "$(date '+%Y-%m-%d %H:%M:%S')" >> /opt/webstack/logs/quickactions.log
+
+echo "OBJECTIVE [$VERSION] $(whoami)@$(hostname): $OBJECTIVE" >> /opt/webstack/logs/quickactions.log
+
+root@ssdnodes-605e9a6080011:/opt/webstack/bin# 
+2025-05-23 15:18:08 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  testing the new insert rules for php code
+2025-05-23 15:18:08 AEST [append_activity] root@ssdnodes-605e9a6080011: testing the new insert rules for php code
+2025-05-23 15:18:20
+IMAGE-LOG [v1.5.0-dev] root@ssdnodes-605e9a6080011: Clipboard-23-May-2025-at-15.18.txt
+2025-05-23 15:20:48 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:   Clipboard-23-May-2025-at-15.18.txt
+2025-05-23 15:20:48 AEST [append_activity] root@ssdnodes-605e9a6080011:  Clipboard-23-May-2025-at-15.18.txt
+2025-05-23 15:21:57 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  <?php
+
+session_start();
+
+define('ADMIN_USER', 'admin');
+
+define('ADMIN_PASS_HASH', '$2y$10$K3xIfyU0kam7WoEl2Q.IPOs9sWsimDkz.4OwDgS367EgnWcDj65P2');
+
+  
+
+
+_// Handle login POST___
+
+if (isset($_POST['admin_user'], $_POST['admin_pass'])) {
+
+    if (
+
+        $_POST['admin_user'] === ADMIN_USER &&
+
+        password_verify($_POST['admin_pass'], ADMIN_PASS_HASH)
+
+    ) {
+
+        $_SESSION['admin_logged_in'] = true;
+
+        header('Location: ' . ($_GET['redirect'] ?? $_SERVER['PHP_SELF']));
+
+        exit;
+
+    }
+
+    $login_error = "Incorrect username or password.";
+
+}
+
+  
+
+
+_// If not logged in, show login form and halt___
+
+if (empty($_SESSION['admin_logged_in'])) {
+
+    ?>
+
+    <!DOCTYPE html>
+
+    <html lang="en">
+
+    <head>
+
+      <meta charset="UTF-8">
+
+      <title>Admin Login – KTP Digital</title>
+
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+      <link rel="stylesheet" href="/assets/tailwind.min.css">
+
+    </head>
+
+    <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white flex items-center justify-center min-h-screen">
+
+      <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg max-w-xs w-full">
+
+        <h1 class="text-2xl font-bold mb-6">🔐 Admin Login</h1>
+
+        <?php if (!empty($login_error)): ?>
+
+          <div class="bg-red-100 text-red-700 px-3 py-2 rounded mb-4"><?=htmlspecialchars($login_error)?></div>
+
+        <?php endif; ?>
+
+        <form method="post" autocomplete="off">
+
+          <label class="block mb-3">
+
+            <span class="text-sm font-medium">Username</span>
+
+            <input type="text" name="admin_user" class="mt-1 w-full px-3 py-2 rounded border focus:outline-none focus:ring" autofocus required>
+
+          </label>
+
+          <label class="block mb-6">
+
+            <span class="text-sm font-medium">Password</span>
+
+            <input type="password" name="admin_pass" class="mt-1 w-full px-3 py-2 rounded border focus:outline-none focus:ring" required>
+
+          </label>
+
+          <button class="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700 transition" type="submit">Login</button>
+
+        </form>
+
+      </div>
+
+    </body>
+
+    </html>
+
+    <?php
+
+    exit;
+
+}
+
+  
+
+
+// ---- AUTHENTICATED: RENDER PAGE \----
+
+include 'admin_nav.php';
+
+  
+
+
+require_once __DIR__ . '/Parsedown.php'; // Make sure Parsedown.php is present
+
+  
+
+
+$objectives_dir = '/opt/webstack/objectives';
+
+$images_url = '/admin/objectives/images/';
+
+$version_file = '/opt/webstack/html/VERSION';
+
+  
+
+
+$version = isset($_GET['version']) ? basename($_GET['version']) : trim(@file_get_contents($version_file));
+
+$log_file = "$objectives_dir/{$version}_iteration_log.md";
+
+  
+
+
+// Find all iteration logs for dropdown
+
+$logs = [];
+
+foreach (glob("$objectives_dir_/*_iteration_log.md") as $f) {_
+
+_    $ver = basename($f, '_iteration_log.md');_
+
+_    $logs[$ver] = $f;_
+2025-05-23 15:21:57 AEST [append_activity] root@ssdnodes-605e9a6080011: 
+2025-05-23 15:22:47
+IMAGE-LOG [v1.5.0-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-23-at-15.22.27.png
+2025-05-23 15:26:58 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  **🚀 **Full EOF Replacement for logs.php with Secure Code Display + Copy Button
+
+This will:
+
+  * Use Parsedown in safe mode (prevents HTML/PHP from being executed)
+  * Render images as clickable (your current logic, preserved)
+  * Enhance code blocks: adds a “Copy” button that appears when you hover code
+  * All code (inline or block) is shown as text, never interpreted
+2025-05-23 15:26:58 AEST [append_activity] root@ssdnodes-605e9a6080011: **🚀 **Full EOF Replacement for logs.php with Secure Code Display + Copy Button
+
+This will:
+
+  * Use Parsedown in safe mode (prevents HTML/PHP from being executed)
+  * Render images as clickable (your current logic, preserved)
+  * Enhance code blocks: adds a “Copy” button that appears when you hover code
+  * All code (inline or block) is shown as text, never interpreted
+2025-05-23 15:36:20
+IMAGE-LOG [v1.5.0-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-23-at-15.36.05.png
+2025-05-23 15:44:08
+IMAGE-LOG [v1.5.0-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-23-at-15.22.27.png
+2025-05-23 16:09:37 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  KTP Webstack CONTEXT LOAD v1.5.0-dev
+
+  * All change, access, and automation rules per /opt/webstack/objectives/PROJECT_DIRECTIVES.md (latest at <https://www.ktp.digital/admin/directives.php>, login: admin/Kungfu88).
+  * No script or workflow may truncate or overwrite analytics/stat logs except with explicit approval, per directives.
+  * All code changes must be deploy-ready (full EOF replacement or single-line BBEdit/vim-safe edit as flagged).
+  * You have full /admin and internal access for debug and automation.
+  * Versioned with rollback via git and snapshot ZIPs.
+  * Current status: v1.5.0-dev deployed, logs and data preserved, analytics and logs.php/image rendering enhancements live, update_version.sh and failure.sh enforced.
+  * If in doubt, refer to the directives or ask.
+2025-05-23 16:09:37 AEST [append_activity] root@ssdnodes-605e9a6080011: KTP Webstack CONTEXT LOAD v1.5.0-dev
+
+  * All change, access, and automation rules per /opt/webstack/objectives/PROJECT_DIRECTIVES.md (latest at <https://www.ktp.digital/admin/directives.php>, login: admin/Kungfu88).
+  * No script or workflow may truncate or overwrite analytics/stat logs except with explicit approval, per directives.
+  * All code changes must be deploy-ready (full EOF replacement or single-line BBEdit/vim-safe edit as flagged).
+  * You have full /admin and internal access for debug and automation.
+  * Versioned with rollback via git and snapshot ZIPs.
+  * Current status: v1.5.0-dev deployed, logs and data preserved, analytics and logs.php/image rendering enhancements live, update_version.sh and failure.sh enforced.
+  * If in doubt, refer to the directives or ask.
