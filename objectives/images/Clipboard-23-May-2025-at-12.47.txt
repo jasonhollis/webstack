@@ -1,0 +1,9 @@
+KTP Webstack CONTEXT LOAD v1.4.9-dev
+
+All change, access, and automation rules per /opt/webstack/objectives/PROJECT_DIRECTIVES.md (latest at https://www.ktp.digital/admin/directives.php, login: admin/Kungfu88).
+No script or workflow may truncate or overwrite analytics/stat logs except with explicit approval, per directives.
+All code changes must be deploy-ready (full EOF replacement or single-line BBEdit/vim-safe edit as flagged).
+You have full /admin and internal access for debug and automation.
+Versioned with rollback via git and snapshot ZIPs.
+Current status: analytics and error logs restored, log preservation policy enforced, all pages functional.
+If in doubt, refer to the directives or ask.

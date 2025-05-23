@@ -1,0 +1,309 @@
+<?php
+include 'admin_auth.php';
+include 'admin_nav.php';
+
+$log_file = '/opt/webstack/logs/web_analytics.log';
+$lines = @file($log_file) ?: [];
+$recent = array_slice($lines, -200);
+
+// Get real client IP (supports proxy)
+function getClientIP() {
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $iplist = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+        return trim($iplist[0]);
+    }
+    return $_SERVER['REMOTE_ADDR'] ?? '';
+}
+
+// Persistent "Exclude My IP" cookie logic
+if (isset($_GET['no_me']) && $_GET['no_me'] == 1) {
+    setcookie('exclude_my_ip', getClientIP(), time()+86400*30, '/');
+    header('Location: '.$_SERVER['PHP_SELF']);
+    exit;
+}
+if (isset($_GET['show_all']) && $_GET['show_all'] == 1) {
+    setcookie('exclude_my_ip', '', time()-3600, '/');
+    header('Location: '.$_SERVER['PHP_SELF']);
+    exit;
+}
+$exclude_ip = $_COOKIE['exclude_my_ip'] ?? null;
+
+// Static cache for frequent/known IPs
+$ipinfo_cache = [
+  '103.224.53.7' => ['city'=>'Melbourne','country'=>'AU','asn'=>'AS38195','asn_name'=>'Superloop','asn_type'=>'ISP','company'=>'Origin Internet'],
+  '128.192.193.151' => ['city'=>'St Louis','country'=>'US','asn'=>'AS174','asn_name'=>'Cogent Communications','asn_type'=>'ISP','company'=>'Cogent Communications'],
+  '54.247.57.72' => ['city'=>'Dublin','country'=>'IE','asn'=>'AS16509','asn_name'=>'Amazon.com','asn_type'=>'Hosting','company'=>'Amazon.com'],
+  '154.28.229.24' => ['city'=>'London','country'=>'GB','asn'=>'AS9009','asn_name'=>'M247 Europe','asn_type'=>'Hosting','company'=>'M247 Europe'],
+  '121.229.185.160' => ['city'=>'Nanjing','country'=>'CN','asn'=>'AS4134','asn_name'=>'China Telecom','asn_type'=>'ISP','company'=>'China Telecom'],
+];
+
+// Live ipinfo.io lookup with file cache (24h expiry)
+function ipinfo_lookup($ip) {
+    $cache_file = "/tmp/ipinfo_" . preg_replace('/[^0-9a-fA-F\.]/', '_', $ip) . ".json";
+    if (file_exists($cache_file) && filemtime($cache_file) > time() - 86400) {
+        $info = @json_decode(file_get_contents($cache_file), true);
+        if ($info && isset($info['city'])) return $info;
+    }
+    $json = @file_get_contents("https://ipinfo.io/{$ip}/json");
+    if ($json) {
+        file_put_contents($cache_file, $json);
+        $info = @json_decode($json, true);
+        if ($info && isset($info['city'])) return $info;
+    }
+    return false;
+}
+
+$traffic_by_date = [];
+$page_hits = [];
+$referrers = [];
+$user_agents = [];
+$response_times = [];
+$admin_hits = [];
+$public_hits = [];
+$ip_counts = [];
+foreach ($recent as $line) {
+    $parts = explode("\t", trim($line));
+    if (count($parts) < 8) continue;
+    [$dt, $ip, $uri, $agent, $ref, $code, $elapsed, $zone] = $parts;
+    if ($exclude_ip && $ip === $exclude_ip) continue;
+    $date = substr($dt, 0, 10);
+    $traffic_by_date[$date] = ($traffic_by_date[$date] ?? 0) + 1;
+    $page_hits[$uri] = ($page_hits[$uri] ?? 0) + 1;
+    $referrers[$ref] = ($referrers[$ref] ?? 0) + 1;
+    $user_agents[$agent] = ($user_agents[$agent] ?? 0) + 1;
+    $response_times[] = floatval($elapsed);
+    $ip_counts[$ip] = ($ip_counts[$ip] ?? 0) + 1;
+    if ($zone === 'ADMIN') $admin_hits[] = $line;
+    if ($zone === 'PUBLIC') $public_hits[] = $line;
+}
+function top_n($arr, $n = 5) { arsort($arr); return array_slice($arr, 0, $n, true); }
+$avg_time = count($response_times) ? array_sum($response_times) / count($response_times) : 0;
+function parse_ua($ua) {
+    $ua = strtolower($ua);
+    if (strpos($ua, 'iphone') !== false) return 'iPhone Safari';
+    if (strpos($ua, 'ipad') !== false) return 'iPad Safari';
+    if (strpos($ua, 'mac os x') !== false && strpos($ua, 'chrome') !== false) return 'Mac Chrome';
+    if (strpos($ua, 'mac os x') !== false && strpos($ua, 'safari') !== false) return 'Mac Safari';
+    if (strpos($ua, 'windows') !== false && strpos($ua, 'chrome') !== false) return 'Windows Chrome';
+    if (strpos($ua, 'windows') !== false && strpos($ua, 'firefox') !== false) return 'Windows Firefox';
+    if (strpos($ua, 'windows') !== false && strpos($ua, 'edge') !== false) return 'Windows Edge';
+    if (strpos($ua, 'windows') !== false) return 'Windows Other';
+    if (strpos($ua, 'android') !== false) return 'Android';
+    if (strpos($ua, 'linux') !== false && strpos($ua, 'chrome') !== false) return 'Linux Chrome';
+    if (strpos($ua, 'linux') !== false) return 'Linux Other';
+    if (strpos($ua, 'zgrab') !== false) return 'Scanner/zgrab';
+    return 'Other';
+}
+$ua_grouped = [];
+foreach ($user_agents as $ua => $count) {
+    $key = parse_ua($ua);
+    $ua_grouped[$key] = ($ua_grouped[$key] ?? 0) + $count;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics Dashboard – KTP Digital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/tailwind.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+<div class="max-w-6xl mx-auto px-4 py-10">
+  <!-- Debug IP info (remove after testing) -->
+  <div class="mb-4 text-xs text-gray-500 bg-yellow-50 dark:bg-yellow-900 rounded-xl p-3">
+    <strong>Detected IP (your current):</strong> <?=htmlspecialchars(getClientIP())?><br>
+    <strong>Currently excluded IP:</strong> <?=htmlspecialchars($exclude_ip ?: '(none)')?><br>
+    <strong>Sample log IPs:</strong>
+    <?php foreach(array_slice(array_keys($ip_counts),0,5) as $tst) echo htmlspecialchars($tst).' '; ?>
+  </div>
+  <!-- Title row: left is normal, right is word of the day -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-2">
+    <div class="flex items-center gap-3">
+      <span class="text-3xl">📊</span>
+      <h1 class="text-3xl font-bold">Analytics Dashboard</h1>
+    </div>
+    <div id="word-day" class="mt-1 md:mt-0 flex items-center gap-2 justify-end text-sm bg-blue-50 dark:bg-blue-900 px-3 py-1 rounded-xl shadow-sm font-mono min-w-[180px]">
+      <span class="font-semibold">Word of the Day:</span>
+      <span id="word" class="text-blue-700 dark:text-blue-300 font-bold">resilience</span>
+      <span id="definition" class="hidden md:inline text-gray-700 dark:text-gray-300 ml-2"></span>
+    </div>
+  </div>
+  <div class="flex gap-4 flex-wrap items-center mb-6">
+    <span class="text-sm text-gray-500 mr-2">Showing data for last 200 hits<?= $exclude_ip ? " <span class='text-gray-400'>(excluding your IP)</span>" : "" ?>&nbsp;&nbsp;</span>
+    <?php if (!$exclude_ip): ?>
+      <a href="?no_me=1" class="inline-flex items-center px-3 py-1 rounded bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 ml-2">
+        <span>Exclude My IP</span>
+      </a>
+    <?php else: ?>
+      <a href="?show_all=1" class="inline-flex items-center px-3 py-1 rounded bg-gray-400 text-white text-xs font-semibold hover:bg-gray-600 ml-2">
+        <span>Show All</span>
+      </a>
+    <?php endif; ?>
+  </div>
+  <div class="grid md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow flex flex-col items-start">
+      <div class="font-semibold text-lg mb-1">Total Hits</div>
+      <div class="text-3xl font-bold"><?=count($recent)?></div>
+    </div>
+    <div class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow flex flex-col items-start">
+      <div class="font-semibold text-lg mb-1">Avg Load Time</div>
+      <div class="text-3xl font-bold"><?=number_format($avg_time, 3)?>s</div>
+    </div>
+    <div class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow flex flex-col items-start">
+      <div class="font-semibold text-lg mb-1">Top Page</div>
+      <div class="text-xl"><?=array_keys(top_n($page_hits, 1))[0] ?? '-'?></div>
+    </div>
+    <div class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow flex flex-col items-start">
+      <div class="font-semibold text-lg mb-1 mb-2">Top IPs</div>
+      <table class="text-xs">
+        <thead>
+          <tr>
+            <th class="font-semibold pr-2 text-left">IP</th>
+            <th class="font-semibold pr-2 text-left">Hits</th>
+            <th class="font-semibold pr-2 text-left">Location</th>
+            <th class="font-semibold pr-2 text-left">ASN</th>
+            <th class="font-semibold pr-2 text-left">ASN Name</th>
+            <th class="font-semibold pr-2 text-left">ASN Type</th>
+            <th class="font-semibold text-left">Org</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php foreach (top_n($ip_counts, 5) as $ip => $cnt):
+            if (isset($ipinfo_cache[$ip])) {
+                $meta = $ipinfo_cache[$ip];
+            } else {
+                $info = ipinfo_lookup($ip);
+                $meta = [
+                    'city'      => $info['city'] ?? '?',
+                    'country'   => $info['country'] ?? '?',
+                    'asn'       => (isset($info['org']) && preg_match('/^(AS\d+)/', $info['org'], $m)) ? $m[1] : '?',
+                    'asn_name'  => (isset($info['org']) && preg_match('/AS\d+\s+(.+)/', $info['org'], $m)) ? $m[1] : '?',
+                    'asn_type'  => ($info['privacy']['vpn'] ?? false) ? 'VPN' : (($info['privacy']['proxy'] ?? false) ? 'Proxy' : 'ISP'),
+                    'company'   => $info['org'] ?? '?'
+                ];
+            }
+        ?>
+          <tr>
+            <td class="pr-2"><a href="https://ipinfo.io/<?=urlencode($ip)?>" target="_blank" class="text-blue-700 dark:text-blue-300 hover:underline"><?=htmlspecialchars($ip)?></a></td>
+            <td class="pr-2"><?=intval($cnt)?></td>
+            <td class="pr-2"><?=htmlspecialchars($meta['city'])?>, <?=htmlspecialchars($meta['country'])?></td>
+            <td class="pr-2"><?=htmlspecialchars($meta['asn'])?></td>
+            <td class="pr-2"><?=htmlspecialchars($meta['asn_name'])?></td>
+            <td class="pr-2"><?=htmlspecialchars($meta['asn_type'])?></td>
+            <td><?=htmlspecialchars($meta['company'])?></td>
+          </tr>
+        <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="mb-8 bg-white dark:bg-gray-900 rounded-xl p-4 shadow">
+    <canvas id="trafficChart" height="80"></canvas>
+    <div class="text-xs text-gray-500 text-center mt-2">Hits per Day</div>
+  </div>
+  <div class="grid md:grid-cols-2 gap-4 mb-8">
+    <div class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow">
+      <h2 class="font-bold text-lg mb-2">Top Pages</h2>
+      <ul class="list-decimal ml-5">
+        <?php foreach (top_n($page_hits, 7) as $uri => $cnt): ?>
+          <li><?=htmlspecialchars($uri)?> <span class="text-gray-400">(<?=$cnt?>)</span></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+    <div class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow">
+      <h2 class="font-bold text-lg mb-2">Top Referrers</h2>
+      <ul class="list-decimal ml-5">
+        <?php foreach (top_n($referrers, 7) as $ref => $cnt): ?>
+          <li class="break-all"><?=htmlspecialchars($ref)?> <span class="text-gray-400">(<?=$cnt?>)</span></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+    <div class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow">
+      <h2 class="font-bold text-lg mb-2">Top User Agents (Grouped)</h2>
+      <ul class="list-decimal ml-5">
+        <?php foreach (top_n($ua_grouped, 5) as $ua => $cnt): ?>
+          <li><?=htmlspecialchars($ua)?> <span class="text-gray-400">(<?=$cnt?>)</span></li>
+        <?php endforeach; ?>
+      </ul>
+      <details class="mt-2">
+        <summary class="text-xs text-blue-500 hover:underline cursor-pointer">Show raw user agent details</summary>
+        <ul class="list-disc ml-6 text-xs">
+          <?php foreach (top_n($user_agents, 10) as $ua => $cnt): ?>
+            <li class="break-all"><?=htmlspecialchars($ua)?> <span class="text-gray-400">(<?=$cnt?>)</span></li>
+          <?php endforeach; ?>
+        </ul>
+      </details>
+    </div>
+    <div class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow">
+      <h2 class="font-bold text-lg mb-2">Recent Admin Hits</h2>
+      <ul class="list-none ml-0 text-xs">
+        <?php foreach (array_reverse(array_slice($admin_hits, -10)) as $line): ?>
+          <?php
+            $p = explode("\t", trim($line));
+            if (count($p) < 8) continue;
+            [$dt, $ip, $uri, $agent, $ref, $code, $elapsed, $zone] = $p;
+          ?>
+          <li>
+            <span class="font-mono"><?=htmlspecialchars($dt)?></span>
+            <a href="https://ipinfo.io/<?=urlencode($ip)?>" target="_blank" class="font-mono text-blue-700 dark:text-blue-300 hover:underline"><?=htmlspecialchars($ip)?></a>
+            <span><?=htmlspecialchars($uri)?></span>
+            <span class="text-xs text-gray-400"><?=htmlspecialchars($code)?> (<?=number_format($elapsed,3)?>s)</span>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  </div>
+  <div class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow">
+    <h2 class="font-bold text-lg mb-2">Traffic by Date</h2>
+    <pre class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 overflow-x-auto">
+<?php foreach ($traffic_by_date as $d => $n): ?>
+<?=$d?> : <?=$n?> hits
+<?php endforeach; ?>
+    </pre>
+  </div>
+</div>
+<footer class="mt-12 text-center text-sm text-gray-500 dark:text-gray-400">
+  &copy; <?php echo date("Y"); ?> KTP Digital Pty Ltd. All rights reserved.
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Chart.js setup
+  const ctx = document.getElementById('trafficChart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: <?=json_encode(array_keys($traffic_by_date))?>,
+      datasets: [{
+        label: '',
+        data: <?=json_encode(array_values($traffic_by_date))?>,
+        fill: false,
+        borderColor: '#3b82f6',
+        tension: 0.1
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { display: false }
+      },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+  // Word of the Day (public API + fallback)
+  fetch('https://random-words-api.vercel.app/word')
+    .then(r => r.json())
+    .then(data => {
+      if (data && data[0]) {
+        document.getElementById('word').textContent = data[0].word || 'resilience';
+        document.getElementById('definition').textContent = data[0].definition ? '– ' + data[0].definition : '';
+      }
+    })
+    .catch(() => {
+      document.getElementById('word').textContent = "resilience";
+      document.getElementById('definition').textContent = "– the capacity to recover quickly from difficulties";
+    });
+});
+</script>
+</body>
+</html>
