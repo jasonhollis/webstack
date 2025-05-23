@@ -1,0 +1,13 @@
+<?php
+// directives.php: View the current PROJECT_DIRECTIVES.md securely
+
+$page = 'directives'; // ensures nav highlights this page
+$directives_path = '/opt/webstack/objectives/PROJECT_DIRECTIVES.md';
+$content = is_readable($directives_path) ? file_get_contents($directives_path) : "Not found or not readable.";
+
+function markdown($text) {
+    // ...your markdown logic
+}
+?>
+<?php include 'admin_nav.php'; ?>
+<!-- your HTML starts here, e.g. <main> ... -->

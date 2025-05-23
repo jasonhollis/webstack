@@ -1,0 +1,24 @@
+<?php
+// /opt/webstack/html/admin/admin_nav.php
+
+if (!isset($page)) $page = '';
+?>
+<nav class="bg-white dark:bg-gray-900 shadow px-4 py-2 flex flex-wrap items-center justify-between">
+  <div class="flex items-center space-x-4">
+    <a href="/" class="inline-flex items-center text-xl font-bold text-blue-700 dark:text-blue-300 hover:underline" title="Back to Site">
+      <!-- Groovy Home Icon SVG -->
+      <svg class="w-6 h-6 mr-2 text-blue-700 dark:text-blue-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M4 10v10a1 1 0 001 1h5a1 1 0 001-1v-6h2v6a1 1 0 001 1h5a1 1 0 001-1V10"></path>
+      </svg>
+      <span class="hidden md:inline">Back to Site</span>
+    </a>
+    <ul class="flex space-x-4 ml-6">
+      <li><a href="/admin/logs.php" class="<?= ($page=='logs') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">Iteration Log</a></li>
+      <li><a href="/admin/objectives.php" class="<?= ($page=='objectives') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">Objectives Log</a></li>
+      <li><a href="/admin/maintenance.php" class="<?= ($page=='maintenance') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">Maintenance</a></li>
+      <li><a href="/admin/file_stats.php" class="<?= ($page=='file_stats') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">File Stats</a></li>
+      <li><a href="/admin/directives.php" class="<?= ($page=='directives') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">AI Directives</a></li>
+    </ul>
+  </div>
+  <a href="/admin/logout.php" class="rounded font-bold transition bg-red-500 hover:bg-red-600 text-white px-4 py-2 ml-8">Logout</a>
+</nav>

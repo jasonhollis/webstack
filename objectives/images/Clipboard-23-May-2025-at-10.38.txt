@@ -1,0 +1,21 @@
+<?php
+if (!isset($page)) $page = '';
+?>
+<nav class="bg-white dark:bg-gray-900 shadow px-4 py-2 flex flex-wrap items-center justify-between">
+  <div class="flex items-center space-x-4">
+    <a href="/admin/" class="text-xl font-bold text-blue-700 dark:text-blue-300 hover:underline">KTP Admin</a>
+    <ul class="flex space-x-4 ml-6">
+      <li><a href="/admin/logs.php" class="<?= ($page=='logs') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">Iteration Log</a></li>
+      <li><a href="/admin/objectives.php" class="<?= ($page=='objectives') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">Objectives Log</a></li>
+      <li><a href="/admin/maintenance.php" class="<?= ($page=='maintenance') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">Maintenance</a></li>
+      <li><a href="/admin/file_stats.php" class="<?= ($page=='file_stats') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">File Stats</a></li>
+      <li><a href="/admin/directives.php" class="<?= ($page=='directives') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">AI Directives</a></li>
+    </ul>
+  </div>
+  <div class="flex items-center space-x-2">
+    <a href="/" class="text-gray-500 hover:text-blue-600 px-2 py-1 rounded transition" title="Back to Site">
+      <svg class="inline w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l7-9v4h7v10h-7v4l-7-9z"/></svg>
+    </a>
+    <a href="/admin/logout.php" class="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded font-bold transition">Logout</a>
+  </div>
+</nav>

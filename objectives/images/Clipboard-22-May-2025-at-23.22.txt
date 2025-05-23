@@ -1,0 +1,43 @@
+# PROJECT_DIRECTIVES.md – KTP Webstack
+
+## Golden Rules
+
+- All file/script changes are via full EOF replacement blocks or sed/awk one-liners.
+- Never break logging to quickactions.log, objectives, or iteration logs.
+- All scripts must be idempotent and self-healing (create missing logs, set correct perms).
+- No interactive onboarding. All output must be deploy-ready.
+
+## Directory Structure
+
+- /opt/webstack/bin: All automation/scripts (only EOF changes)
+- /opt/webstack/objectives: All logs, Markdown, and versioned objective/iteration files
+- /opt/webstack/html: Site root, VERSION file
+- /opt/webstack/logs: System and deploy logs (never delete unless via version bump or cleanup script)
+
+## Logging/Automation
+
+- Each version bump via update_version.sh pre-creates:
+    - `${OBJECTIVES_DIR}/${VERSION}_iteration_log.md`
+    - `${OBJECTIVES_DIR}/${VERSION}_objectives.md`
+- Scripts must use `$VERSION_FILE` at runtime, not cached values.
+- All failures route via `/opt/webstack/bin/failure.sh` and push to Pushover.
+
+## Admin UI
+
+- Only /admin is allowed for protected or advanced tools.
+- Log and Objectives views load correct file by version.
+- Never show content for files that do not exist; show a clear "No entries yet" instead.
+
+## Shortcuts/Mac Integration
+
+- All Shortcuts invoke scripts via SSH or SCP, pass input as stdin or $1 (never both).
+- Image uploads go to /opt/webstack/objectives/images/ (spaces replaced with dashes).
+
+## Change Management
+
+- All major changes to these directives are logged in the objectives or iteration log with a [directives] tag.
+
+---
+
+## Last Updated: 2025-05-22 v1.4.8-dev
+

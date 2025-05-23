@@ -1,0 +1,79 @@
+# PROJECT_DIRECTIVES.md – KTP Webstack
+
+## 🏆 GOLDEN RULES
+
+- **All script/file changes** must be delivered as full EOF replacement blocks or a single sed/awk one-liner. No partial edits, no multi-step manual changes.
+- **Never break logging** to any of:
+    - quickactions.log
+    - objectives logs
+    - iteration logs
+- **All automation scripts must be deploy-ready**: handle their own file creation, permissions, and error handling. No onboarding, no explanations unless asked.
+- **All failures must go through `/opt/webstack/bin/failure.sh`** and notify Pushover.
+- **No direct changes to canonical files outside these directives and snapshots.**
+
+---
+
+## 📂 Directory & File Structure
+
+- `/opt/webstack/bin/` – All automation scripts (deploy/rotate/log/notify, etc.)
+- `/opt/webstack/objectives/` – Versioned Markdown logs (`*_iteration_log.md`, `*_objectives.md`), images, PROJECT_DIRECTIVES.md
+- `/opt/webstack/html/` – Site root and VERSION file (`/opt/webstack/html/VERSION`)
+- `/opt/webstack/logs/` – System and deploy logs (logrotate-managed)
+
+---
+
+## 🚦 Logging, Versioning & Automation
+
+- **Every version bump (`update_version.sh`):**
+    - Pre-creates:
+        - `${OBJECTIVES_DIR}/${VERSION}_iteration_log.md`
+        - `${OBJECTIVES_DIR}/${VERSION}_objectives.md`
+    - Sets correct ownership (root:www-data) and permissions (664).
+- **All scripts read `$VERSION_FILE` at runtime** (never cache).
+- **No log entries are appended to old version logs after a bump.**
+- **All logs are Markdown, UTF-8, no shell prompt or output unless explicitly logged.**
+- **Failures are logged to `/opt/webstack/logs/failure.log` and sent via Pushover.**
+
+---
+
+## 🖥️ Admin & UI
+
+- **Admin tools live only in `/admin`.**
+- **Log viewers select and render the correct file by version.**
+- If no log for a version exists, UI displays “No entries yet.”
+- **Directives page** must always render the current PROJECT_DIRECTIVES.md (read-only for all but admin).
+- **Objectives log** and **iteration log** are independent—objectives are for project milestones, iteration for activity/dev/test notes.
+
+---
+
+## 🚀 Shortcuts & Mac Integration
+
+- **All Mac Shortcuts invoke scripts via SSH/SCP:**
+    - Text logs: sent via stdin to server script
+    - Image/file logs: sent as `$1`, uploaded to `/opt/webstack/objectives/images/` (spaces → dashes)
+- **No mix of stdin and $1 in any script.**
+- **All logging scripts must accept input via one method only.**
+
+---
+
+## 🔒 Change Management & Compliance
+
+- **Any change to these directives:**
+    - Must be logged in the objectives or iteration log with a `[directives]` tag.
+    - Directives file is versioned and included in every snapshot.
+- **Drift checker script** (`check_canonical.sh`) should be run after each deploy, confirming file existence, perms, and modification dates for all critical files/scripts.
+
+---
+
+## 🔄 Maintenance & Cleanup
+
+- Log cleanup or archive may only be done via designated scripts, never manual deletion.
+- Snapshots taken before any significant update or refactor.
+
+---
+
+## Last Updated: 2025-05-22 v1.4.8-dev
+
+---
+
+**Refer to this file for all workflow, logging, admin, and automation rules. All contributors (human or AI) must comply.**

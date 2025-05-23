@@ -1,0 +1,43 @@
+<?php
+// /opt/webstack/html/admin/directives.php
+$page = 'directives';
+include 'admin_auth.php';
+include 'admin_nav.php';
+
+$directives_md = '/opt/webstack/objectives/PROJECT_DIRECTIVES.md';
+$last_modified = file_exists($directives_md) ? date('Y-m-d H:i:s', filemtime($directives_md)) : 'Unknown';
+
+// Use Parsedown for nice Markdown output (if available)
+$parsedown_path = __DIR__ . '/Parsedown.php';
+$markdown_html = '';
+if (file_exists($parsedown_path) && file_exists($directives_md)) {
+    require_once $parsedown_path;
+    $Parsedown = new Parsedown();
+    $markdown_html = $Parsedown->text(file_get_contents($directives_md));
+} else {
+    $markdown_html = "<pre>" . htmlspecialchars(@file_get_contents($directives_md)) . "</pre>";
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Directives – KTP Webstack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+    <?php // Nav bar already included at top ?>
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold mb-8 flex items-center">
+            <span class="mr-2">📚</span> Project Directives
+        </h1>
+        <article class="prose lg:prose-xl dark:prose-invert">
+            <?= $markdown_html ?>
+        </article>
+        <footer class="mt-12 text-xs text-gray-500 dark:text-gray-400">
+            Last updated: <?= htmlspecialchars($last_modified) ?> (UTC)
+        </footer>
+    </main>
+</body>
+</html>

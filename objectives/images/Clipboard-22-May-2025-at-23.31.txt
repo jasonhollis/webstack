@@ -1,0 +1,40 @@
+cat << 'EOF' > /opt/webstack/html/admin/directives.php
+<?php
+// directives.php: View the current PROJECT_DIRECTIVES.md securely
+
+$directives_path = '/opt/webstack/objectives/PROJECT_DIRECTIVES.md';
+$content = is_readable($directives_path) ? file_get_contents($directives_path) : "Not found or not readable.";
+
+function markdown($text) {
+    // Try to use Parsedown if available, else plain text with line breaks
+    if (file_exists(__DIR__.'/Parsedown.php')) {
+        require_once __DIR__.'/Parsedown.php';
+        $Parsedown = new Parsedown();
+        return $Parsedown->text($text);
+    } else {
+        return '<pre style="white-space: pre-wrap; word-break: break-word;">'.htmlspecialchars($text).'</pre>';
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Directives – KTP Digital Webstack</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/tailwind.min.css">
+</head>
+<body class="bg-white dark:bg-gray-900 dark:text-white">
+<?php include 'nav.php'; ?>
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">📚 Project Directives</h1>
+  <div class="prose dark:prose-invert max-w-none">
+    <?=markdown($content)?>
+  </div>
+  <p class="mt-8 text-xs text-gray-400">Path: <?=htmlspecialchars($directives_path)?></p>
+</div>
+</body>
+</html>
+EOF
+
+chmod 644 /opt/webstack/html/admin/directives.php
