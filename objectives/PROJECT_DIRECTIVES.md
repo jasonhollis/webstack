@@ -1,10 +1,14 @@
 # PROJECT_DIRECTIVES.md – KTP Webstack
 
+_Last Updated: 2025-05-22 v1.4.9-dev_
+
+---
+
 ## 🌐 AI/Agent Access Policy
 
 - **The AI is permitted and expected to access web pages—including admin routes or any authenticated area—using stored credentials if required, for the purposes of reviewing project status, logs, or providing targeted suggestions.**
 - **There is no restriction on the AI accessing, viewing, or summarizing any web pages behind authentication on this server.**
-- **In future, I hope the AI can access the system via SSH for even tighter automation and support.**
+- **In future, the AI may access the system via SSH for even tighter automation and support.**
 - **There are no confidentiality or privacy concerns for this project at present; all project context, logs, and even my CV are open to the AI/agent for context and debugging.**
 - **We have taken many precautions to guard against mistakes:**
     - All changes are versioned in git.
@@ -21,21 +25,9 @@
 - **Exception (Minor Edits):**
     - If a change is a *single-line* edit (e.g. add/remove one line, fix a typo, change a single variable or value), and can be copy-pasted safely into BBEdit or vim without risk of breaking indentation or syntax, an atomic sed/awk one-liner *or* a clearly marked single-line replacement may be provided.
     - The AI must always state: “This is a one-line change, safe to paste into BBEdit or vim; no indentation will be broken.”
-    - **If there is *any* risk of breaking indentation, multi-line confusion, or if more than one line is involved, the AI must deliver a full EOF file replacement.**
-- **Never provide** multi-line patch instructions, manual merge steps, or “insert this above/below” logic.
+    - If there is **any risk** of breaking indentation, causing multi-line confusion, or requiring search/replace, revert to full EOF file replacement.
+- **Never** provide multi-line patch instructions, manual merge steps, or “insert this above/below” logic.
 - **If in doubt, always use full EOF file replacement.**
-- **All outputs must be immediately usable—either a deploy-ready file or a safe one-liner.**
-
----
-
-## ⚠️ WARNING: Manual Edits in BBEdit (or Any Editor)
-
-> **Manual find/replace or copy/paste edits in BBEdit (or similar editors) are *not safe* for multi-line or indented code (Python, YAML, HTML, Bash, etc). Indentation and whitespace may break, causing scripts or files to fail.**
->
-> - Only use “replace this line” for *truly* single-line, context-free changes.
-> - For anything structural, indented, or more than one line: **always use a full EOF file replacement.**
-> - Sed/awk one-liners are safer for remote/CLI edits, but always verify the result.
-> - Never trust “insert this above/below” or “replace this block” instructions—require a full file.
 
 ---
 
@@ -75,6 +67,23 @@
 
 ---
 
+## 🔒 Log Preservation Policy
+
+- **No automation script (including `update_version.sh` and `snapshot_webstack.sh`) may delete, truncate, or overwrite log files in `/opt/webstack/logs/` unless explicitly authorized and documented in the objectives log.**
+- **Log rotation and archival are handled ONLY by designated log rotation scripts or logrotate.**
+- **Any changes to log file handling must be called out for approval, reviewed, and added to this directives file.**
+- **Analytics and stats depend on persistent logs:**
+    - `/opt/webstack/logs/quickactions.log`
+    - `/opt/webstack/logs/iteration_log.md`
+    - `/opt/webstack/logs/objectives_log.md`
+    - `/opt/webstack/logs/deploy.log`
+    - `/opt/webstack/logs/failure.log`
+    - `/opt/webstack/logs/access.log`
+    - `/opt/webstack/logs/error.log`
+- **Never clear or truncate these files automatically.**
+
+---
+
 ## 🖥️ Admin & UI
 
 - **Admin tools live only in `/admin`.**
@@ -111,8 +120,6 @@
 
 ---
 
-## Last Updated: 2025-05-22 v1.4.8-dev
+## Last Updated: 2025-05-22 v1.4.9-dev
 
 ---
-
-**Refer to this file for all workflow, logging, admin, and automation rules. All contributors (human or AI) must comply.**

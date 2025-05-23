@@ -24,7 +24,7 @@ echo "[$(date)] 📦 Snapshot created: $(basename "$SNAP")" >> /opt/webstack/log
 echo "[$(date)] 📦 Snapshot created: $(basename "$SNAP")"
 
 # Clean logs (truncate all except deploy.log)
-find /opt/webstack/logs -type f ! -name 'deploy.log' -exec truncate -s 0 {} \;
+#find /opt/webstack/logs -type f ! -name 'deploy.log' -exec truncate -s 0 {} \;
 
 exit 0
 
