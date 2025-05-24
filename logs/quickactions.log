@@ -10008,3 +10008,135 @@ IMAGE-LOG [v1.5.5-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-15.
 OBJECTIVE [v1.5.5-dev] root@ssdnodes-605e9a6080011: Done working and good.  Next the info in that box is relatively meaningful for a nerd like me but if my marketing guy looks at this page to explore meta info he' probably not going to have a clue as to the black box.  Can you grab that information and then display it in a format with labels that is a bit more consistent with the rest of the page?
 2025-05-24 15:17:06
 IMAGE-LOG [v1.5.5-dev] root@ssdnodes-605e9a6080011: CleanShot-2025-05-24-at-15.16.41@2x.png
+2025-05-24 15:27:34 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Resume KTP Webstack development from v1.5.6-dev-content. Last release (v1.5.5-dev) completed meta diagnostics, analytics upgrades, and system health UI. We are now focused on content-specific improvements, cleanup, and roadmap planning
+2025-05-24 15:27:34 AEST [append_activity] root@ssdnodes-605e9a6080011: Resume KTP Webstack development from v1.5.6-dev-content. Last release (v1.5.5-dev) completed meta diagnostics, analytics upgrades, and system health UI. We are now focused on content-specific improvements, cleanup, and roadmap planning
+2025-05-24 15:45:51
+OBJECTIVE [v1.5.6-dev-content] root@ssdnodes-605e9a6080011: Well generally I will open the existing file on Bbedit via ssh, scp whatever and then replace it with Bedit using the code you give me and hit save to make it live on the server what I want is a workflow that makes sure we have a copy of the old version before replacing it
+2025-05-24 15:48:08 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Option 1: Manual Local Backup in BBEdit (Quick & Easy)
+
+Before you save:
+
+  * In BBEdit:  
+File > Save a Copy As… → Save the current remote file locally (or as filename.php.bak) for backup.
+  * Then save/overwrite the file on the server.
+
+Downside: Manual and easy to forget.
+
+  
+
+
+Option 2: Automate Remote Backup with a Pre-Save Script (Recommended for Your Use Case)
+
+When you’re about to overwrite /opt/webstack/html/somefile.php, run this command in Terminal:
+
+  
+
+
+ssh root@www.ktp.digital "cp /opt/webstack/html/somefile.php /opt/webstack/html/somefile.php.bak_$(date +%Y%m%d%H%M%S)"
+
+  * This creates a timestamped backup before every edit.
+  * Then save/overwrite as usual in BBEdit.
+  * If you need to roll back:  
+  
+  
+mv /opt/webstack/html/somefile.php.bak_20250524154432 /opt/webstack/html/somefile.php
+  *   
+  
+
+
+You can automate this with a simple shell script:
+
+  
+
+
+#!/bin/bash
+
+FILENAME="$1"
+
+ssh root@www.ktp.digital "cp $FILENAME $FILENAME.bak_$(date +%Y%m%d%H%M%S)"
+
+Call it like:
+
+  
+
+
+./backup_remote.sh /opt/webstack/html/layout.php
+
+  
+
+
+Option 3: Use Git for Each Edit (The Pro Way, but Slightly More Setup)
+
+  1. Edit file in BBEdit (over SSH or locally).
+  2. Before saving/uploading, run on the server:  
+  
+  
+cd /opt/webstack/html
+  3. git add filename.php
+  4. git commit -m "Backup before overwriting filename.php"
+  5.   
+  
+
+  6. Now overwrite/save as usual.
+  7. Rollback:  
+  
+  
+git checkout HEAD^ -- filename.php
+  8.   
+  
+
+  * Upside: Infinite undo/history, multi-file safe, one-line rollback.
+  * Downside: Slightly more overhead if you only want “one backup before save.”
+
+  
+
+
+Summary Table
+
+Option
+
+Pros
+
+Cons
+
+1\. Manual
+
+No setup, easy for one-offs
+
+Easy to forget, not automatic
+
+2\. Script
+
+Fully automatic, timestamped
+
+One backup per save only
+
+3\. Git
+
+Infinite undo/history, robust
+
+Slightly more involved
+
+  
+
+
+RECOMMENDATION:
+
+  * For your workflow, Option 2 (scripted backup) is the best blend of easy and safe.
+  * You could even make a BBEdit script or Automator Quick Action to run this backup command with a keyboard shortcut before you save.
+
+  
+
+
+**Want a ready-to-use shell script for Option 2? Or want to automate this in BBEdit with a custom command?******
+
+Let me know your preference and I’ll build the exact workflow for you!
+2025-05-24 15:48:08 AEST [append_activity] root@ssdnodes-605e9a6080011: 
+2025-05-24 16:07:03
+IMAGE-LOG [v1.5.6-dev-content] root@ssdnodes-605e9a6080011: CleanShot-2025-05-24-at-16.06.50@2x.png
+2025-05-24 16:12:39
+IMAGE-LOG [v1.5.6-dev-content] root@ssdnodes-605e9a6080011: CleanShot-2025-05-24-at-16.12.22@2x.png
+2025-05-24 16:57:12
+IMAGE-LOG [v1.5.6-dev-content] root@ssdnodes-605e9a6080011: CleanShot-2025-05-24-at-16.56.55@2x.png

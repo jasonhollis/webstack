@@ -1,4 +1,5 @@
-*
-!.gitignore
-!.well-known
-!.well-known/*
+logs/
+snapshots/
+node_modules/
+*.log
+.DS_Store
