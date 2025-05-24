@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.ktp.digital/index.php</loc></url>
+  <url><loc>https://www.ktp.digital/about.php</loc></url>
+  <url><loc>https://www.ktp.digital/automation.php</loc></url>
+  <url><loc>https://www.ktp.digital/contact.php</loc></url>
+  <url><loc>https://www.ktp.digital/enterprise.php</loc></url>
+  <url><loc>https://www.ktp.digital/mac.php</loc></url>
+  <url><loc>https://www.ktp.digital/nas.php</loc></url>
+  <url><loc>https://www.ktp.digital/nextdns.php</loc></url>
+  <url><loc>https://www.ktp.digital/smallbiz.php</loc></url>
+  <url><loc>https://www.ktp.digital/tailscale.php</loc></url>
+<url>
+  <loc>https://www.ktp.digital/methodology.php</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+</urlset>

@@ -1,0 +1,8 @@
+.admin-page {
+  padding-top: 140px !important;
+}
+@media (max-width: 640px) {
+  .admin-page {
+    padding-top: 80px !important;
+  }
+}

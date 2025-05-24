@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /older/
+Disallow: /snapshots/
+Allow: /
+
+Sitemap: https://www.ktp.digital/sitemap.xml
