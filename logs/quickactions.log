@@ -9013,3 +9013,998 @@ OBJECTIVE [v1.5.4-dev] root@ssdnodes-605e9a6080011: Would you like next:
   * A ?json=1 API toggle for this page?
   * Git stats charted visually over time?
   * Auto-append summary to objectives.md on version bump?
+2025-05-24 14:03:29 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  root@ssdnodes-605e9a6080011:/opt/webstack/bin# ./update_version.sh v1.5.5-dev
+
+[master 4fdcea8] ⬆️ Version bump: v1.5.5-dev
+
+ 23 files changed, 1017 insertions(+), 3 deletions(-)
+
+ create mode 100755 bin/git_debug.sh
+
+ create mode 100644 objectives/images/3B01E5FC-E233-4D4A-8F4B-FD6F35A36AB4.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.06.47.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.10.39.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.21.28.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.23.43.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.30.21.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.32.09.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.34.49.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.38.31.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.40.17.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.44.09.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.50.25.png
+
+ create mode 100644 objectives/v1.5.4-dev_iteration_log.md
+
+ create mode 100644 objectives/v1.5.4-dev_objectives.md
+
+Enumerating objects: 44, done.
+
+Counting objects: 100% (42/42), done.
+
+Delta compression using up to 12 threads
+
+Compressing objects: 100% (29/29), done.
+
+Writing objects: 100% (30/30), 9.49 MiB | 4.09 MiB/s, done.
+
+Total 30 (delta 9), reused 0 (delta 0), pack-reused 0
+
+remote: Resolving deltas: 100% (9/9), completed with 8 local objects.
+
+To github.com:jasonhollis/webstack.git
+
+   cc64cb7..4fdcea8  master -> master
+
+Enumerating objects: 1, done.
+
+Counting objects: 100% (1/1), done.
+
+Writing objects: 100% (1/1), 169 bytes | 169.00 KiB/s, done.
+
+Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+
+To github.com:jasonhollis/webstack.git
+
+ * [new tag]         v1.5.5-dev -> v1.5.5-dev
+
+[Sat May 24 02:03:08 PM AEST 2025] 📦 Snapshot created: webstack-v1.5.5-dev-2025-05-24-140300.zip
+
+✅ Version v1.5.5-dev deployed, committed, tagged, pushed, snapshotted, and logs preserved.
+
+root@ssdnodes-605e9a6080011:/opt/webstack/bin# 
+2025-05-24 14:03:29 AEST [append_activity] root@ssdnodes-605e9a6080011: root@ssdnodes-605e9a6080011:/opt/webstack/bin# ./update_version.sh v1.5.5-dev
+
+[master 4fdcea8] ⬆️ Version bump: v1.5.5-dev
+
+ 23 files changed, 1017 insertions(+), 3 deletions(-)
+
+ create mode 100755 bin/git_debug.sh
+
+ create mode 100644 objectives/images/3B01E5FC-E233-4D4A-8F4B-FD6F35A36AB4.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.06.47.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.10.39.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.21.28.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.23.43.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.30.21.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.32.09.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.34.49.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.38.31.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.40.17.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.44.09.png
+
+ create mode 100644 objectives/images/Screenshot-2025-05-24-at-13.50.25.png
+
+ create mode 100644 objectives/v1.5.4-dev_iteration_log.md
+
+ create mode 100644 objectives/v1.5.4-dev_objectives.md
+
+Enumerating objects: 44, done.
+
+Counting objects: 100% (42/42), done.
+
+Delta compression using up to 12 threads
+
+Compressing objects: 100% (29/29), done.
+
+Writing objects: 100% (30/30), 9.49 MiB | 4.09 MiB/s, done.
+
+Total 30 (delta 9), reused 0 (delta 0), pack-reused 0
+
+remote: Resolving deltas: 100% (9/9), completed with 8 local objects.
+
+To github.com:jasonhollis/webstack.git
+
+   cc64cb7..4fdcea8  master -> master
+
+Enumerating objects: 1, done.
+
+Counting objects: 100% (1/1), done.
+
+Writing objects: 100% (1/1), 169 bytes | 169.00 KiB/s, done.
+
+Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+
+To github.com:jasonhollis/webstack.git
+
+ * [new tag]         v1.5.5-dev -> v1.5.5-dev
+
+[Sat May 24 02:03:08 PM AEST 2025] 📦 Snapshot created: webstack-v1.5.5-dev-2025-05-24-140300.zip
+
+✅ Version v1.5.5-dev deployed, committed, tagged, pushed, snapshotted, and logs preserved.
+
+root@ssdnodes-605e9a6080011:/opt/webstack/bin# 
+2025-05-24 14:04:30 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Resume KTP Webstack context from v1.5.4-dev
+2025-05-24 14:04:30 AEST [append_activity] root@ssdnodes-605e9a6080011: Resume KTP Webstack context from v1.5.4-dev
+2025-05-24 14:08:54 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  root@ssdnodes-605e9a6080011:/opt/webstack/bin# cd /opt/webstack/html
+
+  
+
+
+echo "📄 Meta Tag Report (All .php files)"
+
+echo "-----------------------------------"
+
+  
+
+
+for f in $(find . -maxdepth 1 -name "*.php"); do
+
+  file=$(basename "$f")
+
+  words=$(grep -oE '\b\w+\b' "$f" | wc -w)
+
+  has_desc=$(grep -c '<meta name="description"' "$f")
+
+  has_title=$(grep -c '<title>' "$f")
+
+  has_robots=$(grep -c '<meta name="robots"' "$f")
+
+  
+
+
+  printf "%-20s | 📝 %4s words | %s | %s | %s\n" "$file" "$words" \
+
+    "$( [[ $has_desc -gt 0 ]] && echo ✅ || echo ❌NoMeta )" \
+
+    "$( [[ $has_title -gt 0 ]] && echo ✅ || echo ❌NoTitle )" \
+
+    "$( [[ $has_robots -gt 0 ]] && echo ⚠️Robots || echo OK )"
+
+done
+
+📄 Meta Tag Report (All .php files)
+
+\-----------------------------------
+
+index-test.php       | 📝  505 words | ❌NoMeta | ✅ | OK
+
+about.php            | 📝  417 words | ❌NoMeta | ❌NoTitle | OK
+
+nav.php              | 📝  488 words | ❌NoMeta | ❌NoTitle | OK
+
+Parsedown.php        | 📝 3631 words | ❌NoMeta | ❌NoTitle | OK
+
+layout.php           | 📝  515 words | ✅ | ✅ | OK
+
+mac.php              | 📝  328 words | ✅ | ❌NoTitle | OK
+
+methodology.php      | 📝  666 words | ✅ | ❌NoTitle | OK
+
+tailscale.php        | 📝  357 words | ✅ | ✅ | OK
+
+smallbiz.php         | 📝  348 words | ❌NoMeta | ❌NoTitle | OK
+
+nextdns.php          | 📝  356 words | ✅ | ✅ | OK
+
+contact.php          | 📝  108 words | ❌NoMeta | ❌NoTitle | OK
+
+ping.php             | 📝    9 words | ❌NoMeta | ❌NoTitle | OK
+
+nas.php              | 📝  788 words | ✅ | ❌NoTitle | OK
+
+macos-tools.php      | 📝  673 words | ✅ | ❌NoTitle | OK
+
+analytics_logger.php | 📝   83 words | ❌NoMeta | ❌NoTitle | OK
+
+automation.php       | 📝  378 words | ❌NoMeta | ❌NoTitle | OK
+
+index.php            | 📝  337 words | ❌NoMeta | ❌NoTitle | OK
+
+newindex.php         | 📝  505 words | ❌NoMeta | ✅ | OK
+
+enterprise.php       | 📝  168 words | ❌NoMeta | ❌NoTitle | OK
+
+root@ssdnodes-605e9a6080011:/opt/webstack/html# 
+2025-05-24 14:08:54 AEST [append_activity] root@ssdnodes-605e9a6080011: root@ssdnodes-605e9a6080011:/opt/webstack/bin# cd /opt/webstack/html
+
+  
+
+
+echo "📄 Meta Tag Report (All .php files)"
+
+echo "-----------------------------------"
+
+  
+
+
+for f in $(find . -maxdepth 1 -name "*.php"); do
+
+  file=$(basename "$f")
+
+  words=$(grep -oE '\b\w+\b' "$f" | wc -w)
+
+  has_desc=$(grep -c '<meta name="description"' "$f")
+
+  has_title=$(grep -c '<title>' "$f")
+
+  has_robots=$(grep -c '<meta name="robots"' "$f")
+
+  
+
+
+  printf "%-20s | 📝 %4s words | %s | %s | %s\n" "$file" "$words" \
+
+    "$( [[ $has_desc -gt 0 ]] && echo ✅ || echo ❌NoMeta )" \
+
+    "$( [[ $has_title -gt 0 ]] && echo ✅ || echo ❌NoTitle )" \
+
+    "$( [[ $has_robots -gt 0 ]] && echo ⚠️Robots || echo OK )"
+
+done
+
+📄 Meta Tag Report (All .php files)
+
+\-----------------------------------
+
+index-test.php       | 📝  505 words | ❌NoMeta | ✅ | OK
+
+about.php            | 📝  417 words | ❌NoMeta | ❌NoTitle | OK
+
+nav.php              | 📝  488 words | ❌NoMeta | ❌NoTitle | OK
+
+Parsedown.php        | 📝 3631 words | ❌NoMeta | ❌NoTitle | OK
+
+layout.php           | 📝  515 words | ✅ | ✅ | OK
+
+mac.php              | 📝  328 words | ✅ | ❌NoTitle | OK
+
+methodology.php      | 📝  666 words | ✅ | ❌NoTitle | OK
+
+tailscale.php        | 📝  357 words | ✅ | ✅ | OK
+
+smallbiz.php         | 📝  348 words | ❌NoMeta | ❌NoTitle | OK
+
+nextdns.php          | 📝  356 words | ✅ | ✅ | OK
+
+contact.php          | 📝  108 words | ❌NoMeta | ❌NoTitle | OK
+
+ping.php             | 📝    9 words | ❌NoMeta | ❌NoTitle | OK
+
+nas.php              | 📝  788 words | ✅ | ❌NoTitle | OK
+
+macos-tools.php      | 📝  673 words | ✅ | ❌NoTitle | OK
+
+analytics_logger.php | 📝   83 words | ❌NoMeta | ❌NoTitle | OK
+
+automation.php       | 📝  378 words | ❌NoMeta | ❌NoTitle | OK
+
+index.php            | 📝  337 words | ❌NoMeta | ❌NoTitle | OK
+
+newindex.php         | 📝  505 words | ❌NoMeta | ✅ | OK
+
+enterprise.php       | 📝  168 words | ❌NoMeta | ❌NoTitle | OK
+
+root@ssdnodes-605e9a6080011:/opt/webstack/html# 
+2025-05-24 14:10:26
+OBJECTIVE [v1.5.5-dev] root@ssdnodes-605e9a6080011: ✅ v1.5.4-dev Objectives
+
+🩺 /admin/system_meta.php — Internal System Health & Metadata Dashboard
+
+  
+
+
+🎯 Purpose
+
+Create a centralized admin-only status page that aggregates live system diagnostics, deployment state, and content metadata coverage. This will give a single-pane-of-glass view into server health, webstack deployment state, and SEO coverage.
+
+  
+
+
+📋 Scope of Work
+
+✅ 1. Page Creation
+
+  * Create system_meta.php in /opt/webstack/html/admin
+  * Tailwind dark/light UI, fully mobile-friendly
+  * Auto-refresh optional (e.g. 30s interval)
+
+✅ 2. System Metadata Summary
+
+  * Current Webstack version (VERSION)
+  * Last snapshot taken + filename
+  * Directory timestamps: /html, /bin, /logs, /objectives
+  * Webhook trigger status (log entry or last call time)
+  * Git HEAD info (optional)
+
+✅ 3. Server Health Section
+
+  * uptime
+  * df -h / (disk usage)
+  * free -h (RAM)
+  * Top 5 CPU + RAM processes (via ps)
+  * nginx service state
+
+✅ 4. TLS + Security Info
+
+  * SSL cert expiry for www.ktp.digital
+  * SSH key fingerprints from ~/.ssh
+  * ufw status or fallback to iptables -L
+
+✅ 5. SEO + Meta Tag Coverage (PHP pages)
+
+  * Total .php files in /html
+  * Count of:
+    * Files with and without:
+      * <meta name="description">
+      * <title>
+      * <meta name="robots">
+  * Word count per page
+  * Rendered like:  
+  
+  
+about.php        | 417 words | ❌NoMeta | ❌NoTitle | OK
+  * contact.php      | 108 words | ❌NoMeta | ❌NoTitle | OK
+  * tailscale.php    | 357 words | ✅Meta | ✅Title | OK
+  *   
+  
+
+
+  
+
+
+🔗 Navigation Integration
+
+  * Add link to system_meta.php in admin_nav.php as "System Meta"
+
+  
+
+
+✳️ Optional Enhancements (Next Iteration)
+
+  * Certbot renewal schedule
+  * nginx log last entries
+  * Detect Pushover alert failures (last sent, timestamp)
+  * Quick “retest” button to rerun checks live (JS AJAX or POST to self)
+2025-05-24 14:12:19 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Great you should be able to see all of that now at https://www.ktp.digital/admin/objectives.php why do you kick out the new full system_meta.php and the admin_nav.php and whatever else is required.  Let's see if you can build the whole release in one quick move
+2025-05-24 14:12:19 AEST [append_activity] root@ssdnodes-605e9a6080011: Great you should be able to see all of that now at https://www.ktp.digital/admin/objectives.php why do you kick out the new full system_meta.php and the admin_nav.php and whatever else is required.  Let's see if you can build the whole release in one quick move
+2025-05-24 14:28:26
+IMAGE-LOG [v1.5.5-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-14.28.12.png
+2025-05-24 14:28:45
+IMAGE-LOG [v1.5.5-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-14.28.30.png
+2025-05-24 14:28:56
+IMAGE-LOG [v1.5.5-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-14.27.54.png
+2025-05-24 14:31:00
+OBJECTIVE [v1.5.5-dev] root@ssdnodes-605e9a6080011: I want to make a quick change to Top User Agents on the Analytics page before we do anything else.  Can you expand that out somehow?  I specifically want to be able to see when you have hit pages because I think you use a specific user agent
+2025-05-24 14:31:04 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  I want to make a quick change to Top User Agents on the Analytics page before we do anything else.  Can you expand that out somehow?  I specifically want to be able to see when you have hit pages because I think you use a specific user agent
+2025-05-24 14:31:04 AEST [append_activity] root@ssdnodes-605e9a6080011: I want to make a quick change to Top User Agents on the Analytics page before we do anything else.  Can you expand that out somehow?  I specifically want to be able to see when you have hit pages because I think you use a specific user agent
+2025-05-24 14:31:42
+OBJECTIVE [v1.5.5-dev] root@ssdnodes-605e9a6080011: Let’s upgrade the “Top User Agents” display on your /admin/analytics.php page with full clarity and AI traceability.
+
+  
+
+
+🧠 Goal
+
+You want to:
+
+  * Expand the list of user agents into a full breakdown
+  * Detect GPT / AI visits clearly (they often use identifiable user agents like python-requests, curl, Go-http-client, etc.)
+  * Show more detail and maybe sort descending by hits
+
+  
+
+
+✅ Recommended Upgrade
+
+Replace the current summary box with a full table showing:
+
+User Agent Substring
+
+Hits
+
+iPhone Safari
+
+4
+
+python-requests
+
+3
+
+Go-http-client
+
+2
+
+curl
+
+1
+
+Mozilla/5.0 (Macintosh)
+
+1
+
+...
+
+...
+
+We’ll parse common tokens in a case-insensitive match. GPT-style requests (like mine) typically come in with:
+
+  * python-requests
+  * curl
+  * Go-http-client
+  * aiohttp
+  * httpx
+  * ChatGPT-User or OpenAI (if proxied via test tools)
+2025-05-24 14:34:47
+IMAGE-LOG [v1.5.5-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-14.34.33.png
+2025-05-24 14:49:44
+OBJECTIVE [v1.5.5-dev] root@ssdnodes-605e9a6080011: ✅ Analytics Enhancement Roadmap (Optional Next Steps)
+
+Now that Top User Agents is fully expanded and tagging AI-ish sources with 🤖, here are a few high-value enhancements we can do next:
+
+  
+
+
+🧩 1. **Group + Collapse Raw User Agents******
+
+Show:
+
+  * a summary by type (iPhone, curl, Mac, Python, etc.)
+  * click to expand full raw strings in a <details> tag per group
+
+🧩 2. **Flag Suspicious Patterns******
+
+  * Alert if any UA makes >X% of total hits
+  * Show warnings for:
+    * Empty user agents
+    * N hits from localhost  
+
+    * Abnormally high load times
+
+🧩 3. **Geo Heatmap Table******
+
+  * Add geoIP lookup for Top IPs
+  * Show:
+    * IP → City, Country
+    * ASN name
+  * Add a small flag icon next to country if desired
+
+🧩 4. **Page Load Distribution Chart******
+
+  * Convert load times into a bar chart
+  * E.g., histogram or buckets: 0-0.2s, 0.2-0.5s, 0.5-1s, 1s+
+2025-05-24 14:54:25
+OBJECTIVE [v1.5.5-dev] root@ssdnodes-605e9a6080011: Those are all great thoughts for a future release.  I have put them in the objectives log.  Please have a look yourself at https://www.ktp.digital/admin/objectives.php at some point very soon we need to build a roadmap page similar to objectives for longer term items with a method for taking things like what I just captured and consolidating them into something cleaner.  For now I want to finish our work on the system meta page and close this release out.  Have another look at https://www.ktp.digital/admin/system_meta.php after you are done with objectives and tell me what's next
+2025-05-24 14:54:27 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Those are all great thoughts for a future release.  I have put them in the objectives log.  Please have a look yourself at https://www.ktp.digital/admin/objectives.php at some point very soon we need to build a roadmap page similar to objectives for longer term items with a method for taking things like what I just captured and consolidating them into something cleaner.  For now I want to finish our work on the system meta page and close this release out.  Have another look at https://www.ktp.digital/admin/system_meta.php after you are done with objectives and tell me what's next
+2025-05-24 14:54:27 AEST [append_activity] root@ssdnodes-605e9a6080011: Those are all great thoughts for a future release.  I have put them in the objectives log.  Please have a look yourself at https://www.ktp.digital/admin/objectives.php at some point very soon we need to build a roadmap page similar to objectives for longer term items with a method for taking things like what I just captured and consolidating them into something cleaner.  For now I want to finish our work on the system meta page and close this release out.  Have another look at https://www.ktp.digital/admin/system_meta.php after you are done with objectives and tell me what's next
+2025-05-24 14:58:40
+IMAGE-LOG [v1.5.5-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-14.58.28.png
+2025-05-24 14:59:07 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  OK give me a bash wc command to test everything in your list there
+2025-05-24 14:59:07 AEST [append_activity] root@ssdnodes-605e9a6080011: OK give me a bash wc command to test everything in your list there
+2025-05-24 15:00:08 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  root@ssdnodes-605e9a6080011:/opt/webstack/html# cd /opt/webstack/html && for f in *.php; do wc=$(grep -oE '\b\w+\b' "$f" | wc -w); printf "%-20s %5s words\n" "$f" "$wc"; done
+
+about.php              417 words
+
+analytics_logger.php    83 words
+
+automation.php         378 words
+
+contact.php            108 words
+
+enterprise.php         168 words
+
+index.php              337 words
+
+index-test.php         505 words
+
+layout.php             515 words
+
+macos-tools.php        673 words
+
+mac.php                328 words
+
+methodology.php        666 words
+
+nas.php                788 words
+
+nav.php                488 words
+
+newindex.php           505 words
+
+nextdns.php            356 words
+
+Parsedown.php         3631 words
+
+ping.php                 9 words
+
+smallbiz.php           348 words
+
+tailscale.php          357 words
+
+root@ssdnodes-605e9a6080011:/opt/webstack/html# 
+2025-05-24 15:00:08 AEST [append_activity] root@ssdnodes-605e9a6080011: root@ssdnodes-605e9a6080011:/opt/webstack/html# cd /opt/webstack/html && for f in *.php; do wc=$(grep -oE '\b\w+\b' "$f" | wc -w); printf "%-20s %5s words\n" "$f" "$wc"; done
+
+about.php              417 words
+
+analytics_logger.php    83 words
+
+automation.php         378 words
+
+contact.php            108 words
+
+enterprise.php         168 words
+
+index.php              337 words
+
+index-test.php         505 words
+
+layout.php             515 words
+
+macos-tools.php        673 words
+
+mac.php                328 words
+
+methodology.php        666 words
+
+nas.php                788 words
+
+nav.php                488 words
+
+newindex.php           505 words
+
+nextdns.php            356 words
+
+Parsedown.php         3631 words
+
+ping.php                 9 words
+
+smallbiz.php           348 words
+
+tailscale.php          357 words
+
+root@ssdnodes-605e9a6080011:/opt/webstack/html# 
+2025-05-24 15:00:36 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  You may have a bug there cowboy!
+2025-05-24 15:00:36 AEST [append_activity] root@ssdnodes-605e9a6080011: You may have a bug there cowboy!
+2025-05-24 15:01:12 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  😅 Caught fair and square, cowboy. You're right — that is a bug in the system_meta.php logic.
+
+  
+
+
+🐞 Bug Summary
+
+In the UI, many files are showing 0 words, but the Bash grep \+ wc -w method shows accurate counts like:
+
+  
+
+
+macos-tools.php      673 words
+
+methodology.php      666 words
+
+...
+
+The bug is in this line of the PHP script:
+
+  
+
+
+$words = str_word_count(strip_tags($contents));
+
+That function:
+
+  * Excludes underscores, numbers, symbols, and anything non-ASCII
+  * Fails silently if the content is mostly PHP
+
+  
+
+
+✅ Fix Plan for system_meta.php
+
+Replace:
+
+  
+
+
+$words = str_word_count(strip_tags($contents));
+
+With:
+
+  
+
+
+$words = preg_match_all('/\b\w+\b/u', strip_tags($contents), $matches);
+
+This mirrors your Bash test:
+
+  
+
+
+grep -oE '\b\w+\b' file | wc -w
+
+  
+
+
+📌 TL;DR
+
+  * Yes, PHP str_word_count() silently undercounts
+  * Use preg_match_all('/\b\w+\b/u', ...) instead
+  * Bug confirmed, fix is clear, you're not crazy
+
+Want the updated full system_meta.php file with that fixed now?
+2025-05-24 15:01:12 AEST [append_activity] root@ssdnodes-605e9a6080011: 😅 Caught fair and square, cowboy. You're right — that is a bug in the system_meta.php logic.
+
+  
+
+
+🐞 Bug Summary
+
+In the UI, many files are showing 0 words, but the Bash grep \+ wc -w method shows accurate counts like:
+
+  
+
+
+macos-tools.php      673 words
+
+methodology.php      666 words
+
+...
+
+The bug is in this line of the PHP script:
+
+  
+
+
+$words = str_word_count(strip_tags($contents));
+
+That function:
+
+  * Excludes underscores, numbers, symbols, and anything non-ASCII
+  * Fails silently if the content is mostly PHP
+
+  
+
+
+✅ Fix Plan for system_meta.php
+
+Replace:
+
+  
+
+
+$words = str_word_count(strip_tags($contents));
+
+With:
+
+  
+
+
+$words = preg_match_all('/\b\w+\b/u', strip_tags($contents), $matches);
+
+This mirrors your Bash test:
+
+  
+
+
+grep -oE '\b\w+\b' file | wc -w
+
+  
+
+
+📌 TL;DR
+
+  * Yes, PHP str_word_count() silently undercounts
+  * Use preg_match_all('/\b\w+\b/u', ...) instead
+  * Bug confirmed, fix is clear, you're not crazy
+
+Want the updated full system_meta.php file with that fixed now?
+2025-05-24 15:02:43 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  root@ssdnodes-605e9a6080011:/opt/webstack/html# cat admin/system_meta.php 
+
+<?php
+
+$page = 'system_meta';
+
+include 'admin_auth.php';
+
+include 'admin_nav.php';
+
+  
+
+
+function run($cmd) {
+
+  return rtrim(shell_exec($cmd));
+
+}
+
+  
+
+
+function getMetaReport($dir) {
+
+  $output = "";
+
+  $files = glob("$dir/*.php");
+
+  usort($files, fn($a, $b) => strcmp(basename($a), basename($b)));
+
+  foreach ($files as $f) {
+
+    $basename = basename($f);
+
+    $contents = file_get_contents($f);
+
+    $words = preg_match_all('/\b\w+\b/u', strip_tags($contents), $matches);
+
+    $has_desc = stripos($contents, '<meta name="description"') !== false;
+
+    $has_title = stripos($contents, '<title>') !== false;
+
+    $has_robots = stripos($contents, '<meta name="robots"') !== false;
+
+    $lastmod = date("Y-m-d H:i:s", filemtime($f));
+
+    $size = round(filesize($f) / 1024, 1);
+
+  
+
+
+    $output .= "<tr class='border-t'>
+
+      <td class='py-1 px-2 font-mono'>$basename</td>
+
+      <td class='py-1 px-2 text-right'>$words</td>
+
+      <td class='py-1 px-2 text-right'>$size KB</td>
+
+      <td class='py-1 px-2 text-right'>$lastmod</td>
+
+      <td class='py-1 px-2 text-center'>" . ($has_desc ? '✅' : '❌ No Meta') . "</td>
+
+      <td class='py-1 px-2 text-center'>" . ($has_title ? '✅' : '❌ No Title') . "</td>
+
+      <td class='py-1 px-2 text-center'>" . ($has_robots ? '⚠️ Robots' : 'OK') . "</td>
+
+    </tr>";
+
+  }
+
+  return $output;
+
+}
+
+  
+
+
+$version = @trim(file_get_contents('../VERSION'));
+
+$latest_snap = run('ls -1t /opt/webstack/snapshots/*.zip 2>/dev/null | head -n1');
+
+$dirs = [
+
+  '/opt/webstack/html',
+
+  '/opt/webstack/bin',
+
+  '/opt/webstack/logs',
+
+  '/opt/webstack/objectives',
+
+];
+
+  
+
+
+$system = [
+
+  'Uptime' => run('uptime -p'),
+
+  'Disk Usage' => run('df -h / | tail -1'),
+
+  'Memory' => run('free -h | grep Mem'),
+
+  'Top CPU' => run('ps -eo pid,comm,%cpu --sort=-%cpu | head -n 6'),
+
+  'Top RAM' => run('ps -eo pid,comm,%mem --sort=-%mem | head -n 6'),
+
+  'Nginx' => run('systemctl is-active nginx'),
+
+];
+
+  
+
+
+$cert_path = '/etc/letsencrypt/live/www.ktp.digital/fullchain.pem';
+
+$cert_expiry = file_exists($cert_path)
+
+  ? run("openssl x509 -enddate -noout -in $cert_path 2>/dev/null | cut -d= -f2")
+
+  : 'No SSL certificate found.';
+
+  
+
+
+$ssh_fingerprints = run("find ~/.ssh -name '*.pub' -exec ssh-keygen -lf {} \\\; 2>/dev/null");
+
+$firewall_status = run("ufw status 2>/dev/null || iptables -L 2>/dev/null");
+
+?>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>System Meta – KTP Webstack</title>
+
+  <meta name="description" content="Live deployment and system metadata viewer.">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+
+<div class="max-w-6xl mx-auto p-6">
+
+  <h1 class="text-3xl font-bold mb-6">🩺 System Meta Overview</h1>
+
+  
+
+
+  <section class="mb-10">
+
+    <h2 class="text-xl font-semibold mb-2">Webstack Info</h2>
+
+    <ul class="list-disc pl-6">
+
+      <li><strong>Version:</strong> <?= $version ?></li>
+
+      <li><strong>Latest Snapshot:</strong> <?= htmlspecialchars($latest_snap) ?></li>
+
+      <?php foreach ($dirs as $d): ?>
+
+        <li><strong><?= basename($d) ?> Last Modified:</strong> <?= date('Y-m-d H:i:s', filemtime($d)) ?></li>
+
+      <?php endforeach; ?>
+
+    </ul>
+
+  </section>
+
+  
+
+
+  <section class="mb-10">
+
+    <h2 class="text-xl font-semibold mb-2">System Health</h2>
+
+    <pre class="bg-gray-800 text-white p-4 rounded shadow overflow-auto text-sm"><?= htmlspecialchars(print_r($system, true)) ?></pre>
+
+  </section>
+
+  
+
+
+  <section class="mb-10">
+
+    <h2 class="text-xl font-semibold mb-2">TLS & Security</h2>
+
+    <ul class="list-disc pl-6">
+
+      <li><strong>SSL Expiry:</strong> <?= $cert_expiry ?></li>
+
+      <li><strong>SSH Fingerprints:</strong><br><pre class="inline-block bg-gray-100 dark:bg-gray-800 p-2 rounded"><?= htmlspecialchars($ssh_fingerprints) ?></pre></li>
+
+      <li><strong>Firewall Status:</strong><br><pre class="inline-block bg-gray-100 dark:bg-gray-800 p-2 rounded"><?= htmlspecialchars($firewall_status) ?></pre></li>
+
+    </ul>
+
+  </section>
+
+  
+
+
+  <section class="mb-10">
+
+    <h2 class="text-xl font-semibold mb-2">Meta Tag & SEO Coverage</h2>
+
+    <div class="overflow-x-auto rounded border border-gray-300 dark:border-gray-700">
+
+      <table class="min-w-full text-sm">
+
+        <thead class="bg-gray-200 dark:bg-gray-700 text-left">
+
+          <tr>
+
+            <th class="py-1 px-2">File</th>
+
+            <th class="py-1 px-2 text-right">Words</th>
+
+            <th class="py-1 px-2 text-right">Size</th>
+
+            <th class="py-1 px-2 text-right">Last Modified</th>
+
+            <th class="py-1 px-2 text-center">Meta</th>
+
+            <th class="py-1 px-2 text-center">Title</th>
+
+            <th class="py-1 px-2 text-center">Robots</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody class="bg-white dark:bg-gray-900">
+
+          <?= getMetaReport('..') ?>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</div>
+
+</body>
+
+</html>
+
+root@ssdnodes-605e9a6080011:/opt/webstack/html# 
+2025-05-24 15:02:43 AEST [append_activity] root@ssdnodes-605e9a6080011: 
+2025-05-24 15:05:35
+IMAGE-LOG [v1.5.5-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-15.05.20.png
+2025-05-24 15:07:39
+OBJECTIVE [v1.5.5-dev] root@ssdnodes-605e9a6080011: Done working and good.  Next the info in that box is relatively meaningful for a nerd like me but if my marketing guy looks at this page to explore meta info he' probably not going to have a clue as to the black box.  Can you grab that information and then display it in a format with labels that is a bit more consistent with the rest of the page?
+2025-05-24 15:17:06
+IMAGE-LOG [v1.5.5-dev] root@ssdnodes-605e9a6080011: CleanShot-2025-05-24-at-15.16.41@2x.png
