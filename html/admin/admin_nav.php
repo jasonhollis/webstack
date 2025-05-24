@@ -21,6 +21,7 @@ if (!isset($page)) $page = '';
       <li><a href="/admin/analytics.php" class="<?= ($page=='analytics') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">Analytics</a></li>
       <li><a href="/admin/maintenance.php" class="<?= ($page=='maintenance') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">Maintenance</a></li>
       <li><a href="/admin/file_stats.php" class="<?= ($page=='file_stats') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">File Stats</a></li>
+      <li><a href="/admin/system_meta.php" class="<?= ($page=='system_meta') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">System Meta</a></li>
       <li><a href="/admin/directives.php" class="<?= ($page=='directives') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">AI Directives</a></li>
     </ul>
   </div>

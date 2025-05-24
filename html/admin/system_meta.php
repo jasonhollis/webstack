@@ -7,38 +7,47 @@ function run($cmd) {
   return rtrim(shell_exec($cmd));
 }
 
-function getMetaReport($dir) {
-  $output = "";
-  $files = glob("$dir/*.php");
-  usort($files, fn($a, $b) => strcmp(basename($a), basename($b)));
+// ------- SEO/Meta coverage: live render scan instead of static -------
+$public_pages = [
+    'index.php',
+    'about.php',
+    'automation.php',
+    'contact.php',
+    'enterprise.php',
+    'mac.php',
+    'macos-tools.php',
+    'nas.php',
+    'nextdns.php',
+    'smallbiz.php',
+    'tailscale.php',
+    'methodology.php',
+    // add/remove public pages as needed
+];
+$base = 'https://www.ktp.digital/';
 
-  foreach ($files as $f) {
-    $basename = basename($f);
-    $contents = file_get_contents($f);
-
-    // Accurate word count even for mostly-PHP files
-    $words = preg_match_all('/\b\w+\b/u', $contents, $matches);
-    $size = round(filesize($f) / 1024, 1);
-    $lastmod = date("Y-m-d H:i:s", filemtime($f));
-
-    $has_desc = stripos($contents, '<meta name="description"') !== false;
-    $has_title = stripos($contents, '<title>') !== false;
-    $has_robots = stripos($contents, '<meta name="robots"') !== false;
-
-    $output .= "<tr class='border-t'>
-      <td class='py-1 px-2 font-mono'>$basename</td>
-      <td class='py-1 px-2 text-right'>$words</td>
-      <td class='py-1 px-2 text-right'>$size KB</td>
-      <td class='py-1 px-2 text-right'>$lastmod</td>
-      <td class='py-1 px-2 text-center'>" . ($has_desc ? '✅' : '❌ No Meta') . "</td>
-      <td class='py-1 px-2 text-center'>" . ($has_title ? '✅' : '❌ No Title') . "</td>
-      <td class='py-1 px-2 text-center'>" . ($has_robots ? '⚠️ Robots' : 'OK') . "</td>
-    </tr>";
-  }
-
-  return $output;
+function checkMetaTags($url) {
+    $html = @file_get_contents($url);
+    if ($html === false) {
+        return ['title' => false, 'meta' => false, 'error' => 'Fetch failed'];
+    }
+    if (preg_match('/<head.*?>(.*?)<\/head>/si', $html, $headMatch)) {
+        $head = $headMatch[1];
+        $hasTitle = stripos($head, '<title>') !== false;
+        $hasMeta = stripos($head, '<meta name="description"') !== false;
+        return [
+            'title' => $hasTitle,
+            'meta'  => $hasMeta,
+            'error' => false,
+        ];
+    }
+    return ['title' => false, 'meta' => false, 'error' => 'No head section'];
 }
-
+$meta_results = [];
+foreach ($public_pages as $file) {
+    $url = $base . $file;
+    $meta_results[$file] = checkMetaTags($url);
+}
+// ---------------------------------------------------------------------
 
 $version = @trim(file_get_contents('../VERSION'));
 $latest_snap = run('ls -1t /opt/webstack/snapshots/*.zip 2>/dev/null | head -n1');
@@ -93,32 +102,31 @@ $firewall_status = run("ufw status 2>/dev/null || iptables -L 2>/dev/null");
   <section class="mb-10">
     <h2 class="text-xl font-semibold mb-2">System Health</h2>
     <div class="grid md:grid-cols-2 gap-4 text-sm">
-  <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
-    <h3 class="font-bold mb-2">🕒 Uptime</h3>
-    <p><?= htmlspecialchars($system['Uptime']) ?></p>
-  </div>
-  <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
-    <h3 class="font-bold mb-2">💾 Disk Usage</h3>
-    <p><?= htmlspecialchars($system['Disk Usage']) ?></p>
-  </div>
-  <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
-    <h3 class="font-bold mb-2">🧠 Memory</h3>
-    <p><?= htmlspecialchars($system['Memory']) ?></p>
-  </div>
-  <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
-    <h3 class="font-bold mb-2">🌐 Nginx Status</h3>
-    <p><?= htmlspecialchars($system['Nginx']) ?></p>
-  </div>
-  <div class="md:col-span-2 bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
-    <h3 class="font-bold mb-2">🔥 Top CPU Processes</h3>
-    <pre class="overflow-x-auto"><?= htmlspecialchars($system['Top CPU']) ?></pre>
-  </div>
-  <div class="md:col-span-2 bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
-    <h3 class="font-bold mb-2">📈 Top RAM Processes</h3>
-    <pre class="overflow-x-auto"><?= htmlspecialchars($system['Top RAM']) ?></pre>
-  </div>
-</div>
-
+      <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+        <h3 class="font-bold mb-2">🕒 Uptime</h3>
+        <p><?= htmlspecialchars($system['Uptime']) ?></p>
+      </div>
+      <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+        <h3 class="font-bold mb-2">💾 Disk Usage</h3>
+        <p><?= htmlspecialchars($system['Disk Usage']) ?></p>
+      </div>
+      <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+        <h3 class="font-bold mb-2">🧠 Memory</h3>
+        <p><?= htmlspecialchars($system['Memory']) ?></p>
+      </div>
+      <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+        <h3 class="font-bold mb-2">🌐 Nginx Status</h3>
+        <p><?= htmlspecialchars($system['Nginx']) ?></p>
+      </div>
+      <div class="md:col-span-2 bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+        <h3 class="font-bold mb-2">🔥 Top CPU Processes</h3>
+        <pre class="overflow-x-auto"><?= htmlspecialchars($system['Top CPU']) ?></pre>
+      </div>
+      <div class="md:col-span-2 bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+        <h3 class="font-bold mb-2">📈 Top RAM Processes</h3>
+        <pre class="overflow-x-auto"><?= htmlspecialchars($system['Top RAM']) ?></pre>
+      </div>
+    </div>
   </section>
 
   <section class="mb-10">
@@ -131,24 +139,42 @@ $firewall_status = run("ufw status 2>/dev/null || iptables -L 2>/dev/null");
   </section>
 
   <section class="mb-10">
-    <h2 class="text-xl font-semibold mb-2">Meta Tag & SEO Coverage</h2>
+    <h2 class="text-xl font-semibold mb-2">Meta Tag & SEO Coverage (Live Rendered)</h2>
     <div class="overflow-x-auto rounded border border-gray-300 dark:border-gray-700">
       <table class="min-w-full text-sm">
         <thead class="bg-gray-200 dark:bg-gray-700 text-left">
           <tr>
             <th class="py-1 px-2">File</th>
-            <th class="py-1 px-2 text-right">Words</th>
-            <th class="py-1 px-2 text-right">Size</th>
-            <th class="py-1 px-2 text-right">Last Modified</th>
-            <th class="py-1 px-2 text-center">Meta</th>
             <th class="py-1 px-2 text-center">Title</th>
-            <th class="py-1 px-2 text-center">Robots</th>
+            <th class="py-1 px-2 text-center">Meta Description</th>
+            <th class="py-1 px-2">Notes</th>
           </tr>
         </thead>
         <tbody class="bg-white dark:bg-gray-900">
-          <?= getMetaReport('..') ?>
+          <?php foreach ($meta_results as $file => $r): ?>
+          <tr class="border-t dark:border-gray-800 <?= (!$r['title'] || !$r['meta']) ? 'bg-red-50 dark:bg-red-900/30' : 'bg-green-50 dark:bg-green-900/10' ?>">
+            <td class="py-1 px-2 font-mono">
+              <a href="<?= htmlspecialchars($base . $file) ?>" target="_blank" class="underline text-blue-700 dark:text-blue-300 hover:text-blue-900"><?= htmlspecialchars($file) ?></a>
+            </td>
+            <td class="py-1 px-2 text-center">
+              <?= $r['title'] ? '✅' : '<span class="text-red-600 dark:text-red-400 font-bold">❌</span>' ?>
+            </td>
+            <td class="py-1 px-2 text-center">
+              <?= $r['meta'] ? '✅' : '<span class="text-red-600 dark:text-red-400 font-bold">❌</span>' ?>
+            </td>
+            <td class="py-1 px-2 text-xs text-gray-500 dark:text-gray-400">
+              <?= $r['error'] ? htmlspecialchars($r['error']) : ($r['title'] && $r['meta'] ? 'OK' : 'Missing tags') ?>
+            </td>
+          </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
+    </div>
+    <div class="mt-6 text-sm text-gray-500 dark:text-gray-400">
+      <p>
+        <b>Green = SEO-compliant, live rendered.</b> <br>
+        <b>Red = Missing or fetch failed (see Notes).</b>
+      </p>
     </div>
   </section>
 </div>

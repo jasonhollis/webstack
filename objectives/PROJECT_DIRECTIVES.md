@@ -1,6 +1,6 @@
 # PROJECT_DIRECTIVES.md – KTP Webstack
 
-_Last updated: 2025-05-23 v1.5.0-dev_
+_Last updated: 2025-05-24 v1.5.8-dev-backlog_
 
 ---
 
@@ -28,6 +28,16 @@ _Last updated: 2025-05-23 v1.5.0-dev_
     - If there is **any risk** of breaking indentation, causing multi-line confusion, or requiring search/replace, revert to full EOF file replacement.
 - **Never** provide multi-line patch instructions, manual merge steps, or “insert this above/below” logic.
 - **If in doubt, always use full EOF file replacement.**
+
+---
+
+### 🔍 Review Before Replacement
+
+- **Before issuing any full EOF file replacement, the AI/Agent must review the current file’s contents—**
+    - This review should use direct file read access, access to the live rendered page, or (if neither is possible) request the user to provide the full canonical file.
+- **Any replacement must preserve all custom logic, includes, analytics, and page-specific structure unless a total rewrite is explicitly intended and agreed.**
+- **No default, skeleton, or assumed file structure may be used unless the file is being created new, or as part of an explicitly stated rebuild.**
+- **If only a minor update is required, the agent should offer a minimal diff, one-liner, or targeted patch in preference to a full replacement, unless a full rewrite is needed.**
 
 ---
 
@@ -105,7 +115,7 @@ _Last updated: 2025-05-23 v1.5.0-dev_
 
 ---
 
-## Last Updated: 2025-05-23 v1.5.0-dev
+## Last Updated: 2025-05-24 v1.5.8-dev-backlog
 
 ---
 

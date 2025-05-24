@@ -1,58 +1,35 @@
-<?php include __DIR__."/analytics_logger.php"; ?>
-<?php include __DIR__."/analytics_logger.php"; ?>
 <?php
 require 'layout.php';
 
-$page_title = "KTP Digital | Smarter IT";
+$page_title = "KTP Digital | White Glove IT Solutions";
+$page_desc = "KTP Digital delivers white glove IT consulting, automation, and secure networking for enterprises, SMBs, and homes across Australia.";
 
 $content = <<<HTML
-<h1 class="text-3xl sm:text-4xl font-bold">Smarter Infrastructure. Safer Systems. Automated Living.</h1>
-<p class="text-base sm:text-lg text-gray-300">
-  <strong>KTP Digital</strong> delivers white glove IT consulting, automation, and secure networking—trusted by enterprises, small businesses, and home automation power users.<br>
-  Experience truly personal, tailored, and expert service—every step of the way.
-</p>
-
-<div class="grid gap-6 sm:grid-cols-2 text-left text-gray-200 mt-6 text-sm">
+<h1 class="text-4xl font-bold mb-4">Welcome to KTP Digital</h1>
+<p class="text-lg mb-8">White glove IT, automation, and secure networking solutions—crafted for enterprise, SMB, and home users.</p>
+<div class="grid gap-8 sm:grid-cols-2 text-left text-gray-200 text-base">
   <div>
-    <h2 class="text-lg font-semibold text-green-400 mb-2">Enterprise Consulting</h2>
+    <h2 class="text-xl font-semibold text-blue-300 mb-2">Why KTP?</h2>
     <ul class="list-disc list-inside space-y-1">
-      <li>Zero Trust & Identity Architecture</li>
-      <li>API Security & Governance</li>
-      <li>Office365, Endpoint & Compliance</li>
+      <li>Decades of real-world expertise in IT, networking, and cybersecurity</li>
+      <li>Personal, transparent, and truly white glove service</li>
+      <li>Solutions for business and home—no job too complex</li>
+      <li>Automation, cloud, networking, and security done right</li>
     </ul>
   </div>
   <div>
-    <h2 class="text-lg font-semibold text-blue-400 mb-2">Small Business IT</h2>
+    <h2 class="text-xl font-semibold text-green-400 mb-2">Our Approach</h2>
     <ul class="list-disc list-inside space-y-1">
-      <li>Secure Networks & Wi-Fi</li>
-      <li>Cloud, Backup & Recovery</li>
-      <li>Microsoft 365 / Google Workspace</li>
-    </ul>
-  </div>
-  <div>
-    <h2 class="text-lg font-semibold text-purple-400 mb-2">Home Automation</h2>
-    <ul class="list-disc list-inside space-y-1">
-      <li>Home Assistant configuration</li>
-      <li>Zigbee / Z-Wave / Thread / Matter</li>
-      <li>Firewalling & smart home security</li>
-    </ul>
-  </div>
-  <div>
-    <h2 class="text-lg font-semibold text-yellow-400 mb-2">Why KTP Digital?</h2>
-    <ul class="list-disc list-inside space-y-1">
-      <li>35+ years in global IT leadership</li>
-      <li>Trusted by banks, telcos & startups</li>
-      <li>Real references. Real results.</li>
-      <li>White glove service for every client</li>
+      <li>Consultative, no-BS advice and design</li>
+      <li>Enterprise-grade automation and integration</li>
+      <li>Hands-on support—deployments, migrations, and rescue jobs</li>
+      <li>Security, privacy, and data protection at the core</li>
     </ul>
   </div>
 </div>
-
-<div class="mt-4">
-  <a href="mailto:info@ktp.digital" class="inline-block bg-green-500 hover:bg-green-600 text-white px-5 py-2 sm:px-6 sm:py-3 rounded-lg text-sm font-semibold shadow">
-    Contact Our Team
-  </a>
+<div class="mt-8">
+  <a href="/contact.php" class="inline-block bg-blue-600 hover:bg-blue-800 text-white font-bold px-6 py-3 rounded shadow">Contact Us Today</a>
 </div>
 HTML;
 
-renderLayout($page_title, $content);
+renderLayout($page_title, $content, '', $page_desc);
