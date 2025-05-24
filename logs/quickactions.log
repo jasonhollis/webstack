@@ -8466,3 +8466,550 @@ No
 🧩 Extendable
 Add keys anytime
 Fragile field order
+2025-05-24 13:07:01
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-13.06.47.png
+2025-05-24 13:07:53
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: 3B01E5FC-E233-4D4A-8F4B-FD6F35A36AB4.png
+2025-05-24 13:10:53
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-13.10.39.png
+2025-05-24 13:14:47 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:    
+
+
+nope are we taking the correct approach?  Why not leverage the data that comes out of our update_version.sh to update this stat or perhaps track the number of commits made in 24 hrs, 1week, 1 month, 1 year?
+
+ChatGPT said:
+
+You're absolutely right — and you're now thinking like a project instrumentation architect.
+
+The current approach of parsing raw git log --name-status is:
+
+  * 🔍 Brittle — depends on formatting, spacing, Git config
+  * ⚙️ Expensive — pulls unnecessary data just to count files
+  * ❌ Blind to automated commits like version bumps that touch logs or VERSION (which you're now automating via update_version.sh)
+
+  
+
+
+✅ A Better Approach (Your Proposal, Refined)
+
+Let’s reframe the Git section of file_stats.php like this:
+
+  
+
+
+🔢 **1\. Git Commit Counts by Period******
+
+Instead of trying to parse files from commits, just run:
+
+  
+
+
+_# Commits in past 24h___
+
+git rev-list --count --all --since="24 hours ago"
+
+Same for:
+
+  
+
+
+git rev-list --count --all --since="7 days ago"
+
+git rev-list --count --all --since="1 month ago"
+
+git rev-list --count --all --since="1 year ago"
+
+This gives you rock-solid data:
+
+  * 📅 Commits in 24h
+  * 📈 Commits in 7d
+  * 🗂 Commits in 30d
+  * 📆 Commits this year
+
+No fragile parsing, no mismatches — and you can link back to GitHub if desired.
+
+  
+
+
+🧠 **2\. Reuse **update_version.sh** context******
+
+Since every version bump:
+
+  * Commits a version tag
+  * Creates 2 files in /objectives/
+  * Could optionally write a JSON snippet or metadata file
+
+You can track version bumps separately as a deploy timeline. But for file_stats.php, just using commit counts is cleanest and 100% reliable.
+
+  
+
+
+⚙️ Want to proceed?
+
+If you're ready, I’ll give you a new file_stats.php EOF file that shows:
+
+  * ✅ Web Hits Today
+  * ✅ Total File Changes
+  * ✅ Commits in last 24h / 7d / 30d / 365d (summary bar)
+  * ✅ Optional: link to /admin/changes.php with diff view
+
+Let me know and I’ll generate it immediately.
+2025-05-24 13:14:47 AEST [append_activity] root@ssdnodes-605e9a6080011:   
+
+
+nope are we taking the correct approach?  Why not leverage the data that comes out of our update_version.sh to update this stat or perhaps track the number of commits made in 24 hrs, 1week, 1 month, 1 year?
+
+ChatGPT said:
+
+You're absolutely right — and you're now thinking like a project instrumentation architect.
+
+The current approach of parsing raw git log --name-status is:
+
+  * 🔍 Brittle — depends on formatting, spacing, Git config
+  * ⚙️ Expensive — pulls unnecessary data just to count files
+  * ❌ Blind to automated commits like version bumps that touch logs or VERSION (which you're now automating via update_version.sh)
+
+  
+
+
+✅ A Better Approach (Your Proposal, Refined)
+
+Let’s reframe the Git section of file_stats.php like this:
+
+  
+
+
+🔢 **1\. Git Commit Counts by Period******
+
+Instead of trying to parse files from commits, just run:
+
+  
+
+
+_# Commits in past 24h___
+
+git rev-list --count --all --since="24 hours ago"
+
+Same for:
+
+  
+
+
+git rev-list --count --all --since="7 days ago"
+
+git rev-list --count --all --since="1 month ago"
+
+git rev-list --count --all --since="1 year ago"
+
+This gives you rock-solid data:
+
+  * 📅 Commits in 24h
+  * 📈 Commits in 7d
+  * 🗂 Commits in 30d
+  * 📆 Commits this year
+
+No fragile parsing, no mismatches — and you can link back to GitHub if desired.
+
+  
+
+
+🧠 **2\. Reuse **update_version.sh** context******
+
+Since every version bump:
+
+  * Commits a version tag
+  * Creates 2 files in /objectives/
+  * Could optionally write a JSON snippet or metadata file
+
+You can track version bumps separately as a deploy timeline. But for file_stats.php, just using commit counts is cleanest and 100% reliable.
+
+  
+
+
+⚙️ Want to proceed?
+
+If you're ready, I’ll give you a new file_stats.php EOF file that shows:
+
+  * ✅ Web Hits Today
+  * ✅ Total File Changes
+  * ✅ Commits in last 24h / 7d / 30d / 365d (summary bar)
+  * ✅ Optional: link to /admin/changes.php with diff view
+
+Let me know and I’ll generate it immediately.
+2025-05-24 13:15:01 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Do you want to debug anything first such as your assumptions in point 2?
+2025-05-24 13:15:01 AEST [append_activity] root@ssdnodes-605e9a6080011: Do you want to debug anything first such as your assumptions in point 2?
+2025-05-24 13:15:24 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  🔍 My Assumption Recap:
+
+Your update_version.sh script:
+
+  * Always runs from /opt/webstack/html
+  * Commits a new version tag + content
+  * Creates two versioned Markdown logs:
+    * objectives/vX.Y.Z-dev_iteration_log.md
+    * objectives/vX.Y.Z-dev_objectives.md
+  * Logs version change to logs/deploy_webhook.log
+
+So I assumed:
+
+"Each time we bump the version, we get exactly one new Git commit, and it is guaranteed to touch VERSION and objectives/."
+2025-05-24 13:15:24 AEST [append_activity] root@ssdnodes-605e9a6080011: 🔍 My Assumption Recap:
+
+Your update_version.sh script:
+
+  * Always runs from /opt/webstack/html
+  * Commits a new version tag + content
+  * Creates two versioned Markdown logs:
+    * objectives/vX.Y.Z-dev_iteration_log.md
+    * objectives/vX.Y.Z-dev_objectives.md
+  * Logs version change to logs/deploy_webhook.log
+
+So I assumed:
+
+"Each time we bump the version, we get exactly one new Git commit, and it is guaranteed to touch VERSION and objectives/."
+2025-05-24 13:16:18 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  ok give me all three in a one liner
+2025-05-24 13:16:18 AEST [append_activity] root@ssdnodes-605e9a6080011: ok give me all three in a one liner
+2025-05-24 13:16:32 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  cd /opt/webstack && echo -e "\n🧠 Last 5 commits with files touched:\n" && git log \--oneline --name-only -n 5 && echo -e "\n🧮 Git commits touching VERSION or objectives/ in last 30 days:\n" && git log \--since="30 days ago" \--pretty=format:'%h %s' \--name-only | grep -E 'VERSION|objectives/' | wc -l && echo -e "\n📂 Latest _objectives.md files:\n" && ls -lt /opt/webstack/objectives/*_objectives.md | head -n 10
+2025-05-24 13:16:32 AEST [append_activity] root@ssdnodes-605e9a6080011: cd /opt/webstack && echo -e "\n🧠 Last 5 commits with files touched:\n" && git log \--oneline --name-only -n 5 && echo -e "\n🧮 Git commits touching VERSION or objectives/ in last 30 days:\n" && git log \--since="30 days ago" \--pretty=format:'%h %s' \--name-only | grep -E 'VERSION|objectives/' | wc -l && echo -e "\n📂 Latest _objectives.md files:\n" && ls -lt /opt/webstack/objectives/*_objectives.md | head -n 10
+2025-05-24 13:20:25 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Beautiful. Your test confirms everything we hoped:
+
+  
+
+
+✅ Validated:
+
+  1. Every version bump creates exactly one Git commit
+  2. Each commit:
+    * Touches html/VERSION
+    * Adds two files in objectives/:
+      * vX.Y.Z-dev_iteration_log.md
+      * vX.Y.Z-dev_objectives.md
+  3. These commits are tagged with messages like:  
+  
+  
+⬆️ Version bump: v1.5.4-dev
+  4.   
+  
+
+
+  
+
+
+🔧 That means:
+
+We no longer need to rely on parsing git log --name-status to track file activity.
+
+Instead, we can cleanly and efficiently:
+
+  * Count version bumps in the last 24h, 7d, 30d, 365d
+  * Use that as a deployment activity tracker
+  * Display a clean Git summary in file_stats.php
+
+  
+
+
+🧩 Optional: More metrics from the repo
+
+We can now trivially add:
+
+  * Commits in 24h: git rev-list --count --all --since="24 hours ago"
+  * Version bumps in 24h: grep -c '^⬆️ Version bump' from Git log messages
+  * Objective files created in any time window
+
+  
+
+
+✅ Ready to rebuild file_stats.php?
+
+I’ll write you an updated EOF that replaces:
+
+  * ❌ Git file parsing
+  * ✅ Clean commit counts
+  * ✅ Accurate deploy (version bump) activity
+  * ✅ Optional "last deployed version" from VERSION
+
+Shall I?
+2025-05-24 13:20:25 AEST [append_activity] root@ssdnodes-605e9a6080011: Beautiful. Your test confirms everything we hoped:
+
+  
+
+
+✅ Validated:
+
+  1. Every version bump creates exactly one Git commit
+  2. Each commit:
+    * Touches html/VERSION
+    * Adds two files in objectives/:
+      * vX.Y.Z-dev_iteration_log.md
+      * vX.Y.Z-dev_objectives.md
+  3. These commits are tagged with messages like:  
+  
+  
+⬆️ Version bump: v1.5.4-dev
+  4.   
+  
+
+
+  
+
+
+🔧 That means:
+
+We no longer need to rely on parsing git log --name-status to track file activity.
+
+Instead, we can cleanly and efficiently:
+
+  * Count version bumps in the last 24h, 7d, 30d, 365d
+  * Use that as a deployment activity tracker
+  * Display a clean Git summary in file_stats.php
+
+  
+
+
+🧩 Optional: More metrics from the repo
+
+We can now trivially add:
+
+  * Commits in 24h: git rev-list --count --all --since="24 hours ago"
+  * Version bumps in 24h: grep -c '^⬆️ Version bump' from Git log messages
+  * Objective files created in any time window
+
+  
+
+
+✅ Ready to rebuild file_stats.php?
+
+I’ll write you an updated EOF that replaces:
+
+  * ❌ Git file parsing
+  * ✅ Clean commit counts
+  * ✅ Accurate deploy (version bump) activity
+  * ✅ Optional "last deployed version" from VERSION
+
+Shall I?
+2025-05-24 13:21:49
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-13.21.28.png
+2025-05-24 13:23:54
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-13.23.43.png
+2025-05-24 13:30:34
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-13.30.21.png
+2025-05-24 13:32:23
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-13.32.09.png
+2025-05-24 13:32:43 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  still -1 creative math happening
+2025-05-24 13:32:43 AEST [append_activity] root@ssdnodes-605e9a6080011: still -1 creative math happening
+2025-05-24 13:35:02
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-13.34.49.png
+2025-05-24 13:38:43
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-13.38.31.png
+2025-05-24 13:40:31
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-13.40.17.png
+2025-05-24 13:43:09 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  root@ssdnodes-605e9a6080011:/opt/webstack# sudo -u www-data -s
+
+cd /opt/webstack
+
+www-data@ssdnodes-605e9a6080011:/opt/webstack$ /usr/bin/git rev-list --count --all --since="24 hours ago"
+
+fatal: detected dubious ownership in repository at '/opt/webstack'
+
+To add an exception for this directory, call:
+
+  
+
+
+git config --global --add safe.directory /opt/webstack
+
+www-data@ssdnodes-605e9a6080011:/opt/webstack$ /usr/bin/git log --since="24 hours ago" --pretty=format:'%s'
+
+fatal: detected dubious ownership in repository at '/opt/webstack'
+
+To add an exception for this directory, call:
+
+  
+
+
+git config --global --add safe.directory /opt/webstack
+
+www-data@ssdnodes-605e9a6080011:/opt/webstack$ git config --global --add safe.directory /opt/webstack
+
+error: could not lock config file /var/www/.gitconfig: Permission denied
+
+www-data@ssdnodes-605e9a6080011:/opt/webstack$ 
+2025-05-24 13:43:09 AEST [append_activity] root@ssdnodes-605e9a6080011: root@ssdnodes-605e9a6080011:/opt/webstack# sudo -u www-data -s
+
+cd /opt/webstack
+
+www-data@ssdnodes-605e9a6080011:/opt/webstack$ /usr/bin/git rev-list --count --all --since="24 hours ago"
+
+fatal: detected dubious ownership in repository at '/opt/webstack'
+
+To add an exception for this directory, call:
+
+  
+
+
+git config --global --add safe.directory /opt/webstack
+
+www-data@ssdnodes-605e9a6080011:/opt/webstack$ /usr/bin/git log --since="24 hours ago" --pretty=format:'%s'
+
+fatal: detected dubious ownership in repository at '/opt/webstack'
+
+To add an exception for this directory, call:
+
+  
+
+
+git config --global --add safe.directory /opt/webstack
+
+www-data@ssdnodes-605e9a6080011:/opt/webstack$ git config --global --add safe.directory /opt/webstack
+
+error: could not lock config file /var/www/.gitconfig: Permission denied
+
+www-data@ssdnodes-605e9a6080011:/opt/webstack$ 
+2025-05-24 13:44:23
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-13.44.09.png
+2025-05-24 13:44:36 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  nope what' next to debug
+2025-05-24 13:44:36 AEST [append_activity] root@ssdnodes-605e9a6080011: nope what' next to debug
+2025-05-24 13:46:09 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  root@ssdnodes-605e9a6080011:/opt/webstack/bin# ./git_debug.sh 
+
+USER: root
+
+HOME: /root
+
+PWD: /opt/webstack/bin
+
+GIT VERSION:
+
+git version 2.39.5
+
+  
+
+
+Listing Git config:
+
+safe.directory=/opt/webstack/html
+
+user.name=Jason Hollis
+
+user.email=jason@ktp.digital
+
+core.repositoryformatversion=0
+
+core.filemode=true
+
+core.bare=false
+
+core.logallrefupdates=true
+
+remote.origin.url=git@github.com:jasonhollis/webstack.git
+
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+
+branch.master.remote=origin
+
+branch.master.merge=refs/heads/master
+
+  
+
+
+Trying: git rev-list
+
+5
+
+  
+
+
+Trying: git log
+
+⬆️ Version bump: v1.5.4-dev
+
+⬆️ Version bump: v1.5.3-dev
+
+⬆️ Version bump: v1.5.2-dev
+
+⬆️ Version bump: v.1.5.1-dev
+
+⬆️ Version bump: v1.5.0-dev
+
+root@ssdnodes-605e9a6080011:/opt/webstack/bin# 
+2025-05-24 13:46:09 AEST [append_activity] root@ssdnodes-605e9a6080011: root@ssdnodes-605e9a6080011:/opt/webstack/bin# ./git_debug.sh 
+
+USER: root
+
+HOME: /root
+
+PWD: /opt/webstack/bin
+
+GIT VERSION:
+
+git version 2.39.5
+
+  
+
+
+Listing Git config:
+
+safe.directory=/opt/webstack/html
+
+user.name=Jason Hollis
+
+user.email=jason@ktp.digital
+
+core.repositoryformatversion=0
+
+core.filemode=true
+
+core.bare=false
+
+core.logallrefupdates=true
+
+remote.origin.url=git@github.com:jasonhollis/webstack.git
+
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+
+branch.master.remote=origin
+
+branch.master.merge=refs/heads/master
+
+  
+
+
+Trying: git rev-list
+
+5
+
+  
+
+
+Trying: git log
+
+⬆️ Version bump: v1.5.4-dev
+
+⬆️ Version bump: v1.5.3-dev
+
+⬆️ Version bump: v1.5.2-dev
+
+⬆️ Version bump: v.1.5.1-dev
+
+⬆️ Version bump: v1.5.0-dev
+
+root@ssdnodes-605e9a6080011:/opt/webstack/bin# 
+2025-05-24 13:50:42
+IMAGE-LOG [v1.5.4-dev] root@ssdnodes-605e9a6080011: Screenshot-2025-05-24-at-13.50.25.png
+2025-05-24 13:53:07 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  I have removed the debug line now
+2025-05-24 13:53:07 AEST [append_activity] root@ssdnodes-605e9a6080011: I have removed the debug line now
+2025-05-24 13:55:02
+OBJECTIVE [v1.5.4-dev] root@ssdnodes-605e9a6080011: Would you like next:
+
+  * A ?json=1 API toggle for this page?
+  * Git stats charted visually over time?
+  * Auto-append summary to objectives.md on version bump?

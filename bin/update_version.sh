@@ -29,6 +29,10 @@ git add -A || { "$FAILURE_SH" "update_version.sh" "git add failed"; exit 1; }
 git commit -m "⬆️ Version bump: $NEW_VERSION" || { "$FAILURE_SH" "update_version.sh" "git commit failed"; exit 1; }
 git push || { "$FAILURE_SH" "update_version.sh" "git push failed"; exit 1; }
 
+# GIT TAG (annotated) and push
+git tag -a "$NEW_VERSION" -m "Version $NEW_VERSION" || { "$FAILURE_SH" "update_version.sh" "git tag failed"; exit 1; }
+git push origin "$NEW_VERSION" || { "$FAILURE_SH" "update_version.sh" "git tag push failed"; exit 1; }
+
 # SNAPSHOT backup (Fail = abort and notify)
 bash "$SNAPSHOT_SCRIPT" "$NEW_VERSION"
 if [[ $? -ne 0 ]]; then
@@ -46,9 +50,9 @@ touch "$ITERATION_FILE" "$OBJECTIVE_FILE"
 chown root:www-data "$ITERATION_FILE" "$OBJECTIVE_FILE"
 chmod 664 "$ITERATION_FILE" "$OBJECTIVE_FILE"
 
-echo "✅ Version $NEW_VERSION deployed, committed, pushed, snapshotted, and logs preserved."
+echo "✅ Version $NEW_VERSION deployed, committed, tagged, pushed, snapshotted, and logs preserved."
 
 # Optionally, add a Pushover deploy success notification here if desired
-# /opt/webstack/bin/notify_pushover.sh "Webstack updated to $NEW_VERSION"
+/opt/webstack/bin/notify_pushover.sh "Webstack updated to $NEW_VERSION"
 
 exit 0
