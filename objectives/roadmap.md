@@ -1,35 +1,51 @@
-# KTP Webstack Roadmap
+# 🚀 KTP Webstack Roadmap – Brainstorm & Options
 
-This rolling roadmap is for admin eyes only. Edit this file via SSH/SFTP/BBEdit to update roadmap status and objectives.
-
----
-
-## Rolling List of Things to Remember
-
-- **Build maintenance for the snapshots via cron**
+## In Progress / Current Objectives
+- Polish `/admin/analytics.php` (UI, top IPs, IP exclude toggle, sparkline/day graph, mobile display).
+- Document public roadmap and update methodology for collaborative development.
 
 ---
 
-## Other Ideas / Backlog
-
-- Add authentication to `/admin/maintenance.php` and all admin tools.
-- Refactor navigation for better mobile/hamburger support (public & admin).
-- Integrate search/filter on the maintenance snapshots table.
-- Implement file upload/restore actions to allow restore from snapshot.
-- Add automated snapshot expiry (old snapshot cleanup from UI).
-- Enhance logging/alerting for all admin actions (Pushover, audit log, etc).
-
----
-
-## Next Objective
-
-**Polish `/admin/analytics.php` with these upgrades:**
-
-- Add Top 5 IPv4/IPv6 IP addresses by hit count, with auto-lookup (show country/region if possible).
-- Implement a one-click "Exclude My IP" toggle in analytics UI — dynamically filter dashboard to hide/show hits from your current admin IP (should persist via cookie/session).
-- Refine all analytics visualizations for compactness, clarity, and mobile usability (Tailwind grid/flex, no horizontal scrolling, readable legends/labels).
-- (Optional) Add "Hits per Day" graph with sparkline and tabular data below.
+## Admin Panel Improvements
+- [ ] Add 2FA or TOTP-based authentication for `/admin` (beyond password hash).
+- [ ] Global search for all logs, objectives, and version notes in admin.
+- [ ] Refactor all admin tools for 100% dark mode, mobile, and accessibility.
+- [ ] Merge Objectives and Iteration Logs into a unified view (with filters).
+- [ ] Add inline markdown editor for objectives/roadmap (edit in browser).
+- [ ] Add “quick links” or admin dashboard summary for key health, uptime, and last errors.
+- [ ] Auto-expiry and cleanup controls for snapshots and logs (UI-driven).
+- [ ] Implement role-based admin (add more users, permissions, audit log).
+- [ ] Add UI to restore from snapshot or backup (one-click recovery).
+- [ ] **UI-driven Roadmap Management:** Select/tick items from roadmap/backlog in the admin UI and click “Go” to move them into the current release or “In Progress.” (Future: drag-and-drop between Backlog, In Progress, Completed.)
 
 ---
 
-> _Please confirm or edit this objective!_
+## Monitoring & Automation
+- [ ] Public status/uptime page with real-time heartbeat from server.
+- [ ] Automated Pushover alerts for key failures (extend `/bin/failure.sh` logic to more subsystems).
+- [ ] Automated site health check (page load, SSL, DNS, storage space).
+- [ ] Cron job maintenance UI for scheduled cleanups, backups, certs, etc.
+
+---
+
+## Content & SEO
+- [ ] Rewrite main pages for maximum clarity, SEO, and “why KTP?” storytelling.
+- [ ] Add `/macos-tools.php` and `/automation.php` case studies for Home Assistant and real client work.
+- [ ] Expand documentation for workflows (how/when to use git vs. file backups).
+- [ ] Generate and display OpenGraph/Twitter card previews for all major pages.
+- [ ] Add sitemap.xml and robots.txt generator in admin.
+
+---
+
+## Development & DevOps
+- [ ] Add one-click download/export of any version or snapshot.
+- [ ] Bash scripts to automate rollback/restore from any snapshot (even partial restore).
+- [ ] Option to run selective test suite after every commit (PHP lint, HTML check, broken links, permissions).
+- [ ] Integrate external log shipping (optionally send logs to S3 or remote syslog).
+- [ ] Option to mirror repo to GitHub Actions or self-hosted CI for smoke tests.
+
+---
+
+## Quality of Life / Power Tools
+- [ ] File browser for `/opt/webstack/logs`, `/snapshots`, and `/objectives` (view, download, delete).
+- [ ]
