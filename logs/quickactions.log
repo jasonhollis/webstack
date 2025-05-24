@@ -8389,3 +8389,80 @@ To github.com:jasonhollis/webstack.git
 ✅ Version v1.5.2-dev deployed, committed, pushed, snapshotted, and logs preserved.
 
 root@ssdnodes-605e9a6080011:/opt/webstack/html/admin/objectives/images# 
+2025-05-24 11:28:14 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  FeatureJSON LogsRaw/TSV Logs
+
+🧠 Human-readability
+High
+Medium
+
+🛠️ Easy to parse in PHP, Python, Go
+Yes
+Only with custom regex
+
+💾 MariaDB Ready
+Yes — use `LOAD DATA`, `JSON_TABLE()`, or preprocess
+Needs re-parsing, field splitting
+
+📊 Analytics-Ready
+Yes — each key becomes a column
+No — must extract fields
+
+🧪 API-Compatible
+Fully
+No
+
+🧩 Extendable
+Add keys anytime
+Fragile field order
+2025-05-24 11:28:14 AEST [append_activity] root@ssdnodes-605e9a6080011: FeatureJSON LogsRaw/TSV Logs
+
+🧠 Human-readability
+High
+Medium
+
+🛠️ Easy to parse in PHP, Python, Go
+Yes
+Only with custom regex
+
+💾 MariaDB Ready
+Yes — use `LOAD DATA`, `JSON_TABLE()`, or preprocess
+Needs re-parsing, field splitting
+
+📊 Analytics-Ready
+Yes — each key becomes a column
+No — must extract fields
+
+🧪 API-Compatible
+Fully
+No
+
+🧩 Extendable
+Add keys anytime
+Fragile field order
+2025-05-24 11:28:58
+OBJECTIVE [v1.5.3-dev] root@ssdnodes-605e9a6080011: FeatureJSON LogsRaw/TSV Logs
+
+🧠 Human-readability
+High
+Medium
+
+🛠️ Easy to parse in PHP, Python, Go
+Yes
+Only with custom regex
+
+💾 MariaDB Ready
+Yes — use `LOAD DATA`, `JSON_TABLE()`, or preprocess
+Needs re-parsing, field splitting
+
+📊 Analytics-Ready
+Yes — each key becomes a column
+No — must extract fields
+
+🧪 API-Compatible
+Fully
+No
+
+🧩 Extendable
+Add keys anytime
+Fragile field order
