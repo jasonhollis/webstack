@@ -21,7 +21,6 @@ $public_pages = [
     'smallbiz.php',
     'tailscale.php',
     'methodology.php',
-    // add/remove public pages as needed
 ];
 $base = 'https://www.ktp.digital/';
 
@@ -44,7 +43,6 @@ function checkMetaTags($url) {
         $hasTitle = false;
         $hasMeta = false;
     }
-    // Count words in rendered HTML body (excluding tags)
     $text = strip_tags($html);
     $wordcount = str_word_count($text);
     $size_kb = round(strlen($html) / 1024, 1);
@@ -72,61 +70,82 @@ $dirs = [
     '/opt/webstack/objectives',
 ];
 
-// ----- System Health: Legacy Logic (Flat Array, for Admin Consistency) -----
+// ----- System Health -----
 $system = [
     'Uptime'     => run('uptime -p'),
     'Disk Usage' => run('df -h / | tail -1'),
-    'Memory'     => run('free -h | grep Mem'),
+    'Memory'     => run('free -m | grep Mem'),
     'Top CPU'    => run('ps -eo pid,comm,%cpu --sort=-%cpu | head -n 6'),
     'Top RAM'    => run('ps -eo pid,comm,%mem --sort=-%mem | head -n 6'),
     'Nginx'      => run('systemctl is-active nginx'),
 ];
 
-// ----- Certbot SSL Cert Handling -----
+// ----- Memory (Human-Readable MB/GB) -----
+$mem_raw = $system['Memory'];
+$mem_labels = ['Total RAM', 'Used', 'Free', 'Shared', 'Buffers/Cache', 'Available'];
+$mem_values = [];
+if (preg_match('/Mem:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/', $mem_raw, $matches)) {
+    $raw_vals = array_slice($matches, 1, 6);
+    foreach ($raw_vals as $i => $val) {
+        if ($val >= 1024) {
+            $g = round($val / 1024, 2);
+            $mem_values[$mem_labels[$i]] = $g . ' GB';
+        } else {
+            $mem_values[$mem_labels[$i]] = $val . ' MB';
+        }
+    }
+}
+
+// ----- SSL: Show domains & expiry -----
 $cert_path = '/etc/letsencrypt/live/ww2.ktp.digital/fullchain.pem';
 $ssl_msg = '';
 if (file_exists($cert_path)) {
-    $raw = run("openssl x509 -enddate -noout -in $cert_path 2>/dev/null");
-    if (preg_match('/notAfter=(.+)/', $raw, $m)) {
+    $raw_exp = run("openssl x509 -enddate -noout -in $cert_path 2>/dev/null");
+    $raw_dns = run("openssl x509 -text -noout -in $cert_path 2>/dev/null | grep DNS:");
+    $domains = [];
+    if (preg_match_all('/DNS:([^\n,]+)/', $raw_dns, $dns_matches)) {
+        foreach ($dns_matches[1] as $d) {
+            $domains[] = trim($d);
+        }
+    }
+    if (preg_match('/notAfter=(.+)/', $raw_exp, $m)) {
         $expiry = strtotime($m[1]);
         $now = time();
         $days = floor(($expiry - $now) / 86400);
+        $domain_str = htmlspecialchars(implode(', ', $domains));
+        $exp_str = date('Y-m-d', $expiry) . " (" . ($days >= 0
+                ? "<span class='text-green-700 dark:text-green-300'>in $days day" . ($days == 1 ? '' : 's') . "</span>"
+                : "<span class='text-red-700 dark:text-red-400'>expired " . abs($days) . " day" . (abs($days) == 1 ? '' : 's') . " ago</span>"
+            ) . ")";
         if ($days >= 0) {
-            $ssl_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>SSL Certificate valid</span> &ndash; Expires " .
-                date('Y-m-d', $expiry) . " <span class='text-gray-500'>(in $days day" . ($days == 1 ? '' : 's') . ")</span>";
+            $ssl_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>Valid</span> &ndash; Domains: <b>$domain_str</b> &ndash; Expires: <b>$exp_str</b>";
         } else {
-            $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>SSL Certificate expired</span> &ndash; Expired " .
-                date('Y-m-d', $expiry) . " <span class='text-red-500'>(expired " . abs($days) . " day" . (abs($days) == 1 ? '' : 's') . " ago)</span><br>" .
-                "<span class='text-xs text-red-400'>Renew with <code>certbot renew</code> and reload your webserver.</span>";
+            $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>Expired</span> &ndash; Domains: <b>$domain_str</b> &ndash; Expired: <b>$exp_str</b>";
         }
     } else {
         $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>SSL certificate: parsing error</span>";
     }
 } else {
-    $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>No SSL certificate found for ww2.ktp.digital</span><br>
-    <span class='text-xs text-red-400'>To enable HTTPS, run <code>certbot --nginx -d www.ktp.digital -d ww2.ktp.digital</code></span>";
+    $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>No SSL certificate found for ww2.ktp.digital</span>";
 }
 
-// ----- Firewall Status -----
+// ----- UFW Firewall: Show active/open ports -----
 $ufw = run("ufw status 2>/dev/null");
 if ($ufw && stripos($ufw, 'Status: active') !== false) {
-    $firewall_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>Firewall is ACTIVE</span>";
-    if (preg_match_all('/(\d+\/(tcp|udp))/', $ufw, $matches)) {
-        $ports = array_unique($matches[1]);
-        $firewall_msg .= ". Open: " . implode(', ', $ports);
+    $firewall_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>ACTIVE</span>";
+    $allowed_ports = [];
+    foreach (explode("\n", $ufw) as $line) {
+        if (preg_match('/^(\d+\/\w+)\s+ALLOW/', $line, $port_m)) {
+            $allowed_ports[] = $port_m[1];
+        }
+    }
+    if ($allowed_ports) {
+        $firewall_msg .= " – Open: <b>" . htmlspecialchars(implode(', ', $allowed_ports)) . "</b>";
     }
 } elseif ($ufw && stripos($ufw, 'inactive') !== false) {
-    $firewall_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>Firewall is INACTIVE</span>";
+    $firewall_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>INACTIVE</span>";
 } else {
-    $iptables = run("iptables -L 2>/dev/null");
-    if (stripos($iptables, 'Chain') !== false) {
-        $firewall_msg = "<span class='text-yellow-700 dark:text-yellow-300 font-bold'>Firewall status unknown</span>";
-        if (preg_match_all('/dpt:(\d+)/', $iptables, $ports)) {
-            $firewall_msg .= ". Open: " . implode(', ', array_unique($ports[1]));
-        }
-    } else {
-        $firewall_msg = "Firewall status could not be determined.";
-    }
+    $firewall_msg = "Status unknown.<br><span class='text-xs text-gray-500'>Try <code>ufw status</code> on the server.</span>";
 }
 ?>
 <!DOCTYPE html>
@@ -137,6 +156,17 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
   <meta name="description" content="Live deployment and system metadata viewer.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .tooltip { position: relative; cursor: pointer; }
+    .tooltip .tooltip-text {
+      visibility: hidden; opacity:0; transition: opacity 0.2s;
+      background: #222; color: #fff; padding: 4px 8px; border-radius: 4px; position: absolute; z-index: 100;
+      left: 50%; top: 100%; transform: translateX(-50%);
+      font-size: 11px; white-space: pre-line; min-width: 110px;
+    }
+    .tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+    .tooltip-q { font-weight: bold; font-size: 13px; color: #3B82F6; margin-left: 2px; cursor: pointer;}
+  </style>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
 <div class="max-w-6xl mx-auto p-6">
@@ -145,10 +175,10 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
   <section class="mb-10">
     <h2 class="text-xl font-semibold mb-2">Webstack Info</h2>
     <ul class="list-disc pl-6">
-      <li><strong>Version:</strong> <?= $version ?></li>
+      <li><strong>Version:</strong> <?= htmlspecialchars($version) ?></li>
       <li><strong>Latest Snapshot:</strong> <?= htmlspecialchars($latest_snap) ?></li>
       <?php foreach ($dirs as $d): ?>
-        <li><strong><?= basename($d) ?> Last Modified:</strong> <?= date('Y-m-d H:i:s', filemtime($d)) ?></li>
+        <li><strong><?= htmlspecialchars(basename($d)) ?> Last Modified:</strong> <?= date('Y-m-d H:i:s', filemtime($d)) ?></li>
       <?php endforeach; ?>
     </ul>
   </section>
@@ -166,7 +196,33 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
       </div>
       <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
         <h3 class="font-bold mb-2">🧠 Memory</h3>
-        <p><?= htmlspecialchars($system['Memory']) ?></p>
+        <?php if ($mem_values): ?>
+        <ul class="text-xs">
+          <?php foreach ($mem_values as $label => $val): ?>
+            <li>
+              <span class="font-semibold"><?= htmlspecialchars($label) ?></span>:
+              <?= htmlspecialchars($val) ?>
+              <span class="tooltip-q tooltip">?
+                <span class="tooltip-text">
+                  <?php
+                    switch ($label) {
+                      case 'Total RAM': echo "Total system RAM installed."; break;
+                      case 'Used': echo "RAM currently used by apps & kernel."; break;
+                      case 'Free': echo "RAM currently not used at all."; break;
+                      case 'Shared': echo "RAM shared between processes (tmpfs, etc)."; break;
+                      case 'Buffers/Cache': echo "RAM used for disk buffering/caching (auto-managed by Linux)."; break;
+                      case 'Available': echo "Estimated RAM available for new apps (inc. cache that can be reclaimed)."; break;
+                      default: echo ""; break;
+                    }
+                  ?>
+                </span>
+              </span>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+        <?php else: ?>
+          <p><?= htmlspecialchars($system['Memory']) ?></p>
+        <?php endif; ?>
       </div>
       <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
         <h3 class="font-bold mb-2">🌐 Nginx Status</h3>
@@ -186,8 +242,12 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
   <section class="mb-10">
     <h2 class="text-xl font-semibold mb-2">TLS &amp; Security</h2>
     <ul class="list-disc pl-6">
-      <li><strong>SSL/TLS Status:</strong> <?= $ssl_msg ?></li>
-      <li><strong>Firewall Status:</strong> <?= $firewall_msg ?></li>
+      <li>
+        <strong>SSL/TLS:</strong> <?= $ssl_msg ?>
+      </li>
+      <li>
+        <strong>Firewall:</strong> <?= $firewall_msg ?>
+      </li>
     </ul>
   </section>
 
