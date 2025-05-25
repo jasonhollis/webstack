@@ -10368,3 +10368,47 @@ IMAGE-LOG [v1.5.8-dev-backlog] root@ssdnodes-605e9a6080011: CleanShot-2025-05-24
 2025-05-24 20:27:36 AEST [activity] invoked by root@ssdnodes-605e9a6080011
   RAW:  We need a backlog.  I'm not asking to build it now.  The memory section makes no sense to a human and the TLS and security bit is wrong but you have fixed the objective.  I'm going blind with this minutia .... seems like index.php is the only issues but that's probably big
 2025-05-24 20:27:36 AEST [append_activity] root@ssdnodes-605e9a6080011: We need a backlog.  I'm not asking to build it now.  The memory section makes no sense to a human and the TLS and security bit is wrong but you have fixed the objective.  I'm going blind with this minutia .... seems like index.php is the only issues but that's probably big
+2025-05-25 11:18:14 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Resume KTP Webstack dev from v1.6.0-dev. Last release (v1.5.9-dev) completed: 
+
+\- Full live SSL/TLS cert reporting (parsing Let’s Encrypt cert file, showing covered domains and expiry, symlink/user/permission bugs solved). 
+
+\- Firewall block now auto-detects active status and lists open ports using safe sudoers config (`www-data` can run `ufw status`). 
+
+\- Memory/RAM block uses GB/MB + tooltips. 
+
+\- SEO/Meta audit highlights pages <200 words. 
+
+\- All Certbot/UFW file/directory permissions correct for secure PHP access. 
+
+\- All previous debug, permission, and shell context issues are resolved and tested.
+
+  
+
+
+Follow all KTP directives: **never replace a file without reading the canonical source and reviewing it first**; all edits must be atomic (full EOF or approved sed one-liners). Next build: backlog automation or next priority as per Backlog.md, and continue enforcing security best practices and admin usability in all changes.
+2025-05-25 11:18:14 AEST [append_activity] root@ssdnodes-605e9a6080011: Resume KTP Webstack dev from v1.6.0-dev. Last release (v1.5.9-dev) completed: 
+
+\- Full live SSL/TLS cert reporting (parsing Let’s Encrypt cert file, showing covered domains and expiry, symlink/user/permission bugs solved). 
+
+\- Firewall block now auto-detects active status and lists open ports using safe sudoers config (`www-data` can run `ufw status`). 
+
+\- Memory/RAM block uses GB/MB + tooltips. 
+
+\- SEO/Meta audit highlights pages <200 words. 
+
+\- All Certbot/UFW file/directory permissions correct for secure PHP access. 
+
+\- All previous debug, permission, and shell context issues are resolved and tested.
+
+  
+
+
+Follow all KTP directives: **never replace a file without reading the canonical source and reviewing it first**; all edits must be atomic (full EOF or approved sed one-liners). Next build: backlog automation or next priority as per Backlog.md, and continue enforcing security best practices and admin usability in all changes.
+2025-05-25 11:19:18
+OBJECTIVE [v1.6.0-dev] root@ssdnodes-605e9a6080011:   * Rewrite main pages for maximum clarity, SEO, and “why KTP?” storytelling.
+  * [ ] Add /macos-tools.php and /automation.php case studies for Home Assistant and real client work.
+2025-05-25 11:37:17
+OBJECTIVE [v1.6.0-dev] root@ssdnodes-605e9a6080011: We need to really Enhance Small Biz and it needs to link to Mac Mac-Os tools, Nas, NextDNS and Tailscale. We used to say a lot about Ubiquiti and that's all gone at the moment?  We probably need a seperate page on Ubiquiti and the them of NextDNS and Tailscale need to be updated
+2025-05-25 11:41:34
+OBJECTIVE [v1.6.0-dev] root@ssdnodes-605e9a6080011: We should probably grab the icons or logos for everything as well.  With the new Ubiquiti page It's not dream machine pro there should be a section on Cloud gateways, networking and WIFI7 with a link, Security Cameras with infasys on AI cams and maybe integration with NAS and another section on Access Controls with a blurb on License plate and facial recognition

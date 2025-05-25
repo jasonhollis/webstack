@@ -1,94 +1,142 @@
-<?php include __DIR__."/analytics_logger.php"; ?>
-<?php include __DIR__."/analytics_logger.php"; ?>
 <?php
-require 'layout.php';
+require_once __DIR__.'/layout.php';
 $page_title = "NAS & Storage Solutions";
 $page_desc  = "QNAP & Synology NAS setup, Time Machine, backup, on-premises storage, hybrid cloud, surveillance, and Docker services for Mac and business.";
+$canonical = "https://www.ktp.digital/nas.php";
+$og_image = "/images/nas/qnap-banner.jpg";
+ob_start();
+?>
 
-// Inject meta tags via layout (if supported)
-$meta = <<<HTML
-  <meta name="description" content="$page_desc">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="$page_title">
-  <meta property="og:description" content="$page_desc">
-  <meta property="og:image" content="https://www.ktp.digital/images/nas/qnap-banner.jpg">
-  <meta property="og:url" content="https://www.ktp.digital/nas.php">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="$page_title">
-  <meta name="twitter:description" content="$page_desc">
-  <meta name="twitter:image" content="https://www.ktp.digital/images/nas/qnap-banner.jpg">
-HTML;
+<div class="p-2 sm:p-8 max-w-5xl mx-auto">
+  <img src="/images/nas/qnap-banner.jpg" alt="QNAP TS-h1290FX" class="rounded shadow mb-8 w-full max-h-96 object-contain">
 
-$content = <<<HTML
-<div class="p-8 max-w-5xl mx-auto">
-  <img src="images/nas/qnap-banner.jpg" alt="QNAP TS-h1290FX" class="rounded shadow mb-8 w-full max-h-96 object-contain">
   <h1 class="text-3xl font-bold mb-6">NAS & Storage Solutions</h1>
+
   <p class="text-lg leading-relaxed mb-6">
-    We’ve been working with both <strong>QNAP</strong> and <strong>Synology</strong> systems since 2008, helping customers deploy robust, secure, and scalable on-premise storage solutions across mixed Mac and Windows environments.
+    <strong>KTP Digital</strong> has delivered <strong>QNAP</strong> and <strong>Synology</strong> systems since 2008, building robust, secure, and scalable on-premise storage for creative, business, and regulated industries. We specialize in keeping your data <b>under your control</b>—with compliance, resilience, and full visibility.
   </p>
-  <p class="text-md mb-6 text-blue-700 dark:text-blue-300">
-    Many of our customers operate in regulated industries where cloud storage is either restricted, discouraged, or requires enhanced oversight. We provide trusted alternatives that keep data under your control — with compliance, resilience, and visibility in mind.
-  </p>
-  <h2 class="text-2xl font-semibold mt-10 mb-4">🖥 Designed for Apple & Creative Workflows</h2>
-  <ul class="list-disc ml-6 mb-6">
-    <li>Time Machine support for seamless Mac backups</li>
-    <li>AFP & SMB for shared drives across Mac and PC</li>
-    <li>Direct iCloud offload or sync-to-NAS strategies</li>
-  </ul>
-  <h2 class="text-2xl font-semibold mt-10 mb-4">🎥 Expand Storage for Surveillance</h2>
-  <ul class="list-disc ml-6 mb-6">
-    <li>Store video securely onsite for <a href="https://ui.com/camera-security" target="_blank" class="text-blue-600 dark:text-blue-400 underline">UniFi Protect</a></li>
-    <li>RAID, SSD caching, hot-swappable expansion</li>
-    <li>Integrates into Ubiquiti-based infrastructure</li>
-  </ul>
-  <h2 class="text-2xl font-semibold mt-10 mb-4">🗄 Centralized File Server</h2>
-  <ul class="list-disc ml-6 mb-6">
-    <li>Granular permissions and access control</li>
-    <li>Secure sync and remote access without public cloud</li>
-    <li>Automated backups to cloud or external disks</li>
-  </ul>
-  <h2 class="text-2xl font-semibold mt-10 mb-4">🔧 Docker & Proxy Services</h2>
-  <ul class="list-disc ml-6 mb-6">
-    <li>Full Docker support on QNAP NAS for custom containers and apps</li>
-    <li>Reverse proxy configuration for clean public URLs</li>
-    <li>Private services like Home Assistant, databases, analytics, and monitoring</li>
-    <li><strong>Rapid deployment:</strong> We can spin up production-ready stacks in minutes</li>
-  </ul>
-  <h2 class="text-2xl font-semibold mt-10 mb-4">🔍 QNAP vs Synology</h2>
-  <div class="overflow-x-auto mb-6">
-    <table class="w-full text-left table-auto border border-gray-300 dark:border-gray-700 text-sm">
-      <thead class="bg-gray-100 dark:bg-gray-800">
-        <tr><th class="p-2">Feature</th><th class="p-2">QNAP</th><th class="p-2">Synology</th></tr>
+
+  <div class="space-y-8">
+    <div>
+      <div class="flex items-center gap-3 mb-2 text-xl font-semibold">
+        <span class="text-2xl">🖥️</span> Designed for Apple & Creative Workflows
+      </div>
+      <div class="pl-7 text-base text-slate-100/90">
+        Time Machine support for seamless Mac backups.<br>
+        AFP & SMB for shared drives across Mac and PC.<br>
+        Direct iCloud offload or sync-to-NAS strategies.
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center gap-3 mb-2 text-xl font-semibold">
+        <span class="text-2xl">🎥</span> Expand Storage for Surveillance
+      </div>
+      <div class="pl-7 text-base text-slate-100/90">
+        Store video securely onsite for <a href="https://ui.com/camera-security" target="_blank" class="text-blue-400 underline">UniFi Protect</a>.<br>
+        RAID, SSD caching, hot-swappable expansion.<br>
+        Seamless integration into Ubiquiti-based infrastructure.
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center gap-3 mb-2 text-xl font-semibold">
+        <span class="text-2xl">🗄️</span> Centralized File Server
+      </div>
+      <div class="pl-7 text-base text-slate-100/90">
+        Granular permissions and access control.<br>
+        Secure sync and remote access without public cloud.<br>
+        Automated backups to cloud or external disks.
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center gap-3 mb-2 text-xl font-semibold">
+        <span class="text-2xl">🔧</span> Docker & Proxy Services
+      </div>
+      <div class="pl-7 text-base text-slate-100/90">
+        Full Docker support on QNAP for custom containers and apps.<br>
+        Reverse proxy configuration for clean public URLs.<br>
+        Private services like Home Assistant, analytics, and monitoring.<br>
+        <span class="font-bold text-green-600">Rapid deployment:</span> We can spin up production-ready stacks in minutes.
+      </div>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-semibold mt-12 mb-4 flex items-center gap-2">
+    <span class="text-2xl">🔍</span> QNAP vs Synology
+  </h2>
+  <div class="overflow-x-auto mb-6 max-w-3xl mx-auto">
+    <table class="w-full text-base rounded-xl shadow bg-white text-black">
+      <thead>
+        <tr>
+          <th class="p-4 font-bold bg-gray-200 text-black rounded-tl-xl text-left">Feature</th>
+          <th class="p-4 font-bold bg-gray-200 text-black text-center">QNAP</th>
+          <th class="p-4 font-bold bg-gray-200 text-black text-center rounded-tr-xl">Synology</th>
+        </tr>
       </thead>
-      <tbody class="bg-white dark:bg-gray-900">
-        <tr class="border-t border-gray-300 dark:border-gray-700">
-          <td class="p-2">Virtualization</td>
-          <td class="p-2">✅ Native VM Manager</td>
-          <td class="p-2">⚠️ Docker only</td>
+      <tbody>
+        <tr class="even:bg-gray-50 odd:bg-white">
+          <td class="p-4 text-left">Virtualization</td>
+          <td class="p-4 text-center">
+            <span class="inline-block align-middle text-green-600 mr-1">✔️</span>
+            Native VM Manager
+          </td>
+          <td class="p-4 text-center">
+            <span class="inline-block align-middle text-yellow-500 mr-1">⚠️</span>
+            Docker only
+          </td>
         </tr>
-        <tr class="border-t border-gray-300 dark:border-gray-700">
-          <td class="p-2">Surveillance</td>
-          <td class="p-2">✅ High camera limits</td>
-          <td class="p-2">✅ Polished interface</td>
+        <tr class="even:bg-gray-50 odd:bg-white">
+          <td class="p-4 text-left">Surveillance</td>
+          <td class="p-4 text-center">
+            <span class="inline-block align-middle text-green-600 mr-1">✔️</span>
+            High camera limits
+          </td>
+          <td class="p-4 text-center">
+            <span class="inline-block align-middle text-green-600 mr-1">✔️</span>
+            Polished interface
+          </td>
         </tr>
-        <tr class="border-t border-gray-300 dark:border-gray-700">
-          <td class="p-2">Mac Support</td>
-          <td class="p-2">✅ Time Machine, AFP, SMB</td>
-          <td class="p-2">✅ Time Machine, SMB</td>
+        <tr class="even:bg-gray-50 odd:bg-white">
+          <td class="p-4 text-left">Mac Support</td>
+          <td class="p-4 text-center">
+            <span class="inline-block align-middle text-green-600 mr-1">✔️</span>
+            Time Machine, AFP, SMB
+          </td>
+          <td class="p-4 text-center">
+            <span class="inline-block align-middle text-green-600 mr-1">✔️</span>
+            Time Machine, SMB
+          </td>
         </tr>
-        <tr class="border-t border-gray-300 dark:border-gray-700">
-          <td class="p-2">Ease of Use</td>
-          <td class="p-2">⚠️ Advanced users</td>
-          <td class="p-2">✅ Beginner-friendly</td>
+        <tr class="even:bg-gray-50 odd:bg-white">
+          <td class="p-4 text-left">Ease of Use</td>
+          <td class="p-4 text-center">
+            <span class="inline-block align-middle text-yellow-500 mr-1">⚠️</span>
+            Advanced users
+          </td>
+          <td class="p-4 text-center">
+            <span class="inline-block align-middle text-green-600 mr-1">✔️</span>
+            Beginner-friendly
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <p class="text-md mt-8 text-blue-600 dark:text-blue-300">
-    🔗 Also see our <a href="mac.php" class="underline">Mac expertise</a>, <a href="smallbiz.php" class="underline">Small Business solutions</a>, and <a href="tailscale.php" class="underline">Tailscale networking</a>.
-  </p>
-</div>
-HTML;
 
-renderLayout($page_title, $content, $meta);
+  <div class="mt-8 text-base text-blue-500 flex items-center gap-2">
+    <svg class="inline-block h-5 w-5 mr-1 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+    </svg>
+    <span>
+      Also see our
+      <a href="mac.php" class="underline">Mac expertise</a>,
+      <a href="smallbiz.php" class="underline">Small Business solutions</a>,
+      and <a href="tailscale.php" class="underline">Tailscale networking</a>.
+    </span>
+  </div>
+</div>
+
+<?php
+$content = ob_get_clean();
+renderLayout($page_title, $content, '', $page_desc, $canonical, $og_image);
