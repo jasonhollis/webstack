@@ -96,32 +96,31 @@ if (preg_match('/Mem:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/', $mem_ra
     }
 }
 
-// ----- SSL: Checks /etc/letsencrypt/live/ww2.ktp.digital/fullchain.pem -----
-$cert_path = '/etc/letsencrypt/archive/ww2.ktp.digital/fullchain2.pem';
+// ----- SSL: Show domains & expiry -----
+$cert_path = '/etc/letsencrypt/live/ww2.ktp.digital/fullchain.pem';
 $ssl_msg = '';
-$domain_str = '';
 if (file_exists($cert_path)) {
     $raw_exp = run("openssl x509 -enddate -noout -in $cert_path 2>/dev/null");
     $raw_dns = run("openssl x509 -text -noout -in $cert_path 2>/dev/null | grep DNS:");
     $domains = [];
     if (preg_match_all('/DNS:([^\n,]+)/', $raw_dns, $dns_matches)) {
         foreach ($dns_matches[1] as $d) {
-            $domains = array_merge($domains, array_map('trim', explode(',', $d)));
+            $domains[] = trim($d);
         }
     }
-    $domain_str = htmlspecialchars(implode(', ', $domains));
     if (preg_match('/notAfter=(.+)/', $raw_exp, $m)) {
         $expiry = strtotime($m[1]);
         $now = time();
         $days = floor(($expiry - $now) / 86400);
+        $domain_str = htmlspecialchars(implode(', ', $domains));
         $exp_str = date('Y-m-d', $expiry) . " (" . ($days >= 0
                 ? "<span class='text-green-700 dark:text-green-300'>in $days day" . ($days == 1 ? '' : 's') . "</span>"
                 : "<span class='text-red-700 dark:text-red-400'>expired " . abs($days) . " day" . (abs($days) == 1 ? '' : 's') . " ago</span>"
             ) . ")";
         if ($days >= 0) {
-            $ssl_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>Valid</span> &ndash; <b>$domain_str</b> &ndash; Expires: <b>$exp_str</b>";
+            $ssl_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>Valid</span> &ndash; Domains: <b>$domain_str</b> &ndash; Expires: <b>$exp_str</b>";
         } else {
-            $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>Expired</span> &ndash; <b>$domain_str</b> &ndash; Expired: <b>$exp_str</b>";
+            $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>Expired</span> &ndash; Domains: <b>$domain_str</b> &ndash; Expired: <b>$exp_str</b>";
         }
     } else {
         $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>SSL certificate: parsing error</span>";
@@ -130,14 +129,14 @@ if (file_exists($cert_path)) {
     $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>No SSL certificate found for ww2.ktp.digital</span>";
 }
 
-// ----- UFW Firewall: Show all open ports (IPv4 + IPv6) -----
-$ufw = run("sudo /usr/sbin/ufw status 2>/dev/null");
+// ----- UFW Firewall: Show active/open ports -----
+$ufw = run("ufw status 2>/dev/null");
 if ($ufw && stripos($ufw, 'Status: active') !== false) {
     $firewall_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>ACTIVE</span>";
     $allowed_ports = [];
     foreach (explode("\n", $ufw) as $line) {
-        if (preg_match('/^([0-9]+\/[a-zA-Z0-9\(\) ]+)\s+ALLOW/', $line, $port_m)) {
-            $allowed_ports[] = trim($port_m[1]);
+        if (preg_match('/^(\d+\/\w+)\s+ALLOW/', $line, $port_m)) {
+            $allowed_ports[] = $port_m[1];
         }
     }
     if ($allowed_ports) {
@@ -147,14 +146,6 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
     $firewall_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>INACTIVE</span>";
 } else {
     $firewall_msg = "Status unknown.<br><span class='text-xs text-gray-500'>Try <code>ufw status</code> on the server.</span>";
-}
-
-// -- Utility for row state in SEO table
-function seo_row_state($r) {
-    if ($r['error']) return 'error';
-    if (!$r['title'] || !$r['meta']) return 'bad';
-    if ($r['wordcount'] < 200) return 'warn';
-    return 'ok';
 }
 ?>
 <!DOCTYPE html>
@@ -166,9 +157,15 @@ function seo_row_state($r) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    .tooltip { position: relative; cursor: pointer; }
+    .tooltip .tooltip-text {
+      visibility: hidden; opacity:0; transition: opacity 0.2s;
+      background: #222; color: #fff; padding: 4px 8px; border-radius: 4px; position: absolute; z-index: 100;
+      left: 50%; top: 100%; transform: translateX(-50%);
+      font-size: 11px; white-space: pre-line; min-width: 110px;
+    }
+    .tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
     .tooltip-q { font-weight: bold; font-size: 13px; color: #3B82F6; margin-left: 2px; cursor: pointer;}
-    .warn-row { background: #FEF9C3 !important; }
-    .error-row { background: #FEE2E2 !important; }
   </style>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
@@ -205,17 +202,21 @@ function seo_row_state($r) {
             <li>
               <span class="font-semibold"><?= htmlspecialchars($label) ?></span>:
               <?= htmlspecialchars($val) ?>
-              <span class="tooltip-q tooltip" title="<?php
-                switch ($label) {
-                  case 'Total RAM': echo "Total system RAM installed."; break;
-                  case 'Used': echo "RAM currently used by apps & kernel."; break;
-                  case 'Free': echo "RAM currently not used at all."; break;
-                  case 'Shared': echo "RAM shared between processes (tmpfs, etc)."; break;
-                  case 'Buffers/Cache': echo "RAM used for disk buffering/caching (auto-managed by Linux)."; break;
-                  case 'Available': echo "Estimated RAM available for new apps (inc. cache that can be reclaimed)."; break;
-                  default: echo ""; break;
-                }
-              ?>">?</span>
+              <span class="tooltip-q tooltip">?
+                <span class="tooltip-text">
+                  <?php
+                    switch ($label) {
+                      case 'Total RAM': echo "Total system RAM installed."; break;
+                      case 'Used': echo "RAM currently used by apps & kernel."; break;
+                      case 'Free': echo "RAM currently not used at all."; break;
+                      case 'Shared': echo "RAM shared between processes (tmpfs, etc)."; break;
+                      case 'Buffers/Cache': echo "RAM used for disk buffering/caching (auto-managed by Linux)."; break;
+                      case 'Available': echo "Estimated RAM available for new apps (inc. cache that can be reclaimed)."; break;
+                      default: echo ""; break;
+                    }
+                  ?>
+                </span>
+              </span>
             </li>
           <?php endforeach; ?>
         </ul>
@@ -265,11 +266,8 @@ function seo_row_state($r) {
           </tr>
         </thead>
         <tbody class="bg-white dark:bg-gray-900">
-          <?php foreach ($meta_results as $file => $r):
-              $row_state = seo_row_state($r);
-              $row_class = $row_state === 'warn' ? 'warn-row' : ($row_state === 'error' ? 'error-row' : (($row_state === 'bad') ? 'error-row' : ''));
-              ?>
-          <tr class="border-t dark:border-gray-800 <?= $row_class ?>">
+          <?php foreach ($meta_results as $file => $r): ?>
+          <tr class="border-t dark:border-gray-800 <?= (!$r['title'] || !$r['meta']) ? 'bg-red-50 dark:bg-red-900/30' : 'bg-green-50 dark:bg-green-900/10' ?>">
             <td class="py-1 px-2 font-mono">
               <a href="<?= htmlspecialchars($base . $file) ?>" target="_blank" class="underline text-blue-700 dark:text-blue-300 hover:text-blue-900"><?= htmlspecialchars($file) ?></a>
             </td>
@@ -282,17 +280,7 @@ function seo_row_state($r) {
             <td class="py-1 px-2 text-center"><?= intval($r['wordcount']) ?></td>
             <td class="py-1 px-2 text-center"><?= htmlspecialchars($r['size_kb']) ?></td>
             <td class="py-1 px-2 text-xs text-gray-500 dark:text-gray-400">
-              <?php
-                if ($r['error']) {
-                  echo htmlspecialchars($r['error']);
-                } elseif (!$r['title'] || !$r['meta']) {
-                  echo "Missing tags";
-                } elseif ($r['wordcount'] < 200) {
-                  echo "Too short (" . intval($r['wordcount']) . " words)";
-                } else {
-                  echo "OK";
-                }
-              ?>
+              <?= $r['error'] ? htmlspecialchars($r['error']) : ($r['title'] && $r['meta'] ? 'OK' : 'Missing tags') ?>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -302,7 +290,6 @@ function seo_row_state($r) {
     <div class="mt-6 text-sm text-gray-500 dark:text-gray-400">
       <p>
         <b>Green = SEO-compliant, live rendered.</b> <br>
-        <b>Yellow = Too short (&lt; 200 words) but otherwise tagged.</b><br>
         <b>Red = Missing or fetch failed (see Notes).</b>
       </p>
     </div>
