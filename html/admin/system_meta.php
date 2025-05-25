@@ -21,7 +21,6 @@ $public_pages = [
     'smallbiz.php',
     'tailscale.php',
     'methodology.php',
-    // add/remove public pages as needed
 ];
 $base = 'https://www.ktp.digital/';
 
@@ -44,7 +43,6 @@ function checkMetaTags($url) {
         $hasTitle = false;
         $hasMeta = false;
     }
-    // Count words in rendered HTML body (excluding tags)
     $text = strip_tags($html);
     $wordcount = str_word_count($text);
     $size_kb = round(strlen($html) / 1024, 1);
@@ -72,68 +70,70 @@ $dirs = [
     '/opt/webstack/objectives',
 ];
 
-// ----- System Health: Reliable Flat Array for Display -----
+// ----- System Health -----
 $system = [
     'Uptime'     => run('uptime -p'),
     'Disk Usage' => run('df -h / | tail -1'),
-    'Memory'     => run('free -h | grep Mem'),
+    'Memory'     => run('free -m | grep Mem'),
     'Top CPU'    => run('ps -eo pid,comm,%cpu --sort=-%cpu | head -n 6'),
     'Top RAM'    => run('ps -eo pid,comm,%mem --sort=-%mem | head -n 6'),
     'Nginx'      => run('systemctl is-active nginx'),
 ];
 
-// ----- Memory Stats (Labeled & Tooltipped) -----
+// ----- Memory (Human-Readable MB/GB) -----
 $mem_raw = $system['Memory'];
-$mem_labels = ['total' => 'Total RAM', 'used' => 'Used', 'free' => 'Free', 'shared' => 'Shared', 'buff/cache' => 'Buffers/Cache', 'available' => 'Available'];
+$mem_labels = ['Total RAM', 'Used', 'Free', 'Shared', 'Buffers/Cache', 'Available'];
 $mem_values = [];
-if (preg_match('/Mem:\s+([\d\w\.]+)\s+([\d\w\.]+)\s+([\d\w\.]+)\s+([\d\w\.]+)\s+([\d\w\.]+)\s+([\d\w\.]+)/', $mem_raw, $matches)) {
-    $mem_values = [
-        'Total RAM' => $matches[1],
-        'Used' => $matches[2],
-        'Free' => $matches[3],
-        'Shared' => $matches[4],
-        'Buffers/Cache' => $matches[5],
-        'Available' => $matches[6],
-    ];
+if (preg_match('/Mem:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/', $mem_raw, $matches)) {
+    $raw_vals = array_slice($matches, 1, 6);
+    foreach ($raw_vals as $i => $val) {
+        if ($val >= 1024) {
+            $g = round($val / 1024, 2);
+            $mem_values[$mem_labels[$i]] = $g . ' GB';
+        } else {
+            $mem_values[$mem_labels[$i]] = $val . ' MB';
+        }
+    }
 }
 
-// ----- SSL Certbot: Status, Domains, Expiry -----
-$cert_path = '/etc/letsencrypt/live/ww2.ktp.digital/fullchain.pem';
+// ----- SSL: Only check www.ktp.digital cert -----
+$cert_path = '/etc/letsencrypt/live/www.ktp.digital/fullchain.pem';
 $ssl_msg = '';
-$ssl_domains = [];
+$domain_str = '';
 if (file_exists($cert_path)) {
     $raw_exp = run("openssl x509 -enddate -noout -in $cert_path 2>/dev/null");
     $raw_dns = run("openssl x509 -text -noout -in $cert_path 2>/dev/null | grep DNS:");
+    $domains = [];
+    if (preg_match_all('/DNS:([^\n,]+)/', $raw_dns, $dns_matches)) {
+        foreach ($dns_matches[1] as $d) {
+            $domains[] = trim($d);
+        }
+    }
+    $domain_str = htmlspecialchars(implode(', ', $domains));
     if (preg_match('/notAfter=(.+)/', $raw_exp, $m)) {
         $expiry = strtotime($m[1]);
         $now = time();
         $days = floor(($expiry - $now) / 86400);
-        $dns = [];
-        if (preg_match('/DNS:([^\n]+)/', $raw_dns, $dns_m)) {
-            $dns = array_map('trim', explode(',', str_replace('DNS:', '', $dns_m[0])));
-        }
-        $ssl_domains = $dns;
+        $exp_str = date('Y-m-d', $expiry) . " (" . ($days >= 0
+                ? "<span class='text-green-700 dark:text-green-300'>in $days day" . ($days == 1 ? '' : 's') . "</span>"
+                : "<span class='text-red-700 dark:text-red-400'>expired " . abs($days) . " day" . (abs($days) == 1 ? '' : 's') . " ago</span>"
+            ) . ")";
         if ($days >= 0) {
-            $ssl_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>SSL valid</span> &ndash; Expires <b>" .
-                date('Y-m-d', $expiry) . "</b> <span class='text-gray-500'>(in $days day" . ($days == 1 ? '' : 's') . ")</span>";
+            $ssl_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>Valid</span> &ndash; <b>$domain_str</b> &ndash; Expires: <b>$exp_str</b>";
         } else {
-            $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>SSL expired</span> &ndash; Expired <b>" .
-                date('Y-m-d', $expiry) . "</b> <span class='text-red-500'>(expired " . abs($days) . " day" . (abs($days) == 1 ? '' : 's') . " ago)</span><br>" .
-                "<span class='text-xs text-red-400'>Renew with <code>certbot renew</code> and reload your webserver.</span>";
+            $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>Expired</span> &ndash; <b>$domain_str</b> &ndash; Expired: <b>$exp_str</b>";
         }
     } else {
         $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>SSL certificate: parsing error</span>";
     }
 } else {
-    $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>No SSL certificate found for ww2.ktp.digital</span><br>
-    <span class='text-xs text-red-400'>To enable HTTPS, run <code>certbot --nginx -d www.ktp.digital -d ww2.ktp.digital</code></span>";
+    $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>No SSL certificate found for www.ktp.digital</span>";
 }
 
-// ----- UFW Firewall Status -----
+// ----- UFW Firewall: Show active/open ports -----
 $ufw = run("ufw status 2>/dev/null");
 if ($ufw && stripos($ufw, 'Status: active') !== false) {
-    $firewall_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>Firewall is ACTIVE</span>";
-    // Parse allowed ports
+    $firewall_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>ACTIVE</span>";
     $allowed_ports = [];
     foreach (explode("\n", $ufw) as $line) {
         if (preg_match('/^(\d+\/\w+)\s+ALLOW/', $line, $port_m)) {
@@ -141,12 +141,20 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
         }
     }
     if ($allowed_ports) {
-        $firewall_msg .= ". Open: <b>" . implode(', ', $allowed_ports) . "</b>";
+        $firewall_msg .= " – Open: <b>" . htmlspecialchars(implode(', ', $allowed_ports)) . "</b>";
     }
 } elseif ($ufw && stripos($ufw, 'inactive') !== false) {
-    $firewall_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>Firewall is INACTIVE</span>";
+    $firewall_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>INACTIVE</span>";
 } else {
-    $firewall_msg = "Firewall status could not be determined.<br><span class='text-xs text-gray-500'>Try <code>ufw status</code> on the server.</span>";
+    $firewall_msg = "Status unknown.<br><span class='text-xs text-gray-500'>Try <code>ufw status</code> on the server.</span>";
+}
+
+// -- Utility for row state in SEO table
+function seo_row_state($r) {
+    if ($r['error']) return 'error';
+    if (!$r['title'] || !$r['meta']) return 'bad';
+    if ($r['wordcount'] < 200) return 'warn';
+    return 'ok';
 }
 ?>
 <!DOCTYPE html>
@@ -158,14 +166,9 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .tooltip { position: relative; cursor: pointer; }
-    .tooltip .tooltip-text {
-      visibility: hidden; opacity:0; transition: opacity 0.2s;
-      background: #222; color: #fff; padding: 4px 8px; border-radius: 4px; position: absolute; z-index: 100;
-      left: 50%; top: 100%; transform: translateX(-50%);
-      font-size: 11px; white-space: pre-line; min-width: 110px;
-    }
-    .tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+    .tooltip-q { font-weight: bold; font-size: 13px; color: #3B82F6; margin-left: 2px; cursor: pointer;}
+    .warn-row { background: #FEF9C3 !important; }
+    .error-row { background: #FEE2E2 !important; }
   </style>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
@@ -202,21 +205,17 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
             <li>
               <span class="font-semibold"><?= htmlspecialchars($label) ?></span>:
               <?= htmlspecialchars($val) ?>
-              <span class="tooltip">❔
-                <span class="tooltip-text">
-                  <?php
-                    switch ($label) {
-                      case 'Total RAM': echo "Total system RAM installed."; break;
-                      case 'Used': echo "RAM currently used by apps & kernel."; break;
-                      case 'Free': echo "RAM currently not used at all."; break;
-                      case 'Shared': echo "RAM shared between processes (tmpfs, etc)."; break;
-                      case 'Buffers/Cache': echo "RAM used for disk buffering/caching (auto-managed by Linux)."; break;
-                      case 'Available': echo "Estimated RAM available for new apps (inc. cache that can be reclaimed)."; break;
-                      default: echo ""; break;
-                    }
-                  ?>
-                </span>
-              </span>
+              <span class="tooltip-q tooltip" title="<?php
+                switch ($label) {
+                  case 'Total RAM': echo "Total system RAM installed."; break;
+                  case 'Used': echo "RAM currently used by apps & kernel."; break;
+                  case 'Free': echo "RAM currently not used at all."; break;
+                  case 'Shared': echo "RAM shared between processes (tmpfs, etc)."; break;
+                  case 'Buffers/Cache': echo "RAM used for disk buffering/caching (auto-managed by Linux)."; break;
+                  case 'Available': echo "Estimated RAM available for new apps (inc. cache that can be reclaimed)."; break;
+                  default: echo ""; break;
+                }
+              ?>">?</span>
             </li>
           <?php endforeach; ?>
         </ul>
@@ -243,13 +242,10 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
     <h2 class="text-xl font-semibold mb-2">TLS &amp; Security</h2>
     <ul class="list-disc pl-6">
       <li>
-        <strong>SSL/TLS Status:</strong> <?= $ssl_msg ?>
-        <?php if ($ssl_domains): ?>
-          <br><span class="text-xs text-gray-500">Domains: <?= htmlspecialchars(implode(', ', $ssl_domains)) ?></span>
-        <?php endif; ?>
+        <strong>SSL/TLS:</strong> <?= $ssl_msg ?>
       </li>
       <li>
-        <strong>Firewall Status:</strong> <?= $firewall_msg ?>
+        <strong>Firewall:</strong> <?= $firewall_msg ?>
       </li>
     </ul>
   </section>
@@ -269,8 +265,11 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
           </tr>
         </thead>
         <tbody class="bg-white dark:bg-gray-900">
-          <?php foreach ($meta_results as $file => $r): ?>
-          <tr class="border-t dark:border-gray-800 <?= (!$r['title'] || !$r['meta']) ? 'bg-red-50 dark:bg-red-900/30' : 'bg-green-50 dark:bg-green-900/10' ?>">
+          <?php foreach ($meta_results as $file => $r):
+              $row_state = seo_row_state($r);
+              $row_class = $row_state === 'warn' ? 'warn-row' : ($row_state === 'error' ? 'error-row' : (($row_state === 'bad') ? 'error-row' : ''));
+              ?>
+          <tr class="border-t dark:border-gray-800 <?= $row_class ?>">
             <td class="py-1 px-2 font-mono">
               <a href="<?= htmlspecialchars($base . $file) ?>" target="_blank" class="underline text-blue-700 dark:text-blue-300 hover:text-blue-900"><?= htmlspecialchars($file) ?></a>
             </td>
@@ -283,7 +282,17 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
             <td class="py-1 px-2 text-center"><?= intval($r['wordcount']) ?></td>
             <td class="py-1 px-2 text-center"><?= htmlspecialchars($r['size_kb']) ?></td>
             <td class="py-1 px-2 text-xs text-gray-500 dark:text-gray-400">
-              <?= $r['error'] ? htmlspecialchars($r['error']) : ($r['title'] && $r['meta'] ? 'OK' : 'Missing tags') ?>
+              <?php
+                if ($r['error']) {
+                  echo htmlspecialchars($r['error']);
+                } elseif (!$r['title'] || !$r['meta']) {
+                  echo "Missing tags";
+                } elseif ($r['wordcount'] < 200) {
+                  echo "Too short (" . intval($r['wordcount']) . " words)";
+                } else {
+                  echo "OK";
+                }
+              ?>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -293,6 +302,7 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
     <div class="mt-6 text-sm text-gray-500 dark:text-gray-400">
       <p>
         <b>Green = SEO-compliant, live rendered.</b> <br>
+        <b>Yellow = Too short (&lt; 200 words) but otherwise tagged.</b><br>
         <b>Red = Missing or fetch failed (see Notes).</b>
       </p>
     </div>
