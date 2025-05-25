@@ -4,7 +4,7 @@ include 'admin_auth.php';
 include 'admin_nav.php';
 
 function run($cmd) {
-  return rtrim(shell_exec($cmd));
+    return rtrim(shell_exec($cmd));
 }
 
 // ------- SEO/Meta coverage: live render scan instead of static -------
@@ -28,19 +28,33 @@ $base = 'https://www.ktp.digital/';
 function checkMetaTags($url) {
     $html = @file_get_contents($url);
     if ($html === false) {
-        return ['title' => false, 'meta' => false, 'error' => 'Fetch failed'];
+        return [
+            'title' => false,
+            'meta' => false,
+            'error' => 'Fetch failed',
+            'wordcount' => 0,
+            'size_kb' => 0
+        ];
     }
     if (preg_match('/<head.*?>(.*?)<\/head>/si', $html, $headMatch)) {
         $head = $headMatch[1];
         $hasTitle = stripos($head, '<title>') !== false;
         $hasMeta = stripos($head, '<meta name="description"') !== false;
-        return [
-            'title' => $hasTitle,
-            'meta'  => $hasMeta,
-            'error' => false,
-        ];
+    } else {
+        $hasTitle = false;
+        $hasMeta = false;
     }
-    return ['title' => false, 'meta' => false, 'error' => 'No head section'];
+    // Count words in rendered HTML body (excluding tags)
+    $text = strip_tags($html);
+    $wordcount = str_word_count($text);
+    $size_kb = round(strlen($html) / 1024, 1);
+    return [
+        'title' => $hasTitle,
+        'meta'  => $hasMeta,
+        'error' => false,
+        'wordcount' => $wordcount,
+        'size_kb' => $size_kb
+    ];
 }
 $meta_results = [];
 foreach ($public_pages as $file) {
@@ -52,28 +66,88 @@ foreach ($public_pages as $file) {
 $version = @trim(file_get_contents('../VERSION'));
 $latest_snap = run('ls -1t /opt/webstack/snapshots/*.zip 2>/dev/null | head -n1');
 $dirs = [
-  '/opt/webstack/html',
-  '/opt/webstack/bin',
-  '/opt/webstack/logs',
-  '/opt/webstack/objectives',
+    '/opt/webstack/html',
+    '/opt/webstack/bin',
+    '/opt/webstack/logs',
+    '/opt/webstack/objectives',
 ];
 
+// ----- System Health: Reliable Flat Array for Display -----
 $system = [
-  'Uptime' => run('uptime -p'),
-  'Disk Usage' => run('df -h / | tail -1'),
-  'Memory' => run('free -h | grep Mem'),
-  'Top CPU' => run('ps -eo pid,comm,%cpu --sort=-%cpu | head -n 6'),
-  'Top RAM' => run('ps -eo pid,comm,%mem --sort=-%mem | head -n 6'),
-  'Nginx' => run('systemctl is-active nginx'),
+    'Uptime'     => run('uptime -p'),
+    'Disk Usage' => run('df -h / | tail -1'),
+    'Memory'     => run('free -h | grep Mem'),
+    'Top CPU'    => run('ps -eo pid,comm,%cpu --sort=-%cpu | head -n 6'),
+    'Top RAM'    => run('ps -eo pid,comm,%mem --sort=-%mem | head -n 6'),
+    'Nginx'      => run('systemctl is-active nginx'),
 ];
 
-$cert_path = '/etc/letsencrypt/live/www.ktp.digital/fullchain.pem';
-$cert_expiry = file_exists($cert_path)
-  ? run("openssl x509 -enddate -noout -in $cert_path 2>/dev/null | cut -d= -f2")
-  : 'No SSL certificate found.';
+// ----- Memory Stats (Labeled & Tooltipped) -----
+$mem_raw = $system['Memory'];
+$mem_labels = ['total' => 'Total RAM', 'used' => 'Used', 'free' => 'Free', 'shared' => 'Shared', 'buff/cache' => 'Buffers/Cache', 'available' => 'Available'];
+$mem_values = [];
+if (preg_match('/Mem:\s+([\d\w\.]+)\s+([\d\w\.]+)\s+([\d\w\.]+)\s+([\d\w\.]+)\s+([\d\w\.]+)\s+([\d\w\.]+)/', $mem_raw, $matches)) {
+    $mem_values = [
+        'Total RAM' => $matches[1],
+        'Used' => $matches[2],
+        'Free' => $matches[3],
+        'Shared' => $matches[4],
+        'Buffers/Cache' => $matches[5],
+        'Available' => $matches[6],
+    ];
+}
 
-$ssh_fingerprints = run("find ~/.ssh -name '*.pub' -exec ssh-keygen -lf {} \\; 2>/dev/null");
-$firewall_status = run("ufw status 2>/dev/null || iptables -L 2>/dev/null");
+// ----- SSL Certbot: Status, Domains, Expiry -----
+$cert_path = '/etc/letsencrypt/live/ww2.ktp.digital/fullchain.pem';
+$ssl_msg = '';
+$ssl_domains = [];
+if (file_exists($cert_path)) {
+    $raw_exp = run("openssl x509 -enddate -noout -in $cert_path 2>/dev/null");
+    $raw_dns = run("openssl x509 -text -noout -in $cert_path 2>/dev/null | grep DNS:");
+    if (preg_match('/notAfter=(.+)/', $raw_exp, $m)) {
+        $expiry = strtotime($m[1]);
+        $now = time();
+        $days = floor(($expiry - $now) / 86400);
+        $dns = [];
+        if (preg_match('/DNS:([^\n]+)/', $raw_dns, $dns_m)) {
+            $dns = array_map('trim', explode(',', str_replace('DNS:', '', $dns_m[0])));
+        }
+        $ssl_domains = $dns;
+        if ($days >= 0) {
+            $ssl_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>SSL valid</span> &ndash; Expires <b>" .
+                date('Y-m-d', $expiry) . "</b> <span class='text-gray-500'>(in $days day" . ($days == 1 ? '' : 's') . ")</span>";
+        } else {
+            $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>SSL expired</span> &ndash; Expired <b>" .
+                date('Y-m-d', $expiry) . "</b> <span class='text-red-500'>(expired " . abs($days) . " day" . (abs($days) == 1 ? '' : 's') . " ago)</span><br>" .
+                "<span class='text-xs text-red-400'>Renew with <code>certbot renew</code> and reload your webserver.</span>";
+        }
+    } else {
+        $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>SSL certificate: parsing error</span>";
+    }
+} else {
+    $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>No SSL certificate found for ww2.ktp.digital</span><br>
+    <span class='text-xs text-red-400'>To enable HTTPS, run <code>certbot --nginx -d www.ktp.digital -d ww2.ktp.digital</code></span>";
+}
+
+// ----- UFW Firewall Status -----
+$ufw = run("ufw status 2>/dev/null");
+if ($ufw && stripos($ufw, 'Status: active') !== false) {
+    $firewall_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>Firewall is ACTIVE</span>";
+    // Parse allowed ports
+    $allowed_ports = [];
+    foreach (explode("\n", $ufw) as $line) {
+        if (preg_match('/^(\d+\/\w+)\s+ALLOW/', $line, $port_m)) {
+            $allowed_ports[] = $port_m[1];
+        }
+    }
+    if ($allowed_ports) {
+        $firewall_msg .= ". Open: <b>" . implode(', ', $allowed_ports) . "</b>";
+    }
+} elseif ($ufw && stripos($ufw, 'inactive') !== false) {
+    $firewall_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>Firewall is INACTIVE</span>";
+} else {
+    $firewall_msg = "Firewall status could not be determined.<br><span class='text-xs text-gray-500'>Try <code>ufw status</code> on the server.</span>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,6 +157,16 @@ $firewall_status = run("ufw status 2>/dev/null || iptables -L 2>/dev/null");
   <meta name="description" content="Live deployment and system metadata viewer.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .tooltip { position: relative; cursor: pointer; }
+    .tooltip .tooltip-text {
+      visibility: hidden; opacity:0; transition: opacity 0.2s;
+      background: #222; color: #fff; padding: 4px 8px; border-radius: 4px; position: absolute; z-index: 100;
+      left: 50%; top: 100%; transform: translateX(-50%);
+      font-size: 11px; white-space: pre-line; min-width: 110px;
+    }
+    .tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+  </style>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
 <div class="max-w-6xl mx-auto p-6">
@@ -91,10 +175,10 @@ $firewall_status = run("ufw status 2>/dev/null || iptables -L 2>/dev/null");
   <section class="mb-10">
     <h2 class="text-xl font-semibold mb-2">Webstack Info</h2>
     <ul class="list-disc pl-6">
-      <li><strong>Version:</strong> <?= $version ?></li>
+      <li><strong>Version:</strong> <?= htmlspecialchars($version) ?></li>
       <li><strong>Latest Snapshot:</strong> <?= htmlspecialchars($latest_snap) ?></li>
       <?php foreach ($dirs as $d): ?>
-        <li><strong><?= basename($d) ?> Last Modified:</strong> <?= date('Y-m-d H:i:s', filemtime($d)) ?></li>
+        <li><strong><?= htmlspecialchars(basename($d)) ?> Last Modified:</strong> <?= date('Y-m-d H:i:s', filemtime($d)) ?></li>
       <?php endforeach; ?>
     </ul>
   </section>
@@ -112,7 +196,33 @@ $firewall_status = run("ufw status 2>/dev/null || iptables -L 2>/dev/null");
       </div>
       <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
         <h3 class="font-bold mb-2">🧠 Memory</h3>
-        <p><?= htmlspecialchars($system['Memory']) ?></p>
+        <?php if ($mem_values): ?>
+        <ul class="text-xs">
+          <?php foreach ($mem_values as $label => $val): ?>
+            <li>
+              <span class="font-semibold"><?= htmlspecialchars($label) ?></span>:
+              <?= htmlspecialchars($val) ?>
+              <span class="tooltip">❔
+                <span class="tooltip-text">
+                  <?php
+                    switch ($label) {
+                      case 'Total RAM': echo "Total system RAM installed."; break;
+                      case 'Used': echo "RAM currently used by apps & kernel."; break;
+                      case 'Free': echo "RAM currently not used at all."; break;
+                      case 'Shared': echo "RAM shared between processes (tmpfs, etc)."; break;
+                      case 'Buffers/Cache': echo "RAM used for disk buffering/caching (auto-managed by Linux)."; break;
+                      case 'Available': echo "Estimated RAM available for new apps (inc. cache that can be reclaimed)."; break;
+                      default: echo ""; break;
+                    }
+                  ?>
+                </span>
+              </span>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+        <?php else: ?>
+          <p><?= htmlspecialchars($system['Memory']) ?></p>
+        <?php endif; ?>
       </div>
       <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
         <h3 class="font-bold mb-2">🌐 Nginx Status</h3>
@@ -130,16 +240,22 @@ $firewall_status = run("ufw status 2>/dev/null || iptables -L 2>/dev/null");
   </section>
 
   <section class="mb-10">
-    <h2 class="text-xl font-semibold mb-2">TLS & Security</h2>
+    <h2 class="text-xl font-semibold mb-2">TLS &amp; Security</h2>
     <ul class="list-disc pl-6">
-      <li><strong>SSL Expiry:</strong> <?= $cert_expiry ?></li>
-      <li><strong>SSH Fingerprints:</strong><br><pre class="inline-block bg-gray-100 dark:bg-gray-800 p-2 rounded"><?= htmlspecialchars($ssh_fingerprints) ?></pre></li>
-      <li><strong>Firewall Status:</strong><br><pre class="inline-block bg-gray-100 dark:bg-gray-800 p-2 rounded"><?= htmlspecialchars($firewall_status) ?></pre></li>
+      <li>
+        <strong>SSL/TLS Status:</strong> <?= $ssl_msg ?>
+        <?php if ($ssl_domains): ?>
+          <br><span class="text-xs text-gray-500">Domains: <?= htmlspecialchars(implode(', ', $ssl_domains)) ?></span>
+        <?php endif; ?>
+      </li>
+      <li>
+        <strong>Firewall Status:</strong> <?= $firewall_msg ?>
+      </li>
     </ul>
   </section>
 
   <section class="mb-10">
-    <h2 class="text-xl font-semibold mb-2">Meta Tag & SEO Coverage (Live Rendered)</h2>
+    <h2 class="text-xl font-semibold mb-2">Meta Tag &amp; SEO Coverage (Live Rendered)</h2>
     <div class="overflow-x-auto rounded border border-gray-300 dark:border-gray-700">
       <table class="min-w-full text-sm">
         <thead class="bg-gray-200 dark:bg-gray-700 text-left">
@@ -147,6 +263,8 @@ $firewall_status = run("ufw status 2>/dev/null || iptables -L 2>/dev/null");
             <th class="py-1 px-2">File</th>
             <th class="py-1 px-2 text-center">Title</th>
             <th class="py-1 px-2 text-center">Meta Description</th>
+            <th class="py-1 px-2 text-center">Word Count</th>
+            <th class="py-1 px-2 text-center">HTML Size (KB)</th>
             <th class="py-1 px-2">Notes</th>
           </tr>
         </thead>
@@ -162,6 +280,8 @@ $firewall_status = run("ufw status 2>/dev/null || iptables -L 2>/dev/null");
             <td class="py-1 px-2 text-center">
               <?= $r['meta'] ? '✅' : '<span class="text-red-600 dark:text-red-400 font-bold">❌</span>' ?>
             </td>
+            <td class="py-1 px-2 text-center"><?= intval($r['wordcount']) ?></td>
+            <td class="py-1 px-2 text-center"><?= htmlspecialchars($r['size_kb']) ?></td>
             <td class="py-1 px-2 text-xs text-gray-500 dark:text-gray-400">
               <?= $r['error'] ? htmlspecialchars($r['error']) : ($r['title'] && $r['meta'] ? 'OK' : 'Missing tags') ?>
             </td>
