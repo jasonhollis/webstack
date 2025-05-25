@@ -1,4 +1,4 @@
-<?php include __DIR__."/analytics_logger.php"; ?>
+<?php include __DIR__ . "/analytics_logger.php"; ?>
 <?php
 function renderLayout($page_title, $content, $meta = '', $page_desc = '', $canonical = '', $og_image = '') {
     $version = @trim(file_get_contents(__DIR__ . '/VERSION'));
@@ -71,19 +71,21 @@ HTML;
             <div class="backdrop w-full max-w-5xl p-6 sm:p-8 rounded-xl shadow-lg text-center space-y-6">
                 <?php echo $content; ?>
                 <div class="mt-6 text-sm text-gray-200">
-                    <p><strong>Current Version:</strong> <span class="font-mono text-green-300"><?php echo htmlspecialchars($version); ?></span></p>
+                    <p><strong>Current Version:</strong> <span class="font-mono text-blue-600"><?php echo htmlspecialchars($version); ?></span></p>
                     <p class="text-xs mt-1">Last updated: <?php echo $updated; ?></p>
                 </div>
             </div>
         </main>
 
-        <footer class="mt-12 text-sm text-white/90 px-4 sm:px-0">
-            <div class="bg-black/70 backdrop-blur rounded-xl max-w-xl mx-auto py-4 px-6 text-center space-y-3 shadow-lg">
-                <div>&copy; <?php echo date("Y"); ?> KTP Digital Pty Ltd. All rights reserved.</div>
-                <div class="flex justify-center items-center gap-4 text-xs">
+        <footer class="mt-12 text-sm text-gray-900 px-4 sm:px-0">
+            <div class="bg-blue-100/90 rounded-xl max-w-xl mx-auto py-4 px-6 text-center space-y-3 shadow-lg">
+                <div>
+                    &copy; <?php echo date("Y"); ?> KTP Digital Pty Ltd. All rights reserved.
+                </div>
+                <div class="flex flex-wrap justify-center items-center gap-4 text-xs">
                     <span class="flex items-center space-x-1">
                         <a href="https://openai.com/chatgpt" target="_blank" rel="noopener noreferrer">
-                            <img src="/images/icons/chatgpt.svg" alt="ChatGPT" class="h-5 w-5" />
+                            <img src="/images/icons/chatgpt-mark.png" alt="ChatGPT" class="h-5 w-5" />
                         </a>
                         <span>Powered by GPT</span>
                     </span>
@@ -93,7 +95,15 @@ HTML;
                         </a>
                         <span>Crafted in BBEdit</span>
                     </span>
-                    <a href="/methodology.php" class="underline hover:text-white">Methodology</a>
+                    <span class="flex items-center space-x-1">
+                        <a href="https://github.com/jasonhollis/webstack" target="_blank" rel="noopener noreferrer">
+                            <img src="/images/icons/github.png" alt="GitHub" class="h-5 w-5" />
+                        </a>
+                        <span>Versioned with GitHub</span>
+                    </span>
+                    <a href="/methodology.php" class="underline hover:text-black whitespace-nowrap">
+                        Methodology
+                    </a>
                 </div>
             </div>
         </footer>

@@ -10412,3 +10412,13 @@ OBJECTIVE [v1.6.0-dev] root@ssdnodes-605e9a6080011:   * Rewrite main pages for m
 OBJECTIVE [v1.6.0-dev] root@ssdnodes-605e9a6080011: We need to really Enhance Small Biz and it needs to link to Mac Mac-Os tools, Nas, NextDNS and Tailscale. We used to say a lot about Ubiquiti and that's all gone at the moment?  We probably need a seperate page on Ubiquiti and the them of NextDNS and Tailscale need to be updated
 2025-05-25 11:41:34
 OBJECTIVE [v1.6.0-dev] root@ssdnodes-605e9a6080011: We should probably grab the icons or logos for everything as well.  With the new Ubiquiti page It's not dream machine pro there should be a section on Cloud gateways, networking and WIFI7 with a link, Security Cameras with infasys on AI cams and maybe integration with NAS and another section on Access Controls with a blurb on License plate and facial recognition
+2025-05-25 13:26:38
+OBJECTIVE [v1.6.1-dev] root@ssdnodes-605e9a6080011: OK let's work out logos/icons.  It would be great if you could give me a one liner to take care of Ubiquiti, GitHub, Tailscale, NextDNS, Qnap, and Apple to download them all into /opt/webstack/html/images/icons but that is probably a pipe dream
+2025-05-25 15:41:33
+OBJECTIVE [v1.6.1-dev] root@ssdnodes-605e9a6080011: If you want the most on-brand look:
+
+  * Get or make SVGs for all icons in one style.
+  * Batch-convert those to PNG for “bulletproof” rendering.
+  * ___Or_ inline SVGs if you want color-adaptive icons everywhere.
+2025-05-25 16:21:21
+OBJECTIVE [v1.6.1-dev] root@ssdnodes-605e9a6080011: that was fast iteration!  The hombrew Icon is questionable and I don't think enterprise clients consider ubiquiti enterprise, Apple is not automatically small business.  I worked at Dell for 5 years and wrote patents there.  I understand Windows deeply (I just hate it).  What should we do?  You are only giving the customer three paths right now.  There is nothing interesting on this page for someone with a specific problem

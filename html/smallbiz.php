@@ -20,33 +20,33 @@ ob_start();
   </ul>
   <div class="flex flex-wrap justify-center gap-5 md:gap-7 my-8">
     <a class="flex flex-col items-center bg-slate-900/90 hover:bg-green-700 transition rounded-xl p-4 w-36 shadow group no-underline text-white" href="/mac.php">
-      <img src="/images/icons/mac.png" alt="Mac" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
+      <img src="/images/icons/apple-white-forcedwhite.svg" alt="Mac" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
       <span class="font-semibold">Mac Integration</span>
     </a>
     <a class="flex flex-col items-center bg-slate-900/90 hover:bg-green-700 transition rounded-xl p-4 w-36 shadow group no-underline text-white" href="/macos-tools.php">
-      <img src="/images/icons/macos-tools.png" alt="macOS Tools" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
+      <img src="/images/icons/macos-tools-white-forcedwhite.svg" alt="macOS Tools" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
       <span class="font-semibold">macOS Tools</span>
     </a>
     <a class="flex flex-col items-center bg-slate-900/90 hover:bg-green-700 transition rounded-xl p-4 w-36 shadow group no-underline text-white" href="/nas.php">
-      <img src="/images/icons/nas.png" alt="NAS" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
+      <img src="/images/icons/qnap-white-forcedwhite.svg" alt="NAS" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
       <span class="font-semibold">NAS &amp; Storage</span>
     </a>
     <a class="flex flex-col items-center bg-slate-900/90 hover:bg-green-700 transition rounded-xl p-4 w-36 shadow group no-underline text-white" href="/ubiquiti.php">
-      <img src="/images/icons/ubiquiti.png" alt="Ubiquiti" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
+      <img src="/images/icons/ubiquiti-white-forcedwhite.svg" alt="Ubiquiti" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
       <span class="font-semibold">Ubiquiti Networks</span>
     </a>
     <a class="flex flex-col items-center bg-slate-900/90 hover:bg-green-700 transition rounded-xl p-4 w-36 shadow group no-underline text-white" href="/nextdns.php">
-      <img src="/images/icons/nextdns.png" alt="NextDNS" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
+      <img src="/images/icons/nextdns-white-forcedwhite.svg" alt="NextDNS" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
       <span class="font-semibold">NextDNS Security</span>
     </a>
     <a class="flex flex-col items-center bg-slate-900/90 hover:bg-green-700 transition rounded-xl p-4 w-36 shadow group no-underline text-white" href="/tailscale.php">
-      <img src="/images/icons/tailscale.png" alt="Tailscale" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
+      <img src="/images/icons/tailscale-white-forcedwhite.svg" alt="Tailscale" class="h-10 w-10 mb-2" onerror="this.style.display='none';">
       <span class="font-semibold">Tailscale VPN</span>
     </a>
   </div>
   <a href="/contact.php" class="inline-block my-6 px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow transition">Talk to Our Experts</a>
   <div class="bg-slate-800/80 p-5 md:p-7 rounded-lg max-w-2xl mx-auto mt-8 text-left relative">
-    <img src="/images/icons/ubiquiti.png" alt="Ubiquiti" class="absolute top-5 right-5 h-8 w-8 opacity-80" onerror="this.style.display='none';">
+    <img src="/images/icons/ubiquiti-white-forcedwhite.svg" alt="Ubiquiti" class="absolute top-5 right-5 h-8 w-8 opacity-80" onerror="this.style.display='none';">
     <div class="font-bold mb-1 text-green-300">Ubiquiti/UniFi for SMBs</div>
     <div>
       Next-generation networking—<b>Cloud Gateways, WiFi 7, and AI-powered Security Cameras</b>—with bulletproof reliability and intuitive management. Whether you need secure Wi-Fi, multi-site remote admin, or deep integration with NAS and cloud, KTP Digital deploys <b>Ubiquiti’s proven platform</b> for Australian business, including smart access controls with facial/plate recognition and advanced surveillance.
