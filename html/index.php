@@ -42,7 +42,7 @@ $content = <<<HTML
   <div class="flex justify-center gap-x-8 mt-8">
     <!-- 5: Cloud, Backup & NAS (QNAP official SVG) -->
     <a href="/cloud.php" class="bg-slate-900/80 hover:bg-cyan-600 transition rounded-xl p-5 text-white shadow text-center flex flex-col items-center w-72">
-      <img src="/images/icons/qnap.svg" class="w-12 h-12 mb-2 opacity-90" alt="Cloud, Backup & NAS" />
+      <img src="/images/icons/qnap-white-forcedwhite.svg" class="w-12 h-12 mb-2 opacity-90" alt="Cloud, Backup & NAS" />
       <div class="font-semibold mb-1">Cloud, Backup & NAS</div>
       <div class="text-xs opacity-80">Storage, backup, and recovery for peace of mind.</div>
     </a>
@@ -65,13 +65,13 @@ $content = <<<HTML
 <div class="flex justify-center gap-x-8 mt-12 mb-8">
   <!-- Small Business (Apple SVG) -->
   <a href="/smallbiz.php" class="bg-slate-900/80 hover:bg-blue-600 transition rounded-xl p-6 shadow text-center flex flex-col items-center no-underline text-white w-64">
-    <img src="/images/icons/apple.svg" class="w-12 h-12 mb-2 opacity-90" alt="Small Business" />
+    <img src="/images/icons/briefcase-white.svg" class="w-12 h-12 mb-2 opacity-90" alt="Small Business" />
     <div class="font-bold mb-1">Small Business</div>
     <div class="text-xs opacity-80">IT, cloud, security, and automation for SMBs.</div>
   </a>
   <!-- Enterprise (Ubiquiti SVG) -->
   <a href="/enterprise.php" class="bg-slate-900/80 hover:bg-blue-600 transition rounded-xl p-6 shadow text-center flex flex-col items-center no-underline text-white w-64">
-    <img src="/images/icons/ubiquiti.svg" class="w-12 h-12 mb-2 opacity-90" alt="Enterprise" />
+    <svg class="w-12 h-12 mb-2 opacity-90" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="7" r="3" fill="#89B4FA" stroke="#fff" stroke-width="2"/><circle cx="8" cy="25" r="3" fill="#fff" stroke="#fff" stroke-width="2"/><circle cx="24" cy="25" r="3" fill="#fff" stroke="#fff" stroke-width="2"/><path d="M16 10V16M16 16L8 22M16 16L24 22" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
     <div class="font-bold mb-1">Enterprise</div>
     <div class="text-xs opacity-80">Strategy, compliance, cloud, and large-scale integration.</div>
   </a>

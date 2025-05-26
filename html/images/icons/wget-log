@@ -1,0 +1,12 @@
+--2025-05-26 11:11:23--  https://cdn.simpleicons.org/symantec
+Resolving cdn.simpleicons.org (cdn.simpleicons.org)... 2606:4700:3035::ac43:d892, 2606:4700:3032::6815:564b, 104.21.86.75, ...
+Connecting to cdn.simpleicons.org (cdn.simpleicons.org)|2606:4700:3035::ac43:d892|:443... failed: No route to host.
+Connecting to cdn.simpleicons.org (cdn.simpleicons.org)|2606:4700:3032::6815:564b|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [image/svg+xml]
+Saving to: ‘symantec.svg’
+
+symantec.svg            [<=>                 ]       0  --.-KB/s               symantec.svg            [ <=>                ]    1019  --.-KB/s    in 0s      
+
+2025-05-26 11:11:25 (16.9 MB/s) - ‘symantec.svg’ saved [1019]
+
