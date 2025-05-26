@@ -7,22 +7,19 @@ function run($cmd) {
     return rtrim(shell_exec($cmd));
 }
 
-// ------- SEO/Meta coverage: live render scan instead of static -------
-$public_pages = [
-    'index.php',
-    'about.php',
-    'automation.php',
-    'contact.php',
-    'enterprise.php',
-    'mac.php',
-    'macos-tools.php',
-    'nas.php',
-    'nextdns.php',
-    'smallbiz.php',
-    'tailscale.php',
-    'methodology.php',
-];
+// ------- SEO/Meta coverage: live render scan with dynamic file list -------
 $base = 'https://www.ktp.digital/';
+// Build list of public *.php files, excluding system, admin, script, and template files.
+$public_pages = [];
+foreach (glob(__DIR__ . '/../*.php') as $f) {
+    $name = basename($f);
+    if (
+        in_array($name, ['layout.php', 'nav.php', 'Parsedown.php', 'robots.txt', 'sitemap.xml', 'VERSION']) ||
+        preg_match('/^admin|^older|^test|^index\-test|^newindex|^new_index|^_|\.bak$/i', $name)
+    ) continue;
+    $public_pages[] = $name;
+}
+sort($public_pages, SORT_STRING | SORT_FLAG_CASE);
 
 function checkMetaTags($url) {
     $html = @file_get_contents($url);

@@ -14,13 +14,6 @@ $content = <<<HTML
 <p class="text-lg mb-6">
   Slow speeds? Unreliable or weak WiFi? We deliver expert diagnosis, enterprise-grade solutions, and ongoing support for businesses and homes. Wired or wireless—your network, fixed.
 </p>
-<ul class="list-disc ml-8 mb-6">
-  <li>WiFi coverage mapping, troubleshooting &amp; upgrades</li>
-  <li>Business, home, and multi-site networking</li>
-  <li>Guest networks, VLANs, parental controls, and security</li>
-  <li>Enterprise UniFi, Ubiquiti, and mesh deployments</li>
-  <li>On-site and remote support, guaranteed results</li>
-</ul>
 <a href="/contact.php" class="inline-block bg-blue-700 hover:bg-blue-800 text-white text-lg font-semibold px-8 py-3 rounded-lg shadow-lg transition">Get Your Network Fixed</a>
 
 </div>

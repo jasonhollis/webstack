@@ -14,13 +14,6 @@ $content = <<<HTML
 <p class="text-lg mb-6">
   Need your Mac and PC systems to play nicely together? We’ll get your network, files, printers, and cloud services in sync, at home or in the office.
 </p>
-<ul class="list-disc ml-8 mb-6">
-  <li>File, printer, and network sharing (cross-platform)</li>
-  <li>Cloud service &amp; device integration (iCloud, OneDrive, Google, Dropbox)</li>
-  <li>Shared calendars, contacts, and apps</li>
-  <li>Email, remote access, and security setup</li>
-  <li>On-site &amp; remote support for all users</li>
-</ul>
 <a href="/contact.php" class="inline-block bg-blue-700 hover:bg-blue-800 text-white text-lg font-semibold px-8 py-3 rounded-lg shadow-lg transition">Make My Devices Work Together</a>
 
 </div>

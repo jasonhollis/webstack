@@ -26,13 +26,6 @@ $content = <<<HTML
     <p class="text-lg mb-4 leading-relaxed text-white">
       I’ve been working with Apple technology since the original Macintosh launch in 1984. From the first GUI to Apple Silicon, I’ve seen — and supported — every generation.
     </p>
-    <ul class="list-disc ml-6 space-y-2 text-blue-100">
-      <li>Mac OS Classic, OS X, and macOS through Sonoma</li>
-      <li>iMac, PowerMac, MacBook, Xserve, M1 & M2 systems</li>
-      <li>Automation via AppleScript, Automator, and Shortcuts</li>
-      <li>Networking, Time Machine, AFP, SMB, iCloud</li>
-      <li>Full Apple ecosystem consulting for small business</li>
-    </ul>
     <p class="mt-6 text-lg text-blue-300 italic">
       “On January 24th, Apple Computer will introduce Macintosh. And you'll see why 1984 won't be like '1984.'”
     </p>

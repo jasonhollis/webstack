@@ -2,6 +2,20 @@ User-agent: *
 Disallow: /admin/
 Disallow: /older/
 Disallow: /snapshots/
+Disallow: /bin/
+Disallow: /logs/
+Disallow: /objectives/
+Disallow: /images/
+Disallow: /css/
+Disallow: /Parsedown.php
+Disallow: /layout.php
+Disallow: /nav.php
+Disallow: /index-old.php
+Disallow: /newindex.php
+Disallow: /index-test.php
+Disallow: /ping.php
+Disallow: /*.bak
+
 Allow: /
 
 Sitemap: https://www.ktp.digital/sitemap.xml

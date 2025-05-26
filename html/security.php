@@ -14,13 +14,6 @@ $content = <<<HTML
 <p class="text-lg mb-6">
   From ransomware recovery to advanced threat prevention, we help you lock down your IT and protect your data. Cybersecurity for small business and enterprise—made simple.
 </p>
-<ul class="list-disc ml-8 mb-6">
-  <li>Ransomware prevention, detection &amp; recovery</li>
-  <li>Phishing, malware, and scam protection</li>
-  <li>Firewall, endpoint, and multi-factor security</li>
-  <li>Security awareness and compliance guidance</li>
-  <li>24/7 monitoring, alerting, and incident response</li>
-</ul>
 <a href="/contact.php" class="inline-block bg-blue-700 hover:bg-blue-800 text-white text-lg font-semibold px-8 py-3 rounded-lg shadow-lg transition">Secure My Business</a>
 
 </div>

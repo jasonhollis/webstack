@@ -14,13 +14,6 @@ $content = <<<HTML
 <p class="text-lg mb-6">
   Migrate to Microsoft 365, get rid of spam, or secure your email—without the hassle. We handle migration, setup, support, and compliance for business and personal users.
 </p>
-<ul class="list-disc ml-8 mb-6">
-  <li>Microsoft 365 setup &amp; migrations (Exchange, Google, legacy)</li>
-  <li>Spam filtering &amp; phishing protection</li>
-  <li>Email security, backups, and encryption</li>
-  <li>Shared mailboxes, calendars, and device sync</li>
-  <li>Ongoing support—never lose an email again</li>
-</ul>
 <a href="/contact.php" class="inline-block bg-blue-700 hover:bg-blue-800 text-white text-lg font-semibold px-8 py-3 rounded-lg shadow-lg transition">Fix My Email</a>
 
 </div>

@@ -15,13 +15,6 @@ $content = <<<HTML
     <h1 class="text-3xl font-extrabold">Websites & Website Services</h1>
   </div>
   <p class="text-lg mb-6">From a simple landing page to a complete, dynamic website—get it built, hosted, and supported by local experts. We handle:</p>
-  <ul class="list-disc ml-8 mb-6">
-    <li>Custom website design & development (WordPress, PHP, static, or your preferred stack)</li>
-    <li>Fast, reliable, secure Australian hosting (SSD, HTTPS, daily backups)</li>
-    <li>SEO optimization, performance tuning, analytics, and content updates</li>
-    <li>Ongoing technical support—never get stuck again</li>
-    <li>Integration with business systems (email, cloud, automation, eCommerce, CRM)</li>
-  </ul>
   <p class="mb-8">No jargon, no outsourcing—just direct, hands-on support. <a href="/contact.php" class="text-blue-700 underline hover:text-blue-900">Contact us</a> for a free review or a demo.</p>
   <a href="/contact.php" class="inline-block bg-blue-700 hover:bg-blue-800 text-white text-lg font-semibold px-8 py-3 rounded-lg shadow-lg transition">Request a Website Quote</a>
 </div>
