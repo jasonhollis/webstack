@@ -10422,3 +10422,40 @@ OBJECTIVE [v1.6.1-dev] root@ssdnodes-605e9a6080011: If you want the most on-bran
   * ___Or_ inline SVGs if you want color-adaptive icons everywhere.
 2025-05-25 16:21:21
 OBJECTIVE [v1.6.1-dev] root@ssdnodes-605e9a6080011: that was fast iteration!  The hombrew Icon is questionable and I don't think enterprise clients consider ubiquiti enterprise, Apple is not automatically small business.  I worked at Dell for 5 years and wrote patents there.  I understand Windows deeply (I just hate it).  What should we do?  You are only giving the customer three paths right now.  There is nothing interesting on this page for someone with a specific problem
+2025-05-26 09:05:52
+OBJECTIVE [v1.6.2-dev] root@ssdnodes-605e9a6080011: **Next Steps / Suggestions******
+
+  * If further visual polish is needed, iterate on card hover/gradient or landing pages.
+  * Continue this workflow for landing/service subpages: icon, branding, SEO meta polish.
+  * Leverage snapshot/restore for any high-velocity experimentation.
+2025-05-26 09:06:40 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Resume KTP Webstack dev from v1.6.1-dev.
+
+All homepage/service card icons standardized: Lucide SVGs for generic categories, official SVGs for brands (Apple, QNAP, Ubiquiti, Home Assistant).  
+
+Home Assistant icon is now a canonical SVG (home-assistant.svg), forced-white/monochrome branding enforced where needed.  
+
+Grid spacing, icon sizing, and placement are visually unified—no PNGs or mismatched icon styles remain.  
+
+Tested and rolled back modern “glass” card polish via sed one-liner; confirmed safe atomic rollback and snapshot restore with preserved `new_index.php`.  
+
+Snapshot-based file hygiene, permission fix (`chmod 644`), and workflow validated—restoration and iteration now low-risk.  
+
+**Priority:** Rapid landing page/service subpage improvements, with the same icon/branding polish, meta/SEO tune-up, and iterative deployment (EOF or one-liner only, no manual multi-step edits).
+
+Pick up with service landing page branding or card polish next.
+2025-05-26 09:06:40 AEST [append_activity] root@ssdnodes-605e9a6080011: Resume KTP Webstack dev from v1.6.1-dev.
+
+All homepage/service card icons standardized: Lucide SVGs for generic categories, official SVGs for brands (Apple, QNAP, Ubiquiti, Home Assistant).  
+
+Home Assistant icon is now a canonical SVG (home-assistant.svg), forced-white/monochrome branding enforced where needed.  
+
+Grid spacing, icon sizing, and placement are visually unified—no PNGs or mismatched icon styles remain.  
+
+Tested and rolled back modern “glass” card polish via sed one-liner; confirmed safe atomic rollback and snapshot restore with preserved `new_index.php`.  
+
+Snapshot-based file hygiene, permission fix (`chmod 644`), and workflow validated—restoration and iteration now low-risk.  
+
+**Priority:** Rapid landing page/service subpage improvements, with the same icon/branding polish, meta/SEO tune-up, and iterative deployment (EOF or one-liner only, no manual multi-step edits).
+
+Pick up with service landing page branding or card polish next.
