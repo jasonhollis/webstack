@@ -1,5 +1,4 @@
 <?php include __DIR__."/analytics_logger.php"; ?>
-<?php include __DIR__."/analytics_logger.php"; ?>
 <?php
 require 'layout.php';
 
@@ -15,6 +14,7 @@ $content = <<<HTML
   </p>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Platform & Productivity -->
     <a href="platform-automation.php" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-200">
       <h2 class="text-xl font-semibold mb-2">🖥️ Platform & Productivity</h2>
       <p class="text-gray-700 dark:text-gray-300 text-base">
@@ -22,13 +22,16 @@ $content = <<<HTML
       </p>
     </a>
 
-    <a href="home-automation.php" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-200">
-      <h2 class="text-xl font-semibold mb-2">🏡 Home & Environmental</h2>
-      <p class="text-gray-700 dark:text-gray-300 text-base">
+    <!-- Home & Environmental (Home Assistant logo centered) -->
+    <a href="home-automation.php" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-200 flex flex-col items-center">
+      <img src="/images/icons/home-assistant.svg" alt="Home Assistant logo" class="w-12 h-12 mb-3" loading="lazy" style="min-width:48px;min-height:48px;">
+      <h2 class="text-xl font-semibold mb-2 text-center">Home & Environmental</h2>
+      <p class="text-gray-700 dark:text-gray-300 text-base text-center">
         With deep expertise in Home Assistant, Fibaro, HomeKit, and smart sensors, KTP delivers rock-solid home automation for any environment.
       </p>
     </a>
 
+    <!-- Custom Logic & Agents -->
     <a href="custom-automation.php" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-200">
       <h2 class="text-xl font-semibold mb-2">🧠 Custom Logic & Agents</h2>
       <p class="text-gray-700 dark:text-gray-300 text-base">

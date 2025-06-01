@@ -10503,3 +10503,41 @@ OBJECTIVE [v1.6.3-dev] root@ssdnodes-605e9a6080011: Resume KTP Webstack dev at v
   * All admin and objectives/logs tools work headless, Markdown-based, with full compliance to the KTP Webstack project directives.
   * All service and vertical pages are ready for further automation or advanced dashboard features.
   * Baseline is clean, mobile-ready, SEO-compliant, and future-proofed for next features or automation.
+2025-06-01 14:16:31 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  🚀 **Key Changes******
+
+  * Light Theme and Layout Overhaul:  
+All main pages (index, stories, automation) now use a consistent, approachable light theme—no dark mode or backdrops—boosting readability and appeal for all audiences.
+  * Landing Page Redesign:
+    * Immediate value prop: “What Are You Trying to Fix?” section now leads with customer pain points, not features.
+    * Responsive, icon-driven solution cards link directly to service pages.
+    * Hero sections and headings use accessible font weights and sizes.
+  * Home Automation Stories (ha-stories.php):
+    * Three customer stories showcased, each with a Home Assistant-style light bulb icon.
+    * Font size and line spacing increased for maximum readability.
+    * Stories highlight real-life transformation—covering legacy integration, large property automation, and total platform migration.
+    * Responsive 3-column layout on desktop, stacking on mobile/tablet.
+  * Refactored layout.php:
+    * Accepts simple, modular $content blocks—no array or dark mode logic.
+    * Footer and nav unified site-wide.
+    * All headings/text colors fixed for light background.
+  * All SVG icons and CTA logic reviewed and updated:
+    * No more broken icons.
+    * Used inline SVG for Home Assistant light bulb (consistent with HA UI).
+    * Ensured all icons have matching alt text and class for responsive sizing.
+  * Index and all service pages made fully consistent:
+    * Fixed white text on white background in legacy card layouts.
+    * Added max-width containers and padding to maintain visual alignment.
+
+  
+
+
+🏆 **Results******
+
+  * Modern, readable, and instantly “browsable” landing experience.
+  * Clear user journeys from homepage through problem/solution cards to consult CTA.
+  * Stories page demonstrates real value, not theory—backed by real results.
+  * Codebase fully modular—future page and card changes are now rapid, safe, and maintainable.
+
+  
+2025-06-01 14:16:31 AEST [append_activity] root@ssdnodes-605e9a6080011: 

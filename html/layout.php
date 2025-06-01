@@ -1,14 +1,10 @@
-<?php include __DIR__ . "/analytics_logger.php"; ?>
 <?php
 function renderLayout($page_title, $content, $meta = '', $page_desc = '', $canonical = '', $og_image = '') {
-    $version = @trim(file_get_contents(__DIR__ . '/VERSION'));
-    $updated = date('Y-m-d H:i:s');
-
     if (!$meta && $page_desc) {
         $meta = <<<HTML
         <meta name="description" content="$page_desc" />
         <meta name="generator" content="KTP Webstack – GPT + BBEdit workflow" />
-        <meta name="keywords" content="automation, macOS, Home Assistant, GPT, HomeKit, BBEdit, PHP, Z-Wave, TailwindCSS" />
+        <meta name="keywords" content="home automation, Home Assistant, smart home, support, KTP Digital, app fatigue, security, HomeKit, Zigbee, Z-Wave" />
         <meta property="og:title" content="$page_title" />
         <meta property="og:description" content="$page_desc" />
         <meta property="og:type" content="website" />
@@ -35,46 +31,17 @@ HTML;
         <script src="https://cdn.tailwindcss.com/3.4.1"></script>
         <title><?php echo htmlspecialchars($page_title); ?></title>
         <?php echo $meta; ?>
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "name": "<?php echo htmlspecialchars($page_title); ?>",
-          "description": "<?php echo htmlspecialchars($page_desc); ?>",
-          "url": "https://www.ktp.digital<?php echo $_SERVER['REQUEST_URI']; ?>",
-          "publisher": {
-            "@type": "Organization",
-            "name": "KTP Digital",
-            "url": "https://www.ktp.digital",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://www.ktp.digital/images/ktp-logo-dark.svg"
-            }
-          }
-        }
-        </script>
         <style>
             body {
-                background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80');
-                background-size: cover;
-                background-position: center;
-            }
-            .backdrop {
-                background-color: rgba(0, 0, 0, 0.65);
+                background: #f5f8fa;
             }
         </style>
     </head>
-    <body class="min-h-screen text-white px-4 sm:px-6 pt-20 pb-8">
-        <?php include __DIR__ . '/nav.php'; ?>
+    <body class="min-h-0 text-gray-900 bg-[#f5f8fa] px-4 sm:px-6 pt-10 pb-8">
+        <?php if (file_exists(__DIR__ . '/nav.php')) include __DIR__ . '/nav.php'; ?>
 
-        <main class="flex justify-center mt-12">
-            <div class="backdrop w-full max-w-5xl p-6 sm:p-8 rounded-xl shadow-lg text-center space-y-6">
-                <?php echo $content; ?>
-                <div class="mt-6 text-sm text-gray-200">
-                    <p><strong>Current Version:</strong> <span class="font-mono text-blue-600"><?php echo htmlspecialchars($version); ?></span></p>
-                    <p class="text-xs mt-1">Last updated: <?php echo $updated; ?></p>
-                </div>
-            </div>
+        <main>
+            <?php echo $content; ?>
         </main>
 
         <footer class="mt-12 text-sm text-gray-900 px-4 sm:px-0">
