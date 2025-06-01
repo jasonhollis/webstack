@@ -77,3 +77,279 @@
 {"ts":"2025-06-01 14:13:50","ip":"103.224.53.7","page":"\/methodology.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"https:\/\/www.ktp.digital\/admin\/system_meta.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
 {"ts":"2025-06-01 14:13:50","ip":"103.224.53.7","page":"\/methodology.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"https:\/\/www.ktp.digital\/admin\/system_meta.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
 {"ts":"2025-06-01 14:13:50","ip":"103.224.53.7","page":"\/methodology.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"https:\/\/www.ktp.digital\/admin\/system_meta.php","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:35","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:35","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:35","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:35","ip":"66.96.86.109","page":"\/analytics_logger.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:35","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:35","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/cloud.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/disaster-recovery.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/email.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/ha-stories.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/home-automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/index-old.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/index.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/integration.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/mac.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/mac.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/nas.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/network.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/nextdns.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:36","ip":"66.96.86.109","page":"\/ping.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:37","ip":"66.96.86.109","page":"\/security.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:37","ip":"66.96.86.109","page":"\/smallbiz.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:37","ip":"66.96.86.109","page":"\/tailscale.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:37","ip":"66.96.86.109","page":"\/ubiquiti.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:37","ip":"66.96.86.109","page":"\/websites.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:22:37","ip":"66.96.86.109","page":"\/windows.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:29:29","ip":"103.224.53.7","page":"\/mac.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"https:\/\/www.ktp.digital\/admin\/system_meta.php","status":200,"load_time":0.0007,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:29:30","ip":"103.224.53.7","page":"\/mac.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"https:\/\/www.ktp.digital\/admin\/system_meta.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:29:31","ip":"103.224.53.7","page":"\/mac.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"https:\/\/www.ktp.digital\/admin\/system_meta.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:29:54","ip":"103.224.53.7","page":"\/macos-tools.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:29:54","ip":"103.224.53.7","page":"\/macos-tools.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:29:54","ip":"103.224.53.7","page":"\/macos-tools.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:29:56","ip":"103.224.53.7","page":"\/mac.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:30:00","ip":"103.224.53.7","page":"\/mac_older.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"-","status":200,"load_time":0.0006,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:30:00","ip":"103.224.53.7","page":"\/mac_older.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"-","status":200,"load_time":0.0007,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:33:13","ip":"103.224.53.7","page":"\/mac.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"https:\/\/www.ktp.digital\/admin\/system_meta.php","status":200,"load_time":0.0005,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/analytics_logger.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/cloud.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/disaster-recovery.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/email.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/ha-stories.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/home-automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/index-old.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/index.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/integration.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/mac.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/mac_older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/mac_older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:37","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:38","ip":"66.96.86.109","page":"\/nas.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:38","ip":"66.96.86.109","page":"\/network.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:38","ip":"66.96.86.109","page":"\/nextdns.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:38","ip":"66.96.86.109","page":"\/ping.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:38","ip":"66.96.86.109","page":"\/security.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:38","ip":"66.96.86.109","page":"\/smallbiz.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:38","ip":"66.96.86.109","page":"\/tailscale.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:38","ip":"66.96.86.109","page":"\/ubiquiti.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:38","ip":"66.96.86.109","page":"\/websites.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:34:38","ip":"66.96.86.109","page":"\/windows.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0011,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0019,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0021,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/analytics_logger.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/cloud.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/disaster-recovery.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/email.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:15","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/ha-stories.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/home-automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/index-old.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/index.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/integration.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/mac.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/mac_older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/mac_older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/nas.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/network.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/nextdns.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/ping.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/security.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/smallbiz.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/tailscale.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:16","ip":"66.96.86.109","page":"\/ubiquiti.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/websites.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/windows.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/cloud.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/disaster-recovery.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/email.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/ha-stories.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/home-automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/index-old.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:17","ip":"66.96.86.109","page":"\/index.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/integration.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/mac.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/mac_older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/mac_older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/nas.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/network.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/nextdns.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/security.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/smallbiz.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/tailscale.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/ubiquiti.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/websites.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:46:18","ip":"66.96.86.109","page":"\/windows.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:48:36","ip":"93.123.109.231","page":"\/","ua":"l9tcpid\/v1.1.0","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:48:48","ip":"103.224.53.7","page":"\/mac.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"https:\/\/www.ktp.digital\/admin\/system_meta.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 14:49:35","ip":"103.224.53.7","page":"\/ha-stories.php","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Safari\/605.1.15","referer":"https:\/\/www.ktp.digital\/admin\/system_meta.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:32:21","ip":"203.12.10.132","page":"\/ha-stories.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:32:57","ip":"203.12.10.132","page":"\/index.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"https:\/\/www.ktp.digital\/ha-stories.php","status":200,"load_time":0.0005,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:33:15","ip":"203.12.10.132","page":"\/network.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"https:\/\/www.ktp.digital\/index.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:33:29","ip":"203.12.10.132","page":"\/security.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"https:\/\/www.ktp.digital\/index.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:33:46","ip":"203.12.10.132","page":"\/automation.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"https:\/\/www.ktp.digital\/index.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:33:46","ip":"203.12.10.132","page":"\/automation.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"https:\/\/www.ktp.digital\/index.php","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:34:01","ip":"203.12.10.132","page":"\/smallbiz.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"https:\/\/www.ktp.digital\/automation.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:34:08","ip":"203.12.10.132","page":"\/enterprise.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"https:\/\/www.ktp.digital\/smallbiz.php","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:34:08","ip":"203.12.10.132","page":"\/enterprise.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"https:\/\/www.ktp.digital\/smallbiz.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:34:12","ip":"203.12.10.132","page":"\/automation.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"https:\/\/www.ktp.digital\/enterprise.php","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:34:12","ip":"203.12.10.132","page":"\/automation.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"https:\/\/www.ktp.digital\/enterprise.php","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:40:57","ip":"104.234.115.158","page":"\/","ua":"'Mozilla\/5.0 (compatible; GenomeCrawlerd\/1.0; +https:\/\/www.nokia.com\/genomecrawler)'","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 15:45:00","ip":"185.242.226.88","page":"\/","ua":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/88.0.4324.190 Safari\/537.36","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 16:03:28","ip":"43.159.152.187","page":"\/","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/13.0.3 Mobile\/15E148 Safari\/604.1","referer":"http:\/\/www.ktp.digital","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 16:04:46","ip":"66.228.53.204","page":"\/","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 13_1) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/108.0.0.0 Safari\/537.36","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 16:09:04","ip":"45.156.130.8","page":"\/","ua":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/60.0.3112.113 Safari\/537.36","referer":"http:\/\/66.96.86.109\/","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 16:11:10","ip":"203.12.10.132","page":"\/ha-stories.php","ua":"Mozilla\/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.5 Mobile\/15E148 Safari\/604.1","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 16:11:22","ip":"203.12.10.132","page":"\/","ua":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 16:11:31","ip":"203.12.10.132","page":"\/index.php","ua":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36","referer":"https:\/\/www.ktp.digital\/","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 16:11:33","ip":"203.12.10.132","page":"\/index.php","ua":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36","referer":"https:\/\/www.ktp.digital\/index.php","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 16:12:33","ip":"52.230.164.186","page":"\/index.php","ua":"Mozilla\/5.0 AppleWebKit\/537.36 (KHTML, like Gecko); compatible; ChatGPT-User\/1.0; +https:\/\/openai.com\/bot","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 16:41:34","ip":"3.132.23.201","page":"\/","ua":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) Chrome\/126.0.0.0 Safari\/537.36","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 16:58:18","ip":"185.180.140.103","page":"\/","ua":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/60.0.3112.113 Safari\/537.36","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 18:10:02","ip":"124.223.193.173","page":"\/","ua":"Mozilla\/5.0 (Linux; Android 10; LIO-AN00 Build\/HUAWEILIO-AN00; wv) MicroMessenger Weixin QQ AppleWebKit\/537.36 (KHTML, like Gecko) Version\/4.0 Chrome\/78.0.3904.62 XWEB\/2692 MMWEBSDK\/200901 Mobile Safari\/537.36","referer":"-","status":200,"load_time":0.0012,"context":"PUBLIC"}
+{"ts":"2025-06-01 18:10:02","ip":"124.223.193.173","page":"\/","ua":"Mozilla\/5.0 (Linux; Android 10; LIO-AN00 Build\/HUAWEILIO-AN00; wv) MicroMessenger Weixin QQ AppleWebKit\/537.36 (KHTML, like Gecko) Version\/4.0 Chrome\/78.0.3904.62 XWEB\/2692 MMWEBSDK\/200901 Mobile Safari\/537.36","referer":"-","status":200,"load_time":0.0005,"context":"PUBLIC"}
+{"ts":"2025-06-01 18:45:43","ip":"138.197.64.11","page":"\/","ua":"Mozilla\/5.0 (X11; Linux x86_64; rv:136.0) Gecko\/20100101 Firefox\/136.0","referer":"-","status":200,"load_time":0.0008,"context":"PUBLIC"}
+{"ts":"2025-06-01 18:45:56","ip":"66.175.216.97","page":"\/","ua":"Mozilla\/5.0 (X11; Linux x86_64) Chrome\/98.0.4758.132 Safari\/537.36","referer":"-","status":200,"load_time":0.0005,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:23:01","ip":"203.12.10.132","page":"\/","ua":"Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36 Edg\/136.0.0.0","referer":"-","status":200,"load_time":0.0005,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/analytics_logger.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/cloud.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/disaster-recovery.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/email.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/ha-stories.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/home-automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/index-old.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:05","ip":"66.96.86.109","page":"\/index.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/integration.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/mac.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/mac_older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/mac_older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/nas.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/network.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/nextdns.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/ping.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/security.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/smallbiz.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/tailscale.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/ubiquiti.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/websites.php","ua":"unknown","referer":"-","status":200,"load_time":0.0005,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:06","ip":"66.96.86.109","page":"\/windows.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/about.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/cloud.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/contact.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/disaster-recovery.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/email.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/enterprise.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/ha-stories.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/home-automation-older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/home-automation.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/index-old.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/index.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/integration.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/mac.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/mac_older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:07","ip":"66.96.86.109","page":"\/mac_older.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/macos-tools.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/methodology.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/nas.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/network.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/nextdns.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/security.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/smallbiz.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/tailscale.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/ubiquiti.php","ua":"unknown","referer":"-","status":200,"load_time":0.0003,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/websites.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}
+{"ts":"2025-06-01 19:36:08","ip":"66.96.86.109","page":"\/windows.php","ua":"unknown","referer":"-","status":200,"load_time":0.0002,"context":"PUBLIC"}

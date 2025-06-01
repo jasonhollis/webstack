@@ -10541,3 +10541,81 @@ All main pages (index, stories, automation) now use a consistent, approachable l
 
   
 2025-06-01 14:16:31 AEST [append_activity] root@ssdnodes-605e9a6080011: 
+2025-06-01 14:20:53 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Resume KTP Webstack dev with full context from v1.6.6 (see previous session), load all prior workflow, technical, and layout policies, treat this as canonical.
+2025-06-01 14:20:53 AEST [append_activity] root@ssdnodes-605e9a6080011: Resume KTP Webstack dev with full context from v1.6.6 (see previous session), load all prior workflow, technical, and layout policies, treat this as canonical.
+2025-06-01 19:29:57
+OBJECTIVE [v1.6.6] root@ssdnodes-605e9a6080011: 🟢 KTP Digital “Home Assistant Australia” Cornerstone Page
+
+Objective:  
+Replace your multiple short Home Assistant pages with one authoritative, long-form page—rich with SEO, value, testimonials, integration experience, live screenshots, and calls to action.  
+Model it on the official Home Assistant landing page (image you shared), but make it 100% local, personal, and “we’ve done this for real customers in Australia.”
+
+  
+
+
+**Recommended Page Structure******
+
+  1. Hero Section
+    * Bold headline: “Australia’s Home Assistant Experts”
+    * Sub: “Real automation. Real homes. Real results. Local support and proven delivery for every major integration.”
+    * Live screenshot or Home Assistant dashboard shot
+  2. Quick “Why Us” Bar
+    * “Over 100 real brands integrated • Decades of experience • Local support across Australia”
+  3. Integrations Grid
+    * Branded logos (Samsung, Denon, Ubiquiti, Tesla, Sonos, Philips Hue, Google, Apple, etc.)
+    * “We’ve delivered these for real customers”
+  4. Testimonials
+    * 2–4 punchy, real quotes from customers about how you saved them from “app hell”, made their home smarter, solved the impossible, etc.
+    * (“Can be anonymized or generic for now, then replaced with real names as you get permission.”)
+  5. Case Studies/Summaries
+    * Pull the best bits from your 3+ stories, but make them concise (each 1–2 paras, plus a photo or integration screenshot).
+  6. Live Screenshots
+    * Real Home Assistant UI, integrations, and device cards from your deployments.
+  7. How It Works (Features)
+    * Bullet out how your Home Assistant setups are built, secured, supported, and upgraded.
+  8. “In the Press” / Featured In / Partners
+    * Logos if available (optional).
+  9. FAQ
+    * Preempt all the common questions: “Can you do HomeKit?” “Can you support Samsung SmartThings?” “Can you automate my…” etc.
+  10. Strong Final CTA
+    * “Book a Home Automation Consultation”
+    * “Ready to get started? Talk to a local expert.”
+
+  
+
+
+**SEO Meta Example for This Cornerstone Page******
+
+  
+
+
+$page_title = "Home Assistant Integration & Automation Australia | KTP Digital";
+
+$page_desc  = "Australia's Home Assistant experts: Real-world integration with Ubiquiti, Denon HEOS, Samsung SmartThings, Google Home, Apple HomeKit, Tesla, Roborock, Sonos, Philips Hue, and more. 100% local support, proven delivery, and custom automation that works.";
+
+$page_keywords = "Home Assistant, automation, integration, Australia, KTP Digital, Ubiquiti, Denon HEOS, SmartThings, Google Home, Apple HomeKit, Tesla, Sonos, Philips Hue, Roborock, Roomba, Aeotec, Zigbee, Z-Wave, smart home, case study, testimonial, support";
+
+  
+
+
+🚀 Would You Like a Full-Page Draft?
+
+I can deliver a full, ready-to-go PHP file:
+
+  * Page title, meta, and structure all included
+  * Hero section and banners (you can replace images/logos as you wish)
+  * Placeholder testimonial and case study content you can swap out
+  * Optimized for SEO, mobile, and conversion
+
+Just say “Go—give me the full Home Assistant cornerstone page” and specify:
+
+  * Any must-have testimonial lines or case study details?
+  * Any specific logos (upload/point to local file path if you want me to reference them)?
+  * Any sections you’d want left out or made more minimal?
+
+  
+
+
+This single page can anchor your entire Home Assistant marketing.  
+Let me know how you want it—and I’ll build you a first-draft EOF file right now.

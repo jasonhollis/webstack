@@ -51,6 +51,14 @@ function checkMetaTags($url) {
         'size_kb' => $size_kb
     ];
 }
+function meta_desc_word_count($url) {
+    $html = @file_get_contents($url);
+    if ($html === false) return '';
+    if (preg_match('/<meta\s+name="description"\s+content="([^"]*)"/i', $html, $m)) {
+        return str_word_count($m[1]);
+    }
+    return '';
+}
 $meta_results = [];
 foreach ($public_pages as $file) {
     $url = $base . $file;
@@ -256,6 +264,7 @@ function seo_row_state($r) {
             <th class="py-1 px-2">File</th>
             <th class="py-1 px-2 text-center">Title</th>
             <th class="py-1 px-2 text-center">Meta Description</th>
+            <th class="py-1 px-2 text-center">Meta Desc Words</th>
             <th class="py-1 px-2 text-center">Word Count</th>
             <th class="py-1 px-2 text-center">HTML Size (KB)</th>
             <th class="py-1 px-2">Notes</th>
@@ -265,6 +274,7 @@ function seo_row_state($r) {
           <?php foreach ($meta_results as $file => $r):
               $row_state = seo_row_state($r);
               $row_class = $row_state === 'warn' ? 'warn-row' : ($row_state === 'error' ? 'error-row' : (($row_state === 'bad') ? 'error-row' : ''));
+              $meta_words = $r['meta'] ? meta_desc_word_count($base . $file) : '–';
               ?>
           <tr class="border-t dark:border-gray-800 <?= $row_class ?>">
             <td class="py-1 px-2 font-mono">
@@ -276,6 +286,7 @@ function seo_row_state($r) {
             <td class="py-1 px-2 text-center">
               <?= $r['meta'] ? '✅' : '<span class="text-red-600 dark:text-red-400 font-bold">❌</span>' ?>
             </td>
+            <td class="py-1 px-2 text-center"><?= $meta_words ?></td>
             <td class="py-1 px-2 text-center"><?= intval($r['wordcount']) ?></td>
             <td class="py-1 px-2 text-center"><?= htmlspecialchars($r['size_kb']) ?></td>
             <td class="py-1 px-2 text-xs text-gray-500 dark:text-gray-400">
