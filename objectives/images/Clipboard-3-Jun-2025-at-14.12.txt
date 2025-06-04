@@ -1,0 +1,1 @@
+Resume KTP Webstack dev at v1.6.7-dev (see last release), load all prior workflow, admin, and layout policies, treat this as canonical. Continue with PHPMailer/Office365 mail integration (troubleshooting “SMTP Error: Could not authenticate”), and ongoing improvements to the leads form, permissions, and deployment.
