@@ -1,0 +1,279 @@
+[
+    {
+        "domain": "alarmo",
+        "name": "Alarmo",
+        "logo": "https://brands.home-assistant.io/alarmo/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/alarmo/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "androidtv",
+        "name": "Androidtv",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/androidtv/"
+    },
+    {
+        "domain": "automate",
+        "name": "Automate",
+        "logo": "https://brands.home-assistant.io/automate/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/automate/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "bangolufsen",
+        "name": "Bangolufsen",
+        "logo": "https://brands.home-assistant.io/bangolufsen/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/bangolufsen/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "bluetooth",
+        "name": "Bluetooth",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/bluetooth/"
+    },
+    {
+        "domain": "denonavr",
+        "name": "Denonavr",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/denonavr/"
+    },
+    {
+        "domain": "denon_heos",
+        "name": "Denon heos",
+        "logo": "https://brands.home-assistant.io/denon_heos/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/denon_heos/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "dyson",
+        "name": "Removed",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/dyson/"
+    },
+    {
+        "domain": "enphase_envoy",
+        "name": "Enphase envoy",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/enphase_envoy/"
+    },
+    {
+        "domain": "cast",
+        "name": "Cast",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/cast/"
+    },
+    {
+        "domain": "hacs",
+        "name": "Hacs",
+        "logo": "https://brands.home-assistant.io/hacs/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/hacs/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "homekit_bridge",
+        "name": "Homekit bridge",
+        "logo": "https://brands.home-assistant.io/homekit_bridge/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/homekit_bridge/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "homekit_controller",
+        "name": "Homekit controller",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/homekit_controller/"
+    },
+    {
+        "domain": "influxdb",
+        "name": "Influxdb",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/influxdb/"
+    },
+    {
+        "domain": "ingress",
+        "name": "Ingress",
+        "logo": "https://brands.home-assistant.io/ingress/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/ingress/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "roomba",
+        "name": "Roomba",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/roomba/"
+    },
+    {
+        "domain": "ollama",
+        "name": "Ollama",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/ollama/"
+    },
+    {
+        "domain": "onvif",
+        "name": "Onvif",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/onvif/"
+    },
+    {
+        "domain": "matter",
+        "name": "Matter",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/matter/"
+    },
+    {
+        "domain": "mqtt",
+        "name": "Mqtt",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/mqtt/"
+    },
+    {
+        "domain": "music_assistant",
+        "name": "Music assistant",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/music_assistant/"
+    },
+    {
+        "domain": "oralb",
+        "name": "Oralb",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/oralb/"
+    },
+    {
+        "domain": "hue",
+        "name": "Hue",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/hue/"
+    },
+    {
+        "domain": "porsche_connect",
+        "name": "Porsche connect",
+        "logo": "https://brands.home-assistant.io/porsche_connect/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/porsche_connect/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "pushover",
+        "name": "Pushover",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/pushover/"
+    },
+    {
+        "domain": "reolink",
+        "name": "Reolink",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/reolink/"
+    },
+    {
+        "domain": "roborock",
+        "name": "Roborock",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/roborock/"
+    },
+    {
+        "domain": "samsungtv",
+        "name": "Samsungtv",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/samsungtv/"
+    },
+    {
+        "domain": "sensibo",
+        "name": "Sensibo",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/sensibo/"
+    },
+    {
+        "domain": "sony_bravia_tv",
+        "name": "Sony bravia tv",
+        "logo": "https://brands.home-assistant.io/sony_bravia_tv/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/sony_bravia_tv/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "songpal",
+        "name": "Songpal",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/songpal/"
+    },
+    {
+        "domain": "switchbot",
+        "name": "Switchbot",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/switchbot/"
+    },
+    {
+        "domain": "systemmonitor",
+        "name": "Systemmonitor",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/systemmonitor/"
+    },
+    {
+        "domain": "tesla_custom",
+        "name": "Tesla custom",
+        "logo": "https://brands.home-assistant.io/tesla_custom/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/tesla_custom/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "thread",
+        "name": "Thread",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/thread/"
+    },
+    {
+        "domain": "tuya",
+        "name": "Tuya",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/tuya/"
+    },
+    {
+        "domain": "unifi_access",
+        "name": "Unifi access",
+        "logo": "https://brands.home-assistant.io/unifi_access/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/unifi_access/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "unifi",
+        "name": "Unifi",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/unifi/"
+    },
+    {
+        "domain": "unifiprotect",
+        "name": "Unifiprotect",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/unifiprotect/"
+    },
+    {
+        "domain": "upnp",
+        "name": "Upnp",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/upnp/"
+    },
+    {
+        "domain": "waste_collection_schedule",
+        "name": "Waste collection schedule",
+        "logo": "https://brands.home-assistant.io/waste_collection_schedule/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/waste_collection_schedule/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "xiaomi_ble",
+        "name": "Xiaomi ble",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/xiaomi_ble/"
+    },
+    {
+        "domain": "xiaomi_miot",
+        "name": "Xiaomi miot",
+        "logo": "https://brands.home-assistant.io/xiaomi_miot/icon.svg",
+        "url": "https://www.home-assistant.io/integrations/xiaomi_miot/",
+        "error": "Failed to load docs"
+    },
+    {
+        "domain": "zwave_js",
+        "name": "Zwave js",
+        "logo": "https://www.home-assistant.io/images/default-social.png",
+        "url": "https://www.home-assistant.io/integrations/zwave_js/"
+    }
+]
