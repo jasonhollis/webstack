@@ -1,0 +1,16 @@
+{
+  "homekit_controller": "homekit",
+  "unifi_protect": "unifiprotect",
+  "tesla_custom": null,
+  "androidtv_remote": "androidtv",
+  "porsche_connect": "porsche",
+  "heos": "denon_heos",
+  "denonavr": "denon_avr",
+  "roomba": "irobot",
+  "xiaomi_miot": "xiaomi_miot_auto",
+  "oralb": "oral_b",
+  "systemmonitor": "system_monitor",
+  "homekit_bridge": "homekit",
+  "mqtt": "mqtt",
+  "pushover": "pushover"
+}

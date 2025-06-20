@@ -1,54 +1,69 @@
 <?php
-// integration_grid_test.php
-$page_title = "Integration Grid Test – KTP Webstack";
-$json_file = __DIR__ . '/data/ha_integrations.json';
+require_once __DIR__ . '/layout.php';
+
+$page_title = 'Integration Grid Test – KTP Webstack';
+
+// Load integrations
+$json_file    = __DIR__ . '/data/ha_integrations.json';
+$icon_dir     = __DIR__ . '/images/icons';
+$fallback_icon = '/images/icons/home-assistant.svg';
 $integrations = [];
-if (file_exists($json_file)) {
-    $integrations = json_decode(file_get_contents($json_file), true);
+if ( file_exists( $json_file ) ) {
+    $integrations = json_decode( file_get_contents( $json_file ), true );
 }
+$integration_count = count( $integrations );
+
+// Build page description (also used for meta description)
+$page_desc = "Live data from ha_integrations.json ({$integration_count} integrations)";
+
 ob_start();
 ?>
+    <h1 class="text-4xl font-bold text-center">Integration Grid Test</h1>
+    <p class="mt-2 text-center text-gray-600"><?= htmlspecialchars( $page_desc ) ?></p>
 
-<style>
-  body { background: #f7fafc; font-family: system-ui, sans-serif; }
-  .integration-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 2rem; max-width: 1100px; margin: 40px auto; }
-  .integration-card { background: #fff; border-radius: 1rem; box-shadow: 0 2px 12px 0 rgba(80,80,120,0.08); display: flex; flex-direction: column; align-items: center; padding: 1.3rem 1rem 1rem 1rem; }
-  .integration-card img { height: 60px; width: 60px; margin-bottom: 0.6rem; border-radius: 0.5rem; box-shadow: 0 2px 8px 0 rgba(80,80,120,0.04); background: #fff; object-fit: contain; }
-  .integration-card span { font-size: 0.98rem; font-weight: 500; color: #374151; text-align: center; }
-  .integration-card a { color: #2563eb; text-decoration: underline; font-size: 0.84rem; margin-top: 0.2rem; }
-</style>
+    <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
+    <?php foreach ( $integrations as $item ) :
+        $domain   = $item['domain'];
+        $name     = $item['name'];
+        $docs_url = $item['url'];
 
-<h1 style="text-align:center; font-size:2rem; font-weight:700; margin-top:2rem;">Integration Grid Test</h1>
-<p style="text-align:center;">Live data from ha_integrations.json (<?= count($integrations) ?> integrations)</p>
-
-<div class="integration-grid">
-<?php
-$fallback_icon = '/images/brand/generic.svg'; // Use your custom fallback if you want
-
-foreach ($integrations as $item) {
-    $label = htmlspecialchars($item['name']);
-    $icon_url = htmlspecialchars($item['logo']);
-    $domain = htmlspecialchars($item['domain']);
-    $docs_url = htmlspecialchars($item['url']);
-    // If icon is missing or default-social.png, use fallback
-    if (
-        !$icon_url ||
-        strpos($icon_url, 'default-social.png') !== false ||
-        strpos($icon_url, 'default-og.png') !== false
-    ) {
-        $icon_url = $fallback_icon;
-    }
-    echo <<<HTML
-    <div class="integration-card">
-      <img src="{$icon_url}" alt="{$label} Logo" onerror="this.src='{$fallback_icon}'"/>
-      <span>{$label}</span>
-      <a href="{$docs_url}" target="_blank">HA Docs</a>
+        // pick the correct icon file or fallback
+        $svg_path = "{$icon_dir}/{$domain}.svg";
+        $png_path = "{$icon_dir}/{$domain}.png";
+        if ( file_exists( $svg_path ) ) {
+            $icon_url = "/images/icons/{$domain}.svg";
+        } elseif ( file_exists( $png_path ) ) {
+            $icon_url = "/images/icons/{$domain}.png";
+        } else {
+            $icon_url = $fallback_icon;
+            error_log( "Missing icon for domain: {$domain}" );
+        }
+    ?>
+        <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-6 flex flex-col items-center">
+            <img
+                src="<?= htmlspecialchars( $icon_url ) ?>"
+                alt="<?= htmlspecialchars( $name ) ?> logo"
+                class="h-20 w-20 object-contain mb-4"
+                onerror="this.src='<?= htmlspecialchars( $fallback_icon ) ?>'"
+            />
+            <span class="text-center text-base font-medium text-gray-900"><?= htmlspecialchars( $name ) ?></span>
+            <a
+                href="<?= htmlspecialchars( $docs_url ) ?>"
+                target="_blank"
+                class="mt-2 text-xs text-blue-600 underline"
+            >HA Docs</a>
+        </div>
+    <?php endforeach; ?>
     </div>
-HTML;
-}
-?>
-</div>
-
 <?php
-echo ob_get_clean();
-?>
+$content = ob_get_clean();
+
+// Render the full page
+echo renderLayout(
+    $page_title,
+    $content,
+    /* $meta = */ '',
+    /* $page_desc = */ $page_desc,
+    /* $canonical = */ '',
+    /* $og_image = */ ''
+);

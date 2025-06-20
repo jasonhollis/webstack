@@ -1,0 +1,30 @@
+Starting HA icon fetch at Thu Jun 19 03:46:33 PM AEST 2025
+Fetching androidtv... OK
+Fetching bang_olufsen... OK
+Fetching bluetooth... OK
+Fetching cast... OK
+Fetching enphase_envoy... OK
+Fetching homekit... OK
+Fetching hue... OK
+Fetching influxdb... OK
+Fetching matter... OK
+Fetching mqtt... OK
+Fetching music_assistant... OK
+Fetching ollama... OK
+Fetching onvif... OK
+Fetching pushover... OK
+Fetching reolink... OK
+Fetching roborock... OK
+Fetching samsungtv... OK
+Fetching sensibo... OK
+Fetching songpal... OK
+Fetching sonos... OK
+Fetching switchbot... OK
+Fetching thread... OK
+Fetching tuya... OK
+Fetching unifi... OK
+Fetching unifiprotect... OK
+Fetching upnp... OK
+Fetching xiaomi_ble... OK
+Fetching zwave_js... OK
+Fetch complete at Thu Jun 19 03:46:50 PM AEST 2025. Log written to /opt/webstack/logs/ha_icon_fetch_20250619-154633.log

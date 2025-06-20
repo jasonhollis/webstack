@@ -1,0 +1,82 @@
+[
+  {
+    "src": "https://brands.home-assistant.io/_/alexa/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/esphome/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/google_assistant/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/cast/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/homekit/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/tradfri/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/knx/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/leviton_z_wave/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/lutron_caseta/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/matter/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/mqtt/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/hue/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/plex/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/shelly/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/smartthings/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/sonos/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/zwave_js/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://brands.home-assistant.io/_/zha/icon.png",
+    "alt": ""
+  },
+  {
+    "src": "https://www.home-assistant.io/images/footer-logo-text.svg",
+    "alt": "Home Assistant"
+  },
+  {
+    "src": "https://www.home-assistant.io/images/frontpage/netlify.svg",
+    "alt": "Deploys by Netlify Badge"
+  }
+]

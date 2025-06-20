@@ -1,0 +1,170 @@
+[
+  {
+    "domain": "androidtv",
+    "name": "Android TV Remote",
+    "url": "https://www.home-assistant.io/integrations/androidtv/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "bang_olufsen",
+    "name": "Bang & Olufsen",
+    "url": "https://www.home-assistant.io/integrations/bang_olufsen/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "bluetooth",
+    "name": "Bluetooth",
+    "url": "https://www.home-assistant.io/integrations/bluetooth/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "cast",
+    "name": "Google Cast",
+    "url": "https://www.home-assistant.io/integrations/cast/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "enphase_envoy",
+    "name": "Enphase Envoy",
+    "url": "https://www.home-assistant.io/integrations/enphase_envoy/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "homekit",
+    "name": "HomeKit",
+    "url": "https://www.home-assistant.io/integrations/homekit/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "hue",
+    "name": "Philips Hue",
+    "url": "https://www.home-assistant.io/integrations/hue/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "influxdb",
+    "name": "InfluxDB",
+    "url": "https://www.home-assistant.io/integrations/influxdb/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "matter",
+    "name": "Matter",
+    "url": "https://www.home-assistant.io/integrations/matter/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "mqtt",
+    "name": "MQTT",
+    "url": "https://www.home-assistant.io/integrations/mqtt/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "music_assistant",
+    "name": "Music Assistant",
+    "url": "https://www.home-assistant.io/integrations/music_assistant/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "ollama",
+    "name": "Ollama",
+    "url": "https://www.home-assistant.io/integrations/ollama/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "onvif",
+    "name": "ONVIF",
+    "url": "https://www.home-assistant.io/integrations/onvif/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "pushover",
+    "name": "Pushover",
+    "url": "https://www.home-assistant.io/integrations/pushover/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "reolink",
+    "name": "Reolink",
+    "url": "https://www.home-assistant.io/integrations/reolink/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "roborock",
+    "name": "Roborock",
+    "url": "https://www.home-assistant.io/integrations/roborock/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "samsungtv",
+    "name": "Samsung Smart TV",
+    "url": "https://www.home-assistant.io/integrations/samsungtv/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "sensibo",
+    "name": "Sensibo",
+    "url": "https://www.home-assistant.io/integrations/sensibo/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "sonos",
+    "name": "Sonos",
+    "url": "https://www.home-assistant.io/integrations/sonos/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "songpal",
+    "name": "Sony Songpal",
+    "url": "https://www.home-assistant.io/integrations/songpal/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "switchbot",
+    "name": "SwitchBot Bluetooth",
+    "url": "https://www.home-assistant.io/integrations/switchbot/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "thread",
+    "name": "Thread",
+    "url": "https://www.home-assistant.io/integrations/thread/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "tuya",
+    "name": "Tuya",
+    "url": "https://www.home-assistant.io/integrations/tuya/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "unifi",
+    "name": "Unifi Network",
+    "url": "https://www.home-assistant.io/integrations/unifi/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "unifiprotect",
+    "name": "Unifi Protect",
+    "url": "https://www.home-assistant.io/integrations/unifiprotect/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "upnp",
+    "name": "UPnP/IGD",
+    "url": "https://www.home-assistant.io/integrations/upnp/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "xiaomi_ble",
+    "name": "Xiaomi BLE",
+    "url": "https://www.home-assistant.io/integrations/xiaomi_ble/",
+    "logo": "/images/brand/generic.svg"
+  },
+  {
+    "domain": "zwave_js",
+    "name": "Z-Wave",
+    "url": "https://www.home-assistant.io/integrations/zwave_js/",
+    "logo": "/images/brand/generic.svg"
+  }
+]
