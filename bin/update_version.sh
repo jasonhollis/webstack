@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
 # update_version.sh — KTP Webstack (SAFE, FAILURE-AWARE, LOG-PRESERVING)
 # All errors routed via /opt/webstack/bin/failure.sh
@@ -10,10 +11,18 @@ SNAPSHOT_SCRIPT="/opt/webstack/bin/snapshot_webstack.sh"
 LOG_FILE="/opt/webstack/logs/deploy_webhook.log"
 FAILURE_SH="/opt/webstack/bin/failure.sh"
 
-cd "$REPO_DIR" || { "$FAILURE_SH" "update_version.sh" "Could not cd to $REPO_DIR"; exit 1; }
+cd "$REPO_DIR" \
+  || { "$FAILURE_SH" "update_version.sh" "Could not cd to $REPO_DIR"; exit 1; }
 
-# Accept version from argument or prompt
-if [[ -n "$1" ]]; then
+# read current (old) version
+if [[ -f "$VERSION_FILE" ]]; then
+  OLD_VERSION="$(<"$VERSION_FILE")"
+else
+  OLD_VERSION="unknown"
+fi
+
+# Accept new version from argument or prompt
+if [[ -n "${1:-}" ]]; then
   NEW_VERSION="$1"
 else
   read -p "🔢 Enter new version (e.g. v1.4.9-dev): " NEW_VERSION
@@ -24,23 +33,25 @@ if [[ -z "$NEW_VERSION" ]]; then
   exit 1
 fi
 
-# GIT ADD/COMMIT/PUSH (Fail = abort and notify)
-git add -A || { "$FAILURE_SH" "update_version.sh" "git add failed"; exit 1; }
-git commit -m "⬆️ Version bump: $NEW_VERSION" || { "$FAILURE_SH" "update_version.sh" "git commit failed"; exit 1; }
-git push || { "$FAILURE_SH" "update_version.sh" "git push failed"; exit 1; }
+# SNAPSHOT the OLD version before we change anything
+bash "$SNAPSHOT_SCRIPT" "$OLD_VERSION" \
+  || { "$FAILURE_SH" "update_version.sh" "snapshot_webstack.sh failed for old version $OLD_VERSION"; exit 1; }
+
+# GIT ADD/COMMIT/PUSH (fail = abort and notify)
+git add -A \
+  || { "$FAILURE_SH" "update_version.sh" "git add failed"; exit 1; }
+git commit -m "⬆️ Version bump: $NEW_VERSION" \
+  || { "$FAILURE_SH" "update_version.sh" "git commit failed"; exit 1; }
+git push \
+  || { "$FAILURE_SH" "update_version.sh" "git push failed"; exit 1; }
 
 # GIT TAG (annotated) and push
-git tag -a "$NEW_VERSION" -m "Version $NEW_VERSION" || { "$FAILURE_SH" "update_version.sh" "git tag failed"; exit 1; }
-git push origin "$NEW_VERSION" || { "$FAILURE_SH" "update_version.sh" "git tag push failed"; exit 1; }
+git tag -a "$NEW_VERSION" -m "Version $NEW_VERSION" \
+  || { "$FAILURE_SH" "update_version.sh" "git tag failed"; exit 1; }
+git push origin "$NEW_VERSION" \
+  || { "$FAILURE_SH" "update_version.sh" "git tag push failed"; exit 1; }
 
-# SNAPSHOT backup (Fail = abort and notify)
-bash "$SNAPSHOT_SCRIPT" "$NEW_VERSION"
-if [[ $? -ne 0 ]]; then
-  "$FAILURE_SH" "update_version.sh" "snapshot_webstack.sh failed for $NEW_VERSION"
-  exit 1
-fi
-
-# ONLY if both git+snapshot succeed, update VERSION & create new log files
+# Now update the VERSION file and preserve logs
 echo "$NEW_VERSION" > "$VERSION_FILE"
 echo "[$(date '+%F %T')] Version updated to $NEW_VERSION" >> "$LOG_FILE"
 
@@ -50,9 +61,9 @@ touch "$ITERATION_FILE" "$OBJECTIVE_FILE"
 chown root:www-data "$ITERATION_FILE" "$OBJECTIVE_FILE"
 chmod 664 "$ITERATION_FILE" "$OBJECTIVE_FILE"
 
-echo "✅ Version $NEW_VERSION deployed, committed, tagged, pushed, snapshotted, and logs preserved."
+echo "✅ Version $NEW_VERSION deployed, committed, tagged, pushed, snapshotted old version, and logs preserved."
 
-# Optionally, add a Pushover deploy success notification here if desired
+# Optional: notify on success
 /opt/webstack/bin/notify_pushover.sh "Webstack updated to $NEW_VERSION"
 
 exit 0

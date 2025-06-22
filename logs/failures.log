@@ -3,3 +3,10 @@
 [2025-06-22 17:48:33 AEST][fetch_extra_icons.sh] Could not fetch any logo for sony_bravia_tv
 [2025-06-22 17:48:37 AEST][fetch_extra_icons.sh] Could not fetch any logo for zigbee2mqtt
 [2025-06-22 17:48:38 AEST][fetch_extra_icons.sh] Landing page did not reference new icons
+[2025-06-22 18:14:52 AEST][fetch_extra_icons] zigbee2mqtt fetch failed
+[2025-06-22 18:17:06 AEST][fetch_ha_icons] Z2M icon failed
+[2025-06-22 18:17:45 AEST][fetch_extra_icons] zigbee2mqtt icon fetch failed
+[2025-06-22 18:19:38 AEST][fetch_extra_icons] zigbee2mqtt fetch failed
+[2025-06-22 18:20:17 AEST][fetch_ha_icons] sony_bravia_tv fetch failed
+[2025-06-22 18:20:28 AEST][fetch_ha_icons] zigbee2mqtt fetch failed
+[2025-06-22 18:33:31 AEST][fetch_ha_icons.sh] Failed fetching icon for sony_bravia_tv
