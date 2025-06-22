@@ -1,170 +1,293 @@
 [
   {
-    "domain": "androidtv",
+    "domain": "alarmo",
+    "name": "Alarmo",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://github.com/nielsfaber/alarmo"
+  },
+  {
+    "domain": "androidtv_remote",
     "name": "Android TV Remote",
-    "url": "https://www.home-assistant.io/integrations/androidtv/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/androidtv_remote/"
+  },
+  {
+    "domain": "automate",
+    "name": "Automate Pulse Hub v2",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://github.com/sillyfrog/Automate-Pulse-v2"
   },
   {
     "domain": "bang_olufsen",
     "name": "Bang & Olufsen",
-    "url": "https://www.home-assistant.io/integrations/bang_olufsen/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/bang_olufsen/"
   },
   {
     "domain": "bluetooth",
     "name": "Bluetooth",
-    "url": "https://www.home-assistant.io/integrations/bluetooth/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/bluetooth/"
   },
   {
     "domain": "cast",
     "name": "Google Cast",
-    "url": "https://www.home-assistant.io/integrations/cast/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/cast/"
+  },
+  {
+    "domain": "denonavr",
+    "name": "Denon AVR Network Receivers",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/denonavr/"
+  },
+  {
+    "domain": "heos",
+    "name": "Denon HEOS",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/heos/"
   },
   {
     "domain": "enphase_envoy",
     "name": "Enphase Envoy",
-    "url": "https://www.home-assistant.io/integrations/enphase_envoy/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/enphase_envoy/"
   },
   {
-    "domain": "homekit",
-    "name": "HomeKit",
-    "url": "https://www.home-assistant.io/integrations/homekit/",
-    "logo": "/images/brand/generic.svg"
+    "domain": "hacs",
+    "name": "HACS",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/hacs/"
   },
   {
-    "domain": "hue",
-    "name": "Philips Hue",
-    "url": "https://www.home-assistant.io/integrations/hue/",
-    "logo": "/images/brand/generic.svg"
+    "domain": "homekit_bridge",
+    "name": "HomeKit Bridge",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/homekit/"
+  },
+  {
+    "domain": "homekit_controller",
+    "name": "HomeKit Device",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/homekit_controller/"
   },
   {
     "domain": "influxdb",
     "name": "InfluxDB",
-    "url": "https://www.home-assistant.io/integrations/influxdb/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/influxdb/"
   },
   {
-    "domain": "matter",
-    "name": "Matter",
-    "url": "https://www.home-assistant.io/integrations/matter/",
-    "logo": "/images/brand/generic.svg"
+    "domain": "ingress",
+    "name": "Ingress",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://github.com/lovelylain/hass_ingress"
   },
   {
-    "domain": "mqtt",
-    "name": "MQTT",
-    "url": "https://www.home-assistant.io/integrations/mqtt/",
-    "logo": "/images/brand/generic.svg"
-  },
-  {
-    "domain": "music_assistant",
-    "name": "Music Assistant",
-    "url": "https://www.home-assistant.io/integrations/music_assistant/",
-    "logo": "/images/brand/generic.svg"
+    "domain": "roomba",
+    "name": "iRobot Roomba and Braava",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/roomba/"
   },
   {
     "domain": "ollama",
     "name": "Ollama",
-    "url": "https://www.home-assistant.io/integrations/ollama/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/ollama/"
   },
   {
     "domain": "onvif",
     "name": "ONVIF",
-    "url": "https://www.home-assistant.io/integrations/onvif/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/onvif/"
+  },
+  {
+    "domain": "matter",
+    "name": "Matter",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/matter/"
+  },
+  {
+    "domain": "mqtt",
+    "name": "MQTT",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/mqtt/"
+  },
+  {
+    "domain": "music_assistant",
+    "name": "Music Assistant",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/music_assistant/"
+  },
+  {
+    "domain": "oralb",
+    "name": "Oral-B",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/oralb/"
+  },
+  {
+    "domain": "hue",
+    "name": "Philips Hue",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/hue/"
+  },
+  {
+    "domain": "porsche_connect",
+    "name": "Porsche Connect",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://github.com/CJNE/ha-porscheconnect"
   },
   {
     "domain": "pushover",
     "name": "Pushover",
-    "url": "https://www.home-assistant.io/integrations/pushover/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/pushover/"
   },
   {
     "domain": "reolink",
     "name": "Reolink",
-    "url": "https://www.home-assistant.io/integrations/reolink/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/reolink/"
   },
   {
     "domain": "roborock",
     "name": "Roborock",
-    "url": "https://www.home-assistant.io/integrations/roborock/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/roborock/"
   },
   {
     "domain": "samsungtv",
     "name": "Samsung Smart TV",
-    "url": "https://www.home-assistant.io/integrations/samsungtv/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/samsungtv/"
   },
   {
     "domain": "sensibo",
     "name": "Sensibo",
-    "url": "https://www.home-assistant.io/integrations/sensibo/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/sensibo/"
   },
   {
     "domain": "sonos",
     "name": "Sonos",
-    "url": "https://www.home-assistant.io/integrations/sonos/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/sonos/"
+  },
+  {
+    "domain": "sony_bravia_tv",
+    "name": "Sony Bravia TV",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/braviatv/"
   },
   {
     "domain": "songpal",
     "name": "Sony Songpal",
-    "url": "https://www.home-assistant.io/integrations/songpal/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/songpal/"
   },
   {
     "domain": "switchbot",
     "name": "SwitchBot Bluetooth",
-    "url": "https://www.home-assistant.io/integrations/switchbot/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/switchbot/"
   },
   {
-    "domain": "thread",
-    "name": "Thread",
-    "url": "https://www.home-assistant.io/integrations/thread/",
-    "logo": "/images/brand/generic.svg"
+    "domain": "systemmonitor",
+    "name": "System Monitor",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/systemmonitor/"
+  },
+  {
+    "domain": "powerwall",
+    "name": "Tesla Powerwall",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/powerwall/"
   },
   {
     "domain": "tuya",
     "name": "Tuya",
-    "url": "https://www.home-assistant.io/integrations/tuya/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/tuya/"
+  },
+  {
+    "domain": "unifi_access",
+    "name": "Unifi Access",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://github.com/imhotep/hass-unifi-access"
   },
   {
     "domain": "unifi",
     "name": "Unifi Network",
-    "url": "https://www.home-assistant.io/integrations/unifi/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/unifi/"
   },
   {
     "domain": "unifiprotect",
     "name": "Unifi Protect",
-    "url": "https://www.home-assistant.io/integrations/unifiprotect/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/unifiprotect/"
   },
   {
     "domain": "upnp",
     "name": "UPnP/IGD",
-    "url": "https://www.home-assistant.io/integrations/upnp/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/upnp/"
+  },
+  {
+    "domain": "waste_collection_schedule",
+    "name": "Waste Collection Schedule",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://github.com/mampfes/hacs_waste_collection_schedule"
   },
   {
     "domain": "xiaomi_ble",
     "name": "Xiaomi BLE",
-    "url": "https://www.home-assistant.io/integrations/xiaomi_ble/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/xiaomi_ble/"
+  },
+  {
+    "domain": "xiaomi_miio",
+    "name": "Xiaomi Miio",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/xiaomi_miio/"
+  },
+  {
+    "domain": "zha",
+    "name": "Zigbee Home Automation",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/zha/"
+  },
+  {
+    "domain": "zigbee2mqtt",
+    "name": "Zigbee2MQTT",
+    "logo": "/images/brand/generic.svg",
+    "url": "https://github.com/Koenkk/zigbee2mqtt"
   },
   {
     "domain": "zwave_js",
     "name": "Z-Wave",
-    "url": "https://www.home-assistant.io/integrations/zwave_js/",
-    "logo": "/images/brand/generic.svg"
+    "logo": "/images/brand/generic.svg",
+    "url": "https://www.home-assistant.io/integrations/zwave_js/"
+  }
+  ,{ 
+    "domain": "amazon_alexa", 
+    "name": "Amazon Alexa", 
+    "logo": "/images/brand/generic.svg", 
+    "url": "https://www.home-assistant.io/integrations/alexa/" 
+  },{ 
+    "domain": "tradfri", 
+    "name": "IKEA TRÅDFRI", 
+    "logo": "/images/brand/generic.svg", 
+    "url": "https://www.home-assistant.io/integrations/tradfri/" 
+  },{ 
+    "domain": "shelly", 
+    "name": "Shelly", 
+    "logo": "/images/brand/generic.svg", 
+    "url": "https://www.home-assistant.io/integrations/shelly/" 
+  },{ 
+    "domain": "smartthings", 
+    "name": "SmartThings", 
+    "logo": "/images/brand/generic.svg", 
+    "url": "https://www.home-assistant.io/integrations/smartthings/" 
   }
 ]

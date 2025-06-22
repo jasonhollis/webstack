@@ -90,7 +90,6 @@ function zoomImage(src) {
       ];
       foreach ($examples as list($title, $img)) : ?>
         <div class="example-img-block">
-          <span class="example-img-title"><?= htmlspecialchars($title) ?></span>
           <img src="/images/icons/<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($title) ?>" class="example-img h-28 md:h-40" onclick="zoomImage(this.src)"/>
         </div>
       <?php endforeach; ?>
@@ -103,12 +102,13 @@ function zoomImage(src) {
     $icon_dir    = __DIR__ . '/images/icons';
     $fallback    = '/images/icons/home-assistant.svg';
     $items       = file_exists($json) ? json_decode(file_get_contents($json), true) : [];
+    usort($items, function($a, $b) { return strcasecmp($a['name'], $b['name']); });
     $total       = count($items);
   ?>
   <div class="w-full max-w-6xl mx-auto mt-8">
     <div class="text-center mb-6">
       <span class="text-xl font-semibold text-gray-800">
-        We have implemented <?= $total ?> integrations including:
+        We have implemented hundreds of integrations for real customers, including:
       </span>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">

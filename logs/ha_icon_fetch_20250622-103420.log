@@ -1,0 +1,198 @@
+Starting HA icon fetch at Sun Jun 22 10:34:20 AM AEST 2025
+DEBUG: JSON_PATH="/opt/webstack/html/data/ha_integrations.json"
+DEBUG: JSON file exists.
+=== Domain: alarmo ===
+  Using slug 'alarmo'
+    Trying svg at https://brands.home-assistant.io/alarmo/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/alarmo/icon.png... OK
+=== Domain: amazon_alexa ===
+  Using slug 'alexa'
+    Trying svg at https://brands.home-assistant.io/alexa/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/alexa/icon.png... OK
+=== Domain: androidtv_remote ===
+  Using slug 'androidtv_remote'
+    Trying svg at https://brands.home-assistant.io/androidtv_remote/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/androidtv_remote/icon.png... OK
+=== Domain: automate ===
+  Using slug 'automate'
+    Trying svg at https://brands.home-assistant.io/automate/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/automate/icon.png... OK
+=== Domain: bang_olufsen ===
+  Using slug 'bang_olufsen'
+    Trying svg at https://brands.home-assistant.io/bang_olufsen/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/bang_olufsen/icon.png... OK
+=== Domain: bluetooth ===
+  Using slug 'bluetooth'
+    Trying svg at https://brands.home-assistant.io/bluetooth/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/bluetooth/icon.png... OK
+=== Domain: cast ===
+  Using slug 'cast'
+    Trying svg at https://brands.home-assistant.io/cast/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/cast/icon.png... OK
+=== Domain: denonavr ===
+  Using slug 'denonavr'
+    Trying svg at https://brands.home-assistant.io/denonavr/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/denonavr/icon.png... OK
+=== Domain: enphase_envoy ===
+  Using slug 'enphase_envoy'
+    Trying svg at https://brands.home-assistant.io/enphase_envoy/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/enphase_envoy/icon.png... OK
+=== Domain: hacs ===
+  Using slug 'hacs'
+    Trying svg at https://brands.home-assistant.io/hacs/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/hacs/icon.png... OK
+=== Domain: heos ===
+  Using slug 'heos'
+    Trying svg at https://brands.home-assistant.io/heos/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/heos/icon.png... OK
+=== Domain: homekit_bridge ===
+  Using slug 'homekit'
+    Trying svg at https://brands.home-assistant.io/homekit/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/homekit/icon.png... OK
+=== Domain: homekit_controller ===
+  Using slug 'homekit'
+    Trying svg at https://brands.home-assistant.io/homekit/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/homekit/icon.png... OK
+=== Domain: hue ===
+  Using slug 'hue'
+    Trying svg at https://brands.home-assistant.io/hue/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/hue/icon.png... OK
+=== Domain: influxdb ===
+  Using slug 'influxdb'
+    Trying svg at https://brands.home-assistant.io/influxdb/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/influxdb/icon.png... OK
+=== Domain: ingress ===
+  Using slug 'ingress'
+    Trying svg at https://brands.home-assistant.io/ingress/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/ingress/icon.png... OK
+=== Domain: matter ===
+  Using slug 'matter'
+    Trying svg at https://brands.home-assistant.io/matter/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/matter/icon.png... OK
+=== Domain: mqtt ===
+  Using slug 'mqtt'
+    Trying svg at https://brands.home-assistant.io/mqtt/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/mqtt/icon.png... OK
+=== Domain: music_assistant ===
+  Using slug 'music_assistant'
+    Trying svg at https://brands.home-assistant.io/music_assistant/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/music_assistant/icon.png... OK
+=== Domain: ollama ===
+  Using slug 'ollama'
+    Trying svg at https://brands.home-assistant.io/ollama/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/ollama/icon.png... OK
+=== Domain: onvif ===
+  Using slug 'onvif'
+    Trying svg at https://brands.home-assistant.io/onvif/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/onvif/icon.png... OK
+=== Domain: oralb ===
+  Using slug 'oralb'
+    Trying svg at https://brands.home-assistant.io/oralb/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/oralb/icon.png... OK
+=== Domain: porsche_connect ===
+  Using slug 'porscheconnect'
+    Trying svg at https://brands.home-assistant.io/porscheconnect/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/porscheconnect/icon.png... OK
+=== Domain: powerwall ===
+  Using slug 'powerwall'
+    Trying svg at https://brands.home-assistant.io/powerwall/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/powerwall/icon.png... OK
+=== Domain: pushover ===
+  Using slug 'pushover'
+    Trying svg at https://brands.home-assistant.io/pushover/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/pushover/icon.png... OK
+=== Domain: reolink ===
+  Using slug 'reolink'
+    Trying svg at https://brands.home-assistant.io/reolink/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/reolink/icon.png... OK
+=== Domain: roborock ===
+  Using slug 'roborock'
+    Trying svg at https://brands.home-assistant.io/roborock/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/roborock/icon.png... OK
+=== Domain: roomba ===
+  Using slug 'roomba'
+    Trying svg at https://brands.home-assistant.io/roomba/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/roomba/icon.png... OK
+=== Domain: samsungtv ===
+  Using slug 'samsungtv'
+    Trying svg at https://brands.home-assistant.io/samsungtv/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/samsungtv/icon.png... OK
+=== Domain: sensibo ===
+  Using slug 'sensibo'
+    Trying svg at https://brands.home-assistant.io/sensibo/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/sensibo/icon.png... OK
+=== Domain: shelly ===
+  Using slug 'shelly'
+    Trying svg at https://brands.home-assistant.io/shelly/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/shelly/icon.png... OK
+=== Domain: smartthings ===
+  Using slug 'smartthings'
+    Trying svg at https://brands.home-assistant.io/smartthings/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/smartthings/icon.png... OK
+=== Domain: songpal ===
+  Using slug 'songpal'
+    Trying svg at https://brands.home-assistant.io/songpal/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/songpal/icon.png... OK
+=== Domain: sonos ===
+  Using slug 'sonos'
+    Trying svg at https://brands.home-assistant.io/sonos/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/sonos/icon.png... OK
+=== Domain: sony_bravia_tv ===
+  Using slug 'sony-bravia-tv'
+    Trying svg at https://brands.home-assistant.io/sony-bravia-tv/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/sony-bravia-tv/icon.png... not found (exit 22)
+=== Domain: switchbot ===
+  Using slug 'switchbot'
+    Trying svg at https://brands.home-assistant.io/switchbot/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/switchbot/icon.png... OK
+=== Domain: systemmonitor ===
+  Using slug 'systemmonitor'
+    Trying svg at https://brands.home-assistant.io/systemmonitor/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/systemmonitor/icon.png... OK
+=== Domain: tradfri ===
+  Using slug 'tradfri'
+    Trying svg at https://brands.home-assistant.io/tradfri/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/tradfri/icon.png... OK
+=== Domain: tuya ===
+  Using slug 'tuya'
+    Trying svg at https://brands.home-assistant.io/tuya/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/tuya/icon.png... OK
+=== Domain: unifi ===
+  Using slug 'unifi'
+    Trying svg at https://brands.home-assistant.io/unifi/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/unifi/icon.png... OK
+=== Domain: unifi_access ===
+  Using slug 'unifi_access'
+    Trying svg at https://brands.home-assistant.io/unifi_access/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/unifi_access/icon.png... OK
+=== Domain: unifiprotect ===
+  Using slug 'unifiprotect'
+    Trying svg at https://brands.home-assistant.io/unifiprotect/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/unifiprotect/icon.png... OK
+=== Domain: upnp ===
+  Using slug 'upnp'
+    Trying svg at https://brands.home-assistant.io/upnp/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/upnp/icon.png... OK
+=== Domain: waste_collection_schedule ===
+  Using slug 'waste_collection_schedule'
+    Trying svg at https://brands.home-assistant.io/waste_collection_schedule/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/waste_collection_schedule/icon.png... OK
+=== Domain: xiaomi_ble ===
+  Using slug 'xiaomi_ble'
+    Trying svg at https://brands.home-assistant.io/xiaomi_ble/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/xiaomi_ble/icon.png... OK
+=== Domain: xiaomi_miio ===
+  Using slug 'xiaomi_miio'
+    Trying svg at https://brands.home-assistant.io/xiaomi_miio/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/xiaomi_miio/icon.png... OK
+=== Domain: zha ===
+  Using slug 'zha'
+    Trying svg at https://brands.home-assistant.io/zha/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/zha/icon.png... OK
+=== Domain: zigbee2mqtt ===
+  Fetching zigbee2mqtt icon... FAIL (curl exit 22)
+=== Domain: zwave_js ===
+  Using slug 'zwave_js'
+    Trying svg at https://brands.home-assistant.io/zwave_js/icon.svg... not found (exit 22)
+    Trying png at https://brands.home-assistant.io/zwave_js/icon.png... OK
+Fetch complete at Sun Jun 22 10:35:18 AM AEST 2025. Log written to /opt/webstack/logs/ha_icon_fetch_20250622-103420.log

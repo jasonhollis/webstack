@@ -1,0 +1,5 @@
+[2025-06-22 17:47:43 AEST][fetch_ha_icons.sh] No icon for sony_bravia_tv (tried svg+png at https://brands.home-assistant.io/sony-bravia-tv)
+[2025-06-22 17:48:01 AEST][fetch_ha_icons.sh] Failed to fetch zigbee2mqtt icon from https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/master/docs/images/logo.png
+[2025-06-22 17:48:33 AEST][fetch_extra_icons.sh] Could not fetch any logo for sony_bravia_tv
+[2025-06-22 17:48:37 AEST][fetch_extra_icons.sh] Could not fetch any logo for zigbee2mqtt
+[2025-06-22 17:48:38 AEST][fetch_extra_icons.sh] Landing page did not reference new icons
