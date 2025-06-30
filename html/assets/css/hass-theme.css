@@ -1,0 +1,45 @@
+:root {
+  --hass-primary: #03A9F4;
+  --hass-bg: #F4FAFF;
+  --hass-text: #334155;
+}
+
+/* Body & headings */
+body {
+  background-color: var(--hass-bg);
+  color: var(--hass-text);
+  font-family: 'Inter', sans-serif;
+}
+h1, .hero-title {
+  color: var(--hass-primary);
+  font-weight: 800;
+}
+
+/* Buttons & links */
+a, .btn-primary {
+  color: var(--hass-primary);
+}
+a:hover, .btn-primary:hover {
+  color: var(--hass-primary-dark);
+}
+
+/* Cards */
+.integration-logo,
+.example-img-block, .use-case {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  transition: transform .2s, box-shadow .2s;
+}
+.integration-logo:hover,
+.example-img-block:hover,
+.use-case:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+/* Hero container */
+.hero-container {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}

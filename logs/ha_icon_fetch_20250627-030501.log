@@ -1,0 +1,261 @@
+Starting HA icon fetch at Fri Jun 27 03:05:01 AM AEST 2025
+DEBUG: JSON_PATH="/opt/webstack/html/data/ha_integrations.json"
+DEBUG: JSON file exists.
+=== alarmo ===
+  Using slug 'alarmo'
+    Trying https://brands.home-assistant.io/alarmo/logo.svg ... not found
+    Trying https://brands.home-assistant.io/alarmo/logo.png ... OK
+=== amazon_alexa ===
+  Using slug 'alexa'
+    Trying https://brands.home-assistant.io/alexa/logo.svg ... not found
+    Trying https://brands.home-assistant.io/alexa/logo.png ... OK
+=== androidtv_remote ===
+  Using slug 'androidtv_remote'
+    Trying https://brands.home-assistant.io/androidtv_remote/logo.svg ... not found
+    Trying https://brands.home-assistant.io/androidtv_remote/logo.png ... OK
+=== apple_tv ===
+  Using slug 'apple_tv'
+    Trying https://brands.home-assistant.io/apple_tv/logo.svg ... not found
+    Trying https://brands.home-assistant.io/apple_tv/logo.png ... OK
+=== automate ===
+  Using slug 'automate'
+    Trying https://brands.home-assistant.io/automate/logo.svg ... not found
+    Trying https://brands.home-assistant.io/automate/logo.png ... OK
+=== bang_olufsen ===
+  Using slug 'bang_olufsen'
+    Trying https://brands.home-assistant.io/bang_olufsen/logo.svg ... not found
+    Trying https://brands.home-assistant.io/bang_olufsen/logo.png ... OK
+=== bluetooth ===
+  Using slug 'bluetooth'
+    Trying https://brands.home-assistant.io/bluetooth/logo.svg ... not found
+    Trying https://brands.home-assistant.io/bluetooth/logo.png ... OK
+=== broadlink ===
+  Using slug 'broadlink'
+    Trying https://brands.home-assistant.io/broadlink/logo.svg ... not found
+    Trying https://brands.home-assistant.io/broadlink/logo.png ... OK
+=== cast ===
+  Using slug 'cast'
+    Trying https://brands.home-assistant.io/cast/logo.svg ... not found
+    Trying https://brands.home-assistant.io/cast/logo.png ... OK
+=== denonavr ===
+  Using slug 'denonavr'
+    Trying https://brands.home-assistant.io/denonavr/logo.svg ... not found
+    Trying https://brands.home-assistant.io/denonavr/logo.png ... OK
+=== elgato_light ===
+  Using slug 'elgato_light'
+    Trying https://brands.home-assistant.io/elgato_light/logo.svg ... not found
+    Trying https://brands.home-assistant.io/elgato_light/logo.png ... not found
+=== enphase_envoy ===
+  Using slug 'enphase_envoy'
+    Trying https://brands.home-assistant.io/enphase_envoy/logo.svg ... not found
+    Trying https://brands.home-assistant.io/enphase_envoy/logo.png ... OK
+=== fully_kiosk_browser ===
+  Using slug 'fully_kiosk_browser'
+    Trying https://brands.home-assistant.io/fully_kiosk_browser/logo.svg ... not found
+    Trying https://brands.home-assistant.io/fully_kiosk_browser/logo.png ... not found
+=== glances ===
+  Using slug 'glances'
+    Trying https://brands.home-assistant.io/glances/logo.svg ... not found
+    Trying https://brands.home-assistant.io/glances/logo.png ... OK
+=== hacs ===
+  Using slug 'hacs'
+    Trying https://brands.home-assistant.io/hacs/logo.svg ... not found
+    Trying https://brands.home-assistant.io/hacs/logo.png ... OK
+=== heos ===
+  Using slug 'heos'
+    Trying https://brands.home-assistant.io/heos/logo.svg ... not found
+    Trying https://brands.home-assistant.io/heos/logo.png ... OK
+=== homekit_bridge ===
+  Using slug 'homekit'
+    Trying https://brands.home-assistant.io/homekit/logo.svg ... not found
+    Trying https://brands.home-assistant.io/homekit/logo.png ... OK
+=== homekit_controller ===
+  Using slug 'homekit'
+    Trying https://brands.home-assistant.io/homekit/logo.svg ... not found
+    Trying https://brands.home-assistant.io/homekit/logo.png ... OK
+=== hue ===
+  Using slug 'hue'
+    Trying https://brands.home-assistant.io/hue/logo.svg ... not found
+    Trying https://brands.home-assistant.io/hue/logo.png ... OK
+=== icloud ===
+  Using slug 'icloud'
+    Trying https://brands.home-assistant.io/icloud/logo.svg ... not found
+    Trying https://brands.home-assistant.io/icloud/logo.png ... OK
+=== ifttt ===
+  Using slug 'ifttt'
+    Trying https://brands.home-assistant.io/ifttt/logo.svg ... not found
+    Trying https://brands.home-assistant.io/ifttt/logo.png ... OK
+=== influxdb ===
+  Using slug 'influxdb'
+    Trying https://brands.home-assistant.io/influxdb/logo.svg ... not found
+    Trying https://brands.home-assistant.io/influxdb/logo.png ... OK
+=== ingress ===
+  Using slug 'ingress'
+    Trying https://brands.home-assistant.io/ingress/logo.svg ... not found
+    Trying https://brands.home-assistant.io/ingress/logo.png ... OK
+=== konnected_io ===
+  Using slug 'konnected_io'
+    Trying https://brands.home-assistant.io/konnected_io/logo.svg ... not found
+    Trying https://brands.home-assistant.io/konnected_io/logo.png ... not found
+=== matter ===
+  Using slug 'matter'
+    Trying https://brands.home-assistant.io/matter/logo.svg ... not found
+    Trying https://brands.home-assistant.io/matter/logo.png ... OK
+=== mqtt ===
+  Using slug 'mqtt'
+    Trying https://brands.home-assistant.io/mqtt/logo.svg ... not found
+    Trying https://brands.home-assistant.io/mqtt/logo.png ... OK
+=== music_assistant ===
+  Using slug 'music_assistant'
+    Trying https://brands.home-assistant.io/music_assistant/logo.svg ... not found
+    Trying https://brands.home-assistant.io/music_assistant/logo.png ... OK
+=== netatmo ===
+  Using slug 'netatmo'
+    Trying https://brands.home-assistant.io/netatmo/logo.svg ... not found
+    Trying https://brands.home-assistant.io/netatmo/logo.png ... OK
+=== ollama ===
+  Using slug 'ollama'
+    Trying https://brands.home-assistant.io/ollama/logo.svg ... not found
+    Trying https://brands.home-assistant.io/ollama/logo.png ... OK
+=== onvif ===
+  Using slug 'onvif'
+    Trying https://brands.home-assistant.io/onvif/logo.svg ... not found
+    Trying https://brands.home-assistant.io/onvif/logo.png ... OK
+=== openai_conversation ===
+  Using slug 'openai_conversation'
+    Trying https://brands.home-assistant.io/openai_conversation/logo.svg ... not found
+    Trying https://brands.home-assistant.io/openai_conversation/logo.png ... OK
+=== open_thread_border_router ===
+  Using slug 'open_thread_border_router'
+    Trying https://brands.home-assistant.io/open_thread_border_router/logo.svg ... not found
+    Trying https://brands.home-assistant.io/open_thread_border_router/logo.png ... not found
+=== oralb ===
+  Using slug 'oralb'
+    Trying https://brands.home-assistant.io/oralb/logo.svg ... not found
+    Trying https://brands.home-assistant.io/oralb/logo.png ... OK
+=== porsche_connect ===
+  Using slug 'porscheconnect'
+    Trying https://brands.home-assistant.io/porscheconnect/logo.svg ... not found
+    Trying https://brands.home-assistant.io/porscheconnect/logo.png ... OK
+=== powerwall ===
+  Using slug 'powerwall'
+    Trying https://brands.home-assistant.io/powerwall/logo.svg ... not found
+    Trying https://brands.home-assistant.io/powerwall/logo.png ... OK
+=== pushover ===
+  Using slug 'pushover'
+    Trying https://brands.home-assistant.io/pushover/logo.svg ... not found
+    Trying https://brands.home-assistant.io/pushover/logo.png ... OK
+=== qnap ===
+  Using slug 'qnap'
+    Trying https://brands.home-assistant.io/qnap/logo.svg ... not found
+    Trying https://brands.home-assistant.io/qnap/logo.png ... OK
+=== reolink ===
+  Using slug 'reolink'
+    Trying https://brands.home-assistant.io/reolink/logo.svg ... not found
+    Trying https://brands.home-assistant.io/reolink/logo.png ... OK
+=== ring ===
+  Using slug 'ring'
+    Trying https://brands.home-assistant.io/ring/logo.svg ... not found
+    Trying https://brands.home-assistant.io/ring/logo.png ... OK
+=== roborock ===
+  Using slug 'roborock'
+    Trying https://brands.home-assistant.io/roborock/logo.svg ... not found
+    Trying https://brands.home-assistant.io/roborock/logo.png ... OK
+=== roomba ===
+  Using slug 'roomba'
+    Trying https://brands.home-assistant.io/roomba/logo.svg ... not found
+    Trying https://brands.home-assistant.io/roomba/logo.png ... OK
+=== samsungtv ===
+  Using slug 'samsungtv'
+    Trying https://brands.home-assistant.io/samsungtv/logo.svg ... not found
+    Trying https://brands.home-assistant.io/samsungtv/logo.png ... OK
+=== sensibo ===
+  Using slug 'sensibo'
+    Trying https://brands.home-assistant.io/sensibo/logo.svg ... not found
+    Trying https://brands.home-assistant.io/sensibo/logo.png ... OK
+=== shelly ===
+  Using slug 'shelly'
+    Trying https://brands.home-assistant.io/shelly/logo.svg ... not found
+    Trying https://brands.home-assistant.io/shelly/logo.png ... OK
+=== smartthings ===
+  Using slug 'smartthings'
+    Trying https://brands.home-assistant.io/smartthings/logo.svg ... not found
+    Trying https://brands.home-assistant.io/smartthings/logo.png ... OK
+=== smlight_slzb ===
+  Using slug 'smlight_slzb'
+    Trying https://brands.home-assistant.io/smlight_slzb/logo.svg ... not found
+    Trying https://brands.home-assistant.io/smlight_slzb/logo.png ... not found
+=== songpal ===
+  Using slug 'songpal'
+    Trying https://brands.home-assistant.io/songpal/logo.svg ... not found
+    Trying https://brands.home-assistant.io/songpal/logo.png ... OK
+=== sonos ===
+  Using slug 'sonos'
+    Trying https://brands.home-assistant.io/sonos/logo.svg ... not found
+    Trying https://brands.home-assistant.io/sonos/logo.png ... OK
+=== sony_bravia_tv ===
+  Using slug 'braviatv'
+    Trying https://brands.home-assistant.io/braviatv/logo.svg ... not found
+    Trying https://brands.home-assistant.io/braviatv/logo.png ... OK
+=== switchbot ===
+  Using slug 'switchbot'
+    Trying https://brands.home-assistant.io/switchbot/logo.svg ... not found
+    Trying https://brands.home-assistant.io/switchbot/logo.png ... OK
+=== systemmonitor ===
+  Using slug 'systemmonitor'
+    Trying https://brands.home-assistant.io/systemmonitor/logo.svg ... not found
+    Trying https://brands.home-assistant.io/systemmonitor/logo.png ... OK
+=== tailscale ===
+  Using slug 'tailscale'
+    Trying https://brands.home-assistant.io/tailscale/logo.svg ... not found
+    Trying https://brands.home-assistant.io/tailscale/logo.png ... OK
+=== tradfri ===
+  Using slug 'tradfri'
+    Trying https://brands.home-assistant.io/tradfri/logo.svg ... not found
+    Trying https://brands.home-assistant.io/tradfri/logo.png ... OK
+=== tuya ===
+  Using slug 'tuya'
+    Trying https://brands.home-assistant.io/tuya/logo.svg ... not found
+    Trying https://brands.home-assistant.io/tuya/logo.png ... OK
+=== unifi ===
+  Using slug 'unifi'
+    Trying https://brands.home-assistant.io/unifi/logo.svg ... not found
+    Trying https://brands.home-assistant.io/unifi/logo.png ... OK
+=== unifi_access ===
+  Using slug 'unifi_access'
+    Trying https://brands.home-assistant.io/unifi_access/logo.svg ... not found
+    Trying https://brands.home-assistant.io/unifi_access/logo.png ... OK
+=== unifiprotect ===
+  Using slug 'unifiprotect'
+    Trying https://brands.home-assistant.io/unifiprotect/logo.svg ... not found
+    Trying https://brands.home-assistant.io/unifiprotect/logo.png ... OK
+=== upnp ===
+  Using slug 'upnp'
+    Trying https://brands.home-assistant.io/upnp/logo.svg ... not found
+    Trying https://brands.home-assistant.io/upnp/logo.png ... OK
+=== waste_collection_schedule ===
+  Using slug 'waste_collection_schedule'
+    Trying https://brands.home-assistant.io/waste_collection_schedule/logo.svg ... not found
+    Trying https://brands.home-assistant.io/waste_collection_schedule/logo.png ... OK
+=== withings ===
+  Using slug 'withings'
+    Trying https://brands.home-assistant.io/withings/logo.svg ... not found
+    Trying https://brands.home-assistant.io/withings/logo.png ... OK
+=== xiaomi_ble ===
+  Using slug 'xiaomi_ble'
+    Trying https://brands.home-assistant.io/xiaomi_ble/logo.svg ... not found
+    Trying https://brands.home-assistant.io/xiaomi_ble/logo.png ... OK
+=== xiaomi_miio ===
+  Using slug 'xiaomi_miio'
+    Trying https://brands.home-assistant.io/xiaomi_miio/logo.svg ... not found
+    Trying https://brands.home-assistant.io/xiaomi_miio/logo.png ... OK
+=== zha ===
+  Using slug 'zha'
+    Trying https://brands.home-assistant.io/zha/logo.svg ... not found
+    Trying https://brands.home-assistant.io/zha/logo.png ... OK
+=== zigbee2mqtt ===
+  Fetching zigbee2mqtt from its site... OK
+=== zwave_js ===
+  Using slug 'zwave_js'
+    Trying https://brands.home-assistant.io/zwave_js/logo.svg ... not found
+    Trying https://brands.home-assistant.io/zwave_js/logo.png ... OK

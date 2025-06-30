@@ -45,6 +45,9 @@ git commit -m "⬆️ Version bump: $NEW_VERSION" \
 git push \
   || { "$FAILURE_SH" "update_version.sh" "git push failed"; exit 1; }
 
++# Reload PHP-FPM to flush OPcache and pick up new templates
++systemctl reload php8.2-fpm
+
 # GIT TAG (annotated) and push
 git tag -a "$NEW_VERSION" -m "Version $NEW_VERSION" \
   || { "$FAILURE_SH" "update_version.sh" "git tag failed"; exit 1; }

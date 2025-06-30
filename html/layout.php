@@ -29,6 +29,9 @@ HTML;
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <link rel="stylesheet" href="/assets/css/hass-theme.css" />
+        <!-- Cookie banner CSS -->
+        <link rel="stylesheet" href="/assets/css/cookie-banner.css" />
         <title><?php echo htmlspecialchars($page_title); ?></title>
         <?php echo $meta; ?>
         <style>
@@ -38,12 +41,17 @@ HTML;
         </style>
     </head>
     <body class="min-h-0 text-gray-900 bg-[#f5f8fa] px-4 sm:px-6 pt-10 pb-8">
+        <!-- Cookie banner JS -->
+        <script src="/assets/js/cookie-banner.js"></script>
+
+        <!-- Site header/navigation -->
         <?php if (file_exists(__DIR__ . '/nav.php')) include __DIR__ . '/nav.php'; ?>
 
         <main>
             <?php echo $content; ?>
         </main>
 
+        <!-- Footer -->
         <footer class="mt-12 text-sm text-gray-900 px-4 sm:px-0">
             <div class="bg-blue-100/90 rounded-xl max-w-xl mx-auto py-4 px-6 text-center space-y-3 shadow-lg">
                 <div>
@@ -51,26 +59,25 @@ HTML;
                 </div>
                 <div class="flex flex-wrap justify-center items-center gap-4 text-xs">
                     <span class="flex items-center space-x-1">
-                        <a href="https://openai.com/chatgpt" target="_blank" rel="noopener noreferrer">
+                        <a href="https://openai.com/chatgpt" target="_blank" rel="noopener">
                             <img src="/images/icons/chatgpt-mark.png" alt="ChatGPT" class="h-5 w-5" />
                         </a>
                         <span>Powered by GPT</span>
                     </span>
                     <span class="flex items-center space-x-1">
-                        <a href="https://www.barebones.com/products/bbedit/" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.barebones.com/products/bbedit/" target="_blank" rel="noopener">
                             <img src="/images/icons/bbedit.png" alt="BBEdit" class="h-5 w-5" />
                         </a>
                         <span>Crafted in BBEdit</span>
                     </span>
                     <span class="flex items-center space-x-1">
-                        <a href="https://github.com/jasonhollis/webstack" target="_blank" rel="noopener noreferrer">
+                        <a href="https://github.com/jasonhollis/webstack" target="_blank" rel="noopener">
                             <img src="/images/icons/github.png" alt="GitHub" class="h-5 w-5" />
                         </a>
                         <span>Versioned with GitHub</span>
                     </span>
-                    <a href="/methodology.php" class="underline hover:text-black whitespace-nowrap">
-                        Methodology
-                    </a>
+                    <a href="/methodology.php" class="underline hover:text-black whitespace-nowrap">Methodology</a>
+                    <a href="/privacy-policy.php" class="underline hover:text-black whitespace-nowrap">Privacy Policy</a>
                 </div>
             </div>
         </footer>
