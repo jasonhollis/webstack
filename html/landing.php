@@ -1,17 +1,46 @@
 <?php
-$page_title = "Awaken your home | KTP Digital";
-$page_desc  = "Open source home automation that puts local control and privacy first. One unified dashboard for HomeKit, Google Home, Alexa, Home Assistant, and more.";
-$canonical  = "https://www.ktp.digital/landing.php";
-$og_image   = "/images/logos/KTP Logo.png";
+$page_title  = "Awaken your home | KTP Digital";
+$page_desc   = "Open source home automation that puts local control and privacy first. One unified dashboard for HomeKit, Google Home, Alexa, Home Assistant, and more.";
+$canonical   = "https://www.ktp.digital/landing.php";
+$og_image    = "/images/logos/KTP Logo.png";
 ob_start();
 ?>
 
+<!-- Import premium font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
 <style>
-  /* Hero: two-column, Home Assistant style */
+  body { font-family: 'Inter', sans-serif; }
+
+  /* Use-case marquee */
+  .usecase-marquee {
+    background: #014c6a;
+    padding: 0.5rem 0;
+    overflow: hidden;
+  }
+  .usecase-marquee .marquee-content {
+    display: flex;
+    width: 300%;
+    animation: marquee 12s linear infinite;
+  }
+  .usecase-marquee span {
+    flex: none;
+    margin: 0 1.5rem;
+    color: #c0e9ff;
+    font-weight: 700;
+    white-space: nowrap;
+    font-size: 1.25rem;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-66.666%); }
+  }
+
+  /* Hero two-column */
   .hero {
     background: #0288D1;
-    color: white;
-    padding: 6rem 1rem;
+    color: #fff;
+    padding: 4rem 1rem;
   }
   .hero-container {
     max-width: 1200px;
@@ -24,39 +53,66 @@ ob_start();
   @media (min-width: 768px) {
     .hero-container { grid-template-columns: 1fr 1fr; }
   }
+
   .hero h1 {
-    font-size: 4rem;
-    font-weight: 800;
-    line-height: 1.1;
+    font-size: 20rem;           /* 5× previous 4rem */
+    font-weight: 900;
+    line-height: 1;
     margin-bottom: 1rem;
   }
   .hero p {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    max-width: 600px;
+    font-size: 2.5rem;          /* larger, bold sub-heading */
+    font-weight: 700;
+    line-height: 1.4;
+    max-width: 700px;
     margin-bottom: 2rem;
+    color: #d0eaff;
   }
-  .hero .btn-primary {
-    background: white;
+  .btn-primary {
+    background: #fff;
     color: #0288D1;
-    font-weight: 600;
-    padding: .75rem 1.5rem;
-    border-radius: .5rem;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
     text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: background .2s;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    transition: background 0.2s;
   }
-  .hero .btn-primary:hover {
-    background: #f0f0f0;
+  .btn-primary:hover {
+    background: #e8f6ff;
   }
   .hero-image img {
     width: 100%;
-    border-radius: 1rem;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    border-radius: 1.5rem;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.25);
     object-fit: cover;
   }
 </style>
 
+<script>
+function zoomImage(src) {
+  window.open(src, '_blank');
+}
+</script>
+
+<!-- marquee above hero -->
+<div class="usecase-marquee">
+  <div class="marquee-content">
+    <?php
+      $cases = [
+        'Gate Automation','Garage Doors','Smart Locks','Security Cameras',
+        'Lighting Control','Automated Blinds','Heating & AC','Home Entertainment',
+        'Voice Control','Irrigation','Network Monitoring','TV & Media'
+      ];
+      $loop = array_merge($cases, $cases, $cases);
+      foreach ($loop as $c) {
+        echo "<span>{$c}</span>";
+      }
+    ?>
+  </div>
+</div>
+
+<!-- Hero section -->
 <div class="hero">
   <div class="hero-container">
     <div>
@@ -65,7 +121,9 @@ ob_start();
       <a href="/lead_form.php" class="btn-primary">Get Started</a>
     </div>
     <div class="hero-image">
-      <img src="/images/icons/customer1.png" alt="Home Assistant dashboard screenshot">
+      <a href="/images/icons/customer1.png" target="_blank" rel="noopener noreferrer">
+        <img src="/images/icons/customer1.png" alt="Home Assistant dashboard screenshot" />
+      </a>
     </div>
   </div>
 </div>
@@ -105,22 +163,24 @@ ob_start();
   $items    = file_exists($json) ? json_decode(file_get_contents($json), true) : [];
   usort($items, function($a, $b) { return strcasecmp($a['name'], $b['name']); });
 ?>
-<div class="w-full max-w-6xl mx-auto mt-8 pb-12">
+<div id="integrations" class="w-full max-w-6xl mx-auto mt-8 pb-12">
   <div class="text-center mb-6">
     <span class="text-xl font-semibold text-gray-800">
       We have implemented hundreds of integrations for real customers, including:
     </span>
   </div>
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-    <?php foreach ($items as $item):
-      $domain = $item['domain']; $name = $item['name']; $url = $item['url'];
-      $svg  = "{$icon_dir}/{$domain}.svg";
-      $png  = "{$icon_dir}/{$domain}.png";
-      $icon = file_exists($svg)
-            ? "/images/icons/{$domain}.svg"
-            : (file_exists($png)
-               ? "/images/icons/{$domain}.png"
-               : $fallback);
+    <?php foreach ($items as $item): 
+      $domain = $item['domain'];
+      $name   = $item['name'];
+      $url    = $item['url'];
+      $svg    = "{$icon_dir}/{$domain}.svg";
+      $png    = "{$icon_dir}/{$domain}.png";
+      $icon   = file_exists($svg) 
+                ? "/images/icons/{$domain}.svg" 
+                : (file_exists($png) 
+                    ? "/images/icons/{$domain}.png" 
+                    : $fallback);
     ?>
       <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-6 flex flex-col items-center">
         <img src="<?= htmlspecialchars($icon) ?>"
@@ -128,8 +188,7 @@ ob_start();
              class="h-20 w-20 object-contain mb-4"
              onerror="this.src='<?= $fallback ?>'" />
         <span class="text-center text-base font-medium text-gray-900"><?= htmlspecialchars($name) ?></span>
-        <a href="<?= htmlspecialchars($url) ?>" target="_blank"
-           class="mt-2 text-xs text-blue-600 underline">HA Docs</a>
+        <a href="<?= htmlspecialchars($url) ?>" target="_blank" class="mt-2 text-xs text-blue-600 underline">HA Docs</a>
       </div>
     <?php endforeach; ?>
   </div>
