@@ -10627,3 +10627,27 @@ IMAGE-LOG [v1.6.7] root@ssdnodes-605e9a6080011: Clipboard-3-Jun-2025-at-14.12.tx
 2025-06-04 10:09:08 AEST [activity] invoked by root@ssdnodes-605e9a6080011
   RAW:  Resume KTP Webstack dev at v1.6.7-dev (see last release summary), load all prior workflow, admin, and layout policies, treat this as canonical. Continue with Home Automation lead form improvements, Mailgun/PHPMailer delivery, Australian data validation, and any pending integrations. Start with the latest EOF `lead_form.php` and all recent fixes.
 2025-06-04 10:09:08 AEST [append_activity] root@ssdnodes-605e9a6080011: Resume KTP Webstack dev at v1.6.7-dev (see last release summary), load all prior workflow, admin, and layout policies, treat this as canonical. Continue with Home Automation lead form improvements, Mailgun/PHPMailer delivery, Australian data validation, and any pending integrations. Start with the latest EOF `lead_form.php` and all recent fixes.
+2025-07-13 14:16:26 AEST [activity] invoked by root@ssdnodes-605e9a6080011
+  RAW:  Would you like to:
+
+  * 🔐 Add HSTS or security headers?
+  * 🐘 Install a database (e.g. MariaDB or PostgreSQL)?
+  * 🔧 Start wiring up a real app?
+  * 🧪 Write a PHP info page for quick environment checks?
+
+You’ve got a clean, modern LEMP stack live — ready for whatever’s next.
+2025-07-13 14:16:26 AEST [append_activity] root@ssdnodes-605e9a6080011: Would you like to:
+
+  * 🔐 Add HSTS or security headers?
+  * 🐘 Install a database (e.g. MariaDB or PostgreSQL)?
+  * 🔧 Start wiring up a real app?
+  * 🧪 Write a PHP info page for quick environment checks?
+
+You’ve got a clean, modern LEMP stack live — ready for whatever’s next.
+2025-07-13 14:25:04
+OBJECTIVE [v1.7.3] root@ssdnodes-605e9a6080011: Would you like to:
+
+  * 🔐 Add HSTS or security headers?
+  * 🐘 Install a database (e.g. MariaDB or PostgreSQL)?
+  * 🔧 Start wiring up a real app?
+  * 🧪 Write a PHP info page for quick environment checks?

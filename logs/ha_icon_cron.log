@@ -5594,3 +5594,711 @@ not found
 not found
     Trying https://brands.home-assistant.io/zwave_js/logo.png ... OK
 Fetch complete at Sun Jul 13 03:06:19 AM AEST 2025. Log written to /opt/webstack/logs/ha_icon_fetch_20250713-030501.log
+=== EXTRA icon for sony_bravia_tv ===
+  skip, have sony-bravia-tv
+=== EXTRA icon for zigbee2mqtt ===
+  skip, have zigbee2mqtt
+-rw-r--r-- 1 root root 17409 Jun 21 19:17 /opt/webstack/html/images/icons/sony-bravia-tv.png
+-rw-r--r-- 1 root root 83057 Jun 30 03:06 /opt/webstack/html/images/icons/zigbee2mqtt.png
+Starting HA icon fetch at Mon Jul 14 03:05:01 AM AEST 2025
+DEBUG: JSON_PATH="/opt/webstack/html/data/ha_integrations.json"
+DEBUG: JSON file exists.
+=== alarmo ===
+  Using slug 'alarmo'
+    Trying https://brands.home-assistant.io/alarmo/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/alarmo/logo.png ... OK
+=== androidtv_remote ===
+  Using slug 'androidtv_remote'
+    Trying https://brands.home-assistant.io/androidtv_remote/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/androidtv_remote/logo.png ... OK
+=== automate ===
+  Using slug 'automate'
+    Trying https://brands.home-assistant.io/automate/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/automate/logo.png ... OK
+=== bang_olufsen ===
+  Using slug 'bang_olufsen'
+    Trying https://brands.home-assistant.io/bang_olufsen/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/bang_olufsen/logo.png ... OK
+=== bluetooth ===
+  Using slug 'bluetooth'
+    Trying https://brands.home-assistant.io/bluetooth/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/bluetooth/logo.png ... OK
+=== cast ===
+  Using slug 'cast'
+    Trying https://brands.home-assistant.io/cast/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/cast/logo.png ... OK
+=== denonavr ===
+  Using slug 'denonavr'
+    Trying https://brands.home-assistant.io/denonavr/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/denonavr/logo.png ... OK
+=== dyson ===
+  Using slug 'dyson'
+    Trying https://brands.home-assistant.io/dyson/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/dyson/logo.png ... curl: (22) The requested URL returned error: 404
+not found
+=== enphase_envoy ===
+  Using slug 'enphase_envoy'
+    Trying https://brands.home-assistant.io/enphase_envoy/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/enphase_envoy/logo.png ... OK
+=== hacs ===
+  Using slug 'hacs'
+    Trying https://brands.home-assistant.io/hacs/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/hacs/logo.png ... OK
+=== heos ===
+  Using slug 'heos'
+    Trying https://brands.home-assistant.io/heos/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/heos/logo.png ... OK
+=== homekit_bridge ===
+  Using slug 'homekit'
+    Trying https://brands.home-assistant.io/homekit/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/homekit/logo.png ... OK
+=== homekit_controller ===
+  Using slug 'homekit'
+    Trying https://brands.home-assistant.io/homekit/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/homekit/logo.png ... OK
+=== hue ===
+  Using slug 'hue'
+    Trying https://brands.home-assistant.io/hue/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/hue/logo.png ... OK
+=== influxdb ===
+  Using slug 'influxdb'
+    Trying https://brands.home-assistant.io/influxdb/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/influxdb/logo.png ... OK
+=== ingress ===
+  Using slug 'ingress'
+    Trying https://brands.home-assistant.io/ingress/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/ingress/logo.png ... OK
+=== matter ===
+  Using slug 'matter'
+    Trying https://brands.home-assistant.io/matter/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/matter/logo.png ... OK
+=== mqtt ===
+  Using slug 'mqtt'
+    Trying https://brands.home-assistant.io/mqtt/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/mqtt/logo.png ... OK
+=== music_assistant ===
+  Using slug 'music_assistant'
+    Trying https://brands.home-assistant.io/music_assistant/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/music_assistant/logo.png ... OK
+=== ollama ===
+  Using slug 'ollama'
+    Trying https://brands.home-assistant.io/ollama/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/ollama/logo.png ... OK
+=== onvif ===
+  Using slug 'onvif'
+    Trying https://brands.home-assistant.io/onvif/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/onvif/logo.png ... OK
+=== oralb ===
+  Using slug 'oralb'
+    Trying https://brands.home-assistant.io/oralb/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/oralb/logo.png ... OK
+=== porsche_connect ===
+  Using slug 'porscheconnect'
+    Trying https://brands.home-assistant.io/porscheconnect/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/porscheconnect/logo.png ... OK
+=== pushover ===
+  Using slug 'pushover'
+    Trying https://brands.home-assistant.io/pushover/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/pushover/logo.png ... OK
+=== reolink ===
+  Using slug 'reolink'
+    Trying https://brands.home-assistant.io/reolink/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/reolink/logo.png ... OK
+=== roborock ===
+  Using slug 'roborock'
+    Trying https://brands.home-assistant.io/roborock/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/roborock/logo.png ... OK
+=== roomba ===
+  Using slug 'roomba'
+    Trying https://brands.home-assistant.io/roomba/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/roomba/logo.png ... OK
+=== samsungtv ===
+  Using slug 'samsungtv'
+    Trying https://brands.home-assistant.io/samsungtv/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/samsungtv/logo.png ... OK
+=== sensibo ===
+  Using slug 'sensibo'
+    Trying https://brands.home-assistant.io/sensibo/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/sensibo/logo.png ... OK
+=== songpal ===
+  Using slug 'songpal'
+    Trying https://brands.home-assistant.io/songpal/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/songpal/logo.png ... OK
+=== sonos ===
+  Using slug 'sonos'
+    Trying https://brands.home-assistant.io/sonos/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/sonos/logo.png ... OK
+=== sony_bravia_tv ===
+  Using slug 'braviatv'
+    Trying https://brands.home-assistant.io/braviatv/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/braviatv/logo.png ... OK
+=== switchbot ===
+  Using slug 'switchbot'
+    Trying https://brands.home-assistant.io/switchbot/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/switchbot/logo.png ... OK
+=== systemmonitor ===
+  Using slug 'systemmonitor'
+    Trying https://brands.home-assistant.io/systemmonitor/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/systemmonitor/logo.png ... OK
+=== tesla_custom ===
+  Using slug 'tesla_custom'
+    Trying https://brands.home-assistant.io/tesla_custom/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/tesla_custom/logo.png ... OK
+=== thread ===
+  Using slug 'thread'
+    Trying https://brands.home-assistant.io/thread/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/thread/logo.png ... OK
+=== tuya ===
+  Using slug 'tuya'
+    Trying https://brands.home-assistant.io/tuya/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/tuya/logo.png ... OK
+=== unifi ===
+  Using slug 'unifi'
+    Trying https://brands.home-assistant.io/unifi/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/unifi/logo.png ... OK
+=== unifi_access ===
+  Using slug 'unifi_access'
+    Trying https://brands.home-assistant.io/unifi_access/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/unifi_access/logo.png ... OK
+=== unifiprotect ===
+  Using slug 'unifiprotect'
+    Trying https://brands.home-assistant.io/unifiprotect/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/unifiprotect/logo.png ... OK
+=== upnp ===
+  Using slug 'upnp'
+    Trying https://brands.home-assistant.io/upnp/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/upnp/logo.png ... OK
+=== waste_collection_schedule ===
+  Using slug 'waste_collection_schedule'
+    Trying https://brands.home-assistant.io/waste_collection_schedule/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/waste_collection_schedule/logo.png ... OK
+=== xiaomi_ble ===
+  Using slug 'xiaomi_ble'
+    Trying https://brands.home-assistant.io/xiaomi_ble/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/xiaomi_ble/logo.png ... OK
+=== xiaomi_miot ===
+  Using slug 'xiaomi_miot'
+    Trying https://brands.home-assistant.io/xiaomi_miot/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/xiaomi_miot/logo.png ... OK
+=== zwave_js ===
+  Using slug 'zwave_js'
+    Trying https://brands.home-assistant.io/zwave_js/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/zwave_js/logo.png ... OK
+Fetch complete at Mon Jul 14 03:06:02 AM AEST 2025. Log written to /opt/webstack/logs/ha_icon_fetch_20250714-030501.log
+=== EXTRA icon for sony_bravia_tv ===
+  skip, have sony-bravia-tv
+=== EXTRA icon for zigbee2mqtt ===
+  skip, have zigbee2mqtt
+-rw-r--r-- 1 root root 17409 Jun 21 19:17 /opt/webstack/html/images/icons/sony-bravia-tv.png
+-rw-r--r-- 1 root root 83057 Jun 30 03:06 /opt/webstack/html/images/icons/zigbee2mqtt.png
+Starting HA icon fetch at Tue Jul 15 03:05:01 AM AEST 2025
+DEBUG: JSON_PATH="/opt/webstack/html/data/ha_integrations.json"
+DEBUG: JSON file exists.
+=== alarmo ===
+  Using slug 'alarmo'
+    Trying https://brands.home-assistant.io/alarmo/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/alarmo/logo.png ... OK
+=== androidtv_remote ===
+  Using slug 'androidtv_remote'
+    Trying https://brands.home-assistant.io/androidtv_remote/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/androidtv_remote/logo.png ... OK
+=== automate ===
+  Using slug 'automate'
+    Trying https://brands.home-assistant.io/automate/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/automate/logo.png ... OK
+=== bang_olufsen ===
+  Using slug 'bang_olufsen'
+    Trying https://brands.home-assistant.io/bang_olufsen/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/bang_olufsen/logo.png ... OK
+=== bluetooth ===
+  Using slug 'bluetooth'
+    Trying https://brands.home-assistant.io/bluetooth/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/bluetooth/logo.png ... OK
+=== cast ===
+  Using slug 'cast'
+    Trying https://brands.home-assistant.io/cast/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/cast/logo.png ... OK
+=== denonavr ===
+  Using slug 'denonavr'
+    Trying https://brands.home-assistant.io/denonavr/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/denonavr/logo.png ... OK
+=== dyson ===
+  Using slug 'dyson'
+    Trying https://brands.home-assistant.io/dyson/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/dyson/logo.png ... curl: (22) The requested URL returned error: 404
+not found
+=== enphase_envoy ===
+  Using slug 'enphase_envoy'
+    Trying https://brands.home-assistant.io/enphase_envoy/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/enphase_envoy/logo.png ... OK
+=== hacs ===
+  Using slug 'hacs'
+    Trying https://brands.home-assistant.io/hacs/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/hacs/logo.png ... OK
+=== heos ===
+  Using slug 'heos'
+    Trying https://brands.home-assistant.io/heos/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/heos/logo.png ... OK
+=== homekit_bridge ===
+  Using slug 'homekit'
+    Trying https://brands.home-assistant.io/homekit/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/homekit/logo.png ... OK
+=== homekit_controller ===
+  Using slug 'homekit'
+    Trying https://brands.home-assistant.io/homekit/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/homekit/logo.png ... OK
+=== hue ===
+  Using slug 'hue'
+    Trying https://brands.home-assistant.io/hue/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/hue/logo.png ... OK
+=== influxdb ===
+  Using slug 'influxdb'
+    Trying https://brands.home-assistant.io/influxdb/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/influxdb/logo.png ... OK
+=== ingress ===
+  Using slug 'ingress'
+    Trying https://brands.home-assistant.io/ingress/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/ingress/logo.png ... OK
+=== matter ===
+  Using slug 'matter'
+    Trying https://brands.home-assistant.io/matter/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/matter/logo.png ... OK
+=== mqtt ===
+  Using slug 'mqtt'
+    Trying https://brands.home-assistant.io/mqtt/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/mqtt/logo.png ... OK
+=== music_assistant ===
+  Using slug 'music_assistant'
+    Trying https://brands.home-assistant.io/music_assistant/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/music_assistant/logo.png ... OK
+=== ollama ===
+  Using slug 'ollama'
+    Trying https://brands.home-assistant.io/ollama/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/ollama/logo.png ... OK
+=== onvif ===
+  Using slug 'onvif'
+    Trying https://brands.home-assistant.io/onvif/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/onvif/logo.png ... OK
+=== oralb ===
+  Using slug 'oralb'
+    Trying https://brands.home-assistant.io/oralb/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/oralb/logo.png ... OK
+=== porsche_connect ===
+  Using slug 'porscheconnect'
+    Trying https://brands.home-assistant.io/porscheconnect/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/porscheconnect/logo.png ... OK
+=== pushover ===
+  Using slug 'pushover'
+    Trying https://brands.home-assistant.io/pushover/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/pushover/logo.png ... OK
+=== reolink ===
+  Using slug 'reolink'
+    Trying https://brands.home-assistant.io/reolink/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/reolink/logo.png ... OK
+=== roborock ===
+  Using slug 'roborock'
+    Trying https://brands.home-assistant.io/roborock/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/roborock/logo.png ... OK
+=== roomba ===
+  Using slug 'roomba'
+    Trying https://brands.home-assistant.io/roomba/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/roomba/logo.png ... OK
+=== samsungtv ===
+  Using slug 'samsungtv'
+    Trying https://brands.home-assistant.io/samsungtv/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/samsungtv/logo.png ... OK
+=== sensibo ===
+  Using slug 'sensibo'
+    Trying https://brands.home-assistant.io/sensibo/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/sensibo/logo.png ... OK
+=== songpal ===
+  Using slug 'songpal'
+    Trying https://brands.home-assistant.io/songpal/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/songpal/logo.png ... OK
+=== sonos ===
+  Using slug 'sonos'
+    Trying https://brands.home-assistant.io/sonos/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/sonos/logo.png ... OK
+=== sony_bravia_tv ===
+  Using slug 'braviatv'
+    Trying https://brands.home-assistant.io/braviatv/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/braviatv/logo.png ... OK
+=== switchbot ===
+  Using slug 'switchbot'
+    Trying https://brands.home-assistant.io/switchbot/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/switchbot/logo.png ... OK
+=== systemmonitor ===
+  Using slug 'systemmonitor'
+    Trying https://brands.home-assistant.io/systemmonitor/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/systemmonitor/logo.png ... OK
+=== tesla_custom ===
+  Using slug 'tesla_custom'
+    Trying https://brands.home-assistant.io/tesla_custom/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/tesla_custom/logo.png ... OK
+=== thread ===
+  Using slug 'thread'
+    Trying https://brands.home-assistant.io/thread/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/thread/logo.png ... OK
+=== tuya ===
+  Using slug 'tuya'
+    Trying https://brands.home-assistant.io/tuya/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/tuya/logo.png ... OK
+=== unifi ===
+  Using slug 'unifi'
+    Trying https://brands.home-assistant.io/unifi/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/unifi/logo.png ... OK
+=== unifi_access ===
+  Using slug 'unifi_access'
+    Trying https://brands.home-assistant.io/unifi_access/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/unifi_access/logo.png ... OK
+=== unifiprotect ===
+  Using slug 'unifiprotect'
+    Trying https://brands.home-assistant.io/unifiprotect/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/unifiprotect/logo.png ... OK
+=== upnp ===
+  Using slug 'upnp'
+    Trying https://brands.home-assistant.io/upnp/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/upnp/logo.png ... OK
+=== waste_collection_schedule ===
+  Using slug 'waste_collection_schedule'
+    Trying https://brands.home-assistant.io/waste_collection_schedule/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/waste_collection_schedule/logo.png ... OK
+=== xiaomi_ble ===
+  Using slug 'xiaomi_ble'
+    Trying https://brands.home-assistant.io/xiaomi_ble/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/xiaomi_ble/logo.png ... OK
+=== xiaomi_miot ===
+  Using slug 'xiaomi_miot'
+    Trying https://brands.home-assistant.io/xiaomi_miot/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/xiaomi_miot/logo.png ... OK
+=== zwave_js ===
+  Using slug 'zwave_js'
+    Trying https://brands.home-assistant.io/zwave_js/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/zwave_js/logo.png ... OK
+Fetch complete at Tue Jul 15 03:06:18 AM AEST 2025. Log written to /opt/webstack/logs/ha_icon_fetch_20250715-030501.log
+=== EXTRA icon for sony_bravia_tv ===
+  skip, have sony-bravia-tv
+=== EXTRA icon for zigbee2mqtt ===
+  skip, have zigbee2mqtt
+-rw-r--r-- 1 root root 17409 Jun 21 19:17 /opt/webstack/html/images/icons/sony-bravia-tv.png
+-rw-r--r-- 1 root root 83057 Jun 30 03:06 /opt/webstack/html/images/icons/zigbee2mqtt.png
+Starting HA icon fetch at Wed Jul 16 03:05:01 AM AEST 2025
+DEBUG: JSON_PATH="/opt/webstack/html/data/ha_integrations.json"
+DEBUG: JSON file exists.
+=== alarmo ===
+  Using slug 'alarmo'
+    Trying https://brands.home-assistant.io/alarmo/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/alarmo/logo.png ... OK
+=== androidtv_remote ===
+  Using slug 'androidtv_remote'
+    Trying https://brands.home-assistant.io/androidtv_remote/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/androidtv_remote/logo.png ... OK
+=== automate ===
+  Using slug 'automate'
+    Trying https://brands.home-assistant.io/automate/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/automate/logo.png ... OK
+=== bang_olufsen ===
+  Using slug 'bang_olufsen'
+    Trying https://brands.home-assistant.io/bang_olufsen/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/bang_olufsen/logo.png ... OK
+=== bluetooth ===
+  Using slug 'bluetooth'
+    Trying https://brands.home-assistant.io/bluetooth/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/bluetooth/logo.png ... OK
+=== cast ===
+  Using slug 'cast'
+    Trying https://brands.home-assistant.io/cast/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/cast/logo.png ... OK
+=== denonavr ===
+  Using slug 'denonavr'
+    Trying https://brands.home-assistant.io/denonavr/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/denonavr/logo.png ... OK
+=== dyson ===
+  Using slug 'dyson'
+    Trying https://brands.home-assistant.io/dyson/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/dyson/logo.png ... curl: (22) The requested URL returned error: 404
+not found
+=== enphase_envoy ===
+  Using slug 'enphase_envoy'
+    Trying https://brands.home-assistant.io/enphase_envoy/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/enphase_envoy/logo.png ... OK
+=== hacs ===
+  Using slug 'hacs'
+    Trying https://brands.home-assistant.io/hacs/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/hacs/logo.png ... OK
+=== heos ===
+  Using slug 'heos'
+    Trying https://brands.home-assistant.io/heos/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/heos/logo.png ... OK
+=== homekit_bridge ===
+  Using slug 'homekit'
+    Trying https://brands.home-assistant.io/homekit/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/homekit/logo.png ... OK
+=== homekit_controller ===
+  Using slug 'homekit'
+    Trying https://brands.home-assistant.io/homekit/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/homekit/logo.png ... OK
+=== hue ===
+  Using slug 'hue'
+    Trying https://brands.home-assistant.io/hue/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/hue/logo.png ... OK
+=== influxdb ===
+  Using slug 'influxdb'
+    Trying https://brands.home-assistant.io/influxdb/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/influxdb/logo.png ... OK
+=== ingress ===
+  Using slug 'ingress'
+    Trying https://brands.home-assistant.io/ingress/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/ingress/logo.png ... OK
+=== matter ===
+  Using slug 'matter'
+    Trying https://brands.home-assistant.io/matter/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/matter/logo.png ... OK
+=== mqtt ===
+  Using slug 'mqtt'
+    Trying https://brands.home-assistant.io/mqtt/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/mqtt/logo.png ... OK
+=== music_assistant ===
+  Using slug 'music_assistant'
+    Trying https://brands.home-assistant.io/music_assistant/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/music_assistant/logo.png ... OK
+=== ollama ===
+  Using slug 'ollama'
+    Trying https://brands.home-assistant.io/ollama/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/ollama/logo.png ... OK
+=== onvif ===
+  Using slug 'onvif'
+    Trying https://brands.home-assistant.io/onvif/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/onvif/logo.png ... OK
+=== oralb ===
+  Using slug 'oralb'
+    Trying https://brands.home-assistant.io/oralb/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/oralb/logo.png ... OK
+=== porsche_connect ===
+  Using slug 'porscheconnect'
+    Trying https://brands.home-assistant.io/porscheconnect/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/porscheconnect/logo.png ... OK
+=== pushover ===
+  Using slug 'pushover'
+    Trying https://brands.home-assistant.io/pushover/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/pushover/logo.png ... OK
+=== reolink ===
+  Using slug 'reolink'
+    Trying https://brands.home-assistant.io/reolink/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/reolink/logo.png ... OK
+=== roborock ===
+  Using slug 'roborock'
+    Trying https://brands.home-assistant.io/roborock/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/roborock/logo.png ... OK
+=== roomba ===
+  Using slug 'roomba'
+    Trying https://brands.home-assistant.io/roomba/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/roomba/logo.png ... OK
+=== samsungtv ===
+  Using slug 'samsungtv'
+    Trying https://brands.home-assistant.io/samsungtv/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/samsungtv/logo.png ... OK
+=== sensibo ===
+  Using slug 'sensibo'
+    Trying https://brands.home-assistant.io/sensibo/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/sensibo/logo.png ... OK
+=== songpal ===
+  Using slug 'songpal'
+    Trying https://brands.home-assistant.io/songpal/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/songpal/logo.png ... OK
+=== sonos ===
+  Using slug 'sonos'
+    Trying https://brands.home-assistant.io/sonos/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/sonos/logo.png ... OK
+=== sony_bravia_tv ===
+  Using slug 'braviatv'
+    Trying https://brands.home-assistant.io/braviatv/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/braviatv/logo.png ... OK
+=== switchbot ===
+  Using slug 'switchbot'
+    Trying https://brands.home-assistant.io/switchbot/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/switchbot/logo.png ... OK
+=== systemmonitor ===
+  Using slug 'systemmonitor'
+    Trying https://brands.home-assistant.io/systemmonitor/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/systemmonitor/logo.png ... OK
+=== tesla_custom ===
+  Using slug 'tesla_custom'
+    Trying https://brands.home-assistant.io/tesla_custom/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/tesla_custom/logo.png ... OK
+=== thread ===
+  Using slug 'thread'
+    Trying https://brands.home-assistant.io/thread/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/thread/logo.png ... OK
+=== tuya ===
+  Using slug 'tuya'
+    Trying https://brands.home-assistant.io/tuya/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/tuya/logo.png ... OK
+=== unifi ===
+  Using slug 'unifi'
+    Trying https://brands.home-assistant.io/unifi/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/unifi/logo.png ... OK
+=== unifi_access ===
+  Using slug 'unifi_access'
+    Trying https://brands.home-assistant.io/unifi_access/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/unifi_access/logo.png ... OK
+=== unifiprotect ===
+  Using slug 'unifiprotect'
+    Trying https://brands.home-assistant.io/unifiprotect/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/unifiprotect/logo.png ... OK
+=== upnp ===
+  Using slug 'upnp'
+    Trying https://brands.home-assistant.io/upnp/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/upnp/logo.png ... OK
+=== waste_collection_schedule ===
+  Using slug 'waste_collection_schedule'
+    Trying https://brands.home-assistant.io/waste_collection_schedule/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/waste_collection_schedule/logo.png ... OK
+=== xiaomi_ble ===
+  Using slug 'xiaomi_ble'
+    Trying https://brands.home-assistant.io/xiaomi_ble/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/xiaomi_ble/logo.png ... OK
+=== xiaomi_miot ===
+  Using slug 'xiaomi_miot'
+    Trying https://brands.home-assistant.io/xiaomi_miot/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/xiaomi_miot/logo.png ... OK
+=== zwave_js ===
+  Using slug 'zwave_js'
+    Trying https://brands.home-assistant.io/zwave_js/logo.svg ... curl: (22) The requested URL returned error: 404
+not found
+    Trying https://brands.home-assistant.io/zwave_js/logo.png ... OK
+Fetch complete at Wed Jul 16 03:06:21 AM AEST 2025. Log written to /opt/webstack/logs/ha_icon_fetch_20250716-030501.log
