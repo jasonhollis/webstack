@@ -5,7 +5,7 @@ Disallow: /snapshots/
 Disallow: /bin/
 Disallow: /logs/
 Disallow: /objectives/
-Disallow: /images/
+# # Disallow: /images/
 Disallow: /css/
 Disallow: /Parsedown.php
 Disallow: /layout.php

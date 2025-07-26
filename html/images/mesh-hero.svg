@@ -1,0 +1,27 @@
+<!-- mesh-hero.svg (3840x900, blue/green plasma) -->
+<svg width="3840" height="900" viewBox="0 0 3840 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <defs>
+    <radialGradient id="g1" cx="70%" cy="25%" r="110%" fx="75%" fy="22%">
+      <stop offset="0%" stop-color="#37e2ef" stop-opacity="0.85"/>
+      <stop offset="45%" stop-color="#3257ff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0e102c" stop-opacity="0.9"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="32%" cy="50%" r="90%">
+      <stop offset="0%" stop-color="#48ffb4" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g3" cx="90%" cy="70%" r="60%">
+      <stop offset="0%" stop-color="#b7f4ff" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="3840" height="900" fill="url(#g1)" />
+  <ellipse cx="3100" cy="200" rx="800" ry="280" fill="url(#g2)" />
+  <ellipse cx="1000" cy="620" rx="600" ry="200" fill="url(#g3)" />
+  <path d="M0,650 Q800,820 1920,770 T3840,850 V900 H0 Z"
+        fill="#14f1c9" fill-opacity="0.14"/>
+  <path d="M0,600 Q960,700 1920,640 T3840,800 V900 H0 Z"
+        fill="#37e2ef" fill-opacity="0.13"/>
+  <path d="M0,750 Q1200,820 2500,850 T3840,870 V900 H0 Z"
+        fill="#21aaff" fill-opacity="0.08"/>
+</svg>
