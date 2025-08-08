@@ -42,8 +42,8 @@ git add -A \
   || { "$FAILURE_SH" "update_version.sh" "git add failed"; exit 1; }
 git commit -m "⬆️ Version bump: $NEW_VERSION" \
   || { "$FAILURE_SH" "update_version.sh" "git commit failed"; exit 1; }
-git push \
-  || { "$FAILURE_SH" "update_version.sh" "git push failed"; exit 1; }
+git push 2>/dev/null \
+  || echo "⚠️ Warning: git push failed (likely no upstream). Continuing locally..."
 
 # Reload PHP-FPM to flush OPcache and pick up new templates
 systemctl reload php8.2-fpm
@@ -51,8 +51,8 @@ systemctl reload php8.2-fpm
 # GIT TAG (annotated) and push
 git tag -a "$NEW_VERSION" -m "Version $NEW_VERSION" \
   || { "$FAILURE_SH" "update_version.sh" "git tag failed"; exit 1; }
-git push origin "$NEW_VERSION" \
-  || { "$FAILURE_SH" "update_version.sh" "git tag push failed"; exit 1; }
+git push origin "$NEW_VERSION" 2>/dev/null \
+  || echo "⚠️ Warning: git tag push failed (likely no upstream). Tag created locally."
 
 # Now update the VERSION file and preserve logs
 echo "$NEW_VERSION" > "$VERSION_FILE"
