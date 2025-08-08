@@ -15,10 +15,12 @@ echo "[$TS][$CONTEXT] $DETAILS" >> "$LOG"
 # Send Pushover alert (subject to available creds)
 if [[ -n "$PUSHOVER_USER" && -n "$PUSHOVER_TOKEN" ]]; then
   curl -s \
+    --connect-timeout 5 \
+    --max-time 10 \
     -F "token=$PUSHOVER_TOKEN" \
     -F "user=$PUSHOVER_USER" \
     -F "title=Webstack FAILURE: $CONTEXT" \
     -F "message=$DETAILS" \
     -F "sound=$SOUND" \
-    https://api.pushover.net/1/messages.json > /dev/null
+    https://api.pushover.net/1/messages.json > /dev/null 2>&1 || true
 fi
