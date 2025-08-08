@@ -130,6 +130,22 @@ When making changes, verify:
 - Legacy scripts in `/opt/webstack/bin/` being phased out
 - Version tracking system (v1.7.5) will be replaced with modern CI/CD
 
+## Important Workflow Rules
+
+### File Editing Best Practices
+**CRITICAL: Always edit files in place - NEVER create multiple versions**
+- Edit existing files directly rather than creating v2, v3, v4 versions
+- The version control system (`/opt/webstack/bin/update_version.sh`) handles version management
+- Creating multiple file versions causes confusion and breaks the established workflow
+- Example: Edit `premium-landing.php` directly, don't create `premium-landing-v2.php`
+
+### Version Management System
+- The project uses a sophisticated version control system via `update_version.sh`
+- This script handles version bumps, git commits, tagging, and iteration logs
+- Current version is tracked in `/opt/webstack/html/VERSION`
+- Objectives for each version are in `/opt/webstack/objectives/`
+- The system automatically creates markdown-based iteration logs
+
 ## Development Priorities
 
 ### Immediate Focus
@@ -143,6 +159,7 @@ When making changes, verify:
 - Build new components alongside legacy code
 - Test thoroughly before replacing production features
 - Keep professional appearance throughout transition
+- **ALWAYS edit files in place - the version system handles tracking**
 
 ## Important Business Notes
 - This is a LIVE revenue-generating website - test all changes carefully

@@ -724,3 +724,4 @@
 {"ts":"2025-08-08 18:09:41","ip":"127.0.0.1","page":"\/websites.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
 {"ts":"2025-08-08 18:09:41","ip":"127.0.0.1","page":"\/windows.php","ua":"unknown","referer":"-","status":200,"load_time":0.0004,"context":"PUBLIC"}
 {"ts":"2025-08-08 18:17:19","ip":"106.75.73.94","page":"\/","ua":"unknown","referer":"-","status":200,"load_time":0.0019,"context":"PUBLIC"}
+{"ts":"2025-08-08 18:32:27","ip":"66.240.192.82","page":"\/","ua":"Mozilla\/5.0 zgrab\/0.x","referer":"-","status":200,"load_time":0.0009,"context":"PUBLIC"}
