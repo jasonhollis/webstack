@@ -4,11 +4,13 @@ set -e
 VERSION="${1:-$(cat /opt/webstack/html/VERSION || echo unknown)}"
 TS=$(date +"%Y-%m-%d-%H%M%S")
 SNAP="/opt/webstack/snapshots/webstack-${VERSION}-${TS}.zip"
-echo "$VERSION" > /opt/webstack/html/VERSION
+# DO NOT MODIFY VERSION FILE - this is just creating a backup!
 
 cd /opt/webstack
 
-# Create snapshot including all key content and configs, but excluding snapshots dir and old logs
+echo "[$(date)] 📦 Starting snapshot for version $VERSION..." >&2
+
+# Create snapshot including all key content and configs, but excluding large files
 zip -r "$SNAP" \
   html \
   bin \
@@ -18,7 +20,11 @@ zip -r "$SNAP" \
   html/VERSION \
   /etc/nginx/nginx.conf \
   /etc/nginx/sites-available \
-  -x "snapshots/*" "html/snapshots/*" "logs/*.gz" "logs/*old*" "logs/*.zip" > /dev/null
+  -x "snapshots/*" "html/snapshots/*" "logs/*.gz" "logs/*old*" "logs/*.zip" \
+  -x "*.mp4" "*.mov" "*.webm" "*.psd" \
+  -x "objectives/images/*" "screenshots/*" > /dev/null
+
+echo "[$(date)] 📦 Snapshot completed (excluded videos and screenshots)" >&2
 
 echo "[$(date)] 📦 Snapshot created: $(basename "$SNAP")" >> /opt/webstack/logs/deploy.log
 echo "[$(date)] 📦 Snapshot created: $(basename "$SNAP")"

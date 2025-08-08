@@ -33,6 +33,12 @@ if [[ -z "$NEW_VERSION" ]]; then
   exit 1
 fi
 
+# CLEANUP before snapshot to reduce size
+echo "🧹 Cleaning temporary files..."
+rm -f /opt/webstack/snapshots/zi* 2>/dev/null
+find /opt/webstack/objectives/images -name "*.png" -mtime +30 -delete 2>/dev/null || true
+find /opt/webstack/screenshots -name "*.png" -mtime +7 -delete 2>/dev/null || true
+
 # SNAPSHOT the OLD version before we change anything
 bash "$SNAPSHOT_SCRIPT" "$OLD_VERSION" \
   || { "$FAILURE_SH" "update_version.sh" "snapshot_webstack.sh failed for old version $OLD_VERSION"; exit 1; }
@@ -48,8 +54,8 @@ git push 2>/dev/null \
 # Reload PHP-FPM to flush OPcache and pick up new templates
 systemctl reload php8.2-fpm
 
-# GIT TAG (annotated) and push
-git tag -a "$NEW_VERSION" -m "Version $NEW_VERSION" \
+# GIT TAG (annotated) and push - use GIT_EDITOR to prevent any interactive prompts
+GIT_EDITOR=true git tag -a "$NEW_VERSION" -m "Version $NEW_VERSION" \
   || { "$FAILURE_SH" "update_version.sh" "git tag failed"; exit 1; }
 git push origin "$NEW_VERSION" 2>/dev/null \
   || echo "⚠️ Warning: git tag push failed (likely no upstream). Tag created locally."

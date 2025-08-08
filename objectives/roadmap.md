@@ -141,12 +141,16 @@
 2. Consolidate landing page versions
 3. Optimize video assets (multiple spiral formats)
 4. Implement proper error logging
-5. **Convert bash scripts to modern code (Python/PHP)**
-   - update_version.sh → Version management system
-   - snapshot_webstack.sh → Backup management
-   - failure.sh → Error handling system
-   - notify_pushover.sh → Notification service
-   - Benefits: Better error handling, testing, cross-platform support
+5. **CRITICAL: Convert all bash scripts to Python with database logging**
+   - update_version.sh → Python version manager with DB audit trail
+   - snapshot_webstack.sh → Python backup system with verification
+   - failure.sh → Python error handler with structured logging
+   - notify_pushover.sh → Python notification service with retry logic
+   - All operations logged to database, not just text files
+   - Proper exception handling instead of exit codes
+   - Unit tests for all critical functions
+   - Progress tracking and rollback capabilities
+   - Benefits: Reliability, testability, audit trail, better error recovery
 
 ### Medium Priority
 1. Standardize navigation across all pages
@@ -171,21 +175,60 @@
 
 ---
 
-## 🚦 Current Sprint (v1.8.0)
+## 🚦 Current Sprint (v1.8.4)
 
-### This Week's Focus
-1. Bump version to v1.8.0
-2. Create lead management dashboard
-3. Test lead capture flow
-4. Set up email notifications
-5. Launch Google Ads campaign
+### Immediate Priority - Lead Management Dashboard
+1. Create /admin/leads.php to view captured leads
+2. Add status tracking (new → contacted → qualified → converted)
+3. Email notifications for new leads
+4. CSV export functionality
+5. Test with live Google Ads campaign
 
-### Next Week
-1. Analytics enhancement
-2. Conversion tracking
-3. A/B testing setup
-4. ROI dashboard
-5. Follow-up automation
+---
+
+## 🐍 v1.9.0 - Python Infrastructure Migration (Critical)
+
+### Replace Shell Scripts with Python
+1. **Version Manager** (`/opt/webstack/lib/version_manager.py`)
+   - Replace update_version.sh
+   - Database audit trail in `version_history` table
+   - Atomic operations with rollback capability
+   - Proper exception handling
+
+2. **Operations Module** (`/opt/webstack/lib/ktp_ops.py`)
+   - SnapshotManager class (replace snapshot_webstack.sh)
+   - PushoverNotifier class (replace notify_pushover.sh)
+   - FailureHandler class (replace failure.sh)
+   - All operations logged to database
+
+3. **Database Schema**
+   ```sql
+   CREATE TABLE version_history (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     version VARCHAR(20),
+     timestamp DATETIME,
+     snapshot_path VARCHAR(255),
+     git_commit VARCHAR(40),
+     changes TEXT,
+     status ENUM('success', 'failed', 'rolled_back')
+   );
+   
+   CREATE TABLE operation_logs (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     timestamp DATETIME,
+     operation VARCHAR(100),
+     status VARCHAR(20),
+     details TEXT,
+     error_message TEXT
+   );
+   ```
+
+### Benefits Over Shell Scripts
+- Testable with unit tests
+- Proper error handling (not just exit codes)
+- Database audit trail (not just text files)
+- Rollback capabilities
+- No more VERSION file corruption bugs
 
 ---
 

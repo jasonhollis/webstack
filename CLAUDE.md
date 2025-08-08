@@ -48,12 +48,19 @@ curl -X GET http://localhost/automation/api/health
 
 ## Architecture Overview
 
+### System Environment
+- **OS**: Debian GNU/Linux 12 (bookworm)
+- **Kernel**: 6.1.0-37-amd64
+- **Hosting**: SSDNodes VPS
+- **Last verified**: August 8, 2025
+
 ### Tech Stack
-- **Server**: Debian 12 Linux on SSDNodes VPS
-- **Web**: nginx 1.22.1 + PHP 8.2-FPM
+- **Web Server**: nginx 1.22.1
+- **PHP**: 8.2.28 with PHP-FPM
 - **Database**: MariaDB 10.11.11 (database: ktp_digital)
 - **Frontend**: Tailwind CSS (CDN), Adobe bank-gothic-bt font
 - **Domain**: www.ktp.digital
+- **SSL**: Let's Encrypt certificates
 
 ### Key Directories
 ```
@@ -83,6 +90,18 @@ curl -X GET http://localhost/automation/api/health
 5. **Brand Consistency**: Use established color scheme (#1e40af blue, #d97706 gold)
 
 ## Code Standards
+
+### Shell Script Development
+**CRITICAL: All shell scripts must use failure.sh for error handling**
+- Every critical command should check exit status
+- Use pattern: `command || { "$FAILURE_SH" "script_name" "error message"; exit 1; }`
+- This ensures Pushover notifications and logging on failures
+- Example:
+  ```bash
+  git add -A || { "$FAILURE_SH" "update_version.sh" "git add failed"; exit 1; }
+  ```
+- Non-critical operations can use `|| echo "Warning..."` to continue
+- All scripts being migrated to Python (see roadmap)
 
 ### PHP Development
 - Use PHP 8.2+ features
