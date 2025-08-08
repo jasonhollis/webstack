@@ -75,7 +75,7 @@ $content = <<<HTML
       </g>
     </svg>
     <div class="relative z-10 flex flex-col items-center space-y-5">
-        <img src="/images/HOME.svg" alt="KTP Digital Home Automation Logo" class="w-28 h-28 mx-auto mb-2 drop-shadow-xl" style="background:rgba(32,48,106,0.10); border-radius:100%;">
+        <img src="/images/icons/home-assistant.svg" alt="KTP Digital Home Automation Logo" class="w-28 h-28 mx-auto mb-2 drop-shadow-xl" style="background:rgba(255,255,255,0.95); border-radius:100%; padding:15px;">
         <h1 class="canva-hero-font text-3xl sm:text-5xl text-white font-bold tracking-wide">
             HOME AUTOMATION<br>
             IT NETWORKING SERVICES<br>
@@ -94,7 +94,7 @@ $content = <<<HTML
     <div class="flex flex-col sm:flex-row gap-8 max-w-5xl mx-auto justify-center items-stretch">
         <div class="bg-[#20306a]/80 rounded-2xl flex-1 px-4 py-8 flex flex-col items-center shadow-lg">
             <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-[#37e2ef] mb-4 bg-white flex items-center justify-center">
-                <img src="/images/HOME.svg" class="w-16 h-16" alt="Home Automation" />
+                <img src="/images/icons/home-assistant.svg" class="w-16 h-16 p-2" alt="Home Automation" />
             </div>
             <h3 class="canva-hero-font text-lg mb-2">Home Automation</h3>
             <p class="text-base opacity-90">Complete control of the service in one go. Hassle-free, tailored to your needs.</p>
