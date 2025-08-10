@@ -56,21 +56,19 @@ class VersionManager:
         print(f"❌ {context}: {error}")
         
     def notify_success_async(self, version):
-        """Send success notification in background thread"""
-        def send_notification():
-            try:
-                if self.notify_script.exists():
-                    subprocess.run(
-                        [str(self.notify_script), "Webstack Update", 
-                         f"Version {version} deployed successfully"],
-                        capture_output=True,
-                        timeout=10
-                    )
-            except:
-                pass  # Silent fail for notifications
-        
-        thread = threading.Thread(target=send_notification, daemon=True)
-        thread.start()
+        """Send success notification - just run it directly with short timeout"""
+        try:
+            if self.notify_script.exists():
+                # Run directly, not in thread - the script itself has timeouts
+                subprocess.run(
+                    [str(self.notify_script), "Webstack Update", 
+                     f"Version {version} deployed successfully"],
+                    capture_output=True,
+                    timeout=5,
+                    check=False
+                )
+        except:
+            pass  # Silent fail for notifications
         
     def get_current_version(self):
         """Read current version from VERSION file"""
@@ -144,16 +142,16 @@ class VersionManager:
         commit_msg = f"⬆️ Version bump: {new_version}"
         self.run_command(["git", "commit", "-m", commit_msg])
         
-        # Push (ignore failures for no upstream)
-        result = self.run_command("git push", check=False)
+        # Push to origin/master (with shorter timeout)
+        result = self.run_command("git push origin master", check=False, timeout=10)
         if result and result.returncode != 0:
             print("⚠️ Warning: git push failed (likely no upstream). Continuing locally...")
             
         # Create annotated tag
         self.run_command(["git", "tag", "-a", new_version, "-m", f"Version {new_version}"])
         
-        # Push tag (ignore failures for no upstream)
-        result = self.run_command(f"git push origin {new_version}", check=False)
+        # Push tag (with shorter timeout)
+        result = self.run_command(f"git push origin {new_version}", check=False, timeout=10)
         if result and result.returncode != 0:
             print("⚠️ Warning: git tag push failed (likely no upstream). Tag created locally.")
             
