@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 define('ADMIN_USER', 'admin');
 define('ADMIN_PASS_HASH', '$2y$10$K3xIfyU0kam7WoEl2Q.IPOs9sWsimDkz.4OwDgS367EgnWcDj65P2');
 

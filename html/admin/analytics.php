@@ -28,14 +28,34 @@ if (isset($_GET['show_all'])) {
 
 $exclude_ip = $_COOKIE['exclude_my_ip'] ?? null;
 
-// path to your JSON lines log
-$log_file = '/opt/webstack/logs/web_analytics.log';
-$lines    = @file($log_file) ?: [];
-// only look at the last 200 entries
-$recent   = array_slice($lines, -200);
+// Database connection
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=ktp_digital', 'root', '');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
+
+// Build query with optional IP exclusion
+$exclude_clause = $exclude_ip ? "AND ip != :exclude_ip" : "";
+
+// Get recent analytics data (last 1000 records)
+$stmt = $pdo->prepare("
+    SELECT * FROM web_analytics 
+    WHERE timestamp >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+    $exclude_clause
+    ORDER BY timestamp DESC 
+    LIMIT 1000
+");
+
+if ($exclude_ip) {
+    $stmt->bindParam(':exclude_ip', $exclude_ip);
+}
+$stmt->execute();
+$recent_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // aggregate structures
-$total_hits       = 0;
+$total_hits       = count($recent_data);
 $traffic_by_date  = [];
 $page_hits        = [];
 $referrers        = [];
@@ -44,24 +64,60 @@ $response_times   = [];
 $admin_hits       = [];
 $public_hits      = [];
 $ip_counts        = [];
+$device_stats     = [];
+$browser_stats    = [];
+$os_stats         = [];
+$bot_stats        = [];
 
-// parse each JSON line
-foreach ($recent as $line) {
-    $entry = json_decode($line, true);
-    if (!$entry) continue;
-    $ip = $entry['ip'] ?? '';
-    if ($exclude_ip && $ip === $exclude_ip) {
-        continue;
-    }
-    $total_hits++;
-    $date = substr($entry['ts'],0,10);
+// process database records
+foreach ($recent_data as $entry) {
+    $ip = $entry['ip'];
+    $date = substr($entry['timestamp'], 0, 10);
+    
+    // Traffic by date
     $traffic_by_date[$date] = ($traffic_by_date[$date] ?? 0) + 1;
-    $page_hits[$entry['page']]      = ($page_hits[$entry['page']] ?? 0) + 1;
-    $referrers[$entry['referer']]   = ($referrers[$entry['referer']] ?? 0) + 1;
-    $user_agents[$entry['ua']]      = ($user_agents[$entry['ua']] ?? 0) + 1;
-    $response_times[]               = floatval($entry['load_time'] ?? 0);
-    $ip_counts[$ip]                 = ($ip_counts[$ip] ?? 0) + 1;
-    if (($entry['context'] ?? '') === 'ADMIN') {
+    
+    // Page hits
+    $page_hits[$entry['page']] = ($page_hits[$entry['page']] ?? 0) + 1;
+    
+    // Referrers
+    $referer = $entry['referer'] ?: '-';
+    $referrers[$referer] = ($referrers[$referer] ?? 0) + 1;
+    
+    // User agents
+    $user_agents[$entry['user_agent']] = ($user_agents[$entry['user_agent']] ?? 0) + 1;
+    
+    // Response times (convert from ms to seconds for compatibility)
+    $load_time_seconds = ($entry['load_time_ms'] ?? 0) / 1000;
+    $response_times[] = $load_time_seconds;
+    
+    // IP counts
+    $ip_counts[$ip] = ($ip_counts[$ip] ?? 0) + 1;
+    
+    // Device statistics
+    if ($entry['device_type']) {
+        $device_stats[$entry['device_type']] = ($device_stats[$entry['device_type']] ?? 0) + 1;
+    }
+    
+    // Browser statistics
+    if ($entry['browser']) {
+        $browser_stats[$entry['browser']] = ($browser_stats[$entry['browser']] ?? 0) + 1;
+    }
+    
+    // OS statistics
+    if ($entry['os']) {
+        $os_stats[$entry['os']] = ($os_stats[$entry['os']] ?? 0) + 1;
+    }
+    
+    // Bot statistics
+    if ($entry['is_bot']) {
+        $bot_stats['bots'] = ($bot_stats['bots'] ?? 0) + 1;
+    } else {
+        $bot_stats['humans'] = ($bot_stats['humans'] ?? 0) + 1;
+    }
+    
+    // Admin vs Public (infer from page)
+    if (strpos($entry['page'], '/admin/') !== false) {
         $admin_hits[] = $entry;
     } else {
         $public_hits[] = $entry;
@@ -114,8 +170,9 @@ $avg_time = $response_times
     </div>
 
     <p class="text-sm text-gray-600 mb-6">
-      Showing data for last <?= $total_hits ?> hit<?= $total_hits===1?'':'s' ?>
+      Showing data for last <?= $total_hits ?> hit<?= $total_hits===1?'':'s' ?> (last 30 days)
       <?= $exclude_ip? "(excluding your IP)" : "" ?>
+      | Bots: <?= $bot_stats['bots'] ?? 0 ?> | Humans: <?= $bot_stats['humans'] ?? 0 ?>
     </p>
 
     <!-- summary cards -->
@@ -176,6 +233,43 @@ $avg_time = $response_times
       </div>
     </div>
 
+    <!-- Device & Browser Stats -->
+    <div class="grid md:grid-cols-3 gap-4 mb-8">
+      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+        <h2 class="font-bold mb-2">Device Types</h2>
+        <div class="text-sm">
+          <?php foreach($device_stats as $device=>$count): ?>
+            <div class="flex justify-between py-1">
+              <span><?= ucfirst($device) ?>:</span>
+              <span><?= $count ?></span>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+        <h2 class="font-bold mb-2">Top Browsers</h2>
+        <div class="text-sm">
+          <?php foreach(top_n($browser_stats,5) as $browser=>$count): ?>
+            <div class="flex justify-between py-1">
+              <span><?= htmlspecialchars($browser) ?>:</span>
+              <span><?= $count ?></span>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+        <h2 class="font-bold mb-2">Top Operating Systems</h2>
+        <div class="text-sm">
+          <?php foreach(top_n($os_stats,5) as $os=>$count): ?>
+            <div class="flex justify-between py-1">
+              <span><?= htmlspecialchars($os) ?>:</span>
+              <span><?= $count ?></span>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    </div>
+
     <!-- Recent Admin Hits -->
     <div class="grid md:grid-cols-2 gap-4">
       <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
@@ -183,10 +277,10 @@ $avg_time = $response_times
         <ul class="text-xs font-mono">
           <?php foreach(array_slice(array_reverse($admin_hits), 0, 10) as $e): ?>
             <li>
-              <?= htmlspecialchars($e['ts']) ?> –
+              <?= htmlspecialchars($e['timestamp']) ?> –
               <?= htmlspecialchars($e['ip']) ?> 
               <?= htmlspecialchars($e['page']) ?> 
-              (<?= htmlspecialchars($e['status'].'/'.$e['load_time'].'s') ?>)
+              (<?= htmlspecialchars($e['status_code'].'/'.(($e['load_time_ms'] ?? 0)/1000).'s') ?>)
             </li>
           <?php endforeach; ?>
         </ul>

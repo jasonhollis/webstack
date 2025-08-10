@@ -1,5 +1,6 @@
 <?php
 // Simple authentication check
+$page = 'screenshot_upload';
 session_start();
 require_once __DIR__ . '/admin_auth.php';
 
@@ -10,18 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $uploadedFiles = [];
     
-    // Check for files under different possible field names
-    $fileFieldNames = ['screenshot', 'screenshots'];
-    $files = null;
-    
-    foreach ($fileFieldNames as $fieldName) {
-        if (isset($_FILES[$fieldName])) {
-            $files = $_FILES[$fieldName];
-            break;
-        }
-    }
-    
-    if ($files) {
+    // Handle the 'screenshot' field with array notation
+    if (isset($_FILES['screenshot'])) {
+        $files = $_FILES['screenshot'];
+        
         // Handle multiple files
         if (is_array($files['name'])) {
             for ($i = 0; $i < count($files['name']); $i++) {
@@ -108,6 +101,7 @@ if (is_dir('/opt/webstack/screenshots')) {
     </style>
 </head>
 <body class="bg-gray-50">
+    <?php include 'admin_nav.php'; ?>
     <div class="container mx-auto px-4 py-8 max-w-4xl">
         <div class="bg-white rounded-lg shadow-lg p-6">
             <h1 class="text-2xl font-bold mb-6 text-gray-800">Screenshot Upload</h1>
@@ -235,14 +229,9 @@ if (is_dir('/opt/webstack/screenshots')) {
             dropZone.classList.add('uploading');
             
             const formData = new FormData();
-            // Use 'screenshots' as field name for multiple files
-            if (files.length > 1) {
-                for (let i = 0; i < files.length; i++) {
-                    formData.append('screenshots[]', files[i]);
-                }
-            } else {
-                // Use 'screenshot' for single file
-                formData.append('screenshot', files[0]);
+            // Always use 'screenshot' field name with array notation for consistency
+            for (let i = 0; i < files.length; i++) {
+                formData.append('screenshot[]', files[i]);
             }
             
             fetch('/admin/screenshot-upload.php', {

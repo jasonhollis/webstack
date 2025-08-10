@@ -127,6 +127,43 @@ The site integrates with premium automation brands. Icons available in `/html/im
 - Zigbee, Z-Wave, Matter, Ring, Philips Hue
 - 60+ other premium brand integrations
 
+## Development Methodology
+
+### Collaborative Iteration Process
+When working with Claude on this project, we follow a structured iterative approach:
+
+1. **Version-Based Development**
+   - Each work session starts with reviewing current version objectives
+   - Work is tracked in `/objectives/vX.X.X_objectives.md`
+   - Progress documented in `/objectives/vX.X.X_iteration_log.md`
+   - Version bumps via `/opt/webstack/bin/update_version.sh` when objectives complete
+
+2. **Iteration Workflow**
+   - Start: Review objectives and current version status
+   - Execute: Implement features with real-time progress tracking
+   - Document: Update iteration log with achievements and metrics
+   - Complete: Run version bump, create git tag, push to remote
+   - Plan: Define next version objectives based on roadmap
+
+3. **Session Pattern**
+   - Claude reads recent objectives/iteration logs to understand context
+   - User provides specific goals aligned with version objectives
+   - Implementation with continuous testing and validation
+   - Session ends with comprehensive iteration log update
+   - Version bump captures the work as a deployable milestone
+
+4. **Documentation Standards**
+   - Every significant change logged with metrics (lines changed, files modified)
+   - Problems solved clearly stated with before/after comparison
+   - Performance improvements quantified (speed, storage, efficiency)
+   - Lessons learned captured for future sessions
+
+### Working with Claude
+- Claude maintains context by reading objectives and iteration logs
+- Each session builds on previous work documented in version history
+- Clear handoff between sessions via detailed iteration logs
+- Version control provides rollback points if needed
+
 ## Testing Checklist
 When making changes, verify:
 1. Lead capture form submits to premium_leads table
@@ -138,16 +175,29 @@ When making changes, verify:
 
 ## Current Development Focus
 
-### Active Rewrite Areas
-- **New Architecture**: Modern PHP 8.2 with proper separation of concerns
-- **Automation System**: Building out `/automation/` with job queue management
-- **Client Portal**: New dashboard at `/client-portal/` for client management
-- **API Development**: RESTful endpoints in `/automation/api/`
+### Recent Achievements (v1.8.5)
+- **Database Logging Infrastructure**: Complete migration from file-based to database logging
+- **Python DatabaseLogger**: Comprehensive logging class with shell integration via db_log.py
+- **Analytics Enhancement**: Dual logging system with UTM tracking and bot detection
+- **Git Cleanup**: Removed 35,747 lines of logs from version control
+- **Performance**: Query speed now instant (was seconds with grep)
 
-### Legacy System Notes
-- Old directives in `/objectives/PROJECT_DIRECTIVES.md` are from pre-rewrite phase
-- Legacy scripts in `/opt/webstack/bin/` being phased out
-- Version tracking system (v1.7.5) will be replaced with modern CI/CD
+### Active Development Areas
+- **Database-Driven Operations**: All system operations now logged to MySQL tables
+- **Python Migration**: Converting bash scripts to Python with proper error handling
+- **Lead Management**: Premium landing page operational for Google Ads campaigns
+- **Analytics System**: SQL-based analytics replacing file grep operations
+
+### Infrastructure Improvements
+- 10+ logging tables: version_history, operation_logs, web_analytics, error_logs, etc.
+- Automatic retention policies with MySQL events
+- Transaction support and proper error handling
+- Real-time dashboard capabilities
+
+### Legacy System Migration
+- Shell scripts being replaced with Python modules (DatabaseLogger.py, db_log.py)
+- Version tracking enhanced with database audit trail (v1.8.5 current)
+- File-based logs maintained for backwards compatibility during transition
 
 ## Important Workflow Rules
 
