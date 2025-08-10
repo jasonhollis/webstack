@@ -65,10 +65,20 @@ class VersionManager:
         print(f"❌ {context}: {error}")
         
     def notify_success_async(self, version):
-        """Send success notification - just run it directly with short timeout"""
+        """Send success notification - prefer Python version"""
         try:
-            if self.notify_script.exists():
-                # Run directly, not in thread - the script itself has timeouts
+            # Prefer Python notifier
+            notify_py = Path("/opt/webstack/bin/notify_pushover.py")
+            if notify_py.exists():
+                subprocess.run(
+                    ["python3", str(notify_py), "Webstack Update", 
+                     f"Version {version} deployed successfully"],
+                    capture_output=True,
+                    timeout=5,
+                    check=False
+                )
+            elif self.notify_script.exists():
+                # Fall back to bash version
                 subprocess.run(
                     [str(self.notify_script), "Webstack Update", 
                      f"Version {version} deployed successfully"],
