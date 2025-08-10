@@ -28,6 +28,8 @@ class VersionManager:
     def run_command(self, cmd, check=True, capture_output=True, timeout=30):
         """Run a shell command with proper error handling"""
         try:
+            # Ensure we inherit the full environment including SSH agent
+            env = os.environ.copy()
             result = subprocess.run(
                 cmd, 
                 shell=True if isinstance(cmd, str) else False,
@@ -35,7 +37,8 @@ class VersionManager:
                 capture_output=capture_output,
                 text=True,
                 timeout=timeout,
-                cwd=str(self.repo_dir)
+                cwd=str(self.repo_dir),
+                env=env
             )
             return result
         except subprocess.CalledProcessError as e:
@@ -140,20 +143,27 @@ class VersionManager:
         
         # Commit
         commit_msg = f"⬆️ Version bump: {new_version}"
-        self.run_command(["git", "commit", "-m", commit_msg])
+        self.run_command(f'git commit -m "{commit_msg}"')
         
-        # Push to origin/master (with shorter timeout)
-        result = self.run_command("git push origin master", check=False, timeout=10)
-        if result and result.returncode != 0:
-            print("⚠️ Warning: git push failed (likely no upstream). Continuing locally...")
+        # Push to origin/master (quick timeout to avoid hanging)
+        print("📤 Pushing to remote repository...")
+        result = self.run_command("git push origin master 2>&1", check=False, timeout=5)
+        if result is None:
+            print("⚠️ Git push timed out. Changes saved locally. Push manually later.")
+        elif result and result.returncode != 0:
+            print(f"⚠️ Git push failed: {result.stdout if result.stdout else 'Unknown error'}")
+        else:
+            print("✅ Pushed to origin/master")
             
         # Create annotated tag
-        self.run_command(["git", "tag", "-a", new_version, "-m", f"Version {new_version}"])
+        self.run_command(f'git tag -a {new_version} -m "Version {new_version}"')
         
-        # Push tag (with shorter timeout)
-        result = self.run_command(f"git push origin {new_version}", check=False, timeout=10)
-        if result and result.returncode != 0:
-            print("⚠️ Warning: git tag push failed (likely no upstream). Tag created locally.")
+        # Push tag
+        result = self.run_command(f"git push origin {new_version} 2>&1", check=False, timeout=5)
+        if result and result.returncode == 0:
+            print(f"✅ Tag {new_version} pushed")
+        else:
+            print(f"⚠️ Tag push skipped. Tag {new_version} created locally.")
             
     def reload_services(self):
         """Reload PHP-FPM to flush OPcache"""
@@ -165,9 +175,13 @@ class VersionManager:
         objective_file = self.objectives_dir / f"{version}_objectives.md"
         
         for file in [iteration_file, objective_file]:
-            file.touch(exist_ok=True)
-            os.chown(file, 0, 33)  # root:www-data
-            file.chmod(0o664)
+            try:
+                file.touch(exist_ok=True)
+                os.chown(file, 0, 33)  # root:www-data (gid 33 is www-data)
+                file.chmod(0o664)
+                print(f"✅ Created: {file.name}")
+            except Exception as e:
+                print(f"⚠️ Failed to create {file.name}: {e}")
             
     def log_version_update(self, version):
         """Log the version update"""
