@@ -51,10 +51,16 @@ class VersionManager:
             return None
             
     def notify_failure(self, context, error):
-        """Send failure notification via failure.sh"""
-        failure_script = "/opt/webstack/bin/failure.sh"
-        if os.path.exists(failure_script):
-            subprocess.run([failure_script, "version_manager.py", f"{context}: {error}"], 
+        """Send failure notification via failure handler"""
+        # Prefer Python version, fall back to bash
+        failure_py = "/opt/webstack/bin/failure.py"
+        failure_sh = "/opt/webstack/bin/failure.sh"
+        
+        if os.path.exists(failure_py):
+            subprocess.run(["python3", failure_py, "version_manager.py", f"{context}: {error}"], 
+                         capture_output=True, timeout=5)
+        elif os.path.exists(failure_sh):
+            subprocess.run([failure_sh, "version_manager.py", f"{context}: {error}"], 
                          capture_output=True, timeout=5)
         print(f"❌ {context}: {error}")
         
