@@ -1,0 +1,1 @@
+/opt/webstack/lib/snapshot_manager.py

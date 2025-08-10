@@ -125,7 +125,19 @@ class VersionManager:
                 
     def create_snapshot(self, version):
         """Create snapshot of the current version"""
-        if self.snapshot_script.exists():
+        # Use Python snapshot manager if available, fall back to bash
+        snapshot_py = Path("/opt/webstack/bin/snapshot_webstack.py")
+        if snapshot_py.exists():
+            print(f"📦 Creating snapshot for version {version}...")
+            result = self.run_command(
+                f"python3 {snapshot_py} {version}",
+                check=False,
+                timeout=60
+            )
+            if result and result.returncode != 0:
+                self.notify_failure("snapshot_manager.py", f"Failed for version {version}")
+                sys.exit(1)
+        elif self.snapshot_script.exists():
             print(f"📦 Creating snapshot for version {version}...")
             result = self.run_command(
                 f"bash {self.snapshot_script} {version}",
