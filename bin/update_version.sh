@@ -84,7 +84,7 @@ chmod 664 "$ITERATION_FILE" "$OBJECTIVE_FILE"
 
 echo "✅ Version $NEW_VERSION deployed, committed, tagged, pushed, snapshotted old version, and logs preserved."
 
-# Optional: notify on success (with timeout to prevent hanging)
-timeout 5s /opt/webstack/bin/notify_pushover.sh "Webstack Update" "Version $NEW_VERSION deployed successfully" 2>/dev/null || true
+# Optional: notify on success (run in background to prevent hanging)
+(/opt/webstack/bin/notify_pushover.sh "Webstack Update" "Version $NEW_VERSION deployed successfully" 2>/dev/null &)
 
 exit 0
