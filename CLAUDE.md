@@ -164,6 +164,19 @@ When working with Claude on this project, we follow a structured iterative appro
 - Clear handoff between sessions via detailed iteration logs
 - Version control provides rollback points if needed
 
+## Admin Panel Tools
+The admin panel (`/admin/`) provides essential development tools:
+- **Iteration Log** (`/admin/logs.php`): View current version's iteration progress
+- **Objectives Log** (`/admin/objectives.php`): Track version objectives and completion
+- **Roadmap** (`/admin/roadmap.php`): Long-term development planning
+- **Analytics** (`/admin/analytics.php`): Web traffic and system metrics
+- **Maintenance** (`/admin/maintenance.php`): System health and maintenance tasks
+- **File Stats** (`/admin/file_stats.php`): Codebase statistics and analysis
+- **System Meta** (`/admin/system_meta.php`): System configuration and metadata
+- **Screenshots** (`/admin/screenshot-upload.php`): Development screenshot management
+- **AI Directives** (`/admin/directives.php`): View PROJECT_DIRECTIVES.md
+- **Claude MD** (`/admin/claude-md.php`): View this CLAUDE.md file with proper formatting
+
 ## Testing Checklist
 When making changes, verify:
 1. Lead capture form submits to premium_leads table
@@ -175,18 +188,21 @@ When making changes, verify:
 
 ## Current Development Focus
 
-### Recent Achievements (v1.8.5)
+### Recent Achievements (v1.8.6-v1.8.7)
 - **Database Logging Infrastructure**: Complete migration from file-based to database logging
 - **Python DatabaseLogger**: Comprehensive logging class with shell integration via db_log.py
 - **Analytics Enhancement**: Dual logging system with UTM tracking and bot detection
 - **Git Cleanup**: Removed 35,747 lines of logs from version control
 - **Performance**: Query speed now instant (was seconds with grep)
+- **Admin System Fixes**: Resolved session handling issues and screenshot upload permissions
+- **Claude MD Viewer**: Added dedicated admin panel page for viewing CLAUDE.md with proper markdown rendering
 
-### Active Development Areas
+### Active Development Areas (v1.8.x-v1.9.0)
 - **Database-Driven Operations**: All system operations now logged to MySQL tables
-- **Python Migration**: Converting bash scripts to Python with proper error handling
-- **Lead Management**: Premium landing page operational for Google Ads campaigns
+- **Python Migration**: Priority - Converting critical bash scripts (update_version.sh, snapshot_webstack.sh) to Python
+- **Lead Management**: Building admin dashboard for premium_leads table management
 - **Analytics System**: SQL-based analytics replacing file grep operations
+- **Admin Panel**: Enhancing admin tools with iteration logs, objectives tracking, and AI instruction viewer
 
 ### Infrastructure Improvements
 - 10+ logging tables: version_history, operation_logs, web_analytics, error_logs, etc.
@@ -196,8 +212,9 @@ When making changes, verify:
 
 ### Legacy System Migration
 - Shell scripts being replaced with Python modules (DatabaseLogger.py, db_log.py)
-- Version tracking enhanced with database audit trail (v1.8.5 current)
+- Version tracking enhanced with database audit trail (v1.8.7 current)
 - File-based logs maintained for backwards compatibility during transition
+- Next major milestone: v1.9.0 - Complete Python infrastructure migration
 
 ## Important Workflow Rules
 

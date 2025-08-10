@@ -24,6 +24,7 @@ if (!isset($page)) $page = '';
       <li><a href="/admin/system_meta.php" class="<?= ($page=='system_meta') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">System Meta</a></li>
       <li><a href="/admin/screenshot-upload.php" class="<?= ($page=='screenshot_upload') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">Screenshots</a></li>
       <li><a href="/admin/directives.php" class="<?= ($page=='directives') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">AI Directives</a></li>
+      <li><a href="/admin/claude-md.php" class="<?= ($page=='claude_md') ? 'font-bold text-blue-600 underline' : 'hover:text-blue-600' ?>">Claude MD</a></li>
     </ul>
   </div>
   <div>
