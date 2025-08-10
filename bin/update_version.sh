@@ -33,15 +33,30 @@ if [[ -z "$NEW_VERSION" ]]; then
   exit 1
 fi
 
-# CLEANUP before snapshot to reduce size
-echo "🧹 Cleaning temporary files..."
+# SCREENSHOT BACKUP - Archive screenshots for this version before cleaning
+if ls /opt/webstack/screenshots/*.png 1> /dev/null 2>&1; then
+  echo "📸 Archiving screenshots for version $OLD_VERSION..."
+  SCREENSHOT_ARCHIVE="/opt/webstack/snapshots/screenshots_${OLD_VERSION}_$(date +%Y%m%d_%H%M%S).zip"
+  cd /opt/webstack/screenshots && zip -r "$SCREENSHOT_ARCHIVE" *.png 2>/dev/null || true
+  if [[ -f "$SCREENSHOT_ARCHIVE" ]]; then
+    echo "📸 Screenshots archived to: $(basename "$SCREENSHOT_ARCHIVE")"
+  fi
+  cd "$REPO_DIR"
+fi
+
+# CLEANUP - Remove files after archiving
+echo "🧹 Cleaning temporary files and screenshots..."
 rm -f /opt/webstack/snapshots/zi* 2>/dev/null
 find /opt/webstack/objectives/images -name "*.png" -mtime +30 -delete 2>/dev/null || true
-find /opt/webstack/screenshots -name "*.png" -mtime +7 -delete 2>/dev/null || true
+# Clean ALL screenshots after archiving them
+rm -f /opt/webstack/screenshots/*.png 2>/dev/null || true
 
 # SNAPSHOT the OLD version before we change anything
 bash "$SNAPSHOT_SCRIPT" "$OLD_VERSION" \
   || { "$FAILURE_SH" "update_version.sh" "snapshot_webstack.sh failed for old version $OLD_VERSION"; exit 1; }
+
+# UPDATE VERSION FILE FIRST (before git commit)
+echo "$NEW_VERSION" > "$VERSION_FILE"
 
 # GIT ADD/COMMIT/PUSH (fail = abort and notify)
 git add -A \
@@ -59,9 +74,6 @@ GIT_EDITOR=true git tag -a "$NEW_VERSION" -m "Version $NEW_VERSION" \
   || { "$FAILURE_SH" "update_version.sh" "git tag failed"; exit 1; }
 git push origin "$NEW_VERSION" 2>/dev/null \
   || echo "⚠️ Warning: git tag push failed (likely no upstream). Tag created locally."
-
-# Now update the VERSION file and preserve logs
-echo "$NEW_VERSION" > "$VERSION_FILE"
 echo "[$(date '+%F %T')] Version updated to $NEW_VERSION" >> "$LOG_FILE"
 
 ITERATION_FILE="$OBJECTIVES_DIR/${NEW_VERSION}_iteration_log.md"
