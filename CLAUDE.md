@@ -247,10 +247,93 @@ When making changes, verify:
 - Keep professional appearance throughout transition
 - **ALWAYS edit files in place - the version system handles tracking**
 
+## Site Architecture Details
+
+### Navigation Structure
+- **Standard Navigation**: Located in `/opt/webstack/html/nav.php`, included via layout.php
+- **Navigation Links**: Home, Small Business, Enterprise, Automation, About, Contact
+- **Layout System**: `layout.php` provides renderLayout() function for consistent page structure
+- **Premium Landing**: `premium-landing.php` is a standalone Google Ads landing page with custom nav
+
+### Design Elements
+- **Brand Font**: Adobe bank-gothic-bt (loaded via Typekit: zqf3vpv.css)
+- **Hero Video**: Spiral animation videos in multiple formats (spiral_*.mp4/webm)
+- **Color Scheme**: 
+  - Primary blue: #1e40af / #3b82f6
+  - Accent gold: #d97706
+  - Cyan highlights: #06b6d4
+- **Logo Files**: 
+  - Main logo: `/images/logos/KTP Logo.png` (1821x1866px, 1.4MB)
+  - Dark mode: `/images/logos/KTP Logo2.png`
+  - Constrained to 32px height in nav.php for proper display
+
+### Page Structure & Content Standards
+
+#### Core Pages Status
+- **Homepage** (`index.php`): Card-based service grid layout ✓ Working
+- **Contact** (`contact.php`): Full contact form with database integration ✓ Enhanced
+- **About** (`about.php`): Professional company overview with metrics ✓ Enhanced  
+- **Email** (`email.php`): Microsoft 365 and email services ✓ Working
+- **Premium Landing** (`premium-landing.php`): Home Automation focus for Google Ads ✓ Working
+  - Custom navigation with anchor links
+  - Full-screen spiral video background
+  - Lead capture form to premium_leads table
+  - Mobile-responsive with Tailwind CSS
+
+#### Content Guidelines for Professional Pages
+- **Hero sections**: Clear value proposition, enterprise-focused messaging
+- **Metrics/Trust indicators**: Years experience, projects delivered, technology managed
+- **Service cards**: Visual cards with icons, hover effects, clear descriptions
+- **Target market references**: Always mention Toorak, Brighton, Armadale for premium positioning
+- **CTAs**: Dual CTAs (primary: Schedule Consultation, secondary: View Services)
+- **Professional tone**: "White glove", "enterprise-grade", "premium", avoid consumer language
+
+### Layout System Details
+- **Two Layout Files**:
+  - `layout.php`: Standard layout with renderLayout() function for most pages
+  - `layout-new.php`: Enhanced layout with render_layout() function, used by premium-landing.php
+- **Key Differences**:
+  - layout-new.php includes Tailwind CSS via CDN
+  - layout-new.php supports bank-gothic font conditional loading
+  - Both include nav.php for consistent navigation
+
+### Common Technical Issues & Solutions
+
+#### Include/Require Conflicts
+- **Problem**: Functions being redeclared when files are included multiple times
+- **Solution**: Always use `include_once` or `require_once` for files containing function definitions
+- **Files affected**: analytics_logger.php frequently included in both page files and nav.php
+- **Pattern**: `<?php include_once __DIR__."/analytics_logger.php"; ?>`
+
+#### Database Integration Pattern
+- **Lead capture**: All forms should save to `premium_leads` table
+- **Required fields**: name, email, phone, message, suburb, ip_address, source
+- **Form handling**: POST to same page, redirect with ?success=1 after insert
+- **Error handling**: Catch exceptions, show user-friendly error messages
+
+#### Color/Theme Consistency
+- **Issue**: Many older files use dark theme colors (text-gray-300) on light backgrounds
+- **Standard colors**: 
+  - Text: text-gray-900 (headings), text-gray-700/600 (body)
+  - Backgrounds: white, gray-50 for cards
+  - Accents: blue-600, green-600 for positive actions
+- **Always check**: Color contrast when updating pages from dark to light theme
+
+### Technical Issues Fixed (Session: 2025-01-11)
+- `layout.php` was incomplete (missing renderLayout function) - rebuilt with proper structure
+- Navigation links updated to use absolute paths (/, /automation.php, etc.)
+- Removed placeholder 1300 number from premium-landing.php
+- Added explicit CSS constraints to logo (max-height: 32px) to prevent display issues
+- Fixed cookie banner styling with proper dark background and positioning
+- Fixed duplicate analytics_logger.php includes causing fatal errors
+- Enhanced contact.php with full contact form and database integration
+- Updated about.php from basic dark-themed page to professional enterprise presentation
+- Fixed email.php dark theme elements for proper display on light background
+
 ## Important Business Notes
 - This is a LIVE revenue-generating website - test all changes carefully
 - Target market: Melbourne premium suburbs ($25K-$100K+ projects)
 - Maintain enterprise-grade professional tone
-- The premium-landing.php file is CRITICAL for Google Ads campaigns
+- The premium-landing.php file is CRITICAL for Google Ads campaigns (Home Automation focused)
 - Focus on high-net-worth individuals and enterprise clients
 - Brand consistency: Use established colors (#1e40af blue, #d97706 gold)

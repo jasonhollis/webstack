@@ -120,25 +120,25 @@ if (file_exists($cert_path)) {
         $now = time();
         $days = floor(($expiry - $now) / 86400);
         $exp_str = date('Y-m-d', $expiry) . " (" . ($days >= 0
-                ? "<span class='text-green-700 dark:text-green-300'>in $days day" . ($days == 1 ? '' : 's') . "</span>"
-                : "<span class='text-red-700 dark:text-red-400'>expired " . abs($days) . " day" . (abs($days) == 1 ? '' : 's') . " ago</span>"
+                ? "<span class='text-green-700 '>in $days day" . ($days == 1 ? '' : 's') . "</span>"
+                : "<span class='text-red-700 '>expired " . abs($days) . " day" . (abs($days) == 1 ? '' : 's') . " ago</span>"
             ) . ")";
         if ($days >= 0) {
-            $ssl_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>Valid</span> &ndash; <b>$domain_str</b> &ndash; Expires: <b>$exp_str</b>";
+            $ssl_msg = "<span class='text-green-700  font-bold'>Valid</span> &ndash; <b>$domain_str</b> &ndash; Expires: <b>$exp_str</b>";
         } else {
-            $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>Expired</span> &ndash; <b>$domain_str</b> &ndash; Expired: <b>$exp_str</b>";
+            $ssl_msg = "<span class='text-red-700  font-bold'>Expired</span> &ndash; <b>$domain_str</b> &ndash; Expired: <b>$exp_str</b>";
         }
     } else {
-        $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>SSL certificate: parsing error</span>";
+        $ssl_msg = "<span class='text-red-700  font-bold'>SSL certificate: parsing error</span>";
     }
 } else {
-    $ssl_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>No SSL certificate found for ww2.ktp.digital</span>";
+    $ssl_msg = "<span class='text-red-700  font-bold'>No SSL certificate found for ww2.ktp.digital</span>";
 }
 
 // ----- UFW Firewall: Show all open ports (IPv4 + IPv6) -----
 $ufw = run("sudo /usr/sbin/ufw status 2>/dev/null");
 if ($ufw && stripos($ufw, 'Status: active') !== false) {
-    $firewall_msg = "<span class='text-green-700 dark:text-green-300 font-bold'>ACTIVE</span>";
+    $firewall_msg = "<span class='text-green-700  font-bold'>ACTIVE</span>";
     $allowed_ports = [];
     foreach (explode("\n", $ufw) as $line) {
         if (preg_match('/^([0-9]+\/[a-zA-Z0-9\(\) ]+)\s+ALLOW/', $line, $port_m)) {
@@ -149,7 +149,7 @@ if ($ufw && stripos($ufw, 'Status: active') !== false) {
         $firewall_msg .= " – Open: <b>" . htmlspecialchars(implode(', ', $allowed_ports)) . "</b>";
     }
 } elseif ($ufw && stripos($ufw, 'inactive') !== false) {
-    $firewall_msg = "<span class='text-red-700 dark:text-red-400 font-bold'>INACTIVE</span>";
+    $firewall_msg = "<span class='text-red-700  font-bold'>INACTIVE</span>";
 } else {
     $firewall_msg = "Status unknown.<br><span class='text-xs text-gray-500'>Try <code>ufw status</code> on the server.</span>";
 }
@@ -176,7 +176,7 @@ function seo_row_state($r) {
     .error-row { background: #FEE2E2 !important; }
   </style>
 </head>
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+<body class="bg-white  text-gray-900 ">
 <div class="max-w-6xl mx-auto p-6">
   <h1 class="text-3xl font-bold mb-6">🩺 System Meta Overview</h1>
 
@@ -194,15 +194,15 @@ function seo_row_state($r) {
   <section class="mb-10">
     <h2 class="text-xl font-semibold mb-2">System Health</h2>
     <div class="grid md:grid-cols-2 gap-4 text-sm">
-      <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+      <div class="bg-gray-100  p-4 rounded shadow">
         <h3 class="font-bold mb-2">🕒 Uptime</h3>
         <p><?= htmlspecialchars($system['Uptime']) ?></p>
       </div>
-      <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+      <div class="bg-gray-100  p-4 rounded shadow">
         <h3 class="font-bold mb-2">💾 Disk Usage</h3>
         <p><?= htmlspecialchars($system['Disk Usage']) ?></p>
       </div>
-      <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+      <div class="bg-gray-100  p-4 rounded shadow">
         <h3 class="font-bold mb-2">🧠 Memory</h3>
         <?php if ($mem_values): ?>
         <ul class="text-xs">
@@ -228,15 +228,15 @@ function seo_row_state($r) {
           <p><?= htmlspecialchars($system['Memory']) ?></p>
         <?php endif; ?>
       </div>
-      <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+      <div class="bg-gray-100  p-4 rounded shadow">
         <h3 class="font-bold mb-2">🌐 Nginx Status</h3>
         <p><?= htmlspecialchars($system['Nginx']) ?></p>
       </div>
-      <div class="md:col-span-2 bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+      <div class="md:col-span-2 bg-gray-100  p-4 rounded shadow">
         <h3 class="font-bold mb-2">🔥 Top CPU Processes</h3>
         <pre class="overflow-x-auto"><?= htmlspecialchars($system['Top CPU']) ?></pre>
       </div>
-      <div class="md:col-span-2 bg-gray-100 dark:bg-gray-800 p-4 rounded shadow">
+      <div class="md:col-span-2 bg-gray-100  p-4 rounded shadow">
         <h3 class="font-bold mb-2">📈 Top RAM Processes</h3>
         <pre class="overflow-x-auto"><?= htmlspecialchars($system['Top RAM']) ?></pre>
       </div>
@@ -257,9 +257,9 @@ function seo_row_state($r) {
 
   <section class="mb-10">
     <h2 class="text-xl font-semibold mb-2">Meta Tag &amp; SEO Coverage (Live Rendered)</h2>
-    <div class="overflow-x-auto rounded border border-gray-300 dark:border-gray-700">
+    <div class="overflow-x-auto rounded border border-gray-300 ">
       <table class="min-w-full text-sm">
-        <thead class="bg-gray-200 dark:bg-gray-700 text-left">
+        <thead class="bg-gray-200  text-left">
           <tr>
             <th class="py-1 px-2">File</th>
             <th class="py-1 px-2 text-center">Title</th>
@@ -270,26 +270,26 @@ function seo_row_state($r) {
             <th class="py-1 px-2">Notes</th>
           </tr>
         </thead>
-        <tbody class="bg-white dark:bg-gray-900">
+        <tbody class="bg-white ">
           <?php foreach ($meta_results as $file => $r):
               $row_state = seo_row_state($r);
               $row_class = $row_state === 'warn' ? 'warn-row' : ($row_state === 'error' ? 'error-row' : (($row_state === 'bad') ? 'error-row' : ''));
               $meta_words = $r['meta'] ? meta_desc_word_count($base . $file) : '–';
               ?>
-          <tr class="border-t dark:border-gray-800 <?= $row_class ?>">
+          <tr class="border-t  <?= $row_class ?>">
             <td class="py-1 px-2 font-mono">
-              <a href="<?= htmlspecialchars($base . $file) ?>" target="_blank" class="underline text-blue-700 dark:text-blue-300 hover:text-blue-900"><?= htmlspecialchars($file) ?></a>
+              <a href="<?= htmlspecialchars($base . $file) ?>" target="_blank" class="underline text-blue-700  hover:text-blue-900"><?= htmlspecialchars($file) ?></a>
             </td>
             <td class="py-1 px-2 text-center">
-              <?= $r['title'] ? '✅' : '<span class="text-red-600 dark:text-red-400 font-bold">❌</span>' ?>
+              <?= $r['title'] ? '✅' : '<span class="text-red-600  font-bold">❌</span>' ?>
             </td>
             <td class="py-1 px-2 text-center">
-              <?= $r['meta'] ? '✅' : '<span class="text-red-600 dark:text-red-400 font-bold">❌</span>' ?>
+              <?= $r['meta'] ? '✅' : '<span class="text-red-600  font-bold">❌</span>' ?>
             </td>
             <td class="py-1 px-2 text-center"><?= $meta_words ?></td>
             <td class="py-1 px-2 text-center"><?= intval($r['wordcount']) ?></td>
             <td class="py-1 px-2 text-center"><?= htmlspecialchars($r['size_kb']) ?></td>
-            <td class="py-1 px-2 text-xs text-gray-500 dark:text-gray-400">
+            <td class="py-1 px-2 text-xs text-gray-500 ">
               <?php
                 if ($r['error']) {
                   echo htmlspecialchars($r['error']);
@@ -307,7 +307,7 @@ function seo_row_state($r) {
         </tbody>
       </table>
     </div>
-    <div class="mt-6 text-sm text-gray-500 dark:text-gray-400">
+    <div class="mt-6 text-sm text-gray-500 ">
       <p>
         <b>Green = SEO-compliant, live rendered.</b> <br>
         <b>Yellow = Too short (&lt; 200 words) but otherwise tagged.</b><br>

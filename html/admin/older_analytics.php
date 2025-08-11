@@ -71,7 +71,7 @@ function lookup_ip($ip) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+<body class="bg-white text-gray-900  ">
 
 <div class="max-w-6xl mx-auto px-4 py-12">
   <h1 class="text-3xl font-bold mb-4">📊 Analytics Dashboard</h1>
@@ -79,7 +79,7 @@ function lookup_ip($ip) {
   <form method="get" class="mb-6 flex flex-wrap items-center gap-4 text-sm">
     <div>
       <label for="n" class="mr-2 font-semibold">Hits to Analyze:</label>
-      <input type="number" id="n" name="n" value="<?= htmlspecialchars($limit) ?>" min="10" max="<?= $total_lines ?>" class="border px-2 py-1 rounded w-24 dark:bg-gray-800 dark:border-gray-600">
+      <input type="number" id="n" name="n" value="<?= htmlspecialchars($limit) ?>" min="10" max="<?= $total_lines ?>" class="border px-2 py-1 rounded w-24  ">
     </div>
     <label class="flex items-center space-x-2">
       <input type="checkbox" name="no_me" value="1" <?= $exclude_ip ? 'checked' : '' ?> class="rounded border-gray-400">
@@ -95,13 +95,13 @@ function lookup_ip($ip) {
   </p>
 
   <div class="grid md:grid-cols-2 gap-6 text-center text-xl font-semibold mb-8">
-    <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded shadow">Hits in View<br><span class="text-3xl"><?= $total_hits ?></span></div>
-    <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded shadow">Avg Load Time<br><span class="text-3xl"><?= $avg_load ?>s</span></div>
+    <div class="p-4 bg-gray-100  rounded shadow">Hits in View<br><span class="text-3xl"><?= $total_hits ?></span></div>
+    <div class="p-4 bg-gray-100  rounded shadow">Avg Load Time<br><span class="text-3xl"><?= $avg_load ?>s</span></div>
   </div>
 
   <div class="overflow-x-auto mb-10">
-    <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700 text-sm text-left">
-      <thead class="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white">
+    <table class="min-w-full divide-y divide-gray-300  text-sm text-left">
+      <thead class="bg-gray-200  text-gray-900 ">
         <tr>
           <th class="px-4 py-2">IP</th>
           <th class="px-4 py-2">Hits</th>
@@ -110,10 +110,10 @@ function lookup_ip($ip) {
           <th class="px-4 py-2">ASN Name</th>
         </tr>
       </thead>
-      <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
+      <tbody class="bg-white  divide-y divide-gray-200 ">
       <?php foreach ($top_ips as $ip => $hits):
           $info = lookup_ip($ip); ?>
-        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+        <tr class="hover:bg-gray-50 :bg-gray-800">
           <td class="px-4 py-2 text-blue-600"><a href="http://ip-api.com/<?= $ip ?>" target="_blank"><?= $ip ?></a></td>
           <td class="px-4 py-2"><?= $hits ?></td>
           <td class="px-4 py-2"><?= $info['city'] ?? '-' ?>, <?= $info['countryCode'] ?? '-' ?></td>
@@ -126,21 +126,21 @@ function lookup_ip($ip) {
   </div>
 
   <div class="grid md:grid-cols-3 gap-6">
-    <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded shadow">
+    <div class="p-4 bg-gray-100  rounded shadow">
       <h2 class="font-bold mb-2">Top Pages</h2>
-      <ul class="text-sm text-gray-800 dark:text-gray-200">
+      <ul class="text-sm text-gray-800 ">
         <?php foreach (array_slice($page_hits, 0, 10) as $page => $count): ?>
         <li><?= htmlspecialchars($page) ?> (<?= $count ?>)</li>
         <?php endforeach; ?>
       </ul>
     </div>
 
-    <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded shadow">
+    <div class="p-4 bg-gray-100  rounded shadow">
       <h2 class="font-bold mb-2">Top Referrers</h2>
       <?php if (count($referrers) === 0): ?>
         <p class="text-sm italic text-gray-500">No referring traffic yet.</p>
       <?php else: ?>
-        <ul class="text-sm text-gray-800 dark:text-gray-200">
+        <ul class="text-sm text-gray-800 ">
           <?php foreach (array_slice($referrers, 0, 10) as $ref => $count): ?>
           <li><?= htmlspecialchars($ref) ?> (<?= $count ?>)</li>
           <?php endforeach; ?>
@@ -148,9 +148,9 @@ function lookup_ip($ip) {
       <?php endif; ?>
     </div>
 
-    <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded shadow">
+    <div class="p-4 bg-gray-100  rounded shadow">
       <h2 class="font-bold mb-2">Top User Agents</h2>
-      <ul class="text-sm text-gray-800 dark:text-gray-200">
+      <ul class="text-sm text-gray-800 ">
         <?php
         $grouped = ['iPhone Safari'=>0,'Windows Chrome'=>0,'Windows Firefox'=>0,'Mac Chrome'=>0,'Other'=>0];
         foreach ($user_agents as $ua => $n) {
@@ -167,7 +167,7 @@ function lookup_ip($ip) {
     </div>
   </div>
 
-  <div class="mt-10 p-4 bg-gray-100 dark:bg-gray-800 rounded shadow">
+  <div class="mt-10 p-4 bg-gray-100  rounded shadow">
     <h2 class="font-bold mb-2">Traffic by Date</h2>
     <ul class="text-sm">
       <?php foreach ($dates as $day => $n): ?>

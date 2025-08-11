@@ -153,24 +153,24 @@ $html_content = $Parsedown->text($content);
     }
   </style>
 </head>
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+<body class="bg-white  text-gray-900 ">
   <main class="max-w-6xl mx-auto px-4 py-8">
     <h1 class="text-4xl font-bold mb-6 flex items-center">
       <span class="mr-3">🤖</span>CLAUDE.md - AI Project Instructions
     </h1>
     
-    <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 mb-6 rounded">
+    <div class="bg-blue-50  border-l-4 border-blue-500 p-4 mb-6 rounded">
       <p class="text-sm">
         This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
         It contains critical business rules, code standards, and development methodology for the KTP Digital project.
       </p>
     </div>
     
-    <div class="markdown-content bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+    <div class="markdown-content bg-white  p-6 rounded-lg shadow-lg">
       <?= $html_content ?>
     </div>
     
-    <footer class="mt-12 pt-6 border-t border-gray-300 dark:border-gray-600">
+    <footer class="mt-12 pt-6 border-t border-gray-300 ">
       <div class="flex justify-between items-center text-xs text-gray-500">
         <div>
           <strong>File Location:</strong> <?= $claude_md_path ?>

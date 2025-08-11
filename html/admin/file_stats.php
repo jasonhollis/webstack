@@ -74,23 +74,23 @@ $total_untracked = count($untracked_files);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/tailwind.min.css">
 </head>
-<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white min-h-screen">
+<body class="bg-white text-gray-900   min-h-screen">
   <div class="max-w-3xl mx-auto px-6 py-10">
     <h1 class="text-3xl font-bold mb-2">📈 File & Git Activity Summary</h1>
 
-    <div class="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl shadow">
+    <div class="mb-4 p-4 bg-gray-100  rounded-xl shadow">
       <div class="flex justify-between items-center">
         <div class="text-lg font-semibold">Current Version</div>
         <div class="text-xl font-mono"><?=htmlspecialchars($current_version)?></div>
       </div>
     </div>
 
-    <div class="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl shadow flex items-center justify-between">
+    <div class="mb-4 p-4 bg-gray-100  rounded-xl shadow flex items-center justify-between">
       <div class="text-lg font-semibold">Web Hits Today</div>
       <div class="text-3xl font-mono"><?=number_format($hits_today)?></div>
     </div>
 
-    <div class="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl shadow">
+    <div class="mb-4 p-4 bg-gray-100  rounded-xl shadow">
       <div class="text-lg font-semibold mb-2">Git Commits</div>
       <ul class="text-sm font-mono grid grid-cols-2 gap-y-1">
         <li>Last 24h: <strong><?= $commits_24h ?></strong></li>
@@ -100,7 +100,7 @@ $total_untracked = count($untracked_files);
       </ul>
     </div>
 
-    <div class="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl shadow">
+    <div class="mb-4 p-4 bg-gray-100  rounded-xl shadow">
       <div class="text-lg font-semibold mb-2">Version Bumps</div>
       <ul class="text-sm font-mono grid grid-cols-2 gap-y-1">
         <li>Last 24h: <strong><?= $bumps_24h ?></strong></li>
@@ -110,7 +110,7 @@ $total_untracked = count($untracked_files);
       </ul>
     </div>
 
-    <div class="mb-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl shadow">
+    <div class="mb-6 p-4 bg-gray-100  rounded-xl shadow">
       <div class="text-lg font-semibold mb-2">Untracked File Changes (Past 24h)</div>
       <?php if ($total_untracked): ?>
         <ul class="text-xs font-mono">

@@ -144,7 +144,7 @@ $avg_time = $response_times
   <link href="/assets/tailwind.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+<body class="bg-white text-gray-900  ">
   <div class="max-w-6xl mx-auto p-6">
 
     <!-- Debug panel (remove after confirming) -->
@@ -177,19 +177,19 @@ $avg_time = $response_times
 
     <!-- summary cards -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div class="p-4 bg-white  rounded shadow">
         <div class="font-semibold">Total Hits</div>
         <div class="text-2xl"><?= $total_hits ?></div>
       </div>
-      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div class="p-4 bg-white  rounded shadow">
         <div class="font-semibold">Avg Load Time</div>
         <div class="text-2xl"><?= number_format($avg_time,3) ?>s</div>
       </div>
-      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div class="p-4 bg-white  rounded shadow">
         <div class="font-semibold">Top Page</div>
         <div class="text-xl"><?= htmlspecialchars(array_keys(top_n($page_hits,1))[0] ?? '-') ?></div>
       </div>
-      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div class="p-4 bg-white  rounded shadow">
         <div class="font-semibold">Top IPs</div>
         <table class="text-xs w-full">
           <thead>
@@ -208,14 +208,14 @@ $avg_time = $response_times
     </div>
 
     <!-- hits per day chart -->
-    <div class="mb-8 p-4 bg-white dark:bg-gray-800 rounded shadow">
+    <div class="mb-8 p-4 bg-white  rounded shadow">
       <canvas id="trafficChart" height="100"></canvas>
       <p class="text-xs text-center text-gray-500 mt-2">Hits per Day</p>
     </div>
 
     <!-- Top Pages & Referrers -->
     <div class="grid md:grid-cols-2 gap-4 mb-8">
-      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div class="p-4 bg-white  rounded shadow">
         <h2 class="font-bold mb-2">Top Pages</h2>
         <ol class="list-decimal ml-6 text-sm">
           <?php foreach(top_n($page_hits,7) as $uri=>$c): ?>
@@ -223,7 +223,7 @@ $avg_time = $response_times
           <?php endforeach; ?>
         </ol>
       </div>
-      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div class="p-4 bg-white  rounded shadow">
         <h2 class="font-bold mb-2">Top Referrers</h2>
         <ol class="list-decimal ml-6 text-sm">
           <?php foreach(top_n($referrers,7) as $r=>$c): ?>
@@ -235,7 +235,7 @@ $avg_time = $response_times
 
     <!-- Device & Browser Stats -->
     <div class="grid md:grid-cols-3 gap-4 mb-8">
-      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div class="p-4 bg-white  rounded shadow">
         <h2 class="font-bold mb-2">Device Types</h2>
         <div class="text-sm">
           <?php foreach($device_stats as $device=>$count): ?>
@@ -246,7 +246,7 @@ $avg_time = $response_times
           <?php endforeach; ?>
         </div>
       </div>
-      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div class="p-4 bg-white  rounded shadow">
         <h2 class="font-bold mb-2">Top Browsers</h2>
         <div class="text-sm">
           <?php foreach(top_n($browser_stats,5) as $browser=>$count): ?>
@@ -257,7 +257,7 @@ $avg_time = $response_times
           <?php endforeach; ?>
         </div>
       </div>
-      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div class="p-4 bg-white  rounded shadow">
         <h2 class="font-bold mb-2">Top Operating Systems</h2>
         <div class="text-sm">
           <?php foreach(top_n($os_stats,5) as $os=>$count): ?>
@@ -272,7 +272,7 @@ $avg_time = $response_times
 
     <!-- Recent Admin Hits -->
     <div class="grid md:grid-cols-2 gap-4">
-      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div class="p-4 bg-white  rounded shadow">
         <h2 class="font-bold mb-2">Recent Admin Hits</h2>
         <ul class="text-xs font-mono">
           <?php foreach(array_slice(array_reverse($admin_hits), 0, 10) as $e): ?>
@@ -285,7 +285,7 @@ $avg_time = $response_times
           <?php endforeach; ?>
         </ul>
       </div>
-      <div class="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div class="p-4 bg-white  rounded shadow">
         <h2 class="font-bold mb-2">Traffic by Date</h2>
         <pre class="text-xs"><?= 
             implode("\n", array_map(

@@ -62,7 +62,7 @@ if ($content !== false && strlen(trim($content)) > 0) {
       .markdown-body a img { border: 2px solid #3b82f6; }
     </style>
 </head>
-<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+<body class="bg-white text-gray-900  ">
 <div class="max-w-3xl mx-auto p-6">
     <h1 class="text-3xl font-bold mb-4">🎯 Objectives</h1>
     <form method="get" class="mb-6 flex items-center gap-4">
@@ -75,7 +75,7 @@ if ($content !== false && strlen(trim($content)) > 0) {
             <?php endforeach; ?>
         </select>
     </form>
-    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow mt-4 markdown-body">
+    <div class="bg-white  rounded-xl p-6 shadow mt-4 markdown-body">
         <?=$html?>
     </div>
 </div>

@@ -49,7 +49,7 @@ $text = @file_get_contents($full_path);
     .file-row.active { background: #2563eb22; font-weight: bold; }
   </style>
 </head>
-<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+<body class="bg-white text-gray-900  ">
 <div class="max-w-6xl mx-auto p-6">
   <div class="mb-4 flex items-center gap-4">
     <h1 class="text-3xl font-bold">Objectives & Change Log</h1>
@@ -58,12 +58,12 @@ $text = @file_get_contents($full_path);
   <div class="flex flex-col md:flex-row gap-6">
     <!-- File list/filter -->
     <div class="md:w-1/3">
-      <div class="bg-gray-100 dark:bg-gray-800 rounded p-3 shadow mb-4">
+      <div class="bg-gray-100  rounded p-3 shadow mb-4">
         <div class="font-semibold mb-2 text-lg">Objective & Log Files</div>
-        <input type="text" id="fileSearch" class="w-full mb-2 px-2 py-1 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900" placeholder="Filter files...">
+        <input type="text" id="fileSearch" class="w-full mb-2 px-2 py-1 rounded border border-gray-300  bg-white " placeholder="Filter files...">
         <div id="fileList" class="space-y-1 max-h-96 overflow-auto">
           <?php foreach ($filemeta as $meta): ?>
-            <a class="file-row block px-2 py-1 rounded hover:bg-blue-200 dark:hover:bg-blue-700<?php echo $meta['name'] === $file ? ' active' : '' ?>"
+            <a class="file-row block px-2 py-1 rounded hover:bg-blue-200 :bg-blue-700<?php echo $meta['name'] === $file ? ' active' : '' ?>"
               href="?file=<?php echo htmlspecialchars($meta['name']); ?>"
               data-name="<?php echo strtolower(htmlspecialchars($meta['name'])); ?>">
               <span class="inline-block w-52 truncate align-middle"><?php echo htmlspecialchars($meta['name']); ?></span>
@@ -79,16 +79,16 @@ $text = @file_get_contents($full_path);
       <div class="flex justify-between mb-2">
         <a href="#fileList" class="text-blue-600 hover:underline">&larr; Back to file list</a>
         <div>
-          <button id="toggleRaw" class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-blue-500 hover:text-white focus:outline-none text-sm mr-2">Show Raw</button>
+          <button id="toggleRaw" class="px-3 py-1 rounded bg-gray-200  text-gray-700  hover:bg-blue-500 hover:text-white focus:outline-none text-sm mr-2">Show Raw</button>
           <a href="<?php echo '/objectives/' . rawurlencode($file); ?>" class="inline-block px-3 py-1 rounded bg-blue-600 text-white text-sm hover:bg-blue-700 shadow transition">
             Download
           </a>
         </div>
       </div>
-      <div id="rendered" class="markdown-body prose prose-lg dark:prose-invert bg-white dark:bg-gray-900 rounded p-4 shadow overflow-x-auto"><?php
+      <div id="rendered" class="markdown-body prose prose-lg  bg-white  rounded p-4 shadow overflow-x-auto"><?php
         echo $parsedown->text($text ?: 'Unable to load objectives file.');
       ?></div>
-      <pre id="raw" class="hidden bg-gray-100 dark:bg-gray-800 text-xs p-4 rounded shadow overflow-x-auto whitespace-pre-wrap"><?php
+      <pre id="raw" class="hidden bg-gray-100  text-xs p-4 rounded shadow overflow-x-auto whitespace-pre-wrap"><?php
         echo htmlspecialchars($text ?: 'Unable to load objectives file.');
       ?></pre>
     </div>

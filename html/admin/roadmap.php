@@ -27,8 +27,8 @@ if (empty($_SESSION['admin_logged_in'])) {
       <meta name="viewport" content="width=device-width,initial-scale=1.0">
       <link rel="stylesheet" href="/assets/tailwind.min.css">
     </head>
-    <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white flex items-center justify-center min-h-screen">
-      <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg max-w-xs w-full">
+    <body class="bg-gray-100  text-gray-900  flex items-center justify-center min-h-screen">
+      <div class="bg-white  p-8 rounded-2xl shadow-lg max-w-xs w-full">
         <h1 class="text-2xl font-bold mb-6">🔐 Admin Login</h1>
         <?php if (!empty($login_error)): ?>
           <div class="bg-red-100 text-red-700 px-3 py-2 rounded mb-4"><?=htmlspecialchars($login_error)?></div>
@@ -76,10 +76,10 @@ $html = $Parsedown->text($content);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/tailwind.min.css">
 </head>
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+<body class="bg-white  text-gray-900 ">
   <div class="max-w-3xl mx-auto p-6">
     <h1 class="text-3xl font-bold mb-4">🛣️ Roadmap</h1>
-    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow mt-4 markdown-body">
+    <div class="bg-white  rounded-xl p-6 shadow mt-4 markdown-body">
       <?=$html?>
     </div>
   </div>

@@ -12,7 +12,8 @@ if (isset($_POST['admin_user'], $_POST['admin_pass'])) {
         password_verify($_POST['admin_pass'], ADMIN_PASS_HASH)
     ) {
         $_SESSION['admin_logged_in'] = true;
-        header('Location: ' . (isset($_GET['redirect']) ? $_GET['redirect'] : 'project_objectives.php'));
+        // Redirect to the originally requested page (current URI)
+        header('Location: ' . $_SERVER['REQUEST_URI']);
         exit;
     }
     $login_error = "Incorrect username or password.";
@@ -20,6 +21,8 @@ if (isset($_POST['admin_user'], $_POST['admin_pass'])) {
 
 // If not logged in, show login form and halt
 if (empty($_SESSION['admin_logged_in'])) {
+    // Capture the current page as the redirect target
+    $current_page = $_SERVER['REQUEST_URI'];
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -29,13 +32,13 @@ if (empty($_SESSION['admin_logged_in'])) {
       <meta name="viewport" content="width=device-width,initial-scale=1.0">
       <link rel="stylesheet" href="/assets/tailwind.min.css">
     </head>
-    <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white flex items-center justify-center min-h-screen">
-      <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg max-w-xs w-full">
+    <body class="bg-gray-100  text-gray-900  flex items-center justify-center min-h-screen">
+      <div class="bg-white  p-8 rounded-2xl shadow-lg max-w-xs w-full">
         <h1 class="text-2xl font-bold mb-6">🔐 Admin Login</h1>
         <?php if (!empty($login_error)): ?>
           <div class="bg-red-100 text-red-700 px-3 py-2 rounded mb-4"><?=htmlspecialchars($login_error)?></div>
         <?php endif; ?>
-        <form method="post" autocomplete="off">
+        <form method="post" action="<?=htmlspecialchars($current_page)?>" autocomplete="off">
           <label class="block mb-3">
             <span class="text-sm font-medium">Username</span>
             <input type="text" name="admin_user" class="mt-1 w-full px-3 py-2 rounded border focus:outline-none focus:ring" autofocus required>

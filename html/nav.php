@@ -1,10 +1,10 @@
-<?php include __DIR__."/analytics_logger.php"; ?>
+<?php include_once __DIR__."/analytics_logger.php"; ?>
 <nav class="bg-white dark:bg-black/90 fixed top-0 left-0 right-0 w-full shadow z-50">
   <div class="w-full px-4 sm:px-6 py-3 flex flex-wrap justify-between items-center overflow-x-auto">
-    <a href="index.php" class="flex items-center space-x-2">
+    <a href="/" class="flex items-center space-x-2">
       <picture>
         <source srcset="images/logos/KTP Logo2.png" media="(prefers-color-scheme: dark)">
-        <img src="/images/logos/KTP Logo.png" alt="KTP Logo" class="h-8 w-auto">
+        <img src="/images/logos/KTP Logo.png" alt="KTP Logo" class="h-8 w-auto" style="max-height: 32px; height: 32px;">
       </picture>
       <span class="font-bold text-gray-900 dark:text-white text-lg">KTP Digital</span>
     </a>
@@ -23,24 +23,24 @@
 
     <!-- Desktop nav -->
     <div class="hidden md:flex space-x-4 text-sm font-medium text-gray-800 dark:text-white whitespace-nowrap">
-      <a href="index.php" class="hover:underline">Home</a>
-      <a href="smallbiz.php" class="hover:underline">Small Business</a>
-      <a href="enterprise.php" class="hover:underline">Enterprise</a>
-      <a href="automation.php" class="hover:underline">Automation</a>
-      <a href="about.php" class="hover:underline">About</a>
-      <a href="contact.php" class="hover:underline">Contact</a>
+      <a href="/" class="hover:underline">Home</a>
+      <a href="/smallbiz.php" class="hover:underline">Small Business</a>
+      <a href="/enterprise.php" class="hover:underline">Enterprise</a>
+      <a href="/automation.php" class="hover:underline">Automation</a>
+      <a href="/about.php" class="hover:underline">About</a>
+      <a href="/contact.php" class="hover:underline">Contact</a>
     </div>
   </div>
 
   <!-- Mobile dropdown -->
   <div id="nav-dropdown" class="md:hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 text-sm font-medium text-gray-800 dark:text-white">
     <div class="pt-2 pb-4 space-y-2">
-      <a href="index.php" class="block hover:underline nav-link">Home</a>
-      <a href="smallbiz.php" class="block hover:underline nav-link">Small Business</a>
-      <a href="enterprise.php" class="block hover:underline nav-link">Enterprise</a>
-      <a href="automation.php" class="block hover:underline nav-link">Automation</a>
-      <a href="about.php" class="block hover:underline nav-link">About</a>
-      <a href="contact.php" class="block hover:underline nav-link">Contact</a>
+      <a href="/" class="block hover:underline nav-link">Home</a>
+      <a href="/smallbiz.php" class="block hover:underline nav-link">Small Business</a>
+      <a href="/enterprise.php" class="block hover:underline nav-link">Enterprise</a>
+      <a href="/automation.php" class="block hover:underline nav-link">Automation</a>
+      <a href="/about.php" class="block hover:underline nav-link">About</a>
+      <a href="/contact.php" class="block hover:underline nav-link">Contact</a>
     </div>
   </div>
 

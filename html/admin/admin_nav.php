@@ -3,11 +3,11 @@
 
 if (!isset($page)) $page = '';
 ?>
-<nav class="bg-white dark:bg-gray-900 shadow px-4 py-2 flex flex-wrap items-center justify-between">
+<nav class="bg-white  shadow px-4 py-2 flex flex-wrap items-center justify-between">
   <div class="flex items-center space-x-4">
     <a href="/"
       title="Back to Site"
-      class="flex items-center text-xl font-bold text-blue-700 dark:text-blue-300 hover:underline">
+      class="flex items-center text-xl font-bold text-blue-700  hover:underline">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6"/>

@@ -21,22 +21,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_file'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/tailwind.min.css">
 </head>
-<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+<body class="bg-white text-gray-900  ">
   <div class="max-w-6xl mx-auto px-4 py-10">
     <h1 class="text-3xl font-bold mb-6">🛠️ Maintenance & Snapshots</h1>
     <p class="mb-6 text-lg">View, download, or delete previous deployment snapshots of this website.</p>
     <div class="overflow-x-auto rounded-lg shadow">
-      <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-        <thead class="bg-gray-100 dark:bg-gray-800">
+      <table class="min-w-full divide-y divide-gray-200 ">
+        <thead class="bg-gray-100 ">
           <tr>
-            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Filename</th>
-            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Size</th>
-            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Modified</th>
-            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Download</th>
-            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Delete</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 ">Filename</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 ">Size</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 ">Modified</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 ">Download</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 ">Delete</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+        <tbody class="divide-y divide-gray-200 ">
         <?php
           $files = array_diff(scandir($snapshot_dir), ['.', '..']);
           usort($files, function($a, $b) use ($snapshot_dir) {
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_file'])) {
             $size = $size_bytes >= 1048576 ? round($size_bytes / 1048576, 1) . ' MB' : round($size_bytes / 1024, 1) . ' KB';
             $date = date("Y-m-d H:i:s", filemtime("$snapshot_dir/$file"));
             echo "<tr>";
-            echo "<td class='px-4 py-2 font-mono text-sm text-blue-600 dark:text-blue-400'>$file</td>";
+            echo "<td class='px-4 py-2 font-mono text-sm text-blue-600 '>$file</td>";
             echo "<td class='px-4 py-2 text-sm'>$size</td>";
             echo "<td class='px-4 py-2 text-sm text-gray-500'>$date</td>";
             echo "<td class='px-4 py-2 text-sm'><a href='$path' class='text-blue-600 hover:underline' download>⬇️ Download</a></td>";
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_file'])) {
       </table>
     </div>
   </div>
-  <footer class="mt-12 text-center text-sm text-gray-500 dark:text-gray-400">
+  <footer class="mt-12 text-center text-sm text-gray-500 ">
     &copy; <?php echo date("Y"); ?> KTP Digital Pty Ltd. All rights reserved.
   </footer>
 </body>

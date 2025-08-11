@@ -38,12 +38,12 @@ function markdown($text) {
   <meta name="description" content="Project directives and workflow policy for the KTP Webstack system.">
   <link rel="stylesheet" href="/assets/tailwind.min.css">
 </head>
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+<body class="bg-white  text-gray-900 ">
   <main class="max-w-4xl mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold mb-6 flex items-center">
       <span class="mr-2">📚</span>Project Directives
     </h1>
-    <div class="prose max-w-none dark:prose-invert">
+    <div class="prose max-w-none ">
       <?= markdown($content) ?>
     </div>
     <footer class="mt-12 text-xs text-gray-500">

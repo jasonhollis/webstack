@@ -161,11 +161,10 @@ ob_start();
             <span class="bank-gothic text-xl text-white">KTP DIGITAL</span>
         </div>
         <div class="hidden md:flex items-center space-x-6">
-            <a href="/index.php" class="text-white/80 hover:text-cyan-400 transition">Home</a>
-            <a href="/automation.php" class="text-white/80 hover:text-cyan-400 transition">Automation</a>
-            <a href="/enterprise.php" class="text-white/80 hover:text-cyan-400 transition">Enterprise</a>
-            <a href="/contact.php" class="text-white/80 hover:text-cyan-400 transition">Contact</a>
-            <a href="tel:1300587348" class="text-cyan-400 font-bold">1300 KTP DIG</a>
+            <a href="/" class="text-white/80 hover:text-cyan-400 transition">Home</a>
+            <a href="#automation" class="text-white/80 hover:text-cyan-400 transition">Automation</a>
+            <a href="#enterprise" class="text-white/80 hover:text-cyan-400 transition">Enterprise</a>
+            <a href="#contact" class="text-white/80 hover:text-cyan-400 transition">Contact</a>
         </div>
     </div>
 </nav>
@@ -513,8 +512,8 @@ ob_start();
         </form>
         
         <div class="text-center mt-8">
-            <p class="text-gray-400">Or call directly:</p>
-            <a href="tel:1300587348" class="text-3xl font-bold text-cyan-400 hover:text-cyan-300 bank-gothic">1300 KTP DIG</a>
+            <p class="text-gray-400">Professional consultation available</p>
+            <p class="text-xl text-gray-300">Melbourne's premium automation experts</p>
         </div>
     </div>
 </section>
