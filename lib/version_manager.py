@@ -196,9 +196,9 @@ class VersionManager:
         commit_msg = f"⬆️ Version bump: {new_version}"
         self.run_command(f'git commit -m "{commit_msg}"')
         
-        # Push to origin/master (quick timeout to avoid hanging)
+        # Push to origin/master (30s timeout for normal pushes)
         print("📤 Pushing to remote repository...")
-        result = self.run_command("git push origin master 2>&1", check=False, timeout=5)
+        result = self.run_command("git push origin master 2>&1", check=False, timeout=30)
         if result is None:
             print("⚠️ Git push timed out. Changes saved locally. Push manually later.")
         elif result and result.returncode != 0:
@@ -210,7 +210,7 @@ class VersionManager:
         self.run_command(f'git tag -a {new_version} -m "Version {new_version}"')
         
         # Push tag
-        result = self.run_command(f"git push origin {new_version} 2>&1", check=False, timeout=5)
+        result = self.run_command(f"git push origin {new_version} 2>&1", check=False, timeout=30)
         if result and result.returncode == 0:
             print(f"✅ Tag {new_version} pushed")
         else:

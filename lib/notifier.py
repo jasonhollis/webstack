@@ -14,6 +14,16 @@ from typing import Optional, Dict, Any
 import logging
 from enum import Enum
 
+# Add DatabaseLogger support for notification tracking
+sys.path.append('/opt/webstack/automation/lib')
+try:
+    from DatabaseLogger import DatabaseLogger
+    db_logger = DatabaseLogger()
+    DB_LOGGING = True
+except Exception as e:
+    db_logger = None
+    DB_LOGGING = False
+
 class NotificationPriority(Enum):
     """Pushover priority levels"""
     LOWEST = -2
@@ -124,10 +134,30 @@ class Notifier:
                 result = response.json()
                 if result.get('status') == 1:
                     self.logger.info(f"Pushover notification sent: {title}")
+                    # Log successful notification to database
+                    if DB_LOGGING and db_logger:
+                        try:
+                            db_logger.log_operation(
+                                operation_type='api_call',
+                                operation_name=f'Pushover: {title}',
+                                script_path='lib/notifier.py'
+                            )
+                        except Exception as e:
+                            self.logger.debug(f"DB logging failed: {e}")
                     return True
                 else:
                     errors = result.get('errors', [])
                     self.logger.error(f"Pushover API errors: {errors}")
+                    # Log failed notification to database
+                    if DB_LOGGING and db_logger:
+                        try:
+                            db_logger.log_error(
+                                error_level='warning',
+                                error_source='pushover_api',
+                                error_message=f"Notification failed: {errors}"
+                            )
+                        except Exception as e:
+                            self.logger.debug(f"DB error logging failed: {e}")
                     return False
             else:
                 self.logger.error(f"Pushover HTTP error: {response.status_code}")
@@ -136,12 +166,39 @@ class Notifier:
                 
         except requests.exceptions.Timeout:
             self.logger.warning("Pushover request timed out")
+            if DB_LOGGING and db_logger:
+                try:
+                    db_logger.log_error(
+                        error_level='warning',
+                        error_source='pushover_timeout',
+                        error_message=f"Notification timeout: {title}"
+                    )
+                except:
+                    pass
             return False
         except requests.exceptions.ConnectionError:
             self.logger.error("Could not connect to Pushover API")
+            if DB_LOGGING and db_logger:
+                try:
+                    db_logger.log_error(
+                        error_level='error',
+                        error_source='pushover_connection',
+                        error_message="Could not connect to Pushover API"
+                    )
+                except:
+                    pass
             return False
         except requests.exceptions.RequestException as e:
             self.logger.error(f"Pushover request failed: {e}")
+            if DB_LOGGING and db_logger:
+                try:
+                    db_logger.log_error(
+                        error_level='error',
+                        error_source='pushover_request',
+                        error_message=f"Request failed: {e}"
+                    )
+                except:
+                    pass
             return False
         except json.JSONDecodeError as e:
             self.logger.error(f"Invalid JSON response from Pushover: {e}")
