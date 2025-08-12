@@ -12,3 +12,16 @@ logs/*.gz
 .DS_Store
 *.swp
 *~
+
+# Large video files (use CDN or separate hosting)
+html/images/spiral_lossless_1080p.webm
+html/images/spiral_alpha.mov
+html/images/spiral_4k.mp4
+html/images/spiral_1080p.mp4
+html/images/spiral_720p.mp4
+html/images/spiral_small_4k.webm
+
+# Exclude all video files over 10MB as a safety measure
+html/images/*.mp4
+html/images/*.mov
+html/images/*.webm
