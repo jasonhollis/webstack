@@ -6,8 +6,17 @@ $page_desc = "KTP Digital delivers white glove IT consulting, automation, disast
 
 $content = <<<HTML
 <section class="max-w-5xl mx-auto text-center pt-6 pb-4">
-    <h1 class="text-4xl font-bold mb-4">Welcome to KTP Digital</h1>
-    <p class="text-lg mb-8">White glove IT, automation, disaster recovery, and secure networking solutions—crafted for enterprise, SMB, and home users.</p>
+    <h1 class="text-4xl font-bold mb-4">Enterprise IT Solutions for Melbourne</h1>
+    <p class="text-xl mb-4 text-blue-700 font-semibold">Serving Toorak, Brighton, Armadale & Melbourne's Premium Suburbs</p>
+    <p class="text-lg mb-8">White glove IT consulting, home automation, and bulletproof infrastructure from $15K to $200K+</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+        <a href="/premium-landing.php" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3 rounded-lg shadow-lg transition">
+            Premium Home Automation
+        </a>
+        <a href="/services.php" class="inline-block bg-gray-800 hover:bg-gray-900 text-white font-bold px-8 py-3 rounded-lg shadow-lg transition">
+            View All Services
+        </a>
+    </div>
 </section>
 
 <section class="max-w-6xl mx-auto pb-6">
@@ -87,8 +96,42 @@ $content = <<<HTML
             <div class="text-xs opacity-80">Professional website design, development, hosting, and support for your business or project.</div>
         </a>
     </div>
+    
+    <!-- Trust Signals -->
+    <div class="bg-gray-50 rounded-xl p-8 mt-12 mb-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+                <div class="text-3xl font-bold text-blue-600">40+</div>
+                <div class="text-sm text-gray-600">Years Experience</div>
+            </div>
+            <div>
+                <div class="text-3xl font-bold text-blue-600">500+</div>
+                <div class="text-sm text-gray-600">Projects Delivered</div>
+            </div>
+            <div>
+                <div class="text-3xl font-bold text-blue-600">24/7</div>
+                <div class="text-sm text-gray-600">Support Available</div>
+            </div>
+            <div>
+                <div class="text-3xl font-bold text-blue-600">100%</div>
+                <div class="text-sm text-gray-600">Melbourne Based</div>
+            </div>
+        </div>
+    </div>
+    
     <div class="mt-8 text-center">
-        <a href="/contact.php" class="inline-block bg-blue-600 hover:bg-blue-800 text-white font-bold px-6 py-3 rounded shadow">Contact Us Today</a>
+        <h3 class="text-2xl font-bold mb-4">Ready to Transform Your Technology?</h3>
+        <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Whether you need bulletproof networking, complete home automation, or enterprise IT strategy - we deliver solutions that just work.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact.php" class="inline-block bg-blue-600 hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-lg shadow">
+                Schedule Consultation
+            </a>
+            <a href="/lead_form.php" class="inline-block bg-green-600 hover:bg-green-800 text-white font-bold px-8 py-3 rounded-lg shadow">
+                Get Custom Quote
+            </a>
+        </div>
     </div>
 </section>
 HTML;

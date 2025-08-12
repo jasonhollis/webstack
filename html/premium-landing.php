@@ -472,6 +472,89 @@ ob_start();
     </div>
 </section>
 
+<!-- Deep Dive Content Section -->
+<section class="py-20 bg-gradient-to-b from-black to-slate-900">
+    <div class="container mx-auto px-4">
+        <h2 class="bank-gothic text-4xl md:text-5xl text-center mb-4 text-white">Explore Our Solutions</h2>
+        <p class="text-center text-xl mb-12 text-gray-400">Deep dive into our expertise and success stories</p>
+        
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+            <!-- Home Automation Deep Dive -->
+            <a href="/home-automation-older.php" class="group bg-slate-800/50 rounded-xl p-6 border border-slate-700 hover:border-cyan-400 transition">
+                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center group-hover:scale-110 transition">
+                    <img src="/images/icons/home-assistant.svg" alt="Home Assistant" class="w-10 h-10">
+                </div>
+                <h3 class="text-xl font-bold text-center mb-2 text-cyan-400 group-hover:text-cyan-300">Real Customer Stories</h3>
+                <p class="text-gray-400 text-center text-sm">
+                    See how we transformed homes with 200+ Zigbee devices, Tesla Powerwall integration, and legacy C-Bus systems
+                </p>
+                <div class="text-center mt-4 text-cyan-400 group-hover:text-cyan-300">
+                    Read Case Studies →
+                </div>
+            </a>
+            
+            <!-- Integration Showcase -->
+            <a href="/integration.php" class="group bg-slate-800/50 rounded-xl p-6 border border-slate-700 hover:border-cyan-400 transition">
+                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center group-hover:scale-110 transition">
+                    <span class="text-2xl">🔗</span>
+                </div>
+                <h3 class="text-xl font-bold text-center mb-2 text-cyan-400 group-hover:text-cyan-300">3,200+ Integrations</h3>
+                <p class="text-gray-400 text-center text-sm">
+                    Connect everything: Sonos, Philips Hue, Tesla, Miele, UniFi, Ring, and thousands more devices
+                </p>
+                <div class="text-center mt-4 text-cyan-400 group-hover:text-cyan-300">
+                    View All Integrations →
+                </div>
+            </a>
+            
+            <!-- Network Solutions -->
+            <a href="/ubiquiti.php" class="group bg-slate-800/50 rounded-xl p-6 border border-slate-700 hover:border-cyan-400 transition">
+                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center group-hover:scale-110 transition">
+                    <span class="text-2xl">🛡️</span>
+                </div>
+                <h3 class="text-xl font-bold text-center mb-2 text-cyan-400 group-hover:text-cyan-300">UniFi Excellence</h3>
+                <p class="text-gray-400 text-center text-sm">
+                    Enterprise networking with Dream Machine Pro, WiFi 6E, AI cameras, and bulletproof security
+                </p>
+                <div class="text-center mt-4 text-cyan-400 group-hover:text-cyan-300">
+                    Learn More →
+                </div>
+            </a>
+        </div>
+        
+        <!-- Additional Resources -->
+        <div class="bg-slate-800/30 rounded-xl p-8 max-w-4xl mx-auto">
+            <h3 class="text-2xl font-bold text-center mb-6 text-white">More Resources</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <a href="/mac.php" class="text-cyan-400 hover:text-cyan-300 underline">
+                    Apple/Mac Support
+                </a>
+                <a href="/disaster-recovery.php" class="text-cyan-400 hover:text-cyan-300 underline">
+                    Disaster Recovery
+                </a>
+                <a href="/cloud.php" class="text-cyan-400 hover:text-cyan-300 underline">
+                    Cloud Services
+                </a>
+                <a href="/nas.php" class="text-cyan-400 hover:text-cyan-300 underline">
+                    NAS & Storage
+                </a>
+                <a href="/security.php" class="text-cyan-400 hover:text-cyan-300 underline">
+                    Cybersecurity
+                </a>
+                <a href="/methodology.php" class="text-cyan-400 hover:text-cyan-300 underline">
+                    Our Methodology
+                </a>
+                <a href="/tailscale.php" class="text-cyan-400 hover:text-cyan-300 underline">
+                    VPN Solutions
+                </a>
+                <a href="/nextdns.php" class="text-cyan-400 hover:text-cyan-300 underline">
+                    DNS Security
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- FAQ Section -->
 <section class="py-20 bg-gradient-to-b from-black to-slate-900">
     <div class="container mx-auto px-4 max-w-4xl">

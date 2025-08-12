@@ -18,6 +18,7 @@ $utm_medium = $_GET['utm_medium'] ?? null;
 $utm_campaign = $_GET['utm_campaign'] ?? null;
 
 // Enhanced bot detection
+if (!function_exists('detectBot')) {
 function detectBot($user_agent) {
     $bot_patterns = [
         '/(bot|crawl|spider|scraper|curl|wget|python|zgrab|scanner)/i',
@@ -33,8 +34,10 @@ function detectBot($user_agent) {
     }
     return false;
 }
+} // end if !function_exists
 
 // Device type detection
+if (!function_exists('parseDeviceType')) {
 function parseDeviceType($user_agent) {
     if (!$user_agent || $user_agent === 'unknown') return 'unknown';
     
@@ -53,8 +56,10 @@ function parseDeviceType($user_agent) {
     }
     return 'desktop';
 }
+} // end if !function_exists
 
 // Browser detection
+if (!function_exists('parseBrowser')) {
 function parseBrowser($user_agent) {
     if (!$user_agent || $user_agent === 'unknown') return null;
     
@@ -67,8 +72,10 @@ function parseBrowser($user_agent) {
     
     return null;
 }
+} // end if !function_exists
 
 // OS detection
+if (!function_exists('parseOS')) {
 function parseOS($user_agent) {
     if (!$user_agent || $user_agent === 'unknown') return null;
     
@@ -81,6 +88,7 @@ function parseOS($user_agent) {
     
     return null;
 }
+} // end if !function_exists
 
 $is_bot = detectBot($ua) ? 1 : 0;
 $device_type = parseDeviceType($ua);

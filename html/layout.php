@@ -120,7 +120,7 @@ HTML;
 <body>
 
 <?php if (!$hide_nav): ?>
-  <?php include 'nav.php'; ?>
+  <?php include 'nav_enhanced.php'; ?>
 <?php endif; ?>
 
 <main>

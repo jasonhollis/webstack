@@ -13,31 +13,66 @@ $content = <<<HTML
     At KTP Digital, automation isn’t an add-on—it’s in our DNA. From macOS power workflows to enterprise triggers and smart home intelligence, we build systems that think ahead, respond instantly, and scale smoothly.
   </p>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    <!-- Platform & Productivity -->
-    <a href="platform-automation.php" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-200">
-      <h2 class="text-xl font-semibold mb-2">🖥️ Platform & Productivity</h2>
-      <p class="text-gray-700 dark:text-gray-300 text-base">
-        From Shortcuts and shell scripts to SSH deploys and webhooks—KTP creates seamless digital workflows for devs, creators, and teams.
-      </p>
-    </a>
-
-    <!-- Home & Environmental (Home Assistant logo centered) -->
-    <a href="home-automation.php" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-200 flex flex-col items-center">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <!-- Home Automation -->
+    <a href="/home-automation.php" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-200 flex flex-col items-center">
       <img src="/images/icons/home-assistant.svg" alt="Home Assistant logo" class="w-12 h-12 mb-3" loading="lazy" style="min-width:48px;min-height:48px;">
-      <h2 class="text-xl font-semibold mb-2 text-center">Home & Environmental</h2>
+      <h2 class="text-xl font-semibold mb-2 text-center">🏠 Home Automation</h2>
       <p class="text-gray-700 dark:text-gray-300 text-base text-center">
-        With deep expertise in Home Assistant, Fibaro, HomeKit, and smart sensors, KTP delivers rock-solid home automation for any environment.
+        Complete smart home solutions with Home Assistant. Control everything from one app. No more app fatigue.
       </p>
     </a>
 
-    <!-- Custom Logic & Agents -->
-    <a href="custom-automation.php" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-200">
-      <h2 class="text-xl font-semibold mb-2">🧠 Custom Logic & Agents</h2>
+    <!-- Business Automation -->
+    <a href="/smallbiz.php" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-200">
+      <h2 class="text-xl font-semibold mb-2">💼 Business Automation</h2>
       <p class="text-gray-700 dark:text-gray-300 text-base">
-        Need to automate something unique? KTP engineers bespoke solutions—cross-platform, agent-assisted, and battle-tested.
+        Streamline operations with automated workflows, Mac/Windows integration, and cloud services that scale with your business.
       </p>
     </a>
+
+    <!-- Network Infrastructure -->
+    <a href="/network.php" class="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-xl transition duration-200">
+      <h2 class="text-xl font-semibold mb-2">🔒 Network & Security</h2>
+      <p class="text-gray-700 dark:text-gray-300 text-base">
+        Enterprise-grade networking with UniFi, secure VPNs, and bulletproof infrastructure that just works.
+      </p>
+    </a>
+  </div>
+
+  <!-- Additional Service Links -->
+  <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-6 mb-8">
+    <h3 class="text-lg font-semibold mb-4 text-center">Explore Our Automation Services</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+      <a href="/ha-stories.php" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline">
+        Customer Stories
+      </a>
+      <a href="/integration.php" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline">
+        Device Integration
+      </a>
+      <a href="/mac.php" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline">
+        Apple/Mac Automation
+      </a>
+      <a href="/ubiquiti.php" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline">
+        UniFi Solutions
+      </a>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="text-center bg-blue-50 dark:bg-blue-900/20 rounded-lg p-8">
+    <h3 class="text-2xl font-semibold mb-4">Ready to Automate?</h3>
+    <p class="text-gray-700 dark:text-gray-300 mb-6">
+      Whether it's your home, business, or both - we'll design the perfect automation solution for you.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/home_automation_form.php" class="inline-block px-6 py-3 bg-blue-700 text-white font-semibold rounded-lg shadow hover:bg-blue-800 transition">
+        Home Automation Quote
+      </a>
+      <a href="/small_business_form.php" class="inline-block px-6 py-3 bg-green-700 text-white font-semibold rounded-lg shadow hover:bg-green-800 transition">
+        Business IT Quote
+      </a>
+    </div>
   </div>
 
   <div class="mt-12 text-center text-sm text-gray-500 dark:text-gray-400">
