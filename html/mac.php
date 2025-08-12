@@ -30,8 +30,8 @@ $content = <<<HTML
   <div class="relative z-10 max-w-2xl mx-auto p-6 md:p-12 text-center">
     <h1 class="text-3xl md:text-4xl font-extrabold mb-4 text-white drop-shadow">Apple Technology — Since 1984</h1>
     <p class="text-lg md:text-xl mb-3 text-blue-100 drop-shadow">
-      I’ve been working with Apple technology since the original Macintosh launch in 1984.<br>
-      From the first GUI to Apple Silicon, I’ve seen — and supported — every generation.
+      KTP Digital has been working with Apple technology since the original Macintosh launch in 1984.<br>
+      From the first GUI to Apple Silicon, we have supported every generation of Apple innovation.
     </p>
     <p class="mt-4 text-base md:text-lg text-blue-200 italic">
       “On January 24th, Apple Computer will introduce Macintosh. And you’ll see why 1984 won’t be like '1984.'”

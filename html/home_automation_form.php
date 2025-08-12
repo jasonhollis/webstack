@@ -229,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $budget,
                 $estimated_value,
                 $lead_score,
-                'home_automation_form',
+                'home_automation_form', // Already correct
                 $ip_address,
                 $user_agent,
                 $utm_source,
@@ -265,7 +265,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->addAddress($internal_notification_address);
             $mail->addReplyTo($email, $customer_name);
 
-            $mail->Subject = "New Lead – $proj_label [$customer_name]";
+            $mail->Subject = "[Home Automation] New Lead – $proj_label [$customer_name]";
             $mail->Body    = $email_body;
 
             $mail->send();
@@ -284,7 +284,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ob_start();
 ?>
 <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg px-6 py-6 mt-6 mb-10">
-  <h1 class="font-bold text-3xl sm:text-4xl mb-1">Request a Quote or Callback</h1>
+  <h1 class="font-bold text-3xl sm:text-4xl mb-1">Home Automation Quote Request</h1>
+  <p class="text-gray-600 mb-4">Transform your home with premium automation solutions. Serving Melbourne's finest suburbs including Toorak, Brighton, and Armadale.</p>
   <?php if (!empty($thanks)): ?>
     <div class="text-blue-700 font-bold mb-6 text-lg">Thank you, your enquiry has been submitted. We’ll get back to you soon!</div>
   <?php else: ?>
@@ -372,9 +373,9 @@ ob_start();
 $content = ob_get_clean();
 
 renderLayout(
-    'Request a Quote or Callback',
+    'Home Automation Quote Request',
     $content,
     '',
-    'Request a quote or callback for home automation, networking, and digital services by KTP Digital.',
-    '/lead_form.php'
+    'Request a quote for premium home automation solutions in Melbourne by KTP Digital - Smart homes for Toorak, Brighton, and Armadale.',
+    '/home_automation_form.php'
 );

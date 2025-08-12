@@ -6,9 +6,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 KTP Digital is a premium IT consultancy specializing in enterprise automation and high-end home automation for Melbourne's luxury market. This is a revenue-generating business website undergoing a complete modernization from legacy systems to a new architecture.
 
 ## Critical Business Files
-- `/opt/webstack/html/premium-landing.php` - PRIMARY REVENUE DRIVER - Google Ads landing page for lead generation
+- `/opt/webstack/html/premium-landing.php` - PRIMARY REVENUE DRIVER - Google Ads landing page with trust signals
+- `/opt/webstack/html/lead_form.php` - ✅ FIXED - Home automation form now saves to database with lead scoring
+- `/opt/webstack/html/home_automation_form.php` - Specialized HA form with premium suburb targeting
+- `/opt/webstack/html/small_business_form.php` - Mac/IT services form with urgency tracking
+- `/opt/webstack/html/network_infrastructure_form.php` - Enterprise network form ($150K+ projects)
+- `/opt/webstack/html/contact.php` - General contact form (working, saves to DB)
 - `/opt/webstack/automation/api/index.php` - Core automation API endpoints
-- Database: `premium_leads` table - Stores high-value leads ($25K-$100K+ projects)
+- Database: `premium_leads` table - Stores leads with scoring, UTM params, estimated value
 
 ## Common Development Commands
 
@@ -92,7 +97,7 @@ python3 /opt/webstack/bin/update_version.py vX.X.X
 ```
 
 ### Database Schema Highlights
-- `premium_leads`: Lead capture with budget_range, suburb, utm tracking
+- `premium_leads`: Lead capture with budget_range, suburb, utm tracking, lead_score, message, project_type
 - `automation_jobs`: Job queue for background processing
 - `companies` & `users`: Multi-tenant client management
 - `client_projects`: Track project values and device installations
@@ -226,21 +231,62 @@ When making changes, verify:
 5. Video backgrounds load properly
 6. No PHP errors in logs
 
+## 🚨 CRITICAL REVENUE ISSUES (Fix Immediately)
+
+### Lead Capture Problems
+1. **lead_form.php BROKEN** - Not saving to database (only to /opt/webstack/logs/leads.log)
+   - Rich data being lost: project type, integrations, property details, rooms, budget
+   - Email works (Mailgun → leads@ktp.digital → HubSpot)
+   - Database save missing completely
+   - Line 158: After file_put_contents, needs PDO insert to premium_leads table
+
+2. **Forms Not Optimized for High-End Clients**
+   - Budget ranges show low amounts ($1k-$2k) attracting wrong clients
+   - Need service tiers: "Consultation", "Premium Suite", "White-Glove Service"
+   - Target: $250/hr clients from Toorak, Brighton, Armadale
+
+3. **HubSpot Integration Constraints**
+   - Using cheapest HubSpot tier
+   - Bark feeds HA leads to HubSpot
+   - lead_form.php emails to HubSpot to avoid license upgrade
+   - Need: Multiple specialized forms with different email subjects for filtering
+
+### Revenue Optimization (v2.0.7) ✅ COMPLETE
+- **Specialized Forms Created**:
+  - ✅ home_automation_form.php - Premium HA with suburb targeting
+  - ✅ small_business_form.php - Mac/IT with urgency tracking
+  - ✅ network_infrastructure_form.php - Enterprise networking ($150K+)
+  - ⏳ quick_contact.php - Simple form (next iteration)
+
+- **Lead Scoring System Implemented**:
+  - ✅ Premium suburbs = +15-20 points
+  - ✅ Integration/feature count = ×5 points each
+  - ✅ Urgency/timeline = +5-15 points
+  - ✅ Budget range = up to +25 points
+  - ✅ Stored in premium_leads.lead_score column
+
+- **Content Issues Fixed**:
+  - ✅ Mac pages "I've" → professional language
+  - ✅ Trust signals added to premium-landing.php
+  - ⏳ integration_grid_test.php simplification (pending)
+  - ⏳ Case studies pages (next iteration)
+
 ## Current Development Focus
 
-### Recent Achievements (v2.0.0-v2.0.6)
-- **Python Version Management**: Successfully migrated update_version.sh to update_version.py
-- **Python Script Migration**: ✅ All critical bash scripts now Python (v2.0.4)
+### Recent Achievements (v2.0.0-v2.0.7)
+- **Revenue Optimization (v2.0.7)**: Fixed critical lead_form.php database save issue
+- **Specialized Forms (v2.0.7)**: Created 3 targeted forms with lead scoring and UTM tracking
+- **Lead Scoring System (v2.0.7)**: Automatic scoring based on suburb, budget, urgency
+- **HubSpot Integration (v2.0.7)**: Email subject tagging for lead categorization
+- **Trust Signals (v2.0.7)**: Added credibility metrics to premium-landing.php
+- **Professional Language (v2.0.7)**: Fixed all first-person references to corporate voice
+- **Version Manager Statistics (v2.0.6)**: Added comprehensive deployment metrics with Pushover
+- **Git Repository Cleanup (v2.0.6)**: Removed 630MB of video files from history
+- **Python Script Migration (v2.0.4)**: ✅ All critical bash scripts now Python
 - **Dual Logging Infrastructure**: Phase 1 complete - all scripts log to both DB and files
-- **Database Logging**: Complete migration path established with graceful degradation
-- **Version Manager Statistics**: Added comprehensive deployment metrics with Pushover integration (v2.0.6)
-- **Git Repository Cleanup**: Removed 630MB of video files from history (v2.0.6)
-- **Python DatabaseLogger**: Comprehensive logging class with shell integration via db_log.py
 - **Analytics Enhancement**: IP geolocation with caching, UTM tracking, bot detection
-- **Git Cleanup**: Removed 35,747 lines of logs + 630MB videos from version control
-- **Performance**: Query speed now instant (was seconds with grep)
-- **Admin System Fixes**: Resolved session handling issues, SSL cert monitoring, 7500x speedup
-- **Claude MD Viewer**: Added dedicated admin panel page for viewing CLAUDE.md with proper markdown rendering
+- **Performance**: Query speed instant, SSL monitoring 7500x speedup
+- **Admin System Fixes**: Resolved session handling, added Claude MD viewer
 
 ### Active Development Areas (v2.0.x - v2.1.x)
 - **Dual Logging Migration**: Phase 1 ✅ COMPLETE (v2.0.4)

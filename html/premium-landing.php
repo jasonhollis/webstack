@@ -217,6 +217,48 @@ ob_start();
     </div>
 </section>
 
+<!-- Trust Signals Section -->
+<section class="py-12 bg-slate-900 border-t border-slate-800">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto text-center">
+            <div class="trust-metric">
+                <div class="text-3xl font-bold text-cyan-400 mb-1">40+</div>
+                <div class="text-sm text-gray-400">Years Experience</div>
+                <div class="text-xs text-gray-500">Since 1984</div>
+            </div>
+            <div class="trust-metric">
+                <div class="text-3xl font-bold text-cyan-400 mb-1">500+</div>
+                <div class="text-sm text-gray-400">Premium Homes</div>
+                <div class="text-xs text-gray-500">Automated</div>
+            </div>
+            <div class="trust-metric">
+                <div class="text-3xl font-bold text-cyan-400 mb-1">$50M+</div>
+                <div class="text-sm text-gray-400">Systems Deployed</div>
+                <div class="text-xs text-gray-500">Total Value</div>
+            </div>
+            <div class="trust-metric">
+                <div class="text-3xl font-bold text-cyan-400 mb-1">24/7</div>
+                <div class="text-sm text-gray-400">Support Available</div>
+                <div class="text-xs text-gray-500">White Glove Service</div>
+            </div>
+        </div>
+        <div class="mt-8 flex flex-wrap justify-center items-center gap-8">
+            <div class="text-gray-400 text-sm">Trusted by Melbourne's Elite:</div>
+            <div class="flex flex-wrap gap-6 text-gray-300 font-semibold">
+                <span>Toorak</span>
+                <span class="text-gray-600">•</span>
+                <span>Brighton</span>
+                <span class="text-gray-600">•</span>
+                <span>Armadale</span>
+                <span class="text-gray-600">•</span>
+                <span>South Yarra</span>
+                <span class="text-gray-600">•</span>
+                <span>Hawthorn</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Services Section with Better Colors -->
 <section id="services" class="py-20 bg-gradient-to-b from-slate-900 to-slate-800">
     <div class="container mx-auto px-4">
