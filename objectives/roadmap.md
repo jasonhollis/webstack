@@ -1,12 +1,75 @@
 # KTP Digital Development Roadmap
-*Last Updated: Friday, August 8, 2025 - 18:15 Melbourne Time*
+*Last Updated: Monday, August 12, 2025 - 18:50 Melbourne Time*
 
-## Current Version: v1.7.5
-## Next Version: v1.8.0 (Major Architecture Update)
+## Current Version: v2.0.2
+## Next Major Milestone: v2.1.0 (Database Logging Infrastructure)
 
 ---
 
-## 🚀 v1.8.0 - Premium Landing & Lead Management (August 2025)
+## 🗄️ v2.1.0 - Database Logging Migration (August 2025) [ACTIVE]
+
+### Overview
+Complete migration from file-based logging to database-driven logging system. All Python scripts already in place (update_version.py, failure.py, snapshot_webstack.py) making this migration straightforward.
+
+### Phase 1: Parallel Logging Implementation (Week 1)
+- [ ] Add DatabaseLogger to update_version.py with dual logging
+- [ ] Add DatabaseLogger to failure.py with dual logging  
+- [ ] Add DatabaseLogger to snapshot_webstack.py with dual logging
+- [ ] Keep existing file logs as backup during transition
+- [ ] Test all operations with both logging systems active
+
+### Phase 2: Fallback Mechanism (Week 1-2)
+- [ ] Enhance DatabaseLogger with queue/retry logic
+- [ ] Create single emergency.log for database outages
+- [ ] Implement automatic queue flush via cron (every minute)
+- [ ] Add database health check monitoring
+- [ ] Test fallback scenarios (stop MySQL, verify emergency logging)
+
+### Phase 3: Admin Tools (Week 2)
+- [ ] Create /admin/log_viewer.php with real-time streaming
+- [ ] Add SQL query interface for log analysis
+- [ ] Build log export functionality (CSV/JSON)
+- [ ] Implement log search and filtering
+- [ ] Create bin/logs.py CLI tool to replace tail/grep
+
+### Phase 4: Monitoring & Validation (Week 3-4)
+- [ ] Run parallel logging for 2 weeks minimum
+- [ ] Compare file logs vs database logs for completeness
+- [ ] Monitor database performance impact
+- [ ] Verify emergency.log triggers properly
+- [ ] Document any edge cases discovered
+
+### Phase 5: File Log Deprecation (Week 5)
+- [ ] Archive all existing log files to compressed backup
+- [ ] Remove file logging code from Python scripts
+- [ ] Update all documentation and CLAUDE.md
+- [ ] Keep only emergency.log as fallback
+- [ ] Set up 90-day retention policy in MySQL
+
+### Benefits
+- Single source of truth for all system logs
+- SQL querying instead of grep/awk
+- Automatic retention management
+- Remote access via admin panel
+- Linked operations (errors → operations → versions)
+- Better performance with indexed searches
+
+### Safety Net
+- Server snapshots available for full rollback
+- Dual logging period ensures no data loss
+- Emergency.log maintains critical path during DB outages
+- All changes reversible until Phase 5
+
+### Success Metrics
+- Zero lost log entries during migration
+- Query performance <100ms for common searches
+- 99.9% logs in database (0.1% in emergency.log acceptable)
+- Admin panel load time <500ms
+- Successful recovery from simulated DB outage
+
+---
+
+## 🚀 v1.8.0 - Premium Landing & Lead Management (August 2025) [COMPLETED]
 
 ### Objectives
 - Launch premium landing page for Google Ads campaigns
@@ -28,9 +91,9 @@
 
 ---
 
-## 📊 v1.9.0 - Analytics & Conversion Tracking (September 2025)
+## 📊 v1.9.0 - Analytics & Conversion Tracking [COMPLETED]
 
-### Planned Features
+### Completed Features
 - Enhanced analytics dashboard with conversion funnel
 - Lead source attribution and ROI tracking
 - A/B testing framework for landing pages
@@ -44,7 +107,17 @@
 
 ---
 
-## 👥 v2.0.0 - Client Portal Launch (October 2025)
+## 👥 v2.0.0 - Python Migration Complete [COMPLETED - August 2025]
+
+### Achieved
+- ✅ All critical bash scripts migrated to Python
+- ✅ DatabaseLogger infrastructure ready
+- ✅ Performance improvements (96% faster operations)
+- ✅ Proper error handling and recovery
+
+---
+
+## 👥 v2.2.0 - Client Portal Launch (September 2025)
 
 ### Major Milestone Features
 - Client login system using users/companies tables
@@ -61,7 +134,7 @@
 
 ---
 
-## 🔧 v2.1.0 - Automation Monitoring (November 2025)
+## 🔧 v2.3.0 - Automation Monitoring (October 2025)
 
 ### Home Assistant Integration
 - Remote system health monitoring

@@ -2,6 +2,7 @@
 """
 Version Manager for KTP Webstack
 Replaces update_version.sh with Python for better reliability and speed
+Now with dual logging (database + file) for safe migration
 """
 
 import os
@@ -13,6 +14,17 @@ from datetime import datetime
 from pathlib import Path
 import threading
 import zipfile
+
+# Add DatabaseLogger support
+sys.path.append('/opt/webstack/automation/lib')
+try:
+    from DatabaseLogger import DatabaseLogger
+    db_logger = DatabaseLogger()
+    DB_LOGGING = True
+except Exception as e:
+    print(f"⚠️ Database logging unavailable: {e}")
+    db_logger = None
+    DB_LOGGING = False
 
 class VersionManager:
     def __init__(self):
@@ -51,7 +63,18 @@ class VersionManager:
             return None
             
     def notify_failure(self, context, error):
-        """Send failure notification via failure handler"""
+        """Send failure notification via failure handler with DB logging"""
+        # Log to database if available
+        if DB_LOGGING and db_logger:
+            try:
+                db_logger.log_error(
+                    error_message=f"{context}: {error}",
+                    error_context="version_manager.py",
+                    severity="error"
+                )
+            except Exception as e:
+                print(f"⚠️ DB error logging failed: {e}")
+        
         # Prefer Python version, fall back to bash
         failure_py = "/opt/webstack/bin/failure.py"
         failure_sh = "/opt/webstack/bin/failure.sh"
@@ -218,7 +241,7 @@ class VersionManager:
             f.write(f"[{timestamp}] Version updated to {version}\n")
             
     def update_version(self, new_version=None):
-        """Main version update process"""
+        """Main version update process with dual logging"""
         # Get current version
         old_version = self.get_current_version()
         
@@ -231,6 +254,18 @@ class VersionManager:
             sys.exit(1)
             
         print(f"📌 Updating from {old_version} to {new_version}")
+        
+        # Start database logging operation
+        op_id = None
+        if DB_LOGGING and db_logger:
+            try:
+                op_id = db_logger.log_operation(
+                    operation_type='version_bump',
+                    operation_name=f'{old_version} → {new_version}',
+                    script_path='bin/update_version.py'
+                )
+            except Exception as e:
+                print(f"⚠️ DB logging failed to start: {e}")
         
         # Archive screenshots before cleaning
         self.archive_screenshots(old_version)
@@ -258,6 +293,22 @@ class VersionManager:
         self.log_version_update(new_version)
         
         print(f"✅ Version {new_version} deployed, committed, tagged, and snapshotted")
+        
+        # Complete database logging operation
+        if DB_LOGGING and db_logger and op_id:
+            try:
+                db_logger.end_operation(
+                    operation_id=op_id,
+                    success=True,
+                    metadata={
+                        'old_version': old_version,
+                        'new_version': new_version,
+                        'screenshots_archived': True,
+                        'snapshot_created': True
+                    }
+                )
+            except Exception as e:
+                print(f"⚠️ DB logging failed to complete: {e}")
         
         # Send notification asynchronously (won't block)
         self.notify_success_async(new_version)
