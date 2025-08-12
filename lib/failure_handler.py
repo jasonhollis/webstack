@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Failure Handler for KTP Webstack
-Replaces failure.sh with Python for better reliability and future database integration
+Replaces failure.sh with Python for better reliability and database integration
+Now with dual logging (database + file) for safe migration
 """
 
 import os
@@ -12,6 +13,17 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 import logging
+
+# Add DatabaseLogger support
+sys.path.append('/opt/webstack/automation/lib')
+try:
+    from DatabaseLogger import DatabaseLogger
+    db_logger = DatabaseLogger()
+    DB_LOGGING = True
+except Exception as e:
+    print(f"⚠️ Database logging unavailable: {e}", file=sys.stderr)
+    db_logger = None
+    DB_LOGGING = False
 
 class FailureHandler:
     def __init__(self):
@@ -32,10 +44,23 @@ class FailureHandler:
         self.logger = logging.getLogger(__name__)
         
     def log_failure(self, context: str, details: str) -> None:
-        """Log failure to failures.log file"""
+        """Log failure to both database and file (dual logging)"""
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S %Z')
         log_entry = f"[{timestamp}][{context}] {details}\n"
         
+        # Database logging (if available)
+        if DB_LOGGING and db_logger:
+            try:
+                db_logger.log_error(
+                    error_level='critical',  # Failures are always critical
+                    error_source=context,
+                    error_message=details
+                )
+                self.logger.debug("Failure logged to database")
+            except Exception as e:
+                self.logger.warning(f"Database logging failed: {e}")
+        
+        # File logging (always, as fallback)
         try:
             with open(self.log_file, 'a') as f:
                 f.write(log_entry)

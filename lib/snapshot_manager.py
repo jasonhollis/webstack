@@ -2,6 +2,7 @@
 """
 Snapshot Manager for KTP Webstack
 Replaces snapshot_webstack.sh with Python for better reliability
+Now with dual logging (database + file) for safe migration
 """
 
 import os
@@ -11,6 +12,17 @@ import zipfile
 from datetime import datetime
 from pathlib import Path
 import fnmatch
+
+# Add DatabaseLogger support
+sys.path.append('/opt/webstack/automation/lib')
+try:
+    from DatabaseLogger import DatabaseLogger
+    db_logger = DatabaseLogger()
+    DB_LOGGING = True
+except Exception as e:
+    print(f"⚠️ Database logging unavailable: {e}")
+    db_logger = None
+    DB_LOGGING = False
 
 class SnapshotManager:
     def __init__(self):
@@ -80,13 +92,25 @@ class SnapshotManager:
         return False
         
     def create_snapshot(self, version=None):
-        """Create a snapshot of the webstack"""
+        """Create a snapshot of the webstack with dual logging"""
         version = self.get_version(version)
         timestamp = datetime.now().strftime("%Y-%m-%d-%H%M%S")
         snapshot_name = f"webstack-{version}-{timestamp}.zip"
         snapshot_path = self.snapshots_dir / snapshot_name
         
         print(f"[{datetime.now()}] 📦 Starting snapshot for version {version}...", file=sys.stderr)
+        
+        # Start database logging operation
+        op_id = None
+        if DB_LOGGING and db_logger:
+            try:
+                op_id = db_logger.log_operation(
+                    operation_type='snapshot',
+                    operation_name=f'Snapshot {version}',
+                    script_path='bin/snapshot_webstack.py'
+                )
+            except Exception as e:
+                print(f"⚠️ DB logging failed to start: {e}", file=sys.stderr)
         
         try:
             with zipfile.ZipFile(snapshot_path, 'w', zipfile.ZIP_DEFLATED) as zf:
@@ -122,10 +146,42 @@ class SnapshotManager:
             
             print(f"[{datetime.now()}] 📦 Snapshot created: {snapshot_name}")
             
+            # Complete database logging operation
+            if DB_LOGGING and db_logger and op_id:
+                try:
+                    file_size = os.path.getsize(snapshot_path)
+                    db_logger.complete_operation(
+                        operation_id=op_id,
+                        status='success',
+                        exit_code=0,
+                        stdout=f"Snapshot created: {snapshot_name} ({file_size:,} bytes)"
+                    )
+                except Exception as e:
+                    print(f"⚠️ DB logging failed to complete: {e}", file=sys.stderr)
+            
             return snapshot_path
             
         except Exception as e:
             print(f"❌ Snapshot failed: {e}", file=sys.stderr)
+            
+            # Log failure to database
+            if DB_LOGGING and db_logger:
+                try:
+                    if op_id:
+                        db_logger.complete_operation(
+                            operation_id=op_id,
+                            status='failed',
+                            exit_code=1,
+                            stderr=str(e)
+                        )
+                    db_logger.log_error(
+                        error_message=f"Snapshot failed: {e}",
+                        error_context="snapshot_webstack.py",
+                        severity="error"
+                    )
+                except Exception as db_err:
+                    print(f"⚠️ DB error logging failed: {db_err}", file=sys.stderr)
+            
             sys.exit(1)
             
     def add_directory_to_zip(self, zf, dir_path, base_path=None):

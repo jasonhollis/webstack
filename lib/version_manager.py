@@ -68,9 +68,9 @@ class VersionManager:
         if DB_LOGGING and db_logger:
             try:
                 db_logger.log_error(
-                    error_message=f"{context}: {error}",
-                    error_context="version_manager.py",
-                    severity="error"
+                    error_level="error",
+                    error_source="version_manager.py",
+                    error_message=f"{context}: {error}"
                 )
             except Exception as e:
                 print(f"⚠️ DB error logging failed: {e}")
@@ -300,12 +300,8 @@ class VersionManager:
                 db_logger.complete_operation(
                     operation_id=op_id,
                     status='success',
-                    metadata={
-                        'old_version': old_version,
-                        'new_version': new_version,
-                        'screenshots_archived': True,
-                        'snapshot_created': True
-                    }
+                    exit_code=0,
+                    stdout=f"Successfully updated from {old_version} to {new_version}"
                 )
             except Exception as e:
                 print(f"⚠️ DB logging failed to complete: {e}")
