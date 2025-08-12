@@ -225,12 +225,18 @@ When making changes, verify:
 - **Admin System Fixes**: Resolved session handling issues and screenshot upload permissions
 - **Claude MD Viewer**: Added dedicated admin panel page for viewing CLAUDE.md with proper markdown rendering
 
-### Active Development Areas (v2.0.x)
-- **Database-Driven Operations**: All system operations now logged to MySQL tables
-- **Python Migration**: ✅ COMPLETED - update_version.sh migrated to update_version.py
+### Active Development Areas (v2.0.x - v2.1.x)
+- **Dual Logging Migration**: Implementing parallel database + file logging (Phase 1 of 5)
+  - update_version.py: ✅ Dual logging active (v2.0.3)
+  - failure.py: ⏳ Pending
+  - snapshot_webstack.py: ⏳ Pending
+- **Database-Driven Operations**: All system operations logged to MySQL tables
+  - Tables: operation_logs, error_logs, version_history, cleanup_logs
+  - DatabaseLogger class in `/opt/webstack/automation/lib/`
+- **Python Migration**: ✅ COMPLETED - All critical bash scripts migrated
 - **Version Management**: Use `python3 bin/update_version.py vX.X.X` for version bumps
 - **Lead Management**: Active lead capture on premium-landing.php and contact.php
-- **Analytics System**: SQL-based analytics with meta tag tracking
+- **Analytics System**: SQL-based analytics with IP geolocation caching
 - **Admin Panel**: Full suite of tools including System Meta, Iteration Logs, Objectives tracking
 - **Performance Standards**: Admin pages should load in <20ms, disable expensive operations by default
 
@@ -245,6 +251,36 @@ When making changes, verify:
 - Version tracking enhanced with database audit trail (v2.0.1 current)
 - Python migration milestone achieved with update_version.py
 - Next focus: Migrating snapshot_webstack.sh and remaining bash scripts to Python
+
+## Logging Architecture
+
+### Dual Logging Strategy (v2.0.3+)
+**Current State:** Parallel logging to both database and files during migration
+- **Database First**: Try DatabaseLogger for structured queries
+- **File Fallback**: Maintain file logs for emergency debugging
+- **Graceful Degradation**: If DB unavailable, continue with files only
+- **Migration Timeline**: 5-6 weeks to complete transition
+
+### DatabaseLogger Usage
+```python
+from DatabaseLogger import DatabaseLogger
+db_logger = DatabaseLogger()
+
+# Start operation
+op_id = db_logger.log_operation('type', 'name', 'script.py')
+
+# Log errors
+db_logger.log_error('message', 'context', severity='error')
+
+# Complete operation
+db_logger.complete_operation(op_id, status='success', metadata={})
+```
+
+### Key Tables
+- `operation_logs`: Track all system operations
+- `error_logs`: Capture failures and issues
+- `version_history`: Version bump audit trail
+- `ip_geolocation_cache`: 7-day TTL for IP lookups
 
 ## Important Workflow Rules
 

@@ -297,9 +297,9 @@ class VersionManager:
         # Complete database logging operation
         if DB_LOGGING and db_logger and op_id:
             try:
-                db_logger.end_operation(
+                db_logger.complete_operation(
                     operation_id=op_id,
-                    success=True,
+                    status='success',
                     metadata={
                         'old_version': old_version,
                         'new_version': new_version,
