@@ -8,18 +8,25 @@ function run($cmd) {
 }
 
 // ------- SEO/Meta coverage: live render scan with dynamic file list -------
-$base = 'https://www.ktp.digital/';
-// Build list of public *.php files, excluding system, admin, script, and template files.
+// SEO Check - DISABLED BY DEFAULT (add ?seo=1 to URL to enable)
+$run_seo_check = isset($_GET['seo']) && $_GET['seo'] == '1';
 $public_pages = [];
-foreach (glob(__DIR__ . '/../*.php') as $f) {
-    $name = basename($f);
-    if (
-        in_array($name, ['layout.php', 'nav.php', 'Parsedown.php', 'robots.txt', 'sitemap.xml', 'VERSION']) ||
-        preg_match('/^admin|^older|^test|^index\-test|^newindex|^new_index|^_|\.bak$/i', $name)
-    ) continue;
-    $public_pages[] = $name;
+
+if ($run_seo_check) {
+    $base = 'https://www.ktp.digital/';
+    // Build list of public *.php files, excluding system, admin, script, and template files.
+    foreach (glob(__DIR__ . '/../*.php') as $f) {
+        $name = basename($f);
+        if (
+            in_array($name, ['layout.php', 'nav.php', 'Parsedown.php', 'robots.txt', 'sitemap.xml', 'VERSION']) ||
+            preg_match('/^admin|^older|^test|^index\-test|^newindex|^new_index|^_|\.bak$/i', $name)
+        ) continue;
+        $public_pages[] = $name;
+    }
+    sort($public_pages, SORT_STRING | SORT_FLAG_CASE);
+} else {
+    $base = 'https://www.ktp.digital/';
 }
-sort($public_pages, SORT_STRING | SORT_FLAG_CASE);
 
 function checkMetaTags($url) {
     $html = @file_get_contents($url);
@@ -60,9 +67,11 @@ function meta_desc_word_count($url) {
     return '';
 }
 $meta_results = [];
-foreach ($public_pages as $file) {
-    $url = $base . $file;
-    $meta_results[$file] = checkMetaTags($url);
+if ($run_seo_check) {
+    foreach ($public_pages as $file) {
+        $url = $base . $file;
+        $meta_results[$file] = checkMetaTags($url);
+    }
 }
 // ---------------------------------------------------------------------
 
@@ -101,35 +110,31 @@ if (preg_match('/Mem:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/', $mem_ra
     }
 }
 
-// ----- SSL: Checks /etc/letsencrypt/live/ww2.ktp.digital/fullchain.pem -----
-$cert_path = '/etc/letsencrypt/archive/ww2.ktp.digital/fullchain2.pem';
+// ----- SSL: Get certificate info from cache file -----
 $ssl_msg = '';
 $domain_str = '';
-if (file_exists($cert_path)) {
-    $raw_exp = run("openssl x509 -enddate -noout -in $cert_path 2>/dev/null");
-    $raw_dns = run("openssl x509 -text -noout -in $cert_path 2>/dev/null | grep DNS:");
-    $domains = [];
-    if (preg_match_all('/DNS:([^\n,]+)/', $raw_dns, $dns_matches)) {
-        foreach ($dns_matches[1] as $d) {
-            $domains = array_merge($domains, array_map('trim', explode(',', $d)));
-        }
+$cache_file = '/tmp/ssl_cert_info.txt';
+if (!file_exists($cache_file) || (time() - filemtime($cache_file) > 3600)) {
+    // Cache is missing or older than 1 hour, try to refresh it
+    run("/opt/webstack/bin/cache_ssl_info.sh 2>/dev/null");
+}
+$certbot_output = file_exists($cache_file) ? file_get_contents($cache_file) : '';
+if ($certbot_output && strpos($certbot_output, 'ww2.ktp.digital') !== false) {
+    // Parse domains
+    if (preg_match('/Domains: (.+)/', $certbot_output, $domain_match)) {
+        $domain_str = htmlspecialchars(trim($domain_match[1]));
     }
-    $domain_str = htmlspecialchars(implode(', ', $domains));
-    if (preg_match('/notAfter=(.+)/', $raw_exp, $m)) {
-        $expiry = strtotime($m[1]);
-        $now = time();
-        $days = floor(($expiry - $now) / 86400);
-        $exp_str = date('Y-m-d', $expiry) . " (" . ($days >= 0
-                ? "<span class='text-green-700 '>in $days day" . ($days == 1 ? '' : 's') . "</span>"
-                : "<span class='text-red-700 '>expired " . abs($days) . " day" . (abs($days) == 1 ? '' : 's') . " ago</span>"
+    // Parse expiry
+    if (preg_match('/Expiry Date: ([0-9]{4}-[0-9]{2}-[0-9]{2}) [0-9]{2}:[0-9]{2}:[0-9]{2}\+[0-9]{2}:[0-9]{2} \(VALID: ([0-9]+) days?\)/', $certbot_output, $exp_match)) {
+        $exp_date = $exp_match[1];
+        $days = intval($exp_match[2]);
+        $exp_str = $exp_date . " (" . ($days >= 0
+                ? "<span class='text-green-700'>in $days day" . ($days == 1 ? '' : 's') . "</span>"
+                : "<span class='text-red-700'>expired " . abs($days) . " day" . (abs($days) == 1 ? '' : 's') . " ago</span>"
             ) . ")";
-        if ($days >= 0) {
-            $ssl_msg = "<span class='text-green-700  font-bold'>Valid</span> &ndash; <b>$domain_str</b> &ndash; Expires: <b>$exp_str</b>";
-        } else {
-            $ssl_msg = "<span class='text-red-700  font-bold'>Expired</span> &ndash; <b>$domain_str</b> &ndash; Expired: <b>$exp_str</b>";
-        }
+        $ssl_msg = "<span class='text-green-700 font-bold'>Valid</span> – $domain_str – Expires: $exp_str";
     } else {
-        $ssl_msg = "<span class='text-red-700  font-bold'>SSL certificate: parsing error</span>";
+        $ssl_msg = "<span class='text-yellow-600 font-bold'>Certificate found but could not parse expiry</span>";
     }
 } else {
     $ssl_msg = "<span class='text-red-700  font-bold'>No SSL certificate found for ww2.ktp.digital</span>";
@@ -257,6 +262,12 @@ function seo_row_state($r) {
 
   <section class="mb-10">
     <h2 class="text-xl font-semibold mb-2">Meta Tag &amp; SEO Coverage (Live Rendered)</h2>
+    <?php if (!$run_seo_check): ?>
+      <div class="bg-gray-100 border border-gray-300 rounded p-4">
+        <p class="text-gray-700">SEO analysis is disabled for faster page loads.</p>
+        <p class="mt-2"><a href="?seo=1" class="text-blue-600 hover:underline">Click here to run SEO analysis</a> (may take 1-2 minutes)</p>
+      </div>
+    <?php else: ?>
     <div class="overflow-x-auto rounded border border-gray-300 ">
       <table class="min-w-full text-sm">
         <thead class="bg-gray-200  text-left">
@@ -314,6 +325,7 @@ function seo_row_state($r) {
         <b>Red = Missing or fetch failed (see Notes).</b>
       </p>
     </div>
+    <?php endif; ?>
   </section>
 </div>
 </body>

@@ -28,6 +28,13 @@ if (isset($_GET['show_all'])) {
 
 $exclude_ip = $_COOKIE['exclude_my_ip'] ?? null;
 
+// Also check GET parameter for form persistence
+if (isset($_GET['exclude_ip']) && $_GET['exclude_ip'] == '1' && $exclude_ip) {
+    // Keep the excluded IP active
+} elseif (isset($_GET['exclude_ip']) && $_GET['exclude_ip'] == '0') {
+    $exclude_ip = null;
+}
+
 // Database connection
 try {
     $pdo = new PDO('mysql:host=localhost;dbname=ktp_digital', 'root', '');
@@ -36,17 +43,25 @@ try {
     die("Database connection failed: " . $e->getMessage());
 }
 
+// Get parameters for date range and limit
+$days = isset($_GET['days']) ? intval($_GET['days']) : 30;
+$limit = isset($_GET['limit']) ? intval($_GET['limit']) : 1000;
+$days = max(1, min(365, $days)); // Constrain between 1-365 days
+$limit = max(100, min(10000, $limit)); // Constrain between 100-10000 records
+
 // Build query with optional IP exclusion
 $exclude_clause = $exclude_ip ? "AND ip != :exclude_ip" : "";
 
-// Get recent analytics data (last 1000 records)
+// Get recent analytics data
 $stmt = $pdo->prepare("
     SELECT * FROM web_analytics 
-    WHERE timestamp >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+    WHERE timestamp >= DATE_SUB(NOW(), INTERVAL :days DAY)
     $exclude_clause
     ORDER BY timestamp DESC 
-    LIMIT 1000
+    LIMIT :limit
 ");
+$stmt->bindParam(':days', $days, PDO::PARAM_INT);
+$stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
 
 if ($exclude_ip) {
     $stmt->bindParam(':exclude_ip', $exclude_ip);
@@ -68,6 +83,70 @@ $device_stats     = [];
 $browser_stats    = [];
 $os_stats         = [];
 $bot_stats        = [];
+$utm_sources      = [];
+$utm_campaigns    = [];
+$utm_mediums      = [];
+$countries        = [];
+$cities           = [];
+$session_stats    = [];
+$unique_sessions  = [];
+$ip_locations     = [];
+
+// IP geolocation with database caching
+function lookup_ip($ip, $pdo = null) {
+    static $geo_cache = [];
+    if (isset($geo_cache[$ip])) return $geo_cache[$ip];
+    
+    // Skip local IPs
+    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
+        return $geo_cache[$ip] = ['city' => 'Local', 'country' => 'Local', 'countryCode' => 'XX', 'org' => 'Private Network'];
+    }
+    
+    // Check database cache first (7 day expiry)
+    if ($pdo) {
+        $stmt = $pdo->prepare("SELECT * FROM ip_geolocation_cache WHERE ip = ? AND lookup_date > DATE_SUB(NOW(), INTERVAL 7 DAY)");
+        $stmt->execute([$ip]);
+        $cached = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($cached) {
+            return $geo_cache[$ip] = [
+                'country' => $cached['country'],
+                'countryCode' => $cached['country_code'],
+                'city' => $cached['city'],
+                'org' => $cached['organization'],
+                'as' => $cached['asn']
+            ];
+        }
+    }
+    
+    // Lookup from API (rate limited to avoid abuse)
+    $json = @file_get_contents("http://ip-api.com/json/{$ip}?fields=status,country,countryCode,city,regionName,org,as");
+    if ($json) {
+        $data = json_decode($json, true);
+        if ($data && $data['status'] === 'success') {
+            // Store in database cache
+            if ($pdo) {
+                try {
+                    $stmt = $pdo->prepare("REPLACE INTO ip_geolocation_cache 
+                        (ip, country_code, country, city, region, organization, asn) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->execute([
+                        $ip,
+                        $data['countryCode'] ?? null,
+                        $data['country'] ?? null,
+                        $data['city'] ?? null,
+                        $data['regionName'] ?? null,
+                        $data['org'] ?? null,
+                        $data['as'] ?? null
+                    ]);
+                } catch (Exception $e) {
+                    // Silently fail cache write
+                }
+            }
+            return $geo_cache[$ip] = $data;
+        }
+    }
+    return $geo_cache[$ip] = null;
+}
 
 // process database records
 foreach ($recent_data as $entry) {
@@ -116,6 +195,42 @@ foreach ($recent_data as $entry) {
         $bot_stats['humans'] = ($bot_stats['humans'] ?? 0) + 1;
     }
     
+    // UTM tracking
+    if (!empty($entry['utm_source'])) {
+        $utm_sources[$entry['utm_source']] = ($utm_sources[$entry['utm_source']] ?? 0) + 1;
+    }
+    if (!empty($entry['utm_campaign'])) {
+        $utm_campaigns[$entry['utm_campaign']] = ($utm_campaigns[$entry['utm_campaign']] ?? 0) + 1;
+    }
+    if (!empty($entry['utm_medium'])) {
+        $utm_mediums[$entry['utm_medium']] = ($utm_mediums[$entry['utm_medium']] ?? 0) + 1;
+    }
+    
+    // Geographic data - try database first, then lookup
+    if (!empty($entry['ip_country'])) {
+        $countries[$entry['ip_country']] = ($countries[$entry['ip_country']] ?? 0) + 1;
+    } else {
+        // Lookup IP location for frequent IPs (3+ hits to reduce API calls)
+        if ($ip_counts[$ip] >= 3) {
+            $geo = lookup_ip($ip, $pdo);
+            if ($geo && isset($geo['countryCode'])) {
+                $countries[$geo['countryCode']] = ($countries[$geo['countryCode']] ?? 0) + 1;
+                if (isset($geo['city']) && $geo['city']) {
+                    $cities[$geo['city']] = ($cities[$geo['city']] ?? 0) + 1;
+                }
+                $ip_locations[$ip] = $geo;
+            }
+        }
+    }
+    if (!empty($entry['ip_city'])) {
+        $cities[$entry['ip_city']] = ($cities[$entry['ip_city']] ?? 0) + 1;
+    }
+    
+    // Session tracking
+    if (!empty($entry['session_id'])) {
+        $unique_sessions[$entry['session_id']] = true;
+    }
+    
     // Admin vs Public (infer from page)
     if (strpos($entry['page'], '/admin/') !== false) {
         $admin_hits[] = $entry;
@@ -147,33 +262,45 @@ $avg_time = $response_times
 <body class="bg-white text-gray-900  ">
   <div class="max-w-6xl mx-auto p-6">
 
-    <!-- Debug panel (remove after confirming) -->
-    <div class="mb-6 p-4 bg-yellow-50 border-l-4 border-yellow-400">
-      <p><strong>Detected IP:</strong> <?=htmlspecialchars(getClientIP())?></p>
-      <p><strong>Excluded IP:</strong> <?=htmlspecialchars($exclude_ip ?: '(none)')?></p>
-      <p><strong>Sample IPs:</strong> <?=htmlspecialchars(implode(', ', array_slice(array_keys($ip_counts),0,5)))?></p>
-    </div>
 
     <div class="flex flex-wrap items-center justify-between mb-4">
-      <h1 class="text-3xl font-bold flex items-center gap-2">📊 Analytics Dashboard</h1>
-      <?php if (!$exclude_ip): ?>
-        <a href="?no_me=1"
-           class="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
-          Exclude My IP
-        </a>
-      <?php else: ?>
-        <a href="?show_all=1"
-           class="text-sm bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600">
-          Show All
-        </a>
-      <?php endif; ?>
+      <div>
+        <h1 class="text-3xl font-bold flex items-center gap-2">📊 Analytics Dashboard</h1>
+        <p class="text-sm text-gray-600 mt-1">Showing data for last <?= $days ?> days (<?= count($recent_data) ?> hits, limit: <?= $limit ?>)</p>
+      </div>
+      <div class="flex gap-2 items-center flex-wrap">
+        <form method="get" class="flex gap-2 items-center" id="analytics-form">
+          <?php if ($exclude_ip): ?>
+            <input type="hidden" name="exclude_ip" value="1">
+          <?php endif; ?>
+          <select name="days" class="px-2 py-1 border rounded text-sm" onchange="this.form.submit()">
+            <option value="7" <?= $days == 7 ? 'selected' : '' ?>>Last 7 days</option>
+            <option value="30" <?= $days == 30 ? 'selected' : '' ?>>Last 30 days</option>
+            <option value="90" <?= $days == 90 ? 'selected' : '' ?>>Last 90 days</option>
+            <option value="365" <?= $days == 365 ? 'selected' : '' ?>>Last year</option>
+          </select>
+          <select name="limit" class="px-2 py-1 border rounded text-sm" onchange="this.form.submit()">
+            <option value="500" <?= $limit == 500 ? 'selected' : '' ?>>500 hits</option>
+            <option value="1000" <?= $limit == 1000 ? 'selected' : '' ?>>1000 hits</option>
+            <option value="2500" <?= $limit == 2500 ? 'selected' : '' ?>>2500 hits</option>
+            <option value="5000" <?= $limit == 5000 ? 'selected' : '' ?>>5000 hits</option>
+            <option value="10000" <?= $limit == 10000 ? 'selected' : '' ?>>10000 hits</option>
+          </select>
+        </form>
+        <?php if (!$exclude_ip): ?>
+          <a href="?no_me=1&days=<?=$days?>&limit=<?=$limit?>"
+             class="px-3 py-1 bg-orange-500 text-white rounded hover:bg-orange-600 text-sm">
+            Exclude My IP
+          </a>
+        <?php else: ?>
+          <a href="?show_all=1&days=<?=$days?>&limit=<?=$limit?>"
+             class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-sm">
+            Show All IPs
+          </a>
+          <span class="text-xs text-gray-600">(Excluding <?=htmlspecialchars($exclude_ip)?>)</span>
+        <?php endif; ?>
+      </div>
     </div>
-
-    <p class="text-sm text-gray-600 mb-6">
-      Showing data for last <?= $total_hits ?> hit<?= $total_hits===1?'':'s' ?> (last 30 days)
-      <?= $exclude_ip? "(excluding your IP)" : "" ?>
-      | Bots: <?= $bot_stats['bots'] ?? 0 ?> | Humans: <?= $bot_stats['humans'] ?? 0 ?>
-    </p>
 
     <!-- summary cards -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
@@ -211,6 +338,53 @@ $avg_time = $response_times
     <div class="mb-8 p-4 bg-white  rounded shadow">
       <canvas id="trafficChart" height="100"></canvas>
       <p class="text-xs text-center text-gray-500 mt-2">Hits per Day</p>
+    </div>
+
+    <!-- Top IPs with Geolocation -->
+    <div class="p-4 bg-white rounded shadow mb-8">
+      <h2 class="font-bold mb-3">Top IP Addresses</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="px-3 py-2 text-left">IP Address</th>
+              <th class="px-3 py-2 text-left">Hits</th>
+              <th class="px-3 py-2 text-left">Location</th>
+              <th class="px-3 py-2 text-left">Organization</th>
+              <th class="px-3 py-2 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php 
+            $top_ips = top_n($ip_counts, 10);
+            foreach($top_ips as $ip => $hits): 
+              $geo = isset($ip_locations[$ip]) ? $ip_locations[$ip] : lookup_ip($ip, $pdo);
+            ?>
+              <tr class="border-b hover:bg-gray-50">
+                <td class="px-3 py-2 font-mono"><?= htmlspecialchars($ip) ?></td>
+                <td class="px-3 py-2"><?= $hits ?></td>
+                <td class="px-3 py-2">
+                  <?php if ($geo): ?>
+                    <?= htmlspecialchars($geo['city'] ?? '-') ?>, <?= htmlspecialchars($geo['country'] ?? $geo['countryCode'] ?? '-') ?>
+                  <?php else: ?>
+                    <span class="text-gray-500">Unknown</span>
+                  <?php endif; ?>
+                </td>
+                <td class="px-3 py-2 text-xs">
+                  <?php if ($geo && isset($geo['org'])): ?>
+                    <?= htmlspecialchars(substr($geo['org'], 0, 40)) ?>
+                  <?php else: ?>
+                    -
+                  <?php endif; ?>
+                </td>
+                <td class="px-3 py-2">
+                  <a href="http://ip-api.com/<?= urlencode($ip) ?>" target="_blank" class="text-blue-600 hover:underline text-xs">Details</a>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- Top Pages & Referrers -->
@@ -266,6 +440,146 @@ $avg_time = $response_times
               <span><?= $count ?></span>
             </div>
           <?php endforeach; ?>
+        </div>
+      </div>
+    </div>
+
+    <!-- UTM Campaign Tracking -->
+    <?php if (!empty($utm_sources) || !empty($utm_campaigns) || !empty($utm_mediums)): ?>
+    <div class="grid md:grid-cols-3 gap-4 mb-8">
+      <div class="p-4 bg-white rounded shadow">
+        <h2 class="font-bold mb-2">UTM Sources</h2>
+        <div class="text-sm">
+          <?php if (empty($utm_sources)): ?>
+            <p class="text-gray-500">No UTM source data</p>
+          <?php else: ?>
+            <?php foreach(top_n($utm_sources, 5) as $source=>$count): ?>
+              <div class="flex justify-between py-1">
+                <span><?= htmlspecialchars($source) ?>:</span>
+                <span><?= $count ?></span>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </div>
+      </div>
+      <div class="p-4 bg-white rounded shadow">
+        <h2 class="font-bold mb-2">UTM Campaigns</h2>
+        <div class="text-sm">
+          <?php if (empty($utm_campaigns)): ?>
+            <p class="text-gray-500">No campaign data</p>
+          <?php else: ?>
+            <?php foreach(top_n($utm_campaigns, 5) as $campaign=>$count): ?>
+              <div class="flex justify-between py-1">
+                <span><?= htmlspecialchars($campaign) ?>:</span>
+                <span><?= $count ?></span>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </div>
+      </div>
+      <div class="p-4 bg-white rounded shadow">
+        <h2 class="font-bold mb-2">UTM Mediums</h2>
+        <div class="text-sm">
+          <?php if (empty($utm_mediums)): ?>
+            <p class="text-gray-500">No medium data</p>
+          <?php else: ?>
+            <?php foreach(top_n($utm_mediums, 5) as $medium=>$count): ?>
+              <div class="flex justify-between py-1">
+                <span><?= htmlspecialchars($medium) ?>:</span>
+                <span><?= $count ?></span>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </div>
+      </div>
+    </div>
+    <?php endif; ?>
+
+    <!-- Geographic Analytics -->
+    <div class="grid md:grid-cols-2 gap-4 mb-8">
+      <div class="p-4 bg-white rounded shadow">
+        <h2 class="font-bold mb-2">Top Countries</h2>
+        <div class="text-sm">
+          <?php if (empty($countries)): ?>
+            <p class="text-gray-500">No geographic data available</p>
+          <?php else: ?>
+            <?php foreach(top_n($countries, 10) as $country=>$count): ?>
+              <div class="flex justify-between py-1">
+                <span><?= htmlspecialchars($country) ?>:</span>
+                <span><?= $count ?></span>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </div>
+      </div>
+      <div class="p-4 bg-white rounded shadow">
+        <h2 class="font-bold mb-2">Top Cities</h2>
+        <div class="text-sm">
+          <?php if (empty($cities)): ?>
+            <p class="text-gray-500">No city data available</p>
+          <?php else: ?>
+            <?php foreach(top_n($cities, 10) as $city=>$count): ?>
+              <div class="flex justify-between py-1">
+                <span><?= htmlspecialchars($city) ?>:</span>
+                <span><?= $count ?></span>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </div>
+      </div>
+    </div>
+
+    <!-- Session Analytics -->
+    <div class="grid md:grid-cols-3 gap-4 mb-8">
+      <div class="p-4 bg-white rounded shadow">
+        <h2 class="font-bold mb-2">Session Stats</h2>
+        <div class="text-sm">
+          <div class="flex justify-between py-1">
+            <span>Unique Sessions:</span>
+            <span class="font-bold"><?= count($unique_sessions) ?></span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span>Total Page Views:</span>
+            <span class="font-bold"><?= $total_hits ?></span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span>Pages per Session:</span>
+            <span class="font-bold"><?= count($unique_sessions) > 0 ? round($total_hits / count($unique_sessions), 1) : 0 ?></span>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-white rounded shadow">
+        <h2 class="font-bold mb-2">Traffic Type</h2>
+        <div class="text-sm">
+          <div class="flex justify-between py-1">
+            <span>Human Traffic:</span>
+            <span><?= $bot_stats['humans'] ?? 0 ?></span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span>Bot Traffic:</span>
+            <span><?= $bot_stats['bots'] ?? 0 ?></span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span>Bot Percentage:</span>
+            <span><?= $total_hits > 0 ? round((($bot_stats['bots'] ?? 0) / $total_hits) * 100, 1) : 0 ?>%</span>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-white rounded shadow">
+        <h2 class="font-bold mb-2">Performance</h2>
+        <div class="text-sm">
+          <div class="flex justify-between py-1">
+            <span>Avg Load Time:</span>
+            <span class="font-bold"><?= number_format($avg_time, 3) ?>s</span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span>Admin Pages:</span>
+            <span><?= count($admin_hits) ?></span>
+          </div>
+          <div class="flex justify-between py-1">
+            <span>Public Pages:</span>
+            <span><?= count($public_hits) ?></span>
+          </div>
         </div>
       </div>
     </div>

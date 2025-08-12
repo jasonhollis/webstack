@@ -44,6 +44,9 @@ nginx -t
 
 # Test automation API
 curl -X GET http://localhost/automation/api/health
+
+# Update SSL certificate cache (for System Meta page)
+/opt/webstack/bin/cache_ssl_info.sh
 ```
 
 ## Architecture Overview
@@ -80,6 +83,8 @@ curl -X GET http://localhost/automation/api/health
 - `automation_jobs`: Job queue for background processing
 - `companies` & `users`: Multi-tenant client management
 - `client_projects`: Track project values and device installations
+- `web_analytics`: Page hits with IP, user agent, load times, UTM params
+- `ip_geolocation_cache`: 7-day cache for IP lookups (country, city, org)
 
 ## Critical Business Rules
 
@@ -127,7 +132,29 @@ The site integrates with premium automation brands. Icons available in `/html/im
 - Zigbee, Z-Wave, Matter, Ring, Philips Hue
 - 60+ other premium brand integrations
 
+## External Services
+- **IP Geolocation**: ip-api.com (free tier, 45 req/min limit)
+  - Cached in `ip_geolocation_cache` table for 7 days
+  - Only lookup IPs with 3+ hits to avoid rate limits
+- **SSL Monitoring**: Certbot certificates cached to `/tmp/ssl_cert_info.txt`
+  - Updated via cron: `/etc/cron.d/ssl-cache`
+
 ## Development Methodology
+
+### CLAUDE.md Update Policy
+**IMPORTANT: Before running version bump or at session end, Claude must:**
+1. **Analyze session changes** for any new patterns, tools, or infrastructure
+2. **Compare against CLAUDE.md** to identify missing documentation
+3. **Update CLAUDE.md** with:
+   - New tools/scripts created (location, purpose, usage)
+   - Database schema changes or new tables
+   - External services/APIs integrated
+   - Performance benchmarks discovered
+   - Critical file paths or dependencies added
+   - Lessons learned that affect future development
+4. **Include in iteration summary** what was added to CLAUDE.md
+
+This ensures knowledge persistence across sessions and prevents re-solving problems.
 
 ### Collaborative Iteration Process
 When working with Claude on this project, we follow a structured iterative approach:
@@ -188,7 +215,8 @@ When making changes, verify:
 
 ## Current Development Focus
 
-### Recent Achievements (v1.8.6-v1.8.7)
+### Recent Achievements (v2.0.0-v2.0.1)
+- **Python Version Management**: Successfully migrated update_version.sh to update_version.py
 - **Database Logging Infrastructure**: Complete migration from file-based to database logging
 - **Python DatabaseLogger**: Comprehensive logging class with shell integration via db_log.py
 - **Analytics Enhancement**: Dual logging system with UTM tracking and bot detection
@@ -197,12 +225,14 @@ When making changes, verify:
 - **Admin System Fixes**: Resolved session handling issues and screenshot upload permissions
 - **Claude MD Viewer**: Added dedicated admin panel page for viewing CLAUDE.md with proper markdown rendering
 
-### Active Development Areas (v1.8.x-v1.9.0)
+### Active Development Areas (v2.0.x)
 - **Database-Driven Operations**: All system operations now logged to MySQL tables
-- **Python Migration**: Priority - Converting critical bash scripts (update_version.sh, snapshot_webstack.sh) to Python
-- **Lead Management**: Building admin dashboard for premium_leads table management
-- **Analytics System**: SQL-based analytics replacing file grep operations
-- **Admin Panel**: Enhancing admin tools with iteration logs, objectives tracking, and AI instruction viewer
+- **Python Migration**: ✅ COMPLETED - update_version.sh migrated to update_version.py
+- **Version Management**: Use `python3 bin/update_version.py vX.X.X` for version bumps
+- **Lead Management**: Active lead capture on premium-landing.php and contact.php
+- **Analytics System**: SQL-based analytics with meta tag tracking
+- **Admin Panel**: Full suite of tools including System Meta, Iteration Logs, Objectives tracking
+- **Performance Standards**: Admin pages should load in <20ms, disable expensive operations by default
 
 ### Infrastructure Improvements
 - 10+ logging tables: version_history, operation_logs, web_analytics, error_logs, etc.
@@ -212,16 +242,16 @@ When making changes, verify:
 
 ### Legacy System Migration
 - Shell scripts being replaced with Python modules (DatabaseLogger.py, db_log.py)
-- Version tracking enhanced with database audit trail (v1.8.7 current)
-- File-based logs maintained for backwards compatibility during transition
-- Next major milestone: v1.9.0 - Complete Python infrastructure migration
+- Version tracking enhanced with database audit trail (v2.0.1 current)
+- Python migration milestone achieved with update_version.py
+- Next focus: Migrating snapshot_webstack.sh and remaining bash scripts to Python
 
 ## Important Workflow Rules
 
 ### File Editing Best Practices
 **CRITICAL: Always edit files in place - NEVER create multiple versions**
 - Edit existing files directly rather than creating v2, v3, v4 versions
-- The version control system (`/opt/webstack/bin/update_version.sh`) handles version management
+- The version control system (`/opt/webstack/bin/update_version.py`) handles version management
 - Creating multiple file versions causes confusion and breaks the established workflow
 - Example: Edit `premium-landing.php` directly, don't create `premium-landing-v2.php`
 
