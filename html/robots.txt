@@ -1,21 +1,98 @@
+# KTP Digital robots.txt
+# Last updated: 2025-08-12
+
 User-agent: *
+
+# Core pages - Allow indexing
+Allow: /
+Allow: /*.php$
+Allow: /images/
+
+# Disallow admin and system directories
 Disallow: /admin/
 Disallow: /older/
 Disallow: /snapshots/
+Disallow: /automation/
+Disallow: /client-portal/
+
+# Disallow system files
 Disallow: /bin/
 Disallow: /logs/
 Disallow: /objectives/
-# # Disallow: /images/
+Disallow: /screenshots/
 Disallow: /css/
+Disallow: /assets/
+
+# Disallow specific files
 Disallow: /Parsedown.php
 Disallow: /layout.php
+Disallow: /layout-new.php
 Disallow: /nav.php
+Disallow: /nav_enhanced.php
+Disallow: /services_menu.php
+Disallow: /analytics_logger.php
+Disallow: /VERSION
+Disallow: /cookie_banner.php
+Disallow: /db_log.php
+Disallow: /debug_leads.php
+Disallow: /objectives_update.php
+Disallow: /phpinfo.php
+Disallow: /snapshot.php
+Disallow: /test_db_log.php
+Disallow: /test_integration_links.php
+Disallow: /testmail.php
+Disallow: /admin.php
+
+# Disallow test/old versions
 Disallow: /index-old.php
-Disallow: /newindex.php
 Disallow: /index-test.php
+Disallow: /newindex.php
+Disallow: /newlanding.php
+Disallow: /premium-landing.php.broken
+Disallow: /test-automation.php
+Disallow: /mailtest.php
 Disallow: /ping.php
+Disallow: /mac_older.php
+Disallow: /home-automation-older.php
+Disallow: /mino.php
 Disallow: /*.bak
 
+# Disallow form handlers (they should POST, not GET)
+Disallow: /lead_form.php
+Disallow: /home_automation_form.php
+Disallow: /small_business_form.php
+Disallow: /network_infrastructure_form.php
+
+# Integration test pages
+Disallow: /integration_grid_test.php
+Disallow: /integration_logo_test.php
+Disallow: /build_ha_integrations.php
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://www.ktp.digital/sitemap.xml
+
+# Special rules for major search engines
+User-agent: Googlebot
 Allow: /
 
-Sitemap: https://www.ktp.digital/sitemap.xml
+User-agent: Bingbot
+Allow: /
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: mta-sts-daemon
+Crawl-delay: 60

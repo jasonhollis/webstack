@@ -84,4 +84,5 @@ $content = <<<HTML
 </section>
 HTML;
 
-renderLayout($page_title, $content, $meta, $page_desc);
+$canonical = "https://www.ktp.digital/methodology.php";
+renderLayout($page_title, $content, $meta, $page_desc, $canonical);

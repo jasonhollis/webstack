@@ -15,12 +15,25 @@ $public_pages = [];
 if ($run_seo_check) {
     $base = 'https://www.ktp.digital/';
     // Build list of public *.php files, excluding system, admin, script, and template files.
+    // Exclude all pink/system files that shouldn't be tracked for SEO
+    $exclude_files = [
+        'layout.php', 'layout-new.php', 'nav.php', 'nav_enhanced.php', 'services_menu.php',
+        'Parsedown.php', 'analytics_logger.php', 'cookie_banner.php',
+        'db_log.php', 'debug_leads.php', 'objectives_update.php', 'phpinfo.php',
+        'snapshot.php', 'test_db_log.php', 'test_integration_links.php', 
+        'testmail.php', 'mailtest.php', 'admin.php', 'ping.php', 'mino.php',
+        'lead_form.php', 'home_automation_form.php', 'small_business_form.php',
+        'network_infrastructure_form.php', 'integration_grid_test.php',
+        'integration_logo_test.php', 'build_ha_integrations.php'
+    ];
+    
     foreach (glob(__DIR__ . '/../*.php') as $f) {
         $name = basename($f);
-        if (
-            in_array($name, ['layout.php', 'nav.php', 'Parsedown.php', 'robots.txt', 'sitemap.xml', 'VERSION']) ||
-            preg_match('/^admin|^older|^test|^index\-test|^newindex|^new_index|^_|\.bak$/i', $name)
-        ) continue;
+        // Skip if in exclude list
+        if (in_array($name, $exclude_files)) continue;
+        // Skip test/old/backup files
+        if (preg_match('/^test|^index\-test|^index\-old|^newindex|^newlanding|^new_index|^_|\.bak$|\.broken$|_older\.php$/i', $name)) continue;
+        
         $public_pages[] = $name;
     }
     sort($public_pages, SORT_STRING | SORT_FLAG_CASE);

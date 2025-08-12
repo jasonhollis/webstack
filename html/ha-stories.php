@@ -93,5 +93,6 @@ $content = <<<HTML
 HTML;
 // End Stories Page Content
 
-renderLayout($page_title, $content, '', $page_description);
+$canonical = "https://www.ktp.digital/ha-stories.php";
+renderLayout($page_title, $content, '', $page_description, $canonical);
 ?>

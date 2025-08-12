@@ -113,5 +113,6 @@ $content = <<<HTML
 </div>
 HTML;
 
-renderLayout($page_title, $content, $meta, $page_desc);
+$canonical = "https://www.ktp.digital/security.php";
+renderLayout($page_title, $content, $meta, $page_desc, $canonical);
 ?>

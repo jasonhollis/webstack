@@ -204,5 +204,6 @@ $content = <<<HTML
 </div>
 HTML;
 
-renderLayout($page_title, $content, '', $page_desc);
+$canonical = "https://www.ktp.digital/about.php";
+renderLayout($page_title, $content, '', $page_desc, $canonical);
 ?>

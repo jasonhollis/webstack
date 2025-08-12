@@ -90,5 +90,6 @@ $content = <<<HTML
 </div>
 HTML;
 
-renderLayout($page_title, $content, $meta, $page_desc);
+$canonical = "https://www.ktp.digital/network.php";
+renderLayout($page_title, $content, $meta, $page_desc, $canonical);
 ?>

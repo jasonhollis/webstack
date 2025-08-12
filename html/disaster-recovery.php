@@ -110,5 +110,6 @@ $content = <<<HTML
 </div>
 HTML;
 
-renderLayout($page_title, $content, $meta, $page_desc);
+$canonical = "https://www.ktp.digital/disaster-recovery.php";
+renderLayout($page_title, $content, $meta, $page_desc, $canonical);
 ?>

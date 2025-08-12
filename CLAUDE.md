@@ -6,12 +6,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 KTP Digital is a premium IT consultancy specializing in enterprise automation and high-end home automation for Melbourne's luxury market. This is a revenue-generating business website undergoing a complete modernization from legacy systems to a new architecture.
 
 ## Critical Business Files
-- `/opt/webstack/html/premium-landing.php` - PRIMARY REVENUE DRIVER - Google Ads landing page with trust signals
-- `/opt/webstack/html/lead_form.php` - ✅ FIXED - Home automation form now saves to database with lead scoring
+- `/opt/webstack/html/premium-landing.php` - PRIMARY REVENUE DRIVER - Google Ads landing page with deep content links
+- `/opt/webstack/html/lead_form.php` - ✅ v2.0.8 FIXED - Budget scoring uses ranges instead of tiers
 - `/opt/webstack/html/home_automation_form.php` - Specialized HA form with premium suburb targeting
 - `/opt/webstack/html/small_business_form.php` - Mac/IT services form with urgency tracking
 - `/opt/webstack/html/network_infrastructure_form.php` - Enterprise network form ($150K+ projects)
 - `/opt/webstack/html/contact.php` - General contact form (working, saves to DB)
+- `/opt/webstack/html/nav_enhanced.php` - ✅ v2.0.8 NEW - Dropdown navigation linking 30+ pages
+- `/opt/webstack/html/services.php` - ✅ v2.0.8 NEW - Complete service directory
+- `/opt/webstack/html/robots.txt` - ✅ v2.0.8 NEW - SEO crawling rules
+- `/opt/webstack/html/sitemap.xml` - ✅ v2.0.8 NEW - Complete sitemap for Google
+- `/opt/webstack/html/.well-known/mta-sts.txt` - ✅ v2.0.8 NEW - Email security policy
 - `/opt/webstack/automation/api/index.php` - Core automation API endpoints
 - Database: `premium_leads` table - Stores leads with scoring, UTM params, estimated value
 
@@ -144,6 +149,25 @@ python3 /opt/webstack/bin/update_version.py vX.X.X
 - Use transactions for multi-table operations
 - Include created_at/updated_at timestamps
 
+## Navigation & SEO Structure (v2.0.8+)
+
+### Navigation System
+- **Main Nav**: `/opt/webstack/html/nav.php` - Simple 6-item menu (legacy)
+- **Enhanced Nav**: `/opt/webstack/html/nav_enhanced.php` - Dropdown navigation with 30+ pages
+- **Services Menu**: `/opt/webstack/html/services_menu.php` - Central service page registry
+- **Categories**: Home Automation, Business IT, Network & Security, Cloud & Data, Tools
+
+### SEO Infrastructure
+- **robots.txt**: Comprehensive crawl rules, excludes system files, blocks bad bots
+- **sitemap.xml**: 30+ content pages with priorities and changefreq
+- **Canonical URLs**: All pages have canonical tags to prevent duplicate content
+- **MTA-STS**: `.well-known/mta-sts.txt` prevents email daemon hammering
+- **System Files Excluded**: 20+ system/test files excluded from SEO tracking
+
+### Critical PHP Fixes
+- **analytics_logger.php**: All functions wrapped in `if (!function_exists())` to prevent redeclaration
+- **Include Pattern**: Always use `include_once` for files with function definitions
+
 ## Integration Partners
 The site integrates with premium automation brands. Icons available in `/html/images/icons/`:
 - Tesla (Powerwall), Sonos, UniFi, Apple HomeKit
@@ -273,7 +297,12 @@ When making changes, verify:
 
 ## Current Development Focus
 
-### Recent Achievements (v2.0.0-v2.0.7)
+### Recent Achievements (v2.0.0-v2.0.8)
+- **Navigation Architecture (v2.0.8)**: Created dropdown nav system linking 30+ orphaned pages
+- **SEO Infrastructure (v2.0.8)**: Complete robots.txt, sitemap.xml, canonical URLs on all pages
+- **Critical Bug Fixes (v2.0.8)**: Fixed analytics_logger.php function redeclaration errors
+- **Performance (v2.0.8)**: System Meta page loads instantly after excluding system files
+- **MTA-STS Fix (v2.0.8)**: Stopped daemon hammering with proper .well-known files
 - **Revenue Optimization (v2.0.7)**: Fixed critical lead_form.php database save issue
 - **Specialized Forms (v2.0.7)**: Created 3 targeted forms with lead scoring and UTM tracking
 - **Lead Scoring System (v2.0.7)**: Automatic scoring based on suburb, budget, urgency
@@ -285,7 +314,6 @@ When making changes, verify:
 - **Python Script Migration (v2.0.4)**: ✅ All critical bash scripts now Python
 - **Dual Logging Infrastructure**: Phase 1 complete - all scripts log to both DB and files
 - **Analytics Enhancement**: IP geolocation with caching, UTM tracking, bot detection
-- **Performance**: Query speed instant, SSL monitoring 7500x speedup
 - **Admin System Fixes**: Resolved session handling, added Claude MD viewer
 
 ### Active Development Areas (v2.0.x - v2.1.x)

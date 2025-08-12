@@ -152,5 +152,6 @@ $content .= <<<HTML
 </section>
 HTML;
 
-renderLayout($page_title, $content, '', $page_desc);
+$canonical = "https://www.ktp.digital/contact.php";
+renderLayout($page_title, $content, '', $page_desc, $canonical);
 ?>

@@ -63,5 +63,6 @@ $content = <<<HTML
 HTML;
 // END LANDING PAGE CONTENT
 
-renderLayout($page_title, $content, '', $page_description);
+$canonical = "https://www.ktp.digital/home-automation.php";
+renderLayout($page_title, $content, '', $page_description, $canonical);
 ?>

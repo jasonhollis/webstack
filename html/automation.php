@@ -81,5 +81,6 @@ $content = <<<HTML
 </section>
 HTML;
 
-renderLayout($page_title, $content, '', $page_description);
+$canonical = "https://www.ktp.digital/automation.php";
+renderLayout($page_title, $content, '', $page_description, $canonical);
 ?>
