@@ -49,6 +49,19 @@ curl -X GET http://localhost/automation/api/health
 /opt/webstack/bin/cache_ssl_info.sh
 ```
 
+### Version Management
+```bash
+# Version bump with statistics (v2.0.6+)
+python3 /opt/webstack/bin/update_version.py vX.X.X
+
+# Statistics displayed include:
+# - Files changed, insertions, deletions
+# - Snapshot size
+# - Total commits and repository size
+# - Duration and version history count
+# All stats are sent via Pushover notification
+```
+
 ## Architecture Overview
 
 ### System Environment
@@ -215,14 +228,16 @@ When making changes, verify:
 
 ## Current Development Focus
 
-### Recent Achievements (v2.0.0-v2.0.4)
+### Recent Achievements (v2.0.0-v2.0.6)
 - **Python Version Management**: Successfully migrated update_version.sh to update_version.py
 - **Python Script Migration**: ✅ All critical bash scripts now Python (v2.0.4)
 - **Dual Logging Infrastructure**: Phase 1 complete - all scripts log to both DB and files
 - **Database Logging**: Complete migration path established with graceful degradation
+- **Version Manager Statistics**: Added comprehensive deployment metrics with Pushover integration (v2.0.6)
+- **Git Repository Cleanup**: Removed 630MB of video files from history (v2.0.6)
 - **Python DatabaseLogger**: Comprehensive logging class with shell integration via db_log.py
 - **Analytics Enhancement**: IP geolocation with caching, UTM tracking, bot detection
-- **Git Cleanup**: Removed 35,747 lines of logs from version control
+- **Git Cleanup**: Removed 35,747 lines of logs + 630MB videos from version control
 - **Performance**: Query speed now instant (was seconds with grep)
 - **Admin System Fixes**: Resolved session handling issues, SSL cert monitoring, 7500x speedup
 - **Claude MD Viewer**: Added dedicated admin panel page for viewing CLAUDE.md with proper markdown rendering

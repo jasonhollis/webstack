@@ -14,6 +14,7 @@ from datetime import datetime
 from pathlib import Path
 import threading
 import zipfile
+import time
 
 # Add DatabaseLogger support
 sys.path.append('/opt/webstack/automation/lib')
@@ -36,6 +37,7 @@ class VersionManager:
         self.log_file = Path("/opt/webstack/logs/deploy_webhook.log")
         self.snapshot_script = Path("/opt/webstack/bin/snapshot_webstack.sh")
         self.notify_script = Path("/opt/webstack/bin/notify_pushover.sh")
+        self.stats = {}
         
     def run_command(self, cmd, check=True, capture_output=True, timeout=30):
         """Run a shell command with proper error handling"""
@@ -87,15 +89,89 @@ class VersionManager:
                          capture_output=True, timeout=5)
         print(f"❌ {context}: {error}")
         
-    def notify_success_async(self, version):
-        """Send success notification - prefer Python version"""
+    def collect_git_stats(self):
+        """Collect git statistics for the deployment"""
         try:
+            # Get files changed in this commit
+            result = self.run_command("git diff --stat HEAD~1 HEAD", check=False)
+            if result and result.returncode == 0:
+                lines = result.stdout.strip().split('\n')
+                if lines and 'files changed' in lines[-1]:
+                    # Parse: "X files changed, Y insertions(+), Z deletions(-)"
+                    parts = lines[-1].split(',')
+                    for part in parts:
+                        if 'files changed' in part:
+                            self.stats['files_changed'] = int(part.split()[0])
+                        elif 'insertion' in part:
+                            self.stats['insertions'] = int(part.split()[0])
+                        elif 'deletion' in part:
+                            self.stats['deletions'] = int(part.split()[0])
+                            
+            # Get total commits
+            result = self.run_command("git rev-list --count HEAD", check=False)
+            if result and result.returncode == 0:
+                self.stats['total_commits'] = int(result.stdout.strip())
+                
+            # Get repo size
+            result = self.run_command("du -sh /opt/webstack/.git | cut -f1", check=False)
+            if result and result.returncode == 0:
+                self.stats['repo_size'] = result.stdout.strip()
+        except:
+            pass
+            
+    def collect_snapshot_stats(self, snapshot_path):
+        """Collect snapshot statistics"""
+        try:
+            if snapshot_path and snapshot_path.exists():
+                size_bytes = snapshot_path.stat().st_size
+                size_mb = size_bytes / (1024 * 1024)
+                self.stats['snapshot_size'] = f"{size_mb:.1f}MB"
+                self.stats['snapshot_name'] = snapshot_path.name
+        except:
+            pass
+            
+    def collect_database_stats(self):
+        """Collect database statistics"""
+        try:
+            if DB_LOGGING and db_logger:
+                # Query total version bumps
+                result = self.run_command(
+                    'echo "SELECT COUNT(*) FROM operation_logs WHERE operation_type=\'version_bump\';" | mariadb -u root ktp_digital -s',
+                    check=False
+                )
+                if result and result.returncode == 0:
+                    self.stats['total_versions'] = int(result.stdout.strip())
+        except:
+            pass
+    
+    def notify_success_async(self, version):
+        """Send success notification with statistics"""
+        try:
+            # Build statistics message
+            msg_parts = [f"Version {version} deployed successfully"]
+            
+            if self.stats.get('files_changed'):
+                msg_parts.append(f"📝 {self.stats['files_changed']} files changed")
+            if self.stats.get('insertions'):
+                msg_parts.append(f"➕ {self.stats['insertions']} insertions")
+            if self.stats.get('deletions'):
+                msg_parts.append(f"➖ {self.stats['deletions']} deletions")
+            if self.stats.get('snapshot_size'):
+                msg_parts.append(f"💾 Snapshot: {self.stats['snapshot_size']}")
+            if self.stats.get('duration'):
+                msg_parts.append(f"⏱️ Duration: {self.stats['duration']:.1f}s")
+            if self.stats.get('total_commits'):
+                msg_parts.append(f"📊 Total commits: {self.stats['total_commits']}")
+            if self.stats.get('repo_size'):
+                msg_parts.append(f"📦 Repo size: {self.stats['repo_size']}")
+                
+            message = "\n".join(msg_parts)
+            
             # Prefer Python notifier
             notify_py = Path("/opt/webstack/bin/notify_pushover.py")
             if notify_py.exists():
                 subprocess.run(
-                    ["python3", str(notify_py), "Webstack Update", 
-                     f"Version {version} deployed successfully"],
+                    ["python3", str(notify_py), "Webstack Update", message],
                     capture_output=True,
                     timeout=5,
                     check=False
@@ -103,8 +179,7 @@ class VersionManager:
             elif self.notify_script.exists():
                 # Fall back to bash version
                 subprocess.run(
-                    [str(self.notify_script), "Webstack Update", 
-                     f"Version {version} deployed successfully"],
+                    [str(self.notify_script), "Webstack Update", message],
                     capture_output=True,
                     timeout=5,
                     check=False
@@ -163,7 +238,10 @@ class VersionManager:
                 pass
                 
     def create_snapshot(self, version):
-        """Create snapshot of the current version"""
+        """Create snapshot of the current version and return path"""
+        timestamp = datetime.now().strftime("%Y-%m-%d-%H%M%S")
+        snapshot_path = self.snapshots_dir / f"webstack-{version}-{timestamp}.zip"
+        
         # Use Python snapshot manager if available, fall back to bash
         snapshot_py = Path("/opt/webstack/bin/snapshot_webstack.py")
         if snapshot_py.exists():
@@ -186,6 +264,8 @@ class VersionManager:
             if result and result.returncode != 0:
                 self.notify_failure("snapshot_webstack.sh", f"Failed for version {version}")
                 sys.exit(1)
+        
+        return snapshot_path
                 
     def git_operations(self, new_version):
         """Handle all git operations"""
@@ -221,18 +301,31 @@ class VersionManager:
         self.run_command("systemctl reload php8.2-fpm", check=False, timeout=5)
         
     def create_version_files(self, version):
-        """Create iteration and objectives files for new version"""
+        """Create iteration and objectives files for new version with initial content"""
         iteration_file = self.objectives_dir / f"{version}_iteration_log.md"
         objective_file = self.objectives_dir / f"{version}_objectives.md"
         
-        for file in [iteration_file, objective_file]:
+        # Create iteration log with header
+        if not iteration_file.exists():
             try:
-                file.touch(exist_ok=True)
-                os.chown(file, 0, 33)  # root:www-data (gid 33 is www-data)
-                file.chmod(0o664)
-                print(f"✅ Created: {file.name}")
+                iteration_content = f"# {version} Iteration Log\n*Session: {datetime.now().strftime('%A, %B %d, %Y')}*\n\n## Session Overview\n\n"
+                iteration_file.write_text(iteration_content)
+                os.chown(iteration_file, 0, 33)  # root:www-data
+                iteration_file.chmod(0o664)
+                print(f"✅ Created: {iteration_file.name}")
             except Exception as e:
-                print(f"⚠️ Failed to create {file.name}: {e}")
+                print(f"⚠️ Failed to create {iteration_file.name}: {e}")
+        
+        # Create objectives file with header
+        if not objective_file.exists():
+            try:
+                objectives_content = f"# {version} Objectives\n\n## Primary Goals\n\n## Tasks\n\n## Notes\n\n"
+                objective_file.write_text(objectives_content)
+                os.chown(objective_file, 0, 33)  # root:www-data
+                objective_file.chmod(0o664)
+                print(f"✅ Created: {objective_file.name}")
+            except Exception as e:
+                print(f"⚠️ Failed to create {objective_file.name}: {e}")
             
     def log_version_update(self, version):
         """Log the version update"""
@@ -241,7 +334,10 @@ class VersionManager:
             f.write(f"[{timestamp}] Version updated to {version}\n")
             
     def update_version(self, new_version=None):
-        """Main version update process with dual logging"""
+        """Main version update process with dual logging and statistics"""
+        # Track start time
+        start_time = time.time()
+        
         # Get current version
         old_version = self.get_current_version()
         
@@ -274,7 +370,8 @@ class VersionManager:
         self.cleanup_files()
         
         # Create snapshot of old version
-        self.create_snapshot(old_version)
+        snapshot_path = self.create_snapshot(old_version)
+        self.collect_snapshot_stats(snapshot_path)
         
         # Update VERSION file
         self.version_file.write_text(new_version)
@@ -282,6 +379,10 @@ class VersionManager:
         
         # Git operations
         self.git_operations(new_version)
+        
+        # Collect statistics after git operations
+        self.collect_git_stats()
+        self.collect_database_stats()
         
         # Reload services
         self.reload_services()
@@ -292,7 +393,28 @@ class VersionManager:
         # Log the update
         self.log_version_update(new_version)
         
-        print(f"✅ Version {new_version} deployed, committed, tagged, and snapshotted")
+        # Calculate duration
+        self.stats['duration'] = time.time() - start_time
+        
+        # Display statistics
+        print("\n📊 Deployment Statistics:")
+        if self.stats.get('files_changed'):
+            print(f"   📝 Files changed: {self.stats['files_changed']}")
+        if self.stats.get('insertions'):
+            print(f"   ➕ Insertions: {self.stats['insertions']}")
+        if self.stats.get('deletions'):
+            print(f"   ➖ Deletions: {self.stats['deletions']}")
+        if self.stats.get('snapshot_size'):
+            print(f"   💾 Snapshot size: {self.stats['snapshot_size']}")
+        if self.stats.get('total_commits'):
+            print(f"   📈 Total commits: {self.stats['total_commits']}")
+        if self.stats.get('repo_size'):
+            print(f"   📦 Repository size: {self.stats['repo_size']}")
+        if self.stats.get('total_versions'):
+            print(f"   🏷️ Total versions: {self.stats['total_versions']}")
+        print(f"   ⏱️ Duration: {self.stats['duration']:.1f} seconds")
+        
+        print(f"\n✅ Version {new_version} deployed, committed, tagged, and snapshotted")
         
         # Complete database logging operation
         if DB_LOGGING and db_logger and op_id:
