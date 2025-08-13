@@ -23,9 +23,10 @@ $current_version = file_exists($version_file) ? trim(file_get_contents($version_
 
 // --------- GIT COMMIT COUNTS ---------
 function count_commits($since) {
-    $cmd = 'HOME=/tmp bash -c "cd /opt/webstack && /usr/bin/git rev-list --count --all --since=\'' . $since . '\'"';
-    exec($cmd, $out, $code);
-    return ($code === 0 && isset($out[0])) ? intval($out[0]) : -1;
+    // Use git with explicit work tree and git dir
+    $cmd = "/usr/bin/git --git-dir=/opt/webstack/.git --work-tree=/opt/webstack rev-list --count --all --since='$since' 2>&1";
+    $result = shell_exec($cmd);
+    return $result !== null ? intval(trim($result)) : 0;
 }
 
 
@@ -37,10 +38,18 @@ $commits_365d = count_commits("1 year ago");
 
 // --------- VERSION BUMPS ---------
 function count_version_bumps($since) {
-    $cmd = 'HOME=/tmp bash -c "cd /opt/webstack && /usr/bin/git log --since=\'' . $since . '\' --pretty=format:\'%s\'"';
-    exec($cmd, $lines, $code);
-    if ($code !== 0) return -1;
-    return count(array_filter($lines, fn($line) => strpos($line, '⬆️ Version bump') === 0));
+    // Use git with explicit work tree and git dir
+    $cmd = "/usr/bin/git --git-dir=/opt/webstack/.git --work-tree=/opt/webstack log --since='$since' --pretty=format:'%s' 2>&1";
+    $result = shell_exec($cmd);
+    if ($result === null || trim($result) === '') return 0;
+    $lines = explode("\n", trim($result));
+    $count = 0;
+    foreach ($lines as $line) {
+        if (strpos($line, '⬆️ Version bump') === 0) {
+            $count++;
+        }
+    }
+    return $count;
 }
 
 
@@ -72,7 +81,7 @@ $total_untracked = count($untracked_files);
   <meta charset="UTF-8">
   <title>File Stats — KTP File Change Digest</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/assets/tailwind.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white text-gray-900   min-h-screen">
   <div class="max-w-3xl mx-auto px-6 py-10">
@@ -81,32 +90,32 @@ $total_untracked = count($untracked_files);
     <div class="mb-4 p-4 bg-gray-100  rounded-xl shadow">
       <div class="flex justify-between items-center">
         <div class="text-lg font-semibold">Current Version</div>
-        <div class="text-xl font-mono"><?=htmlspecialchars($current_version)?></div>
+        <div class="text-xl font-mono"><?php echo htmlspecialchars($current_version); ?></div>
       </div>
     </div>
 
     <div class="mb-4 p-4 bg-gray-100  rounded-xl shadow flex items-center justify-between">
       <div class="text-lg font-semibold">Web Hits Today</div>
-      <div class="text-3xl font-mono"><?=number_format($hits_today)?></div>
+      <div class="text-3xl font-mono"><?php echo number_format($hits_today); ?></div>
     </div>
 
     <div class="mb-4 p-4 bg-gray-100  rounded-xl shadow">
       <div class="text-lg font-semibold mb-2">Git Commits</div>
       <ul class="text-sm font-mono grid grid-cols-2 gap-y-1">
-        <li>Last 24h: <strong><?= $commits_24h ?></strong></li>
-        <li>Last 7d: <strong><?= $commits_7d ?></strong></li>
-        <li>Last 30d: <strong><?= $commits_30d ?></strong></li>
-        <li>Last 365d: <strong><?= $commits_365d ?></strong></li>
+        <li>Last 24h: <strong><?php echo $commits_24h; ?></strong></li>
+        <li>Last 7d: <strong><?php echo $commits_7d; ?></strong></li>
+        <li>Last 30d: <strong><?php echo $commits_30d; ?></strong></li>
+        <li>Last 365d: <strong><?php echo $commits_365d; ?></strong></li>
       </ul>
     </div>
 
     <div class="mb-4 p-4 bg-gray-100  rounded-xl shadow">
       <div class="text-lg font-semibold mb-2">Version Bumps</div>
       <ul class="text-sm font-mono grid grid-cols-2 gap-y-1">
-        <li>Last 24h: <strong><?= $bumps_24h ?></strong></li>
-        <li>Last 7d: <strong><?= $bumps_7d ?></strong></li>
-        <li>Last 30d: <strong><?= $bumps_30d ?></strong></li>
-        <li>Last 365d: <strong><?= $bumps_365d ?></strong></li>
+        <li>Last 24h: <strong><?php echo $bumps_24h; ?></strong></li>
+        <li>Last 7d: <strong><?php echo $bumps_7d; ?></strong></li>
+        <li>Last 30d: <strong><?php echo $bumps_30d; ?></strong></li>
+        <li>Last 365d: <strong><?php echo $bumps_365d; ?></strong></li>
       </ul>
     </div>
 
@@ -115,7 +124,7 @@ $total_untracked = count($untracked_files);
       <?php if ($total_untracked): ?>
         <ul class="text-xs font-mono">
           <?php foreach ($untracked_files as $uf): ?>
-            <li><?=htmlspecialchars($uf['file'])?> <span class="text-gray-400">(<?=htmlspecialchars($uf['mtime'])?>)</span></li>
+            <li><?php echo htmlspecialchars($uf['file']); ?> <span class="text-gray-400">(<?php echo htmlspecialchars($uf['mtime']); ?>)</span></li>
           <?php endforeach; ?>
         </ul>
       <?php else: ?>
@@ -123,7 +132,7 @@ $total_untracked = count($untracked_files);
       <?php endif; ?>
     </div>
 
-    <div class="text-gray-400 text-xs">Generated at <?=date('H:i:s')?> AEST</div>
+    <div class="text-gray-400 text-xs">Generated at <?php echo date('H:i:s'); ?> AEST</div>
   </div>
 </body>
 </html>
