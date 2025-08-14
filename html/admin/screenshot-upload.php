@@ -62,7 +62,7 @@ $screenshots = [];
 if (is_dir('/opt/webstack/screenshots')) {
     $files = scandir('/opt/webstack/screenshots');
     foreach ($files as $file) {
-        if ($file !== '.' && $file !== '..' && preg_match('/\.(png|jpg|jpeg|gif|webp)$/i', $file)) {
+        if ($file !== '.' && $file !== '..' && preg_match('/\.(png|jpg|jpeg|gif|webp|mov|mp4|pdf)$/i', $file)) {
             $filepath = '/opt/webstack/screenshots/' . $file;
             $screenshots[] = [
                 'name' => $file,
@@ -111,9 +111,9 @@ if (is_dir('/opt/webstack/screenshots')) {
                 <svg class="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                 </svg>
-                <p class="text-xl font-semibold text-gray-700 mb-2">Drop screenshots here</p>
-                <p class="text-gray-500 mb-4">or click to select files</p>
-                <input type="file" id="fileInput" class="hidden" multiple accept="image/*">
+                <p class="text-xl font-semibold text-gray-700 mb-2">Drop files here</p>
+                <p class="text-gray-500 mb-4">Images, videos (.mov, .mp4), or PDFs</p>
+                <input type="file" id="fileInput" class="hidden" multiple accept="image/*,.mov,.mp4,.pdf">
                 <button onclick="document.getElementById('fileInput').click()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
                     Choose Files
                 </button>

@@ -94,7 +94,8 @@ python3 /opt/webstack/bin/update_version.py vX.X.X
 ├── html/                    # Public website (nginx root)
 │   ├── premium-landing.php  # Lead generation landing page
 │   ├── images/icons/        # 60+ integration partner logos
-│   └── images/spiral_*.mp4  # Hero video backgrounds
+│   ├── images/spiral_*.mp4  # Hero video backgrounds
+│   └── images/spiral_alpha.mov # Spiral with alpha channel (225MB)
 ├── automation/              # Backend automation engine
 │   ├── api/                # REST API endpoints
 │   └── lib/                # Core libraries (Database.php, JobQueueManager.php)
@@ -180,6 +181,38 @@ The site integrates with premium automation brands. Icons available in `/html/im
   - Only lookup IPs with 3+ hits to avoid rate limits
 - **SSL Monitoring**: Certbot certificates cached to `/tmp/ssl_cert_info.txt`
   - Updated via cron: `/etc/cron.d/ssl-cache`
+
+## Video Production Capabilities
+
+### Available Tools & Licenses
+**IMPORTANT: The owner has full Adobe Creative Cloud, Final Cut Pro, and Pixelmator Pro licenses**
+- Can license and download 4K versions of any Adobe Stock content
+- Can create custom videos with alpha channels for transparency
+- Can export to any format/resolution/codec required
+- File size is NOT a constraint - focus on quality and visual impact
+
+### Video Workflow
+1. **Source Selection**: Choose Adobe Stock preview, owner will license 4K version
+2. **Editing**: Owner can modify in Final Cut Pro or Adobe Premiere/After Effects:
+   - Add/remove alpha channels for transparency
+   - Adjust colors, speed, direction
+   - Create seamless loops
+   - Export at any resolution (4K, 1080p, 720p, mobile-optimized)
+3. **Format Conversion**: 
+   - Primary editing outputs: .mov with ProRes or H.264
+   - Web formats: Use ffmpeg on server for .mp4 and .webm conversion
+   - Example: `ffmpeg -i input.mov -c:v libvpx-vp9 -b:v 2M output.webm`
+
+### Current Video Assets
+- `/opt/webstack/html/images/spiral_alpha.mov` - Original spiral with alpha channel (225MB)
+- Multiple spiral variations in .mp4 format for web use
+- Adobe Stock samples in `/opt/webstack/html/test-videos/` for evaluation
+
+### Best Practices
+- Request specific modifications rather than compromising on preview files
+- Specify if alpha channel is needed for overlay effects
+- Consider creating multiple versions: desktop (4K), tablet (1080p), mobile (720p)
+- Use .webm with VP9 codec for modern browsers, .mp4 H.264 fallback
 
 ## Development Methodology
 
