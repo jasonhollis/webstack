@@ -1,4 +1,7 @@
 <?php
+require '/opt/webstack/vendor/autoload.php'; // PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+
 // Database connection for lead capture
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'get_quote') {
     try {
@@ -6,19 +9,105 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'get_quote') {
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ]);
         
-        $stmt = $pdo->prepare("INSERT INTO premium_leads (name, email, phone, suburb, budget_range, ip_address, source, estimated_value) VALUES (?, ?, ?, ?, ?, ?, 'premium_landing_test', ?)");
+        // Build full name
+        $full_name = trim($_POST['first_name']) . ' ' . trim($_POST['surname']);
         
-        $budgetMap = ['consultation' => 5000, 'small' => 15000, 'medium' => 50000, 'large' => 100000, 'enterprise' => 200000];
+        // Build message with project details
+        $message = "Project Type: " . $_POST['project_type'] . "\n";
+        if (!empty($_POST['integrations'])) {
+            $message .= "Integrations: " . implode(', ', $_POST['integrations']) . "\n";
+        }
+        $message .= "Property: " . $_POST['property_type'] . ", ";
+        $message .= $_POST['bedrooms'] . " bed, " . $_POST['rooms'] . " other rooms\n";
+        if (!empty($_POST['details'])) {
+            $message .= "Details: " . $_POST['details'] . "\n";
+        }
+        
+        // Calculate estimated value and lead score
+        $budgetMap = [
+            'Under $5,000' => 5000,
+            '$5,000 - $15,000' => 15000, 
+            '$15,000 - $35,000' => 35000,
+            '$35,000 - $75,000' => 75000,
+            '$75,000+' => 100000,
+            'Prefer to discuss' => 50000
+        ];
+        $estimated_value = $budgetMap[$_POST['budget']] ?? 50000;
+        
+        // Calculate lead score
+        $lead_score = 50; // Base score
+        if ($estimated_value >= 75000) $lead_score += 25;
+        elseif ($estimated_value >= 35000) $lead_score += 15;
+        elseif ($estimated_value >= 15000) $lead_score += 10;
+        
+        // Add points for integrations
+        if (!empty($_POST['integrations'])) {
+            $lead_score += count($_POST['integrations']) * 5;
+        }
+        
+        $stmt = $pdo->prepare("INSERT INTO premium_leads 
+            (name, email, phone, suburb, postcode, budget_range, project_type, message, 
+             ip_address, source, estimated_value, lead_score) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'premium_landing_test', ?, ?)");
         
         $stmt->execute([
-            trim($_POST['name']), 
+            $full_name,
             trim($_POST['email']), 
             trim($_POST['phone']), 
-            $_POST['suburb'], 
-            $_POST['budget'], 
+            trim($_POST['suburb']),
+            trim($_POST['postcode']),
+            $_POST['budget'],
+            $_POST['project_type'],
+            $message,
             $_SERVER['REMOTE_ADDR'] ?? 'unknown',
-            $budgetMap[$_POST['budget']] ?? 50000
+            $estimated_value,
+            $lead_score
         ]);
+        
+        // Send email notification
+        try {
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.mailgun.org';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'scanner@mailgun.ktp.digital';
+            $mail->Password   = 'ScanMePlease888';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
+            
+            $mail->setFrom('info@ktp.digital', 'KTP Digital Lead Form');
+            $mail->addAddress('leads@ktp.digital');
+            $mail->addReplyTo(trim($_POST['email']), $full_name);
+            
+            // Build email body
+            $email_body = "New Lead from Premium Landing Page\n\n";
+            $email_body .= "Name: {$full_name}\n";
+            $email_body .= "Email: " . trim($_POST['email']) . "\n";
+            $email_body .= "Phone: " . trim($_POST['phone']) . "\n";
+            $email_body .= "Suburb: " . trim($_POST['suburb']) . "\n";
+            $email_body .= "Postcode: " . trim($_POST['postcode']) . "\n";
+            $email_body .= "Budget: " . $_POST['budget'] . "\n";
+            $email_body .= "Lead Score: {$lead_score}\n";
+            $email_body .= "\n{$message}";
+            
+            $project_label = [
+                'updates' => 'Updates to Existing',
+                'newsystem' => 'New System',
+                'newbuild' => 'New Build'
+            ][$_POST['project_type']] ?? $_POST['project_type'];
+            
+            $mail->Subject = "[Home Automation] New Lead - {$project_label} [{$full_name}]";
+            $mail->Body = $email_body;
+            
+            $mail->send();
+        } catch (Exception $e) {
+            // Log error but don't stop the process
+            error_log("Email send failed: " . $e->getMessage());
+        }
+        
+        // Also log to file
+        $log_entry = date('Y-m-d H:i:s') . " | {$full_name} | " . trim($_POST['email']) . " | " . trim($_POST['phone']) . " | Lead Score: {$lead_score}\n";
+        @file_put_contents('/opt/webstack/logs/leads.log', $log_entry, FILE_APPEND);
         
         header('Location: /premium-landing-spiral-test.php?success=1');
         exit;
@@ -238,6 +327,9 @@ footer {
 }
 CSS;
 
+// Add JavaScript for postcode autocomplete
+$extra_scripts = '<script src="/js/postcode_autocomplete.js" defer></script>';
+
 $content = '';
 
 if (isset($_GET['success'])) {
@@ -311,17 +403,17 @@ $content .= <<<HTML
     <section class="stats-section">
         <div style="max-width: 800px; margin: 0 auto;">
             <h3 style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;">Trusted by Melbourne's Elite</h3>
-            <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem;">Exclusively serving premium suburbs</p>
+            <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem;">Serving all of Melbourne and surrounding areas</p>
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; font-size: 1.125rem;">
-                <span>Toorak</span>
+                <span>Melbourne CBD</span>
                 <span style="opacity: 0.5;">•</span>
-                <span>Brighton</span>
+                <span>Eastern Suburbs</span>
                 <span style="opacity: 0.5;">•</span>
-                <span>Armadale</span>
+                <span>Bayside</span>
                 <span style="opacity: 0.5;">•</span>
-                <span>South Yarra</span>
+                <span>Inner City</span>
                 <span style="opacity: 0.5;">•</span>
-                <span>Hawthorn</span>
+                <span>All Areas</span>
             </div>
         </div>
     </section>
@@ -333,53 +425,93 @@ $content .= <<<HTML
                 <p style="color: #3b82f6; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Private Consultation</p>
                 <h2 class="gradient-title" style="font-size: 2.5rem;">REQUEST AN INVITATION</h2>
                 <p style="font-size: 1.25rem; color: #4b5563;">
-                    Limited availability for Melbourne's most discerning properties
+                    Professional consultation for your unique automation needs
                 </p>
             </div>
             
             <form method="POST">
                 <input type="hidden" name="action" value="get_quote">
                 
+                <!-- Name Fields -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                    <input type="text" name="name" required placeholder="Your Name" class="form-input">
+                    <input type="text" name="first_name" required placeholder="First Name" class="form-input">
+                    <input type="text" name="surname" required placeholder="Surname" class="form-input">
+                </div>
+                
+                <!-- Contact Info -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                     <input type="email" name="email" required placeholder="Email Address" class="form-input">
+                    <input type="tel" name="phone" required pattern="^0\d{9}$" maxlength="10" placeholder="Phone (0400 000 000)" class="form-input">
                 </div>
                 
-                <div class="form-group">
-                    <input type="tel" name="phone" required placeholder="Phone Number" class="form-input">
+                <!-- Location -->
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <input type="text" name="suburb" required placeholder="Your Suburb" class="form-input">
+                    <input type="text" name="postcode" pattern="\d{4}" maxlength="4" required placeholder="Postcode" class="form-input">
                 </div>
                 
+                <!-- Project Type -->
                 <div class="form-group">
-                    <select name="suburb" required class="form-input">
-                        <option value="">Select Your Suburb</option>
-                        <option value="toorak">Toorak</option>
-                        <option value="brighton">Brighton</option>
-                        <option value="armadale">Armadale</option>
-                        <option value="south-yarra">South Yarra</option>
-                        <option value="malvern">Malvern</option>
-                        <option value="canterbury">Canterbury</option>
-                        <option value="hawthorn">Hawthorn</option>
-                        <option value="other">Other Premium Suburb</option>
+                    <select name="project_type" required class="form-input">
+                        <option value="">Select Project Type</option>
+                        <option value="updates">Updates to Existing Automation</option>
+                        <option value="newsystem">Complete New System</option>
+                        <option value="newbuild">New Home Build Design</option>
                     </select>
                 </div>
                 
+                <!-- Integrations -->
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem; color: #6b7280;">Select Integration Areas (hold Ctrl/Cmd for multiple)</label>
+                    <select name="integrations[]" multiple size="6" class="form-input" style="height: auto; padding: 0.5rem;">
+                        <option value="Lighting">Lighting Control</option>
+                        <option value="Curtains">Curtains & Blinds</option>
+                        <option value="Climate">AC/Heating/Climate</option>
+                        <option value="Access">Doors/Gates Access Control</option>
+                        <option value="Security">Security/CCTV</option>
+                        <option value="Entertainment">TV/Cinema/Audio</option>
+                        <option value="Network">Network/WiFi</option>
+                        <option value="Energy">Solar/Energy Management</option>
+                    </select>
+                </div>
+                
+                <!-- Property Details -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <select name="property_type" required class="form-input">
+                        <option value="">Property Type</option>
+                        <option value="Apartment">Apartment/Unit</option>
+                        <option value="House">House</option>
+                        <option value="Townhouse">Townhouse</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input type="number" name="bedrooms" min="0" required placeholder="Bedrooms" class="form-input">
+                    <input type="number" name="rooms" min="0" required placeholder="Other Rooms" class="form-input">
+                </div>
+                
+                <!-- Budget -->
                 <div class="form-group">
                     <select name="budget" required class="form-input">
                         <option value="">Project Budget Range</option>
-                        <option value="consultation">Initial Consultation</option>
-                        <option value="small">Small Project</option>
-                        <option value="medium">Medium Project</option>
-                        <option value="large">Large Project</option>
-                        <option value="enterprise">Enterprise Solution</option>
+                        <option value="Under $5,000">Under $5,000</option>
+                        <option value="$5,000 - $15,000">$5,000 - $15,000</option>
+                        <option value="$15,000 - $35,000">$15,000 - $35,000</option>
+                        <option value="$35,000 - $75,000">$35,000 - $75,000</option>
+                        <option value="$75,000+">$75,000+</option>
+                        <option value="Prefer to discuss">Prefer to discuss with professional</option>
                     </select>
+                </div>
+                
+                <!-- Additional Details -->
+                <div class="form-group">
+                    <textarea name="details" rows="3" placeholder="Additional details (optional) - existing equipment, specific needs, special requests..." class="form-input" style="resize: vertical;"></textarea>
                 </div>
                 
                 <button type="submit" class="btn-primary">Submit Application</button>
             </form>
             
             <div style="text-align: center; margin-top: 2rem;">
-                <p style="font-size: 0.75rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.1em;">Exclusively Serving</p>
-                <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem;">Toorak • Brighton • Armadale • South Yarra</p>
+                <p style="font-size: 0.75rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.1em;">Proudly Serving</p>
+                <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem;">All Melbourne Metro & Regional Victoria</p>
                 <p style="font-size: 0.75rem; color: #6b7280; margin-top: 1rem;">Response within 24 hours for qualified inquiries</p>
             </div>
         </div>
@@ -427,10 +559,15 @@ $content .= <<<HTML
         </div>
         <div class="footer-bottom">
             <p>&copy; <?= date('Y') ?> KTP Digital - Premium IT Solutions</p>
-            <p style="margin-top: 0.5rem; font-size: 0.875rem;">Serving Toorak, Brighton, Armadale, South Yarra, and Melbourne's finest suburbs</p>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem;">Serving all of Melbourne and regional Victoria with premium IT solutions</p>
         </div>
     </div>
 HTML;
 
+// Check if renderLayout accepts scripts parameter
+// If not, we'll add the script directly to content
+if (!isset($extra_scripts)) {
+    $content .= '<script src="/js/postcode_autocomplete.js" defer></script>';
+}
 renderLayout($page_title, $content, $extra_styles, $page_desc);
 ?>
