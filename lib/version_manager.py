@@ -195,16 +195,31 @@ class VersionManager:
         
     def archive_screenshots(self, version):
         """Archive screenshots for the current version"""
-        png_files = list(self.screenshots_dir.glob("*.png"))
-        if png_files:
-            print(f"📸 Archiving {len(png_files)} screenshots for version {version}...")
+        # Define patterns for screenshot files (not Adobe Stock or other assets)
+        screenshot_patterns = [
+            "screenshot-*.png",
+            "screenshot-*.jpg",
+            "screenshot-*.jpeg", 
+            "screenshot-*.gif",
+            "screenshot-*.pdf",
+            "screenshot-*.mov",
+            "screenshot-*.mp4"
+        ]
+        
+        # Collect all screenshot files
+        screenshot_files = []
+        for pattern in screenshot_patterns:
+            screenshot_files.extend(list(self.screenshots_dir.glob(pattern)))
+        
+        if screenshot_files:
+            print(f"📸 Archiving {len(screenshot_files)} screenshots for version {version}...")
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             archive_path = self.snapshots_dir / f"screenshots_{version}_{timestamp}.zip"
             
             try:
                 with zipfile.ZipFile(archive_path, 'w', zipfile.ZIP_DEFLATED) as zf:
-                    for png in png_files:
-                        zf.write(png, png.name)
+                    for file in screenshot_files:
+                        zf.write(file, file.name)
                 print(f"📸 Screenshots archived to: {archive_path.name}")
             except Exception as e:
                 print(f"⚠️ Screenshot archive failed: {e}")
@@ -230,12 +245,23 @@ class VersionManager:
         except:
             pass
             
-        # Remove screenshots after archiving
-        for png in self.screenshots_dir.glob("*.png"):
-            try:
-                png.unlink()
-            except:
-                pass
+        # Remove screenshots after archiving (same patterns as archive)
+        screenshot_patterns = [
+            "screenshot-*.png",
+            "screenshot-*.jpg",
+            "screenshot-*.jpeg",
+            "screenshot-*.gif", 
+            "screenshot-*.pdf",
+            "screenshot-*.mov",
+            "screenshot-*.mp4"
+        ]
+        
+        for pattern in screenshot_patterns:
+            for file in self.screenshots_dir.glob(pattern):
+                try:
+                    file.unlink()
+                except:
+                    pass
                 
     def create_snapshot(self, version):
         """Create snapshot of the current version and return path"""

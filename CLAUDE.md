@@ -7,8 +7,12 @@ KTP Digital is a premium IT consultancy specializing in enterprise automation an
 
 ## Critical Business Files
 - `/opt/webstack/html/premium-landing.php` - PRIMARY REVENUE DRIVER - Google Ads landing page with deep content links
+- `/opt/webstack/html/premium-landing-spiral.php` - ✅ v2.1.0 NEW - Dark theme with spiral video background
+- `/opt/webstack/html/premium-landing-spiral-test.php` - ✅ v2.1.0 NEW - Light theme for A/B testing
+- `/opt/webstack/html/api/postcode_lookup.php` - ✅ v2.1.0 NEW - Australian postcode/suburb API
+- `/opt/webstack/html/js/postcode_autocomplete.js` - ✅ v2.1.0 NEW - Autocomplete for forms
 - `/opt/webstack/html/lead_form.php` - ✅ v2.0.8 FIXED - Budget scoring uses ranges instead of tiers
-- `/opt/webstack/html/home_automation_form.php` - Specialized HA form with premium suburb targeting
+- `/opt/webstack/html/home_automation_form.php` - ✅ v2.1.0 UPDATED - Universal form, no suburb restrictions
 - `/opt/webstack/html/small_business_form.php` - Mac/IT services form with urgency tracking
 - `/opt/webstack/html/network_infrastructure_form.php` - Enterprise network form ($150K+ projects)
 - `/opt/webstack/html/contact.php` - General contact form (working, saves to DB)
@@ -18,7 +22,7 @@ KTP Digital is a premium IT consultancy specializing in enterprise automation an
 - `/opt/webstack/html/sitemap.xml` - ✅ v2.0.8 NEW - Complete sitemap for Google
 - `/opt/webstack/html/.well-known/mta-sts.txt` - ✅ v2.0.8 NEW - Email security policy
 - `/opt/webstack/automation/api/index.php` - Core automation API endpoints
-- Database: `premium_leads` table - Stores leads with scoring, UTM params, estimated value
+- Database: `premium_leads` table - Stores leads with scoring, UTM params, estimated value, postcode
 
 ## Common Development Commands
 
@@ -181,6 +185,11 @@ The site integrates with premium automation brands. Icons available in `/html/im
   - Only lookup IPs with 3+ hits to avoid rate limits
 - **SSL Monitoring**: Certbot certificates cached to `/tmp/ssl_cert_info.txt`
   - Updated via cron: `/etc/cron.d/ssl-cache`
+- **Australian Postcode API**: postcodeapi.com.au (free tier, 100 req/hour)
+  - Primary source: `/api/postcode_lookup.php`
+  - Fallback: Static database of 50+ Victorian postcodes
+  - Autocomplete: `/js/postcode_autocomplete.js` with debounced requests
+  - Returns: suburb, state, postcode, lat/long
 
 ## Video Production Capabilities
 
