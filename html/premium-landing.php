@@ -480,7 +480,7 @@ ob_start();
         
         <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
             <!-- Home Automation Deep Dive -->
-            <a href="/home-automation-older.php" class="group bg-slate-800/50 rounded-xl p-6 border border-slate-700 hover:border-cyan-400 transition">
+            <a href="/success-stories.php" class="group bg-slate-800/50 rounded-xl p-6 border border-slate-700 hover:border-cyan-400 transition">
                 <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center group-hover:scale-110 transition">
                     <img src="/images/icons/home-assistant.svg" alt="Home Assistant" class="w-10 h-10">
                 </div>

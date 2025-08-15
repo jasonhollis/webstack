@@ -6,6 +6,18 @@
         "url": "https://www.home-assistant.io/integrations/alarmo/"
     },
     {
+        "domain": "ring",
+        "name": "Ring",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/ring/"
+    },
+    {
+        "domain": "zigbee",
+        "name": "Zigbee Home Automation",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/zha/"
+    },
+    {
         "domain": "androidtv_remote",
         "name": "Android TV Remote",
         "logo": "/images/brand/generic.svg",
@@ -268,5 +280,221 @@
         "name": "Z-Wave",
         "logo": "/images/brand/generic.svg",
         "url": "https://www.home-assistant.io/integrations/zwave_js/"
+    },
+    {
+        "domain": "nest",
+        "name": "Google Nest",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/nest/"
+    },
+    {
+        "domain": "ecobee",
+        "name": "Ecobee",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/ecobee/"
+    },
+    {
+        "domain": "honeywell",
+        "name": "Honeywell",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/honeywell/"
+    },
+    {
+        "domain": "august",
+        "name": "August",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/august/"
+    },
+    {
+        "domain": "yale",
+        "name": "Yale Smart Living",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/yale_smart_alarm/"
+    },
+    {
+        "domain": "arlo",
+        "name": "Arlo",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/arlo/"
+    },
+    {
+        "domain": "eufy",
+        "name": "Eufy",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/eufy/"
+    },
+    {
+        "domain": "wyze",
+        "name": "Wyze",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/wyze/"
+    },
+    {
+        "domain": "lifx",
+        "name": "LIFX",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/lifx/"
+    },
+    {
+        "domain": "wiz",
+        "name": "WiZ",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/wiz/"
+    },
+    {
+        "domain": "govee",
+        "name": "Govee",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/govee/"
+    },
+    {
+        "domain": "lutron",
+        "name": "Lutron",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/lutron/"
+    },
+    {
+        "domain": "myq",
+        "name": "MyQ",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/myq/"
+    },
+    {
+        "domain": "chamberlain",
+        "name": "Chamberlain",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/chamberlain/"
+    },
+    {
+        "domain": "spotify",
+        "name": "Spotify",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/spotify/"
+    },
+    {
+        "domain": "plex",
+        "name": "Plex",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/plex/"
+    },
+    {
+        "domain": "apple_tv",
+        "name": "Apple TV",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/apple_tv/"
+    },
+    {
+        "domain": "roku",
+        "name": "Roku",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/roku/"
+    },
+    {
+        "domain": "lg_webos",
+        "name": "LG webOS",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/webostv/"
+    },
+    {
+        "domain": "vizio",
+        "name": "Vizio",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/vizio/"
+    },
+    {
+        "domain": "yamaha",
+        "name": "Yamaha",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/yamaha/"
+    },
+    {
+        "domain": "airplay",
+        "name": "AirPlay",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/airplay/"
+    },
+    {
+        "domain": "homekit",
+        "name": "HomeKit",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/homekit/"
+    },
+    {
+        "domain": "google_assistant",
+        "name": "Google Assistant",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/google_assistant/"
+    },
+    {
+        "domain": "alexa",
+        "name": "Amazon Alexa",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/alexa/"
+    },
+    {
+        "domain": "shelly",
+        "name": "Shelly",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/shelly/"
+    },
+    {
+        "domain": "synology_dsm",
+        "name": "Synology DSM",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/synology_dsm/"
+    },
+    {
+        "domain": "qnap",
+        "name": "QNAP",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/qnap/"
+    },
+    {
+        "domain": "mikrotik",
+        "name": "Mikrotik",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/mikrotik/"
+    },
+    {
+        "domain": "openwrt",
+        "name": "OpenWRT",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/openwrt/"
+    },
+    {
+        "domain": "dnsip",
+        "name": "DNS IP",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/dnsip/"
+    },
+    {
+        "domain": "wake_on_lan",
+        "name": "Wake on LAN",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/wake_on_lan/"
+    },
+    {
+        "domain": "ping",
+        "name": "Ping (ICMP)",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/ping/"
+    },
+    {
+        "domain": "nmap_tracker",
+        "name": "Nmap Tracker",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/nmap_tracker/"
+    },
+    {
+        "domain": "snmp",
+        "name": "SNMP",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/snmp/"
+    },
+    {
+        "domain": "cert_expiry",
+        "name": "Certificate Expiry",
+        "logo": "/images/brand/generic.svg",
+        "url": "https://www.home-assistant.io/integrations/cert_expiry/"
     }
 ]

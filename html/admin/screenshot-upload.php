@@ -84,10 +84,19 @@ if (is_dir('/opt/webstack/screenshots')) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Screenshot Upload - KTP Digital Admin</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/tailwind.min.css">
+    <script src="https://cdn.tailwindcss.com/3.4.0"></script>
     <style>
         .drop-zone {
             transition: all 0.3s ease;
+            border: 4px dashed #d1d5db !important;
+            border-radius: 0.5rem !important;
+            padding: 3rem !important;
+            text-align: center !important;
+            cursor: pointer !important;
+        }
+        .drop-zone:hover {
+            border-color: #60a5fa !important;
         }
         .drop-zone.dragover {
             background-color: rgb(59, 130, 246, 0.1);
@@ -97,6 +106,17 @@ if (is_dir('/opt/webstack/screenshots')) {
         .uploading {
             opacity: 0.6;
             pointer-events: none;
+        }
+        .btn-primary {
+            background-color: #3b82f6 !important;
+            color: white !important;
+            padding: 0.5rem 1.5rem !important;
+            border-radius: 0.5rem !important;
+            font-weight: 600 !important;
+            transition: background-color 0.3s ease !important;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb !important;
         }
     </style>
 </head>
@@ -114,7 +134,7 @@ if (is_dir('/opt/webstack/screenshots')) {
                 <p class="text-xl font-semibold text-gray-700 mb-2">Drop files here</p>
                 <p class="text-gray-500 mb-4">Images, videos (.mov, .mp4), or PDFs</p>
                 <input type="file" id="fileInput" class="hidden" multiple accept="image/*,.mov,.mp4,.pdf">
-                <button onclick="document.getElementById('fileInput').click()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
+                <button onclick="document.getElementById('fileInput').click()" class="btn-primary">
                     Choose Files
                 </button>
             </div>

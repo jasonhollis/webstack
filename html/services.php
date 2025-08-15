@@ -26,8 +26,9 @@ ob_start();
                 // Add descriptions for each service
                 $descriptions = [
                     '/home-automation.php' => 'Complete smart home solutions with Home Assistant. Control everything from one app.',
-                    '/ha-stories.php' => 'Real customer transformations with enterprise-grade home automation.',
+                    '/success-stories.php' => 'Real customer transformations with enterprise-grade home automation.',
                     '/integration.php' => 'Connect 3,200+ devices and services seamlessly.',
+                    '/ai-camera-integrations.php' => 'AI-powered security with facial recognition and object detection.',
                     '/home_automation_form.php' => 'Get a custom quote for your smart home project.',
                     '/smallbiz.php' => 'Premium IT support designed for Melbourne small businesses.',
                     '/enterprise.php' => 'Scalable enterprise solutions that grow with your business.',

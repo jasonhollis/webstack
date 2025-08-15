@@ -7,6 +7,21 @@ $page_keywords = "Home Assistant, customer stories, case studies, automation, KT
 
 // Begin Stories Page Content
 $content = <<<HTML
+<!-- Redirect Notice -->
+<div class="max-w-4xl mx-auto mb-8">
+    <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg">
+        <div class="flex items-center">
+            <div class="ml-3">
+                <p class="text-blue-900 font-bold mb-2">📍 New and Improved Stories Page</p>
+                <p class="text-blue-800 mb-3">We've created a new, more visual success stories page with metrics and detailed case studies.</p>
+                <a href="/success-stories.php" class="inline-block px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
+                    View New Success Stories →
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="max-w-4xl mx-auto text-center pt-6 pb-8">
     <img src="/images/icons/home-assistant.svg" alt="Home Assistant Logo" class="mx-auto w-16 h-16 mb-4" loading="lazy">
     <h1 class="text-3xl sm:text-5xl font-bold mb-3">Home Assistant in Real Homes</h1>

@@ -98,9 +98,19 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.ktp.digital/success-stories.php</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ktp.digital/ai-camera-integrations.php</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.ktp.digital/ha-stories.php</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.ktp.digital/tailscale.php</loc>

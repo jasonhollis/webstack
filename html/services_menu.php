@@ -5,8 +5,9 @@ $service_categories = [
         'icon' => '🏠',
         'pages' => [
             '/home-automation.php' => 'Home Automation Solutions',
-            '/ha-stories.php' => 'Customer Success Stories',
+            '/success-stories.php' => 'Customer Success Stories',
             '/integration.php' => 'Device Integration',
+            '/ai-camera-integrations.php' => 'AI Camera & Security',
             '/home_automation_form.php' => 'Get a Quote'
         ]
     ],

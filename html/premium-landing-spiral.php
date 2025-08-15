@@ -448,27 +448,27 @@ $content .= <<<HTML
                 </div>
                 
                 <div class="solution-grid">
-                    <a href="/integration_grid_test.php?category=garage" class="solution-item">
+                    <a href="/integrations.php?category=garage" class="solution-item">
                         <div style="font-size: 3rem; margin-bottom: 1rem;">🚗</div>
                         <p style="font-weight: bold; margin-bottom: 0.5rem;">Garage &amp; Gates</p>
                         <p style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">Automatic doors, remote access</p>
                     </a>
-                    <a href="/integration_grid_test.php?category=access" class="solution-item">
+                    <a href="/integrations.php?category=security" class="solution-item">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🔔</div>
+                        <p style="font-weight: bold; margin-bottom: 0.5rem;">Security & Doorbells</p>
+                        <p style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">Ring, cameras, alarms</p>
+                    </a>
+                    <a href="/integrations.php?category=access" class="solution-item">
                         <div style="font-size: 3rem; margin-bottom: 1rem;">👤</div>
                         <p style="font-weight: bold; margin-bottom: 0.5rem;">Facial Recognition</p>
                         <p style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">Keyless entry, visitor ID</p>
                     </a>
-                    <a href="/integration_grid_test.php?category=vehicle" class="solution-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🚙</div>
-                        <p style="font-weight: bold; margin-bottom: 0.5rem;">License Plates</p>
-                        <p style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">Vehicle detection, access control</p>
-                    </a>
-                    <a href="/integration_grid_test.php?category=climate" class="solution-item">
+                    <a href="/integrations.php?category=climate" class="solution-item">
                         <div style="font-size: 3rem; margin-bottom: 1rem;">🌡️</div>
                         <p style="font-weight: bold; margin-bottom: 0.5rem;">Climate Control</p>
                         <p style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">Multi-zone, scheduling</p>
                     </a>
-                    <a href="/integration_grid_test.php?category=lighting" class="solution-item">
+                    <a href="/integrations.php?category=lighting" class="solution-item">
                         <div style="font-size: 3rem; margin-bottom: 1rem;">💡</div>
                         <p style="font-weight: bold; margin-bottom: 0.5rem;">Smart Lighting</p>
                         <p style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">Scenes, motion sensing</p>
@@ -501,7 +501,7 @@ $content .= <<<HTML
             <div class="contact-form">
                 <div style="text-align: center; margin-bottom: 2rem;">
                     <p style="color: #60a5fa; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Private Consultation</p>
-                    <h2 class="gradient-title" style="font-size: 2.5rem;">REQUEST AN INVITATION</h2>
+                    <h2 class="gradient-title" style="font-size: 2.5rem;">SCHEDULE YOUR CONSULTATION</h2>
                     <p style="font-size: 1.25rem; color: rgba(255, 255, 255, 0.8);">
                         Professional consultation for your unique automation needs
                     </p>
@@ -610,10 +610,10 @@ $content .= <<<HTML
                 <div class="footer-section">
                     <h4>Solutions</h4>
                     <ul>
-                        <li><a href="/integration_grid_test.php?category=garage">Garage & Gates</a></li>
-                        <li><a href="/integration_grid_test.php?category=access">Facial Recognition</a></li>
-                        <li><a href="/integration_grid_test.php?category=climate">Climate Control</a></li>
-                        <li><a href="/integration_grid_test.php?category=lighting">Smart Lighting</a></li>
+                        <li><a href="/integrations.php?category=security">Security & Doorbells</a></li>
+                        <li><a href="/integrations.php?category=garage">Garage & Gates</a></li>
+                        <li><a href="/integrations.php?category=climate">Climate Control</a></li>
+                        <li><a href="/integrations.php?category=lighting">Smart Lighting</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">

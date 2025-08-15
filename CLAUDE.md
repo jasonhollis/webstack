@@ -61,6 +61,9 @@ curl -X GET http://localhost/automation/api/health
 
 # Update SSL certificate cache (for System Meta page)
 /opt/webstack/bin/cache_ssl_info.sh
+
+# Update Home Assistant integration icons (v2.1.4+)
+python3 /opt/webstack/bin/fetch_ha_icons.py
 ```
 
 ### Version Management

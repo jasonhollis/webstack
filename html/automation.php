@@ -44,7 +44,7 @@ $content = <<<HTML
   <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-6 mb-8">
     <h3 class="text-lg font-semibold mb-4 text-center">Explore Our Automation Services</h3>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-      <a href="/ha-stories.php" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline">
+      <a href="/success-stories.php" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline">
         Customer Stories
       </a>
       <a href="/integration.php" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline">
