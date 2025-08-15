@@ -92,6 +92,11 @@ class VersionManager:
     def collect_git_stats(self):
         """Collect git statistics for the deployment"""
         try:
+            # Get current commit hash
+            result = self.run_command("git rev-parse HEAD", check=False)
+            if result and result.returncode == 0:
+                self.stats['git_commit'] = result.stdout.strip()
+            
             # Get files changed in this commit
             result = self.run_command("git diff --stat HEAD~1 HEAD", check=False)
             if result and result.returncode == 0:
@@ -126,6 +131,7 @@ class VersionManager:
                 size_bytes = snapshot_path.stat().st_size
                 size_mb = size_bytes / (1024 * 1024)
                 self.stats['snapshot_size'] = f"{size_mb:.1f}MB"
+                self.stats['snapshot_size_mb'] = round(size_mb, 2)
                 self.stats['snapshot_name'] = snapshot_path.name
         except:
             pass
@@ -354,10 +360,39 @@ class VersionManager:
                 print(f"⚠️ Failed to create {objective_file.name}: {e}")
             
     def log_version_update(self, version):
-        """Log the version update"""
+        """Log the version update with dual logging (file + database)"""
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        # File logging (always happens)
         with open(self.log_file, 'a') as f:
             f.write(f"[{timestamp}] Version updated to {version}\n")
+        
+        # Database logging (if available)
+        if DB_LOGGING and db_logger:
+            try:
+                # Log to version_history table
+                deployment_id = db_logger.log_version_deployment(
+                    version=version,
+                    previous_version=self.stats.get('old_version'),
+                    git_commit=self.stats.get('git_commit')
+                )
+                
+                # Update with statistics
+                db_logger.update_version_deployment(
+                    deployment_id,
+                    git_tag=version,
+                    snapshot_path=self.stats.get('snapshot_path'),
+                    snapshot_size_mb=self.stats.get('snapshot_size_mb'),
+                    total_duration_ms=int(self.stats.get('duration', 0) * 1000),
+                    files_changed=self.stats.get('files_changed'),
+                    lines_added=self.stats.get('insertions'),
+                    lines_removed=self.stats.get('deletions'),
+                    status='pushed'
+                )
+                print(f"   📊 Logged to database (deployment #{deployment_id})")
+            except Exception as e:
+                print(f"   ⚠️ Database logging failed: {e}")
+                # Continue - file logging succeeded
             
     def update_version(self, new_version=None):
         """Main version update process with dual logging and statistics"""
@@ -366,6 +401,7 @@ class VersionManager:
         
         # Get current version
         old_version = self.get_current_version()
+        self.stats['old_version'] = old_version
         
         # Get new version from argument or prompt
         if not new_version:
@@ -397,6 +433,7 @@ class VersionManager:
         
         # Create snapshot of old version
         snapshot_path = self.create_snapshot(old_version)
+        self.stats['snapshot_path'] = str(snapshot_path) if snapshot_path else None
         self.collect_snapshot_stats(snapshot_path)
         
         # Update VERSION file
@@ -445,12 +482,21 @@ class VersionManager:
         # Complete database logging operation
         if DB_LOGGING and db_logger and op_id:
             try:
+                # Build comprehensive output message
+                output_msg = f"Version {new_version} deployed successfully\n"
+                output_msg += f"Files changed: {self.stats.get('files_changed', 0)}\n"
+                output_msg += f"Insertions: {self.stats.get('insertions', 0)}\n"
+                output_msg += f"Deletions: {self.stats.get('deletions', 0)}\n"
+                output_msg += f"Duration: {self.stats['duration']:.1f}s"
+                
                 db_logger.complete_operation(
                     operation_id=op_id,
                     status='success',
                     exit_code=0,
-                    stdout=f"Successfully updated from {old_version} to {new_version}"
+                    stdout=output_msg,
+                    duration_ms=int(self.stats['duration'] * 1000)
                 )
+                print(f"   📊 Operation logged to database (operation #{op_id})")
             except Exception as e:
                 print(f"⚠️ DB logging failed to complete: {e}")
         

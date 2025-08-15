@@ -70,9 +70,10 @@ python3 /opt/webstack/bin/update_version.py vX.X.X
 
 # Statistics displayed include:
 # - Files changed, insertions, deletions
-# - Snapshot size
+# - Snapshot size and git commit hash
 # - Total commits and repository size
 # - Duration and version history count
+# - Dual logging to database + files (v2.1.2+)
 # All stats are sent via Pushover notification
 ```
 
@@ -97,7 +98,7 @@ python3 /opt/webstack/bin/update_version.py vX.X.X
 /opt/webstack/
 ├── html/                    # Public website (nginx root)
 │   ├── premium-landing.php  # Lead generation landing page
-│   ├── images/icons/        # 60+ integration partner logos
+│   ├── images/icons/        # 216+ integration partner logos
 │   ├── images/spiral_*.mp4  # Hero video backgrounds
 │   └── images/spiral_alpha.mov # Spiral with alpha channel (225MB)
 ├── automation/              # Backend automation engine
@@ -118,23 +119,24 @@ python3 /opt/webstack/bin/update_version.py vX.X.X
 
 1. **Lead Generation Priority**: The premium-landing.php page must always remain functional and optimized for conversion
 2. **Professional Tone**: Maintain enterprise-grade messaging - avoid consumer/DIY language
-3. **Target Market**: Focus on Melbourne premium suburbs (Toorak, Brighton, Armadale)
+3. **Target Market**: Serving all Melbourne and Victoria areas (v2.1.0+)
 4. **Project Values**: Emphasize $25K-$100K+ projects, not small consumer jobs
 5. **Brand Consistency**: Use established color scheme (#1e40af blue, #d97706 gold)
 
 ## Code Standards
 
-### Shell Script Development
-**CRITICAL: All shell scripts must use failure.sh for error handling**
-- Every critical command should check exit status
-- Use pattern: `command || { "$FAILURE_SH" "script_name" "error message"; exit 1; }`
-- This ensures Pushover notifications and logging on failures
+### Python Script Development (v2.0.4+)
+**All critical shell scripts have been migrated to Python**
+- Core scripts: `update_version.py`, `failure.py`, `snapshot_manager.py`
+- All scripts use dual logging (database + file) as of v2.1.2
+- Graceful fallback to file-only logging if database unavailable
+- Use `failure.py` for error notifications with Pushover
 - Example:
-  ```bash
-  git add -A || { "$FAILURE_SH" "update_version.sh" "git add failed"; exit 1; }
+  ```python
+  from failure_handler import FailureHandler
+  handler = FailureHandler()
+  handler.notify_failure("script_name", "error message")
   ```
-- Non-critical operations can use `|| echo "Warning..."` to continue
-- All scripts being migrated to Python (see roadmap)
 
 ### PHP Development
 - Use PHP 8.2+ features
@@ -185,6 +187,7 @@ The site integrates with premium automation brands. Icons available in `/html/im
   - Only lookup IPs with 3+ hits to avoid rate limits
 - **SSL Monitoring**: Certbot certificates cached to `/tmp/ssl_cert_info.txt`
   - Updated via cron: `/etc/cron.d/ssl-cache`
+- **Icon Updates**: Disabled as of v2.1.2 (216 icons sufficient, daily fetching was overkill)
 - **Australian Postcode API**: postcodeapi.com.au (free tier, 100 req/hour)
   - Primary source: `/api/postcode_lookup.php`
   - Fallback: Static database of 50+ Victorian postcodes
@@ -229,14 +232,21 @@ The site integrates with premium automation brands. Icons available in `/html/im
 **IMPORTANT: Before running version bump or at session end, Claude must:**
 1. **Analyze session changes** for any new patterns, tools, or infrastructure
 2. **Compare against CLAUDE.md** to identify missing documentation
-3. **Update CLAUDE.md** with:
+3. **Review CLAUDE.md for quality issues**:
+   - **Conflicts**: Contradictory information that needs resolution
+   - **Redundancy**: Duplicate information in multiple sections
+   - **Stale Info**: Outdated version numbers, completed tasks marked as pending, old file counts
+   - **Missing Info**: New features/changes not documented
+4. **Update CLAUDE.md** with:
    - New tools/scripts created (location, purpose, usage)
    - Database schema changes or new tables
    - External services/APIs integrated
    - Performance benchmarks discovered
    - Critical file paths or dependencies added
    - Lessons learned that affect future development
-4. **Include in iteration summary** what was added to CLAUDE.md
+   - Fix all conflicts, redundancy, and stale information found
+5. **Report to user** what conflicts/redundancy/stale info was found and fixed
+6. **Include in iteration summary** what was added to CLAUDE.md
 
 This ensures knowledge persistence across sessions and prevents re-solving problems.
 
@@ -247,7 +257,7 @@ When working with Claude on this project, we follow a structured iterative appro
    - Each work session starts with reviewing current version objectives
    - Work is tracked in `/objectives/vX.X.X_objectives.md`
    - Progress documented in `/objectives/vX.X.X_iteration_log.md`
-   - Version bumps via `/opt/webstack/bin/update_version.sh` when objectives complete
+   - Version bumps via `python3 /opt/webstack/bin/update_version.py` when objectives complete
 
 2. **Iteration Workflow**
    - Start: Review objectives and current version status
@@ -297,27 +307,9 @@ When making changes, verify:
 5. Video backgrounds load properly
 6. No PHP errors in logs
 
-## 🚨 CRITICAL REVENUE ISSUES (Fix Immediately)
+## Revenue Optimization Achievements
 
-### Lead Capture Problems
-1. **lead_form.php BROKEN** - Not saving to database (only to /opt/webstack/logs/leads.log)
-   - Rich data being lost: project type, integrations, property details, rooms, budget
-   - Email works (Mailgun → leads@ktp.digital → HubSpot)
-   - Database save missing completely
-   - Line 158: After file_put_contents, needs PDO insert to premium_leads table
-
-2. **Forms Not Optimized for High-End Clients**
-   - Budget ranges show low amounts ($1k-$2k) attracting wrong clients
-   - Need service tiers: "Consultation", "Premium Suite", "White-Glove Service"
-   - Target: $250/hr clients from Toorak, Brighton, Armadale
-
-3. **HubSpot Integration Constraints**
-   - Using cheapest HubSpot tier
-   - Bark feeds HA leads to HubSpot
-   - lead_form.php emails to HubSpot to avoid license upgrade
-   - Need: Multiple specialized forms with different email subjects for filtering
-
-### Revenue Optimization (v2.0.7) ✅ COMPLETE
+### Lead Capture System (v2.0.7-v2.1.0) ✅ COMPLETE
 - **Specialized Forms Created**:
   - ✅ home_automation_form.php - Premium HA with suburb targeting
   - ✅ small_business_form.php - Mac/IT with urgency tracking
@@ -358,16 +350,20 @@ When making changes, verify:
 - **Analytics Enhancement**: IP geolocation with caching, UTM tracking, bot detection
 - **Admin System Fixes**: Resolved session handling, added Claude MD viewer
 
-### Active Development Areas (v2.0.x - v2.1.x)
-- **Dual Logging Migration**: Phase 1 ✅ COMPLETE (v2.0.4)
-  - update_version.py: ✅ Dual logging with graceful DB fallback
-  - failure.py: ✅ Dual logging with Pushover alerts maintained
-  - snapshot_webstack.py: ✅ Dual logging with operation tracking
-  - All scripts tested and verified working with fallback
+### Database Logging Migration (v2.1.x series)
+- **Phase 1**: ✅ COMPLETE (v2.1.2) - Dual logging implemented
+  - update_version.py: Enhanced with version_history + operation_logs
+  - failure.py: Dual logging with Pushover alerts maintained
+  - snapshot_manager.py: Dual logging with operation tracking
+  - test_dual_logging.py: Test framework for validation
+- **Phase 2**: ⏳ PENDING - Emergency.log fallback mechanism
+- **Phase 3**: ⏳ PENDING - Admin log viewer tools
+- **Phase 4**: ⏳ PENDING - 2-week parallel monitoring
+- **Phase 5**: ⏳ PENDING - File log deprecation
 - **Database-Driven Operations**: All system operations logged to MySQL tables
   - Tables: operation_logs, error_logs, version_history, cleanup_logs
   - DatabaseLogger class in `/opt/webstack/automation/lib/`
-- **Python Migration**: ✅ COMPLETED - All critical bash scripts migrated
+- **Python Migration**: ✅ COMPLETED (v2.0.4) - All critical bash scripts migrated
 - **Version Management**: Use `python3 bin/update_version.py vX.X.X` for version bumps
 - **Lead Management**: Active lead capture on premium-landing.php and contact.php
 - **Analytics System**: SQL-based analytics with IP geolocation caching
@@ -380,11 +376,11 @@ When making changes, verify:
 - Transaction support and proper error handling
 - Real-time dashboard capabilities
 
-### Legacy System Migration
-- Shell scripts being replaced with Python modules (DatabaseLogger.py, db_log.py)
-- Version tracking enhanced with database audit trail (v2.0.1 current)
-- Python migration milestone achieved with update_version.py
-- Next focus: Migrating snapshot_webstack.sh and remaining bash scripts to Python
+### Migration Completed
+- ✅ All shell scripts replaced with Python modules (v2.0.4)
+- ✅ Version tracking enhanced with database audit trail
+- ✅ Python migration milestone achieved
+- ✅ Dual logging infrastructure operational (v2.1.2)
 
 ## Logging Architecture
 
@@ -426,8 +422,11 @@ db_logger.complete_operation(
 
 ### Key Tables
 - `operation_logs`: Track all system operations
+  - operation_type: enum('version_bump','snapshot','git_push','cleanup','backup','restore','api_call','cron_job','manual_script')
+  - status: enum('started','running','success','failed','timeout','cancelled')
 - `error_logs`: Capture failures and issues
 - `version_history`: Version bump audit trail
+  - status: enum('started','snapshot_complete','committed','tagged','pushed','failed','rolled_back')
 - `ip_geolocation_cache`: 7-day TTL for IP lookups
 
 ## Important Workflow Rules
@@ -440,8 +439,8 @@ db_logger.complete_operation(
 - Example: Edit `premium-landing.php` directly, don't create `premium-landing-v2.php`
 
 ### Version Management System
-- The project uses a sophisticated version control system via `update_version.sh`
-- This script handles version bumps, git commits, tagging, and iteration logs
+- The project uses a sophisticated version control system via `update_version.py`
+- This Python script handles version bumps, git commits, tagging, and iteration logs
 - Current version is tracked in `/opt/webstack/html/VERSION`
 - Objectives for each version are in `/opt/webstack/objectives/`
 - The system automatically creates markdown-based iteration logs
