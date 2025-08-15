@@ -63,6 +63,15 @@ $version_file = '/opt/webstack/html/VERSION';
 $version = isset($_GET['version']) ? basename($_GET['version']) : trim(@file_get_contents($version_file));
 $log_file = "$objectives_dir/{$version}_iteration_log.md";
 
+// Handle download request
+if (isset($_GET['download']) && file_exists($log_file)) {
+    header('Content-Type: text/markdown');
+    header('Content-Disposition: attachment; filename="' . basename($log_file) . '"');
+    header('Content-Length: ' . filesize($log_file));
+    readfile($log_file);
+    exit;
+}
+
 // Find all iteration logs for dropdown
 $logs = [];
 foreach (glob("$objectives_dir/*_iteration_log.md") as $f) {
@@ -134,6 +143,13 @@ $html = preg_replace_callback(
                 </option>
             <?php endforeach; ?>
         </select>
+        <?php if (file_exists($log_file)): ?>
+        <a href="?version=<?=urlencode($version)?>&download=1" 
+           class="ml-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+           download="<?=htmlspecialchars($version)?>_iteration_log.md">
+            📥 Download Markdown
+        </a>
+        <?php endif; ?>
     </form>
     <div class="bg-white  rounded-xl p-6 shadow mt-4 markdown-body">
         <?=$html?>

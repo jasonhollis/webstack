@@ -263,8 +263,9 @@ When working with Claude on this project, we follow a structured iterative appro
    - Start: Review objectives and current version status
    - Execute: Implement features with real-time progress tracking
    - Document: Update iteration log with achievements and metrics
-   - Complete: Run version bump, create git tag, push to remote
+   - Complete: Run `python3 /opt/webstack/bin/update_version.py vX.X.X` (handles ALL git operations)
    - Plan: Define next version objectives based on roadmap
+   - **NEVER run git commands manually - update_version.py does everything**
 
 3. **Session Pattern**
    - Claude reads recent objectives/iteration logs to understand context
@@ -287,16 +288,16 @@ When working with Claude on this project, we follow a structured iterative appro
 
 ## Admin Panel Tools
 The admin panel (`/admin/`) provides essential development tools:
-- **Iteration Log** (`/admin/logs.php`): View current version's iteration progress
-- **Objectives Log** (`/admin/objectives.php`): Track version objectives and completion
-- **Roadmap** (`/admin/roadmap.php`): Long-term development planning
+- **Iteration Log** (`/admin/logs.php`): View current version's iteration progress (📥 Download button v2.1.3+)
+- **Objectives Log** (`/admin/objectives.php`): Track version objectives and completion (📥 Download button v2.1.3+)
+- **Roadmap** (`/admin/roadmap.php`): Long-term development planning (📥 Download button v2.1.3+)
 - **Analytics** (`/admin/analytics.php`): Web traffic and system metrics
 - **Maintenance** (`/admin/maintenance.php`): System health and maintenance tasks
 - **File Stats** (`/admin/file_stats.php`): Codebase statistics and analysis
 - **System Meta** (`/admin/system_meta.php`): System configuration and metadata
 - **Screenshots** (`/admin/screenshot-upload.php`): Development screenshot management
 - **AI Directives** (`/admin/directives.php`): View PROJECT_DIRECTIVES.md
-- **Claude MD** (`/admin/claude-md.php`): View this CLAUDE.md file with proper formatting
+- **Claude MD** (`/admin/claude-md.php`): View this CLAUDE.md file with proper formatting (📥 Download button v2.1.3+)
 
 ## Testing Checklist
 When making changes, verify:
@@ -439,11 +440,14 @@ db_logger.complete_operation(
 - Example: Edit `premium-landing.php` directly, don't create `premium-landing-v2.php`
 
 ### Version Management System
+**CRITICAL: NEVER run git commands directly! Use update_version.py for ALL git operations**
 - The project uses a sophisticated version control system via `update_version.py`
-- This Python script handles version bumps, git commits, tagging, and iteration logs
+- This Python script handles ALL: version bumps, git commits, tagging, pushing, and iteration logs
+- DO NOT use: `git add`, `git commit`, `git push`, `git tag` - update_version.py does it all
 - Current version is tracked in `/opt/webstack/html/VERSION`
 - Objectives for each version are in `/opt/webstack/objectives/`
 - The system automatically creates markdown-based iteration logs
+- Just run: `python3 /opt/webstack/bin/update_version.py vX.X.X` and it handles everything
 
 ## Development Priorities
 

@@ -5,6 +5,16 @@ require_once 'Parsedown.php';
 
 $page = 'claude_md';
 $claude_md_path = '/opt/webstack/CLAUDE.md';
+
+// Handle download request
+if (isset($_GET['download']) && file_exists($claude_md_path)) {
+    header('Content-Type: text/markdown');
+    header('Content-Disposition: attachment; filename="CLAUDE.md"');
+    header('Content-Length: ' . filesize($claude_md_path));
+    readfile($claude_md_path);
+    exit;
+}
+
 $content = is_readable($claude_md_path) ? file_get_contents($claude_md_path) : "CLAUDE.md file not found or not readable.";
 
 // Use Parsedown for proper markdown rendering
@@ -155,9 +165,18 @@ $html_content = $Parsedown->text($content);
 </head>
 <body class="bg-white  text-gray-900 ">
   <main class="max-w-6xl mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-6 flex items-center">
-      <span class="mr-3">🤖</span>CLAUDE.md - AI Project Instructions
-    </h1>
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-4xl font-bold flex items-center">
+        <span class="mr-3">🤖</span>CLAUDE.md - AI Project Instructions
+      </h1>
+      <?php if (file_exists($claude_md_path)): ?>
+      <a href="?download=1" 
+         class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+         download="CLAUDE.md">
+          📥 Download Markdown
+      </a>
+      <?php endif; ?>
+    </div>
     
     <div class="bg-blue-50  border-l-4 border-blue-500 p-4 mb-6 rounded">
       <p class="text-sm">

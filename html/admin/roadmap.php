@@ -58,6 +58,15 @@ require_once __DIR__ . '/admin_nav.php';
 require_once __DIR__ . '/Parsedown.php';
 $roadmap_path = '/opt/webstack/objectives/roadmap.md';
 
+// Handle download request
+if (isset($_GET['download']) && file_exists($roadmap_path)) {
+    header('Content-Type: text/markdown');
+    header('Content-Disposition: attachment; filename="roadmap.md"');
+    header('Content-Length: ' . filesize($roadmap_path));
+    readfile($roadmap_path);
+    exit;
+}
+
 $content = is_readable($roadmap_path)
     ? file_get_contents($roadmap_path)
     : "# Roadmap\n\n_Roadmap file not found. Create `/opt/webstack/objectives/roadmap.md` to get started._";
@@ -78,7 +87,16 @@ $html = $Parsedown->text($content);
 </head>
 <body class="bg-white  text-gray-900 ">
   <div class="max-w-3xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-4">🛣️ Roadmap</h1>
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-3xl font-bold">🛣️ Roadmap</h1>
+      <?php if (file_exists($roadmap_path)): ?>
+      <a href="?download=1" 
+         class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+         download="roadmap.md">
+          📥 Download Markdown
+      </a>
+      <?php endif; ?>
+    </div>
     <div class="bg-white  rounded-xl p-6 shadow mt-4 markdown-body">
       <?=$html?>
     </div>

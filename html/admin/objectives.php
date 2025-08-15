@@ -10,6 +10,15 @@ $version_file = '/opt/webstack/html/VERSION';
 $version = isset($_GET['version']) ? basename($_GET['version']) : trim(@file_get_contents($version_file));
 $obj_file = "$objectives_dir/{$version}_objectives.md";
 
+// Handle download request
+if (isset($_GET['download']) && file_exists($obj_file)) {
+    header('Content-Type: text/markdown');
+    header('Content-Disposition: attachment; filename="' . basename($obj_file) . '"');
+    header('Content-Length: ' . filesize($obj_file));
+    readfile($obj_file);
+    exit;
+}
+
 // Find all objectives logs for dropdown
 $objs = [];
 foreach (glob("$objectives_dir/*_objectives.md") as $f) {
@@ -74,6 +83,13 @@ if ($content !== false && strlen(trim($content)) > 0) {
                 </option>
             <?php endforeach; ?>
         </select>
+        <?php if (file_exists($obj_file)): ?>
+        <a href="?version=<?=urlencode($version)?>&download=1" 
+           class="ml-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+           download="<?=htmlspecialchars($version)?>_objectives.md">
+            📥 Download Markdown
+        </a>
+        <?php endif; ?>
     </form>
     <div class="bg-white  rounded-xl p-6 shadow mt-4 markdown-body">
         <?=$html?>
