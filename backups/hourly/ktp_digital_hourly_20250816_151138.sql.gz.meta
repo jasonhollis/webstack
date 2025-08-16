@@ -1,0 +1,8 @@
+{
+  "timestamp": "20250816_151138",
+  "type": "hourly",
+  "file": "/opt/webstack/backups/hourly/ktp_digital_hourly_20250816_151138.sql.gz",
+  "size": 65245,
+  "checksum": "30c4fa3540ab4c655b928ec99d373f65a5e0fdf112f4933693fbe00ead57672f",
+  "db_name": "ktp_digital"
+}

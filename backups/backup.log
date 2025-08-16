@@ -1,0 +1,32 @@
+[2025-08-16 13:45:41] INFO: Starting manual backup to /opt/webstack/backups/manual/ktp_digital_manual_20250816_134541.sql
+[2025-08-16 13:45:41] ERROR: Backup exception: [Errno 2] No such file or directory: '/opt/webstack/backups/manual/ktp_digital_manual_20250816_134541.sql'
+[2025-08-16 13:46:07] INFO: Starting manual backup to /opt/webstack/backups/manual/ktp_digital_manual_20250816_134607.sql
+[2025-08-16 13:46:07] INFO: Compressing backup to /opt/webstack/backups/manual/ktp_digital_manual_20250816_134607.sql.gz
+[2025-08-16 13:46:07] INFO: Backup complete: /opt/webstack/backups/manual/ktp_digital_manual_20250816_134607.sql.gz (checksum: e5b0b410ff5a21956a6dde3f6a554f0323ef2c64d482032eaee4fde72f866012)
+[2025-08-16 13:46:07] WARNING: Error processing /opt/webstack/backups/manual/ktp_digital_manual_20250816_134607.sql.gz: time data 'manual_20250816' does not match format '%Y%m%d_%H%M%S'
+[2025-08-16 15:11:38] INFO: Starting hourly backup to /opt/webstack/backups/hourly/ktp_digital_hourly_20250816_151138.sql
+[2025-08-16 15:11:38] INFO: Compressing backup to /opt/webstack/backups/hourly/ktp_digital_hourly_20250816_151138.sql.gz
+[2025-08-16 15:11:38] INFO: Backup complete: /opt/webstack/backups/hourly/ktp_digital_hourly_20250816_151138.sql.gz (checksum: 30c4fa3540ab4c655b928ec99d373f65a5e0fdf112f4933693fbe00ead57672f)
+[2025-08-16 15:11:38] WARNING: Error processing /opt/webstack/backups/hourly/ktp_digital_hourly_20250816_151138.sql.gz: time data 'hourly_20250816' does not match format '%Y%m%d_%H%M%S'
+[2025-08-16 15:14:05] INFO: Starting manual backup to /opt/webstack/backups/manual/ktp_digital_manual_20250816_151405.sql
+[2025-08-16 15:14:05] INFO: Compressing backup to /opt/webstack/backups/manual/ktp_digital_manual_20250816_151405.sql.gz
+[2025-08-16 15:14:05] INFO: Backup complete: /opt/webstack/backups/manual/ktp_digital_manual_20250816_151405.sql.gz (checksum: 757e34fa78d23e99c4138a5dd84441ead3a710a2d75dab121bde254b0b7af8f8)
+[2025-08-16 15:14:05] INFO: Logged backup to database: ktp_digital_manual_20250816_151405.sql.gz
+[2025-08-16 15:14:05] WARNING: Error processing /opt/webstack/backups/manual/ktp_digital_manual_20250816_134607.sql.gz: time data 'manual_20250816' does not match format '%Y%m%d_%H%M%S'
+[2025-08-16 15:14:05] WARNING: Error processing /opt/webstack/backups/manual/ktp_digital_manual_20250816_151405.sql.gz: time data 'manual_20250816' does not match format '%Y%m%d_%H%M%S'
+[2025-08-16 15:18:46] INFO: Starting manual backup to /opt/webstack/backups/manual/ktp_digital_manual_20250816_151846.sql
+[2025-08-16 15:18:46] INFO: Compressing backup to /opt/webstack/backups/manual/ktp_digital_manual_20250816_151846.sql.gz
+[2025-08-16 15:18:46] INFO: Backup complete: /opt/webstack/backups/manual/ktp_digital_manual_20250816_151846.sql.gz (checksum: a96bc50ed1ea094742e4ed739bf41dc96b1c6d963052fe3886590ef7c7e98567)
+[2025-08-16 15:18:46] INFO: Logged backup to database: ktp_digital_manual_20250816_151846.sql.gz
+[2025-08-16 15:18:46] WARNING: Error processing /opt/webstack/backups/manual/ktp_digital_manual_20250816_151846.sql.gz: time data 'manual_20250816' does not match format '%Y%m%d_%H%M%S'
+[2025-08-16 15:18:46] WARNING: Error processing /opt/webstack/backups/manual/ktp_digital_manual_20250816_134607.sql.gz: time data 'manual_20250816' does not match format '%Y%m%d_%H%M%S'
+[2025-08-16 15:18:46] WARNING: Error processing /opt/webstack/backups/manual/ktp_digital_manual_20250816_151405.sql.gz: time data 'manual_20250816' does not match format '%Y%m%d_%H%M%S'
+[2025-08-16 15:20:13] INFO: Starting manual backup to /opt/webstack/backups/manual/ktp_digital_manual_20250816_152013.sql
+[2025-08-16 15:20:13] INFO: Compressing backup to /opt/webstack/backups/manual/ktp_digital_manual_20250816_152013.sql.gz
+[2025-08-16 15:20:13] INFO: Backup complete: /opt/webstack/backups/manual/ktp_digital_manual_20250816_152013.sql.gz (checksum: 984060be0bb9d862c7326fe58e9f9fca43313234d6a9b1d81ada947b5e10f0fe)
+[2025-08-16 15:20:13] INFO: Logged backup to database: ktp_digital_manual_20250816_152013.sql.gz
+[2025-08-16 15:20:15] INFO: Pushover notification sent for manual backup
+[2025-08-16 15:20:15] WARNING: Error processing /opt/webstack/backups/manual/ktp_digital_manual_20250816_152013.sql.gz: time data 'manual_20250816' does not match format '%Y%m%d_%H%M%S'
+[2025-08-16 15:20:15] WARNING: Error processing /opt/webstack/backups/manual/ktp_digital_manual_20250816_151846.sql.gz: time data 'manual_20250816' does not match format '%Y%m%d_%H%M%S'
+[2025-08-16 15:20:15] WARNING: Error processing /opt/webstack/backups/manual/ktp_digital_manual_20250816_134607.sql.gz: time data 'manual_20250816' does not match format '%Y%m%d_%H%M%S'
+[2025-08-16 15:20:15] WARNING: Error processing /opt/webstack/backups/manual/ktp_digital_manual_20250816_151405.sql.gz: time data 'manual_20250816' does not match format '%Y%m%d_%H%M%S'

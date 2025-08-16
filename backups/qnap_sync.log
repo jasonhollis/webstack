@@ -1,0 +1,41 @@
+[2025-08-16 14:05:50] Testing connection to QNAP at 192.168.91.41
+[2025-08-16 14:05:50] ERROR: Cannot connect to QNAP. Please check:
+[2025-08-16 14:05:50]   1. Tailscale is running on both machines
+[2025-08-16 14:05:50]   2. SSH is enabled on QNAP
+[2025-08-16 14:05:50]   3. SSH keys are configured (or password auth enabled)
+[2025-08-16 14:05:50]   4. QNAP hostname/IP is correct: 192.168.91.41
+[2025-08-16 14:50:40] Testing connection to QNAP at 192.168.91.41
+[2025-08-16 14:50:41] Connection test successful
+[2025-08-16 14:50:41] Starting backup sync to QNAP
+[2025-08-16 14:50:41] Business hours detected - bandwidth limited to 5MB/s
+[2025-08-16 14:50:41] ERROR: Sync failed
+[2025-08-16 14:51:06] Testing connection to QNAP at 192.168.91.41
+[2025-08-16 14:51:07] Connection test successful
+[2025-08-16 14:51:07] Starting backup sync to QNAP
+[2025-08-16 14:51:08] Business hours detected - bandwidth limited to 5MB/s
+[2025-08-16 14:51:08] Sync completed successfully
+[2025-08-16 14:51:08] Statistics: 1 backup files, Total size: 104K
+[2025-08-16 14:51:09] Verification: Remote file count matches local (1 files)
+[2025-08-16 14:51:32] Testing connection to QNAP at 192.168.91.41
+[2025-08-16 14:51:32] Connection test successful
+[2025-08-16 14:51:32] Automated sync schedule configured
+[2025-08-16 14:51:32] Starting backup sync to QNAP
+[2025-08-16 14:51:33] Business hours detected - bandwidth limited to 5MB/s
+[2025-08-16 14:51:34] Sync completed successfully
+[2025-08-16 14:51:34] Statistics: 1 backup files, Total size: 104K
+[2025-08-16 14:51:34] Verification: Remote file count matches local (1 files)
+[2025-08-16 15:15:01] Testing connection to QNAP at 192.168.91.41
+[2025-08-16 15:15:02] Connection test successful
+[2025-08-16 15:15:02] Starting backup sync to QNAP
+[2025-08-16 15:15:03] Business hours detected - bandwidth limited to 5MB/s
+[2025-08-16 15:15:04] Sync completed successfully
+[2025-08-16 15:15:04] Statistics: 3 backup files, Total size: 244K
+[2025-08-16 15:15:04] Verification: Remote file count matches local (3 files)
+[2025-08-16 15:23:06] Testing connection to QNAP at 192.168.91.41
+[2025-08-16 15:23:06] Connection test successful
+[2025-08-16 15:23:06] Starting backup sync to QNAP
+[2025-08-16 15:23:07] Business hours detected - bandwidth limited to 5MB/s
+[2025-08-16 15:23:08] Sync completed successfully
+[2025-08-16 15:23:08] Statistics: 5 backup files, Total size: 392K
+[2025-08-16 15:23:09] Verification: Remote file count matches local (5 files)
+[2025-08-16 15:23:11] Pushover notification sent: ✅ QNAP Sync Complete

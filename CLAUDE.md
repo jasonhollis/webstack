@@ -46,6 +46,31 @@ mariadb -u root ktp_digital
 
 # Common queries for lead tracking
 echo "SELECT * FROM premium_leads ORDER BY created_at DESC LIMIT 10;" | mariadb -u root ktp_digital
+
+# Check backup status
+echo "SELECT backup_type, COUNT(*) as count, MAX(created_at) as latest FROM database_backups GROUP BY backup_type;" | mariadb -u root ktp_digital
+```
+
+### Database Backup System (v2.1.6+)
+```bash
+# Manual backup
+python3 /opt/webstack/bin/backup_database.py backup --type manual
+
+# Check backup statistics
+python3 /opt/webstack/bin/backup_database.py stats
+
+# Verify backup integrity
+python3 /opt/webstack/bin/backup_database.py verify --file /path/to/backup.sql.gz
+
+# Restore from backup (WARNING: replaces entire database)
+python3 /opt/webstack/bin/backup_database.py restore --file /path/to/backup.sql.gz
+
+# Sync to QNAP NAS
+/opt/webstack/bin/sync_to_qnap.sh
+
+# Check backup logs
+tail -f /opt/webstack/backups/backup.log
+tail -f /opt/webstack/backups/qnap_sync.log
 ```
 
 ### Testing & Validation
@@ -289,13 +314,43 @@ When working with Claude on this project, we follow a structured iterative appro
 - Clear handoff between sessions via detailed iteration logs
 - Version control provides rollback points if needed
 
+## Database Backup Infrastructure (v2.1.6+)
+
+### Overview
+Comprehensive backup system with local retention, offsite sync to QNAP NAS, and monitoring.
+
+### Components
+- **Backup Manager**: `/opt/webstack/bin/backup_database.py` - Python-based backup with compression, checksums
+- **QNAP Sync**: `/opt/webstack/bin/sync_to_qnap.sh` - Rsync to NAS via Tailscale VPN
+- **Tailscale VPN**: Secure tunnel to QNAP at 192.168.91.41 via ktp-forest-hill gateway
+- **Database Tables**: `database_backups`, `backup_sync_log` - Track all backup operations
+- **Admin Dashboard**: `/admin/maintenance.php` - Web interface for backup monitoring
+
+### Backup Schedule (via cron)
+- **Hourly**: Every hour at :00 (24-hour retention)
+- **Daily**: 2:30 AM (7-day retention)
+- **Weekly**: Sunday 3:00 AM (4-week retention)
+- **Monthly**: 1st at 3:30 AM (3-month retention)
+- **QNAP Sync**: 3:15 AM, 9:15 AM, 3:15 PM, 9:15 PM
+
+### Monitoring
+- **Pushover Notifications**: Hourly backups and QNAP syncs send alerts
+- **Web Dashboard**: Real-time stats at `/admin/maintenance.php`
+- **Logs**: `/opt/webstack/backups/backup.log`, `/opt/webstack/backups/qnap_sync.log`
+
+### Storage Details
+- **Database Size**: ~12MB
+- **Backup Size**: ~65KB compressed per backup
+- **QNAP Location**: `/share/Jason/Backups/ktp-digital/` (9.1TB available on ZFS)
+- **Cost**: $0/month (using existing infrastructure)
+
 ## Admin Panel Tools
 The admin panel (`/admin/`) provides essential development tools:
 - **Iteration Log** (`/admin/logs.php`): View current version's iteration progress (📥 Download button v2.1.3+)
 - **Objectives Log** (`/admin/objectives.php`): Track version objectives and completion (📥 Download button v2.1.3+)
 - **Roadmap** (`/admin/roadmap.php`): Long-term development planning (📥 Download button v2.1.3+)
 - **Analytics** (`/admin/analytics.php`): Web traffic and system metrics
-- **Maintenance** (`/admin/maintenance.php`): System health and maintenance tasks
+- **Maintenance** (`/admin/maintenance.php`): System health, backups, and maintenance tasks (✅ v2.1.6 Enhanced)
 - **File Stats** (`/admin/file_stats.php`): Codebase statistics and analysis
 - **System Meta** (`/admin/system_meta.php`): System configuration and metadata
 - **Screenshots** (`/admin/screenshot-upload.php`): Development screenshot management

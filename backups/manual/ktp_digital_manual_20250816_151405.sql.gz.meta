@@ -1,0 +1,8 @@
+{
+  "timestamp": "20250816_151405",
+  "type": "manual",
+  "file": "/opt/webstack/backups/manual/ktp_digital_manual_20250816_151405.sql.gz",
+  "size": 65548,
+  "checksum": "757e34fa78d23e99c4138a5dd84441ead3a710a2d75dab121bde254b0b7af8f8",
+  "db_name": "ktp_digital"
+}
